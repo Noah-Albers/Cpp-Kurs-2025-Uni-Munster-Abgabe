@@ -1,21 +1,25 @@
 CXX := c++
-CXXFLAGS := -Wall -std=c++20
+CXXFLAGS := -g -O0 -Wall -std=c++20
+
+SRCDIR := ./src
+TESTDIR := ./test
+BUILDDIR := ./build
+VPATH := src
+
+SFMLDIR := $(BUILDDIR)/SFML
 
 # Contain path for any includes (headers)
 # Depending on your platform: Include a path to boost, on linux should be 
 # /usr/local/include, on mac could be /opt/homebrew/include
 GTEST_INCLUDES := -IGoogleTest/googletest/include -IGoogleTest/googletest \
 			      -IGoogleTest/googlemock/include -IGoogleTest/googlemock
-INCLUDES := -I./SFML/include -I/opt/homebrew/include $(GTEST_INCLUDES)
+INCLUDES := -I./$(SFMLDIR)/include -I/opt/homebrew/include $(GTEST_INCLUDES)
 
 # Contains libraries we need to (-L is directory search path, -l is lib)
-LDFLAGS := -L/usr/local/lib -L./SFML/lib -L/opt/homebrew/lib
+LDFLAGS := -L/usr/local/lib -L./$(SFMLDIR)/lib -L/opt/homebrew/lib
 LDLIBS := -lsfml-system -lsfml-window -lsfml-graphics
 
-SRCDIR := ./src
-TESTDIR := ./test
-BUILDDIR := ./build
-VPATH := src
+
 
 # search all .cpp files and add corresponding .o-files to GAME_OBJECTS
 SRCFILES := $(shell find $(SRCDIR) -name '*.cpp')
@@ -25,7 +29,7 @@ GAME_OBJECTS := $(SRCFILES:$(SRCDIR)/%.cpp=$(BUILDDIR)/src/%.o)
 DEPENDENCIES := $(SRCFILES:$(SRCDIR)/%.cpp=$(BUILDDIR)/src/%.d) 
 
 # build GTest
-GTEST_DIR := GoogleTest
+GTEST_DIR := $(BUILDDIR)/GoogleTest
 $(BUILDDIR)/gtest-all.o: $(GTEST_DIR)/googletest/src/gtest-all.cc
 	$(CXX) $(CXXFLAGS) -I$(GTEST_DIR)/googletest/include -I$(GTEST_DIR)/googletest $< -c -o $@
 $(BUILDDIR)/gtest_main.o: $(GTEST_DIR)/googletest/src/gtest_main.cc
@@ -70,7 +74,7 @@ getSFML:
 	@echo "Removing download"
 	rm SFML.tar.gz
 	@echo "Renaming folder"
-	mv SFML-3.0.0 SFML
+	mv SFML-3.0.0 $(SFMLDIR)
 	@echo "Finished!"
     
 $(BUILDDIR)/%.o: %.cpp
