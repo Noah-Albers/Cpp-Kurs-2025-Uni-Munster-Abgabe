@@ -18,7 +18,8 @@ Game::Game() :
     view(sf::FloatRect(sf::Vector2f({0, 0}), sf::Vector2f({constants::VIEW_WIDTH,constants::VIEW_HEIGHT}))),
     game_layer(window),
     player_control(game_layer),
-    bullet_control(game_layer)
+    bullet_control(game_layer),
+    alien_control(game_layer)
     {
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
@@ -66,6 +67,7 @@ bool Game::input() {
 void Game::update(float time_passed) {
 	player_control.update();
 	bullet_control.update();
+    alien_control.update();
 }
 
 void Game::draw() {
@@ -76,6 +78,7 @@ void Game::draw() {
     // Adds game objects to draw
     player_control.draw();
     bullet_control.draw();
+    alien_control.draw();
     
     // Performs draw calls
     game_layer.draw();
