@@ -3,13 +3,22 @@
 #include <SFML/Window/Keyboard.hpp>
 
 #include "../model/Constants.hpp"
+#include "BulletControl.h"
 #include "PlayerControl.h"
+
+// Initialize the static member to nullptr
+Game& Game::instance = *(new Game());
+
+ Game& Game::getInstance() {
+    return instance;
+}
 
 Game::Game() :
 	window(sf::VideoMode({constants::VIEW_WIDTH, constants::VIEW_HEIGHT}), "Space Invaders"),
     view(sf::FloatRect(sf::Vector2f({0, 0}), sf::Vector2f({constants::VIEW_WIDTH,constants::VIEW_HEIGHT}))),
     game_layer(window),
-    player_control(game_layer)
+    player_control(game_layer),
+    bullet_control(game_layer)
     {
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
@@ -50,23 +59,13 @@ bool Game::input() {
 			player_control.keyStateChanged(true, kp->code);
         if(const auto* kp = event->getIf<sf::Event::KeyReleased>())
 			player_control.keyStateChanged(false, kp->code);
-		
-        
-        // TODO: Process other events
-        // examples:
-        //if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
-            //if (keyPressed->code == sf::Keyboard::Key::Right) { // right arrow key pressed
-                // ...
-        // if (const auto* keyReleased = event->getIf<sf::Event::KeyReleased>()) {
-            // if (keyReleased->code == sf::Keyboard::Key::Right) { // right arrow released
-                // ...
     }
     return false;
 }
 
 void Game::update(float time_passed) {
 	player_control.update();
-    // TODO: update the game objects with the current time stamp
+	bullet_control.update();
 }
 
 void Game::draw() {
@@ -76,8 +75,15 @@ void Game::draw() {
     
     // Adds game objects to draw
     player_control.draw();
+    bullet_control.draw();
     
     // Performs draw calls
     game_layer.draw();
     window.display();
 }
+
+// #region Getters/Setters
+
+BulletControl& Game::getBulletControl(){ return bullet_control; };
+
+// #endregion

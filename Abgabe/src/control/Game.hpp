@@ -5,18 +5,28 @@
 
 #include "../view/Layer.hpp"
 #include "PlayerControl.h"
+#include "BulletControl.h"
 
 // Game class
 class Game {
 
-public:
+public:    
     //initialize the game (window and controls)
     Game();
 
     // start the game
     void start();
+    
+    // Singleton access method
+    static Game& getInstance();
+
+	// Getters/Setters
+	BulletControl& getBulletControl();
 
 private:
+	// Singleton to the game instance
+    static Game& instance;
+
     // processes user input, returns true if window has been closed
     bool input();
 
@@ -34,6 +44,7 @@ private:
     
     // Controllers for the game
     PlayerControl player_control;
+    BulletControl bullet_control;
 };
 
 #endif

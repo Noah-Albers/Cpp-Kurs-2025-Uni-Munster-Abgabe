@@ -7,11 +7,10 @@
 
 #include "PlayerControl.h"
 #include <SFML/Window/Keyboard.hpp>
+#include "Game.hpp"
 
-PlayerControl::PlayerControl(Layer &layer) : layer(layer) {
-	// TODO Auto-generated constructor stub
-
-}
+PlayerControl::PlayerControl(Layer &layer) : layer(layer) {}
+PlayerControl::~PlayerControl() {}
 
 void PlayerControl::update(){
 	this->player.update();
@@ -38,9 +37,16 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 												HorizontalDirection::LEFT
 		);
 	}
-}
-
-PlayerControl::~PlayerControl() {
-	// TODO Auto-generated destructor stub
+	
+	// All code below shall only execute on press
+	if(!is_now_pressed) return;
+	
+	// Spawns a bullet when space is pressed
+	if (key == sf::Keyboard::Key::Space)
+		// TODO: Maybe at some point replace with constants or a calculation
+		Game::getInstance().getBulletControl().spawnBulletAt(
+			this->player.getPosition().x-14,
+			this->player.getPosition().y-48
+		);
 }
 

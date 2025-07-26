@@ -11,7 +11,6 @@
 #include <SFML/Graphics.hpp>
 #include "../view/Layer.hpp"
 #include "../model/Player.h"
-#include "../utils/Directions.h"
 
 class PlayerControl {
 public:
@@ -37,8 +36,6 @@ protected:
 	
 	// Player object
 	Player player;
-	
-
 };
 
 #endif /* SRC_CONTROL_PLAYERCONTROL_H_ */
