@@ -3,10 +3,14 @@
 #include <SFML/Window/Keyboard.hpp>
 
 #include "../model/Constants.hpp"
+#include "PlayerControl.h"
 
-Game::Game() : window(sf::VideoMode({constants::VIEW_WIDTH, constants::VIEW_HEIGHT}), "Space Invaders"),
-    view(sf::FloatRect(sf::Vector2f({0,-constants::VIEW_HEIGHT}), sf::Vector2f({constants::VIEW_WIDTH,constants::VIEW_HEIGHT}))),
-    game_layer(window) {
+Game::Game() :
+	window(sf::VideoMode({constants::VIEW_WIDTH, constants::VIEW_HEIGHT}), "Space Invaders"),
+    view(sf::FloatRect(sf::Vector2f({0, 0}), sf::Vector2f({constants::VIEW_WIDTH,constants::VIEW_HEIGHT}))),
+    game_layer(window),
+    player_control(game_layer)
+    {
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
 
@@ -40,6 +44,14 @@ bool Game::input() {
             window.close();
             return true;
         }
+        
+        // Handles key press and release events
+        if(const auto* kp = event->getIf<sf::Event::KeyPressed>())
+			player_control.keyStateChanged(true, kp->code);
+        if(const auto* kp = event->getIf<sf::Event::KeyReleased>())
+			player_control.keyStateChanged(false, kp->code);
+		
+        
         // TODO: Process other events
         // examples:
         //if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
@@ -53,15 +65,19 @@ bool Game::input() {
 }
 
 void Game::update(float time_passed) {
+	player_control.update();
     // TODO: update the game objects with the current time stamp
 }
 
 void Game::draw() {
+	// Cleans the screen
     window.clear();
-
     game_layer.clear();
-    // TODO: add game elements to layer
+    
+    // Adds game objects to draw
+    player_control.draw();
+    
+    // Performs draw calls
     game_layer.draw();
-
     window.display();
 }

@@ -1,10 +1,12 @@
 # Model
 set(ModelSources
+    ${CMAKE_CURRENT_SOURCE_DIR}/model/Player.cpp
     )
 
 # Controller
 set(ControlSources
     ${CMAKE_CURRENT_SOURCE_DIR}/control/Game.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/control/PlayerControl.cpp
     )
 
 # View

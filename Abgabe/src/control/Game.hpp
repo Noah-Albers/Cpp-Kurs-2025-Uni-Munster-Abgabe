@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../view/Layer.hpp"
+#include "PlayerControl.h"
 
 // Game class
 class Game {
@@ -30,6 +31,9 @@ private:
     // view area and layers
     sf::View view;
     Layer game_layer;
+    
+    // Controllers for the game
+    PlayerControl player_control;
 };
 
 #endif
