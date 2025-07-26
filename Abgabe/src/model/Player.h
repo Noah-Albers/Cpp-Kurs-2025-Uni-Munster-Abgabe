@@ -10,33 +10,22 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "../utils/Directions.h"
+#include "./properties/PropMoveable.h"
+#include "properties/PropSprite.h"
 
-class Player {
+class Player : public PropMoveable, public PropSprite {
 public:
 	Player();
 	virtual ~Player();
 	
-	sf::Sprite getSprite();
-	void moveBy(int x, int y);
-	void setVerticalDirection(VerticalDirection dir);
-	void setHorizontalDirection(HorizontalDirection dir);
-	
 	// Event: When the object shall update
 	void update();
 	
-protected:
-    // Texture and sprite for the player
-    sf::Texture texture;
-    sf::Sprite sprite;
-    
-	// Vertical and horizonal movement direction's
-	HorizontalDirection h_dir;
-	VerticalDirection v_dir;
+	// Position manipulation methods overwritten for PropMoveable
+	virtual void setPosition(const sf::Vector2f position) override;
+	virtual sf::Vector2f getPosition() override;
 	
-	// Multiplier to set the player speed
-	float speed;
-	
+protected:    
 };
 
 #endif /* SRC_MODEL_PLAYER_H_ */
