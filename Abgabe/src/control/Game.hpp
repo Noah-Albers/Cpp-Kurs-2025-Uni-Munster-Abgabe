@@ -6,6 +6,7 @@
 #include "../view/Layer.hpp"
 #include "PlayerControl.h"
 #include "BulletControl.h"
+#include "UIControl.h"
 
 // Game class
 class Game {
@@ -24,9 +25,6 @@ public:
 	BulletControl& getBulletControl();
 
 private:
-	// Singleton to the game instance
-    static Game& instance;
-
     // processes user input, returns true if window has been closed
     bool input();
 
@@ -39,12 +37,13 @@ private:
     sf::RenderWindow window;
 
     // view areas and layers
-    sf::View gameView, uiView;
-    Layer gameLayer, uiLayer;
+    sf::View gameView;
+    Layer gameLayer;
     
     // Controllers for the game
     PlayerControl player_control;
     BulletControl bullet_control;
+    UIControl ui_control;
 };
 
 #endif

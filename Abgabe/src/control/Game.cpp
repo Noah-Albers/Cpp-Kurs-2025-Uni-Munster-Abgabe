@@ -5,29 +5,28 @@
 #include "../model/Constants.hpp"
 #include "BulletControl.h"
 #include "PlayerControl.h"
+#include "UIControl.h"
 
-// Initialize the static member to nullptr
-Game& Game::instance = *(new Game());
+// Initialize the singleton
 
  Game& Game::getInstance() {
+	static Game instance;
     return instance;
 }
 
 Game::Game() :
 	window(sf::VideoMode({constants::GAME_WIDTH, constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}), "Space Invaders"),
     gameView(sf::FloatRect(sf::Vector2f({0, -constants::SCOREBOARD_HEIGHT}), sf::Vector2f({constants::GAME_WIDTH,constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}))),
-    uiView(sf::FloatRect(sf::Vector2f({0, 0}), sf::Vector2f({constants::GAME_WIDTH,constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}))),
     gameLayer(window),
-    uiLayer(window),
     player_control(gameLayer),
-    bullet_control(gameLayer)
+    bullet_control(gameLayer),
+    ui_control(window)
     {
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
 
     // set the view (visible area) for our game
     gameLayer.set_view(gameView);
-    uiLayer.set_view(uiView);
 }
 
 void Game::start() {
@@ -75,15 +74,15 @@ void Game::draw() {
 	// Cleans the screen
     window.clear();
     gameLayer.clear();
-    uiLayer.clear();
     
     // Adds game objects to draw
     player_control.draw();
     bullet_control.draw();
     
+    ui_control.draw();
+    
     // Performs draw calls
     gameLayer.draw();
-    uiLayer.draw();
     
     window.display();
 }

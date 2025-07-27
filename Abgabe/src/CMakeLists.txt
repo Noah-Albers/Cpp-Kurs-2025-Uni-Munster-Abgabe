@@ -1,3 +1,8 @@
+# Assets
+set(AssetSources
+    ${CMAKE_CURRENT_SOURCE_DIR}/assets/AssetLoader.cpp
+	)
+
 # Model
 set(ModelSources
     ${CMAKE_CURRENT_SOURCE_DIR}/model/properties/PropMoveable.cpp
@@ -8,9 +13,11 @@ set(ModelSources
 
 # Controller
 set(ControlSources
+    ${CMAKE_CURRENT_SOURCE_DIR}/control/properties/PropDrawable.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/control/Game.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/control/PlayerControl.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/control/BulletControl.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/control/UIControl.cpp
     )
 
 # View
@@ -23,5 +30,6 @@ add_executable(SpaceInvaders
         ${ModelSources}
         ${ControlSources}
         ${ViewSources}
+        ${AssetSources}
         ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
         )
