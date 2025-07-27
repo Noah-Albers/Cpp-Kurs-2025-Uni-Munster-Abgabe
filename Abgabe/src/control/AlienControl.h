@@ -38,6 +38,10 @@ protected:
 
 	// Bullets shot by the player
 	std::list<Bullet> bullets;
+
+private:
+	//Check if 2 Recktangles overlap
+	bool rectsIntersect(const sf::FloatRect& a, const sf::FloatRect& b);
 };
 
 #endif /* SRC_CONTROL_ALIENCONTROL_H_ */
