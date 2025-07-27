@@ -31,6 +31,6 @@ void BulletControl::spawnBulletAt(const int x, const int y) {
 	bullets.emplace_back(x,y);
 }
 
-std::list<Bullet> BulletControl::getBullets() {
+std::list<Bullet>& BulletControl::getBullets() {
 	return bullets;
 }

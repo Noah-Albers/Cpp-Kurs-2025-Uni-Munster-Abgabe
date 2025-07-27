@@ -11,7 +11,6 @@
 #include <SFML/Graphics.hpp>
 #include "../view/Layer.hpp"
 #include "../model/Alien.h"
-#include "BulletControl.h"
 #include <list>
 
 class AlienControl {
@@ -25,8 +24,6 @@ public:
 	// Event: When the game objects shall update
 	void update();
 
-	void setBulletControl(BulletControl* bullet_control);
-
 	void spawnAlien(const int x, const int y);
 	
 protected:
@@ -35,14 +32,6 @@ protected:
 	
 	// All Alien objects
 	std::list<Alien> aliens;
-
-	// Bullets shot by the player
-	std::list<Bullet> bullets;
-
-private:
-	//Check if 2 Recktangles overlap
-	bool rectsIntersect(const sf::FloatRect& a, const sf::FloatRect& b);
-	BulletControl* bullet_control;
 };
 
 #endif /* SRC_CONTROL_ALIENCONTROL_H_ */

@@ -20,7 +20,7 @@ Alien::Alien(const int x, const int y) :
 		
     // Positions the sprite
 	sprite.setOrigin({24,24});
-    sprite.setPosition({x, y});
+    sprite.setPosition(sf::Vector2f(x, y));
 }
 Alien::~Alien() {}
 
@@ -45,10 +45,7 @@ void Alien::setPosition(sf::Vector2f pos){
 
 void Alien::changeDirection() {
 	if (h_dir == HorizontalDirection::RIGHT)
-	{
 		setHorizontalDirection(HorizontalDirection::LEFT);
-	} else {
+	else
 		setHorizontalDirection(HorizontalDirection::RIGHT);
-	}
-	
 }

@@ -15,8 +15,6 @@
 
 class BulletControl {
 public:
-	int smth = 0;
-
 	BulletControl(Layer &layer);
 	virtual ~BulletControl();
 	
@@ -30,7 +28,7 @@ public:
 	void spawnBulletAt(const int x, const int y);
 
 	// Returns the Bulletlist
-	std::list<Bullet> getBullets();
+	std::list<Bullet>& getBullets();
 	
 	
 protected:

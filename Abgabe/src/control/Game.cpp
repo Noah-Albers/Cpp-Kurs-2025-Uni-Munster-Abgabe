@@ -22,8 +22,9 @@ Game::Game() :
     bullet_control(game_layer),
     alien_control(game_layer)
     {
-        alien_control.setBulletControl(&bullet_control);
-        alien_control.spawnAlien(100, 100);
+	
+    alien_control.spawnAlien(100, 100);
+ 
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
 
