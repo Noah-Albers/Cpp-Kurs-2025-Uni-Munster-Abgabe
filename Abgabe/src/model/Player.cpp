@@ -20,7 +20,7 @@ Player::Player() :
 		
     // Positions the sprite
 	sprite.setOrigin({24,24});
-    sprite.setPosition({0, constants::VIEW_HEIGHT});
+    sprite.setPosition({0, constants::GAME_HEIGHT});
 }
 Player::~Player() {}
 
@@ -36,9 +36,9 @@ sf::Vector2f Player::getPosition() {
 void Player::setPosition(sf::Vector2f pos){
 	// Ensures the player stays in the view
 	if(pos.x < 0) pos.x = 0;
-	if(pos.x > constants::VIEW_WIDTH) pos.x = constants::VIEW_WIDTH;
+	if(pos.x > constants::GAME_WIDTH) pos.x = constants::GAME_WIDTH;
 	if(pos.y < 0) pos.y = 0;
-	if(pos.y > constants::VIEW_HEIGHT) pos.y = constants::VIEW_HEIGHT;
+	if(pos.y > constants::GAME_HEIGHT) pos.y = constants::GAME_HEIGHT;
 	
 	sprite.setPosition(pos);
 }

@@ -2,6 +2,7 @@
 #define LAYER_H
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/View.hpp>
 
 // Layer class
 class Layer {

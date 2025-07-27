@@ -14,17 +14,20 @@ Game& Game::instance = *(new Game());
 }
 
 Game::Game() :
-	window(sf::VideoMode({constants::VIEW_WIDTH, constants::VIEW_HEIGHT}), "Space Invaders"),
-    view(sf::FloatRect(sf::Vector2f({0, 0}), sf::Vector2f({constants::VIEW_WIDTH,constants::VIEW_HEIGHT}))),
-    game_layer(window),
-    player_control(game_layer),
-    bullet_control(game_layer)
+	window(sf::VideoMode({constants::GAME_WIDTH, constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}), "Space Invaders"),
+    gameView(sf::FloatRect(sf::Vector2f({0, -constants::SCOREBOARD_HEIGHT}), sf::Vector2f({constants::GAME_WIDTH,constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}))),
+    uiView(sf::FloatRect(sf::Vector2f({0, 0}), sf::Vector2f({constants::GAME_WIDTH,constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}))),
+    gameLayer(window),
+    uiLayer(window),
+    player_control(gameLayer),
+    bullet_control(gameLayer)
     {
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
 
     // set the view (visible area) for our game
-    game_layer.set_view(view);
+    gameLayer.set_view(gameView);
+    uiLayer.set_view(uiView);
 }
 
 void Game::start() {
@@ -71,14 +74,17 @@ void Game::update(float time_passed) {
 void Game::draw() {
 	// Cleans the screen
     window.clear();
-    game_layer.clear();
+    gameLayer.clear();
+    uiLayer.clear();
     
     // Adds game objects to draw
     player_control.draw();
     bullet_control.draw();
     
     // Performs draw calls
-    game_layer.draw();
+    gameLayer.draw();
+    uiLayer.draw();
+    
     window.display();
 }
 

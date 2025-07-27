@@ -38,9 +38,9 @@ private:
 
     sf::RenderWindow window;
 
-    // view area and layers
-    sf::View view;
-    Layer game_layer;
+    // view areas and layers
+    sf::View gameView, uiView;
+    Layer gameLayer, uiLayer;
     
     // Controllers for the game
     PlayerControl player_control;
