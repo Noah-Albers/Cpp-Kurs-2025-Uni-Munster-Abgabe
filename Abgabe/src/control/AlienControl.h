@@ -11,24 +11,33 @@
 #include <SFML/Graphics.hpp>
 #include "../view/Layer.hpp"
 #include "../model/Alien.h"
+#include "BulletControl.h"
+#include <list>
 
 class AlienControl {
 public:
 	AlienControl(Layer &layer);
 	virtual ~AlienControl();
 	
-	// Event: When the player is drawn
+	// Event: When the alien is drawn
 	void draw();
 	
 	// Event: When the game objects shall update
 	void update();
+
+	void setBulletList(std::list<Bullet> bullets);
+
+	void spawnAlien(const int x, const int y);
 	
 protected:
 	// Layer to render the player onto
 	Layer &layer;
 	
-	// Player object
-	Alien alien;
+	// All Alien objects
+	std::list<Alien> aliens;
+
+	// Bullets shot by the player
+	std::list<Bullet> bullets;
 };
 
-#endif /* SRC_CONTROL_PLAYERCONTROL_H_ */
+#endif /* SRC_CONTROL_ALIENCONTROL_H_ */

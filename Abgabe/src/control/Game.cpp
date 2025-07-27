@@ -5,6 +5,7 @@
 #include "../model/Constants.hpp"
 #include "BulletControl.h"
 #include "PlayerControl.h"
+#include "AlienControl.h"
 
 // Initialize the static member to nullptr
 Game& Game::instance = *(new Game());
@@ -21,6 +22,8 @@ Game::Game() :
     bullet_control(game_layer),
     alien_control(game_layer)
     {
+        alien_control.setBulletList(bullet_control.getBullets());
+        alien_control.spawnAlien(100, 100);
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
 

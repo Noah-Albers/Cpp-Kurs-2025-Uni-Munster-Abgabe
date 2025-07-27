@@ -13,14 +13,14 @@
 #include "properties/PropMoveable.h"
 #include "properties/PropSprite.h"
 
-Alien::Alien() :
-	PropMoveable(5),
+Alien::Alien(const int x, const int y) :
+	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
 	PropSprite("assets/sprites/alien_default.png", 48, 48)
     {
 		
     // Positions the sprite
 	sprite.setOrigin({24,24});
-    sprite.setPosition({0, 2 / constants::VIEW_HEIGHT});
+    sprite.setPosition({x, y});
 }
 Alien::~Alien() {}
 
