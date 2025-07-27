@@ -6,8 +6,9 @@
  */
 
 #include "BulletControl.h"
+#include "properties/PropDrawable.h"
 
-BulletControl::BulletControl(Layer &layer) : layer(layer) {}
+BulletControl::BulletControl(Layer &layer) : PropDrawable(layer) {}
 BulletControl::~BulletControl() {}
 
 void BulletControl::update(){

@@ -12,28 +12,22 @@
 #include <list>
 #include "../view/Layer.hpp"
 #include "../model/Bullet.h"
+#include "./properties/PropDrawable.h"
 
-class BulletControl {
+class BulletControl : public PropDrawable {
 public:
-	int smth = 0;
-
 	BulletControl(Layer &layer);
 	virtual ~BulletControl();
 	
 	// Event: When the game objects shall update
 	void update();
 	
-	// Event: When the objects are drawn to the screen
-	void draw();
-	
 	// Spawns a new bullet at the given position
 	void spawnBulletAt(const int x, const int y);
 	
+	virtual void draw() override;
 	
 protected:
-	// Layer to render the bullets onto
-	Layer &layer;
-
 	// List of shot bullets
 	std::list<Bullet> bullets;
 };

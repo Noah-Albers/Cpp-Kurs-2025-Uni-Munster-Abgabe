@@ -11,14 +11,12 @@
 #include <SFML/Graphics.hpp>
 #include "../view/Layer.hpp"
 #include "../model/Player.h"
+#include "properties/PropDrawable.h"
 
-class PlayerControl {
+class PlayerControl : public PropDrawable {
 public:
 	PlayerControl(Layer &layer);
 	virtual ~PlayerControl();
-	
-	// Event: When the player is drawn
-	void draw();
 	
 	// Event: When the game objects shall update
 	void update();
@@ -30,10 +28,10 @@ public:
 	 */
 	void keyStateChanged(bool is_now_pressed, sf::Keyboard::Key keyCode);
 	
-protected:
-	// Layer to render the player onto
-	Layer &layer;
 	
+	virtual void draw() override;
+	
+protected:
 	// Player object
 	Player player;
 };

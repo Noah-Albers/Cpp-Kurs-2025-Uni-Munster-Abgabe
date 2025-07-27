@@ -8,8 +8,9 @@
 #include "PlayerControl.h"
 #include <SFML/Window/Keyboard.hpp>
 #include "Game.hpp"
+#include "properties/PropDrawable.h"
 
-PlayerControl::PlayerControl(Layer &layer) : layer(layer) {}
+PlayerControl::PlayerControl(Layer &layer) : PropDrawable(layer) {}
 PlayerControl::~PlayerControl() {}
 
 void PlayerControl::update(){
