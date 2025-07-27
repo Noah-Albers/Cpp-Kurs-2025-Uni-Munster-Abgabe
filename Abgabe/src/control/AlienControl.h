@@ -25,7 +25,7 @@ public:
 	// Event: When the game objects shall update
 	void update();
 
-	void setBulletList(std::list<Bullet> bullets);
+	void setBulletControl(BulletControl* bullet_control);
 
 	void spawnAlien(const int x, const int y);
 	
@@ -42,6 +42,7 @@ protected:
 private:
 	//Check if 2 Recktangles overlap
 	bool rectsIntersect(const sf::FloatRect& a, const sf::FloatRect& b);
+	BulletControl* bullet_control;
 };
 
 #endif /* SRC_CONTROL_ALIENCONTROL_H_ */
