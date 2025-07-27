@@ -24,6 +24,8 @@ public:
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;
 	virtual sf::Vector2f getPosition() override;
+
+	void changeDirection();
 	
 protected:    
 };

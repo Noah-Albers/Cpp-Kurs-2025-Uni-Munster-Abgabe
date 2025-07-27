@@ -38,6 +38,8 @@ void PropMoveable::setVerticalDirection(const VerticalDirection dir) { v_dir = d
 void PropMoveable::setHorizontalDirection(const HorizontalDirection dir) { h_dir = dir; }
 void PropMoveable::setSpeed(const float _speed) { speed = _speed; }
 
+
+
 // #endregion
 
 

@@ -1,5 +1,5 @@
 /*
- * Player.cpp
+ * Alien.cpp
  *
  *  Created on: 26.07.2025
  *      Author: Olly
@@ -34,12 +34,21 @@ sf::Vector2f Alien::getPosition() {
 }
 
 void Alien::setPosition(sf::Vector2f pos){
-	// Ensures the player stays in the view
-	if(pos.x < 0) pos.x = 0;
-	if(pos.x > constants::VIEW_WIDTH) pos.x = constants::VIEW_WIDTH;
+	if(pos.x < 0) this->changeDirection();
+	if(pos.x > constants::VIEW_WIDTH) this->changeDirection();
 	if(pos.y < 0) pos.y = 0;
 	if(pos.y > constants::VIEW_HEIGHT) pos.y = constants::VIEW_HEIGHT;
 	
 	sprite.setPosition(pos);
 }
 
+
+void Alien::changeDirection() {
+	if (h_dir == HorizontalDirection::RIGHT)
+	{
+		setHorizontalDirection(HorizontalDirection::LEFT);
+	} else {
+		setHorizontalDirection(HorizontalDirection::RIGHT);
+	}
+	
+}
