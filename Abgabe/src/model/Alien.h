@@ -15,7 +15,7 @@
 
 class Alien : public PropMoveable, public PropSprite {
 public:
-	Alien(const int x, const int y);
+	Alien(const int x, const int y, const int lifes);
 	virtual ~Alien();
 	
 	// Event: When the object shall update
@@ -30,12 +30,12 @@ public:
 	sf::Sprite getShieldSprite();
 
 	void nextSprite();
+	int getLifes();
+	void removeLife();
 protected: 
 
 private:
 	PropSprite shieldSprite;
-	void removeLife();
-	int getLifes();
 	int lifes;
 
 	sf::Clock animation_clock;

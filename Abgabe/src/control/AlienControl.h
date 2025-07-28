@@ -24,7 +24,7 @@ public:
 	// Event: When the game objects shall update
 	void update();
 
-	void spawnAlien(const int x, const int y);
+	void spawnAlien(const int x, const int y, const int lifes);
 	
 protected:
 	// Layer to render the player onto

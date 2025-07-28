@@ -13,7 +13,7 @@
 #include "properties/PropMoveable.h"
 #include "properties/PropSprite.h"
 
-Alien::Alien(const int x, const int y) :
+Alien::Alien(const int x, const int y, const int lifes) :
 	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
 	PropSprite("assets/sprites/alien_default.png", 64, 64, 0.5),
 	shieldSprite("assets/sprites/Alien_Shield.png", 64, 64, 0.5)
@@ -29,6 +29,7 @@ Alien::Alien(const int x, const int y) :
 
 	animation_clock.restart();
 	frame_index = 0;
+	this->lifes = lifes;
 }
 Alien::~Alien() {}
 
@@ -65,7 +66,7 @@ sf::Sprite Alien::getShieldSprite() {
 }
 
 void Alien::nextSprite() {
-    if (animation_clock.getElapsedTime().asSeconds() > 0.1) {
+    if (animation_clock.getElapsedTime().asSeconds() > constants::ANIMATION_TIME) {
         frame_index++;
         shieldSprite.setFrame(frame_index);
         animation_clock.restart();

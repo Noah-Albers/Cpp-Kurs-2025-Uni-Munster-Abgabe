@@ -16,18 +16,24 @@ AlienControl::AlienControl(Layer &layer) : layer(layer) {}
 AlienControl::~AlienControl() {}
 
 void AlienControl::update() {
+	auto& bullets = Game::getInstance().getBulletControl().getBullets();
 	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); ) {
 		bool erased = false;
 
-		for (auto& bullet : Game::getInstance().getBulletControl().getBullets()) {
-			auto bulletBounds = bullet.getSprite().getGlobalBounds();
+		for (auto bullet_it = bullets.begin(); bullet_it != bullets.end();) {
+			auto bulletBounds = bullet_it->getSprite().getGlobalBounds();
 			auto alientBounds = alien_it->getSprite().getGlobalBounds();
 
 			if(bulletBounds.findIntersection(alientBounds)){
-        		alien_it = aliens.erase(alien_it);
-        		erased = true;
+				alien_it->removeLife();
+				if (alien_it->getLifes() == 0) {
+					alien_it = aliens.erase(alien_it);
+					erased = true;
+				}
+				bullet_it = bullets.erase(bullet_it);
         		break;
     		}
+			++bullet_it;
 		}
 
 
@@ -43,12 +49,14 @@ void AlienControl::update() {
 void AlienControl::draw(){
 	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++){
 		layer.add_to_layer(alien_it->getSprite());
-		layer.add_to_layer(alien_it->getShieldSprite());
+		if (alien_it->getLifes() > 1) {
+			layer.add_to_layer(alien_it->getShieldSprite());
+		}
 	}
 }
 
-void AlienControl::spawnAlien(const int x, const int y) {
-	aliens.emplace_back(x, y);
+void AlienControl::spawnAlien(const int x, const int y, const int lifes) {
+	aliens.emplace_back(x, y, lifes);
 }
 
 void AlienControl::randomSpawnBullet(Alien& alien) {

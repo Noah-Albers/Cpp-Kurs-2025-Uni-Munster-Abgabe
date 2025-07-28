@@ -27,7 +27,7 @@ Game::Game() :
     ui_control(window)
     {
 	
-    alien_control.spawnAlien(100, 100);
+    alien_control.spawnAlien(100, 100, 3);
  
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
