@@ -28,6 +28,15 @@ sf::Sprite PropSprite::getSprite() {
 	return sprite;
 }
 
+//detects whether the current object collides with another
+bool PropSprite::isCollidingWith(PropSprite& object){
+		auto thisBounds = sprite.getGlobalBounds();
+		auto objectBounds = object.getSprite().getGlobalBounds();
+
+		return thisBounds.findIntersection(objectBounds).has_value();
+		
+	}
+
 void PropSprite::setFrame(int index){
 	// Ensures that it rotates after the maximum index
 	int maxIndx = sprite.getTexture().getSize().x/sprite.getTextureRect().size.x;

@@ -70,5 +70,9 @@ int PlayerControl::getLifes(){
 	return lifes;
 }
 
-// #endregion
 
+
+Player& PlayerControl::getPlayer(){
+	return player;
+}
+// #endregion

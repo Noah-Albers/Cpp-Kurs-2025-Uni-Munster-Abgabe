@@ -17,6 +17,8 @@ class PlayerControl : public PropDrawable {
 public:
 	PlayerControl(Layer &layer);
 	virtual ~PlayerControl();
+
+	
 	
 	// Event: When the game objects shall update
 	void update();
@@ -31,11 +33,13 @@ public:
 	// Adds damage to the player
 	void damagePlayer(int lifes = 1);
 	
+	
 	virtual void draw() override;
 	
 	// Getters/Setters
 	int getLifes();
-	
+	Player& getPlayer();
+
 protected:
 	// How many lifes the player has left
 	int lifes;
