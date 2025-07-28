@@ -25,6 +25,7 @@ public:
 
 	// Getters/Setters
 	BulletControl& getBulletControl();
+	PlayerControl& getPlayerControl();
 
 private:
     // processes user input, returns true if window has been closed

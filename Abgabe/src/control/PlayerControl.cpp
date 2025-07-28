@@ -9,8 +9,12 @@
 #include <SFML/Window/Keyboard.hpp>
 #include "Game.hpp"
 #include "properties/PropDrawable.h"
+#include "../model/Constants.hpp"
 
-PlayerControl::PlayerControl(Layer &layer) : PropDrawable(layer) {}
+PlayerControl::PlayerControl(Layer &layer) :
+	PropDrawable(layer),
+	lifes(constants::START_LIFES)
+	{}
 PlayerControl::~PlayerControl() {}
 
 void PlayerControl::update(){
@@ -19,6 +23,10 @@ void PlayerControl::update(){
 
 void PlayerControl::draw(){
 	this->layer.add_to_layer(this->player.getSprite());
+}
+
+void PlayerControl::damagePlayer(int amount){
+	lifes -= amount;
 }
 
 void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) {
@@ -50,4 +58,12 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 			this->player.getPosition().y-48
 		);
 }
+
+// #region Getters/Setters
+
+int PlayerControl::getLifes(){
+	return lifes;
+}
+
+// #endregion
 

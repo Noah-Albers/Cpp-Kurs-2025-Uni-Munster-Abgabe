@@ -28,10 +28,18 @@ public:
 	 */
 	void keyStateChanged(bool is_now_pressed, sf::Keyboard::Key keyCode);
 	
+	// Adds damage to the player
+	void damagePlayer(int lifes = 1);
 	
 	virtual void draw() override;
 	
+	// Getters/Setters
+	int getLifes();
+	
 protected:
+	// How many lifes the player has left
+	int lifes;
+
 	// Player object
 	Player player;
 };

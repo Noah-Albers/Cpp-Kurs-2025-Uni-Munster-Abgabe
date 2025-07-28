@@ -9,7 +9,9 @@
 #define SRC_CONTROL_UICONTROL_H_
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Window.hpp>
 
 class UIControl {
@@ -32,6 +34,10 @@ protected:
 	
 	// Text's for the score
 	sf::Text scoreboardLabel, scoreLabel;
+	
+	// Sprite and texture for the player's health
+	sf::Texture healthTexture;
+	sf::Sprite healthSprite;
 };
 
 #endif /* SRC_CONTROL_UICONTROL_H_ */
