@@ -17,8 +17,8 @@ PlayerControl::PlayerControl(Layer &layer) :
 	{}
 PlayerControl::~PlayerControl() {}
 
-void PlayerControl::update(){
-	this->player.update();
+void PlayerControl::update(float time_passed){
+	this->player.update(time_passed);
 }
 
 void PlayerControl::draw(){
@@ -66,13 +66,7 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 
 // #region Getters/Setters
 
-int PlayerControl::getLifes(){
-	return lifes;
-}
+int PlayerControl::getLifes(){ return lifes; };
+Player& PlayerControl::getPlayer(){ return player; };
 
-
-
-Player& PlayerControl::getPlayer(){
-	return player;
-}
 // #endregion

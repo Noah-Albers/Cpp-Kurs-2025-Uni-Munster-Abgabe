@@ -19,7 +19,7 @@ public:
 	virtual ~Player();
 	
 	// Event: When the object shall update
-	void update();
+	void update(float time_passed);
 	
 	
 

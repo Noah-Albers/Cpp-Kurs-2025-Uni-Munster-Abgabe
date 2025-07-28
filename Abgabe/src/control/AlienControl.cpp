@@ -13,7 +13,7 @@
 AlienControl::AlienControl(Layer &layer) : layer(layer) {}
 AlienControl::~AlienControl() {}
 
-void AlienControl::update() {
+void AlienControl::update(float time_passed) {
 	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); ) {
 		bool erased = false;
 
@@ -26,7 +26,7 @@ void AlienControl::update() {
 		}
 
 		if (!erased) {
-			alien_it->update();
+			alien_it->update(time_passed);
 			++alien_it;
 		}
 	}

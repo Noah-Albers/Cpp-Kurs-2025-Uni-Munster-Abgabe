@@ -17,7 +17,7 @@ MeteorControl::~MeteorControl() {}
 void MeteorControl::update(float time_passed){
 	// Moves Meteors forward and removes any that went out of screen
 	for(auto it = meteors.begin(); it != meteors.end();){
-		it->updatePosition();
+		it->updatePosition(time_passed);
 		
 		if(it->getPosition().y > constants::GAME_HEIGHT+20)
 			it = meteors.erase(it);

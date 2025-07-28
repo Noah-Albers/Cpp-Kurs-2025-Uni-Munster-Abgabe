@@ -22,7 +22,7 @@ public:
 	void draw();
 	
 	// Event: When the game objects shall update
-	void update();
+	void update(float time_passed);
 
 	void spawnAlien(const int x, const int y);
 	

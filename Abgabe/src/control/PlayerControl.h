@@ -21,7 +21,7 @@ public:
 	
 	
 	// Event: When the game objects shall update
-	void update();
+	void update(float time_passed);
 	
 	/**
 	 * Event: When a key is pressed or released.
