@@ -14,8 +14,8 @@
 #include "properties/PropSprite.h"
 
 Player::Player() :
-	PropMoveable(4),
-	PropSprite("assets/sprites/player_default.png", 48, 48)
+	PropMoveable(3.5),
+	PropSprite("assets/sprites/player_default.png", 32, 28, 2)
     {
 		
     // Positions the sprite
