@@ -16,6 +16,9 @@ public:
 	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y);
 	virtual ~PropSprite();
 	
+
+	bool collision(PropSprite& object);
+
 	// Sets the texture to the given frame
 	void setFrame(int index);
 	

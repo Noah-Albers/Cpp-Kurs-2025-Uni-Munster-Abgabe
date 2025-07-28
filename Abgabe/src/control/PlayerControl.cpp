@@ -21,6 +21,11 @@ void PlayerControl::draw(){
 	this->layer.add_to_layer(this->player.getSprite());
 }
 
+//take damage/ lose a life/heart when hit
+void PlayerControl::damage(){
+
+}
+
 void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) {
 	bool is_vertical = key == sf::Keyboard::Key::W || key == sf::Keyboard::Key::S;
 	bool is_horizontal = key == sf::Keyboard::Key::A || key == sf::Keyboard::Key::D;
@@ -51,3 +56,6 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 		);
 }
 
+Player& PlayerControl::getPlayer(){
+	return player;
+}

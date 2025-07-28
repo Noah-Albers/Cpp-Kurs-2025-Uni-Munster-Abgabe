@@ -17,6 +17,9 @@ class PlayerControl : public PropDrawable {
 public:
 	PlayerControl(Layer &layer);
 	virtual ~PlayerControl();
+
+	//take damage/ lose a life/heart when hit
+	void damage();
 	
 	// Event: When the game objects shall update
 	void update();
@@ -28,6 +31,7 @@ public:
 	 */
 	void keyStateChanged(bool is_now_pressed, sf::Keyboard::Key keyCode);
 	
+	Player& getPlayer();
 	
 	virtual void draw() override;
 	

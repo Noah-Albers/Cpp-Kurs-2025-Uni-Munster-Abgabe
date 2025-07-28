@@ -35,6 +35,7 @@ public:
 	// Spawns a new Meteor at the given position
 	void spawnMeteorAt(const int x, const int y);
 	
+    
 	
 protected:
 	// Layer to render the Meteors onto

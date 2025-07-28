@@ -27,6 +27,14 @@ sf::Sprite PropSprite::getSprite() {
 	return sprite;
 }
 
+bool PropSprite::collision(PropSprite& object){
+		auto thisBounds = sprite.getGlobalBounds();
+		auto objectBounds = object.getSprite().getGlobalBounds();
+
+		return thisBounds.findIntersection(objectBounds).has_value();
+		
+	}
+
 void PropSprite::setFrame(int index){
 	sprite.setTextureRect(sf::IntRect({
 		sprite.getTextureRect().size.x * index,
