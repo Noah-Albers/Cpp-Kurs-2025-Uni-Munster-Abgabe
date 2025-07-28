@@ -11,20 +11,16 @@
 #include "../model/Constants.hpp"
 #include "Game.hpp"
 
-
 AlienControl::AlienControl(Layer &layer) : layer(layer) {}
 AlienControl::~AlienControl() {}
 
-void AlienControl::update() {
+void AlienControl::update(float time_passed) {
 	auto& bullets = Game::getInstance().getBulletControl().getBullets();
 	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); ) {
 		bool erased = false;
 
 		for (auto bullet_it = bullets.begin(); bullet_it != bullets.end();) {
-			auto bulletBounds = bullet_it->getSprite().getGlobalBounds();
-			auto alientBounds = alien_it->getSprite().getGlobalBounds();
-
-			if(bulletBounds.findIntersection(alientBounds)){
+			if(alien_it->isCollidingWith(*bullet_it)){	
 				alien_it->removeLife();
 				if (alien_it->getLifes() == 0) {
 					alien_it = aliens.erase(alien_it);
@@ -36,18 +32,17 @@ void AlienControl::update() {
 			++bullet_it;
 		}
 
-
 		if (!erased) {
+			alien_it->update(time_passed);
 			randomSpawnBullet(*alien_it);
 			alien_it->nextSprite();
-			alien_it->update();
 			++alien_it;
 		}
 	}
 }
 
 void AlienControl::draw(){
-	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++){
+	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++) {
 		layer.add_to_layer(alien_it->getSprite());
 		if (alien_it->getLifes() > 1) {
 			layer.add_to_layer(alien_it->getShieldSprite());

@@ -11,10 +11,10 @@
 BulletControl::BulletControl(Layer &layer) : PropDrawable(layer) {}
 BulletControl::~BulletControl() {}
 
-void BulletControl::update(){
+void BulletControl::update(float time_passed){
 	// Moves bullets forward and removes any that went out of screen
 	for(auto it = bullets.begin(); it != bullets.end();){
-		it->updatePosition();
+		it->updatePosition(time_passed);
 		
 		if(it->getPosition().y < -20)
 			it = bullets.erase(it);

@@ -14,7 +14,7 @@
 #include "properties/PropSprite.h"
 
 Player::Player() :
-	PropMoveable(5),
+	PropMoveable(4),
 	PropSprite("assets/sprites/player_default.png", 48, 48)
     {
 		
@@ -25,8 +25,8 @@ Player::Player() :
 Player::~Player() {}
 
 
-void Player::update(){
-	this->updatePosition();
+void Player::update(float time_passed){
+	this->updatePosition(time_passed);
 }
 
 sf::Vector2f Player::getPosition() {

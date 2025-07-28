@@ -16,7 +16,7 @@ PropMoveable::PropMoveable(
 ) : h_dir(h_dir), v_dir(v_dir), speed(speed) {}
 PropMoveable::~PropMoveable() {}
 
-void PropMoveable::updatePosition(){
+void PropMoveable::updatePosition(float time_passed){
 	int by_x=0, by_y=0;
 	if(v_dir != VerticalDirection::NONE)
 		by_y = v_dir == VerticalDirection::DOWN ? 1 : -1;
@@ -24,9 +24,11 @@ void PropMoveable::updatePosition(){
 		by_x = h_dir == HorizontalDirection::RIGHT ? 1 : -1;
 	
 	if(by_x != 0 || by_y != 0)
-		moveBy(by_x * this->speed,by_y * this->speed);
+		moveBy(
+		(float)by_x * this->speed * time_passed * 100.0,
+		(float)by_y * this->speed * time_passed * 100.0
+		);
 }
-
 
 void PropMoveable::moveBy(int x, int y){
 	setPosition(getPosition() + sf::Vector2f(x,y));
@@ -37,8 +39,6 @@ void PropMoveable::moveBy(int x, int y){
 void PropMoveable::setVerticalDirection(const VerticalDirection dir) { v_dir = dir; }
 void PropMoveable::setHorizontalDirection(const HorizontalDirection dir) { h_dir = dir; }
 void PropMoveable::setSpeed(const float _speed) { speed = _speed; }
-
-
 
 // #endregion
 

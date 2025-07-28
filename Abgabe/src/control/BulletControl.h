@@ -20,7 +20,7 @@ public:
 	virtual ~BulletControl();
 	
 	// Event: When the game objects shall update
-	void update();
+	void update(float time_passed);
 	
 	// Spawns a new bullet at the given position
 	void spawnBulletAt(const int x, const int y);

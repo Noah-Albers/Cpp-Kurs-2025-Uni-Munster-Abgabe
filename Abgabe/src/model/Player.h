@@ -19,11 +19,15 @@ public:
 	virtual ~Player();
 	
 	// Event: When the object shall update
-	void update();
+	void update(float time_passed);
 	
+	
+
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;
 	virtual sf::Vector2f getPosition() override;
+
+
 	
 protected:    
 };

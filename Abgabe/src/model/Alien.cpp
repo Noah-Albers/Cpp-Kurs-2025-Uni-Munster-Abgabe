@@ -34,8 +34,8 @@ Alien::Alien(const int x, const int y, const int lifes) :
 Alien::~Alien() {}
 
 
-void Alien::update(){
-	this->updatePosition();
+void Alien::update(float time_passed){
+	this->updatePosition(time_passed);
 	shieldSprite.getSpriteReference().setPosition(sprite.getPosition());
 }
 
