@@ -23,7 +23,7 @@ public:
 	virtual ~PropMoveable();
 	
 	// Event: When the object shall update its position
-	void updatePosition(float time_passed = 1);
+	void updatePosition(float time_passed = 0.01);
 	
 	// Moves the object relative to its current position
 	void moveBy(const int x, const int y);

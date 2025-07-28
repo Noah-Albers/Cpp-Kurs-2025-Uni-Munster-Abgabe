@@ -15,16 +15,7 @@ MeteorControl::MeteorControl(Layer &layer) :
 MeteorControl::~MeteorControl() {}
 
 void MeteorControl::update(float time_passed){
-	// Moves Meteors forward and removes any that went out of screen
-	for(auto it = meteors.begin(); it != meteors.end();){
-		it->updatePosition(time_passed);
-		
-		if(it->getPosition().y > constants::GAME_HEIGHT+20)
-			it = meteors.erase(it);
-		else
-			++it;
-	}
-
+	// Moves Meteors forward and removes any that got destroyed from the screen
 	for (auto meteors_it = meteors.begin(); meteors_it != meteors.end();) {
 		bool erased = false;
 
@@ -50,7 +41,7 @@ void MeteorControl::update(float time_passed){
 
 		// Moves Meteors forward
 		if (!erased) {
-			meteors_it->updatePosition();
+			meteors_it->updatePosition(time_passed);
 			++meteors_it;
 		}
 	}
