@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "../view/Layer.hpp"
+#include "ParticleControl.h"
 #include "PlayerControl.h"
 #include "UIControl.h"
 #include "BulletControl.h"
@@ -27,8 +28,10 @@ public:
 	// Getters/Setters
 	BulletControl& getBulletControl();
 	PlayerControl& getPlayerControl();
-	UIControl& getUIControl();
     AlienBulletControl& getAlienBulletControl();
+
+	UIControl& getUIControl();
+	ParticleControl& getParticleControl();
 
 private:
     // processes user input, returns true if window has been closed
@@ -52,7 +55,9 @@ private:
     AlienControl alien_control;
     AlienBulletControl alien_bullet_control;
     MeteorControl meteor_control;
-
+	
+	
+	ParticleControl particle_control;
     UIControl ui_control;
 };
 

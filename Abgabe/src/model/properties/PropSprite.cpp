@@ -7,8 +7,9 @@
 
 #include "PropSprite.h"
 #include <SFML/Graphics/Rect.hpp>
+#include <SFML/System/Vector2.hpp>
 
-PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale) : 
+PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale, const bool centerOrigin) : 
 	texture(),
     sprite(texture) {
 	
@@ -19,26 +20,25 @@ PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, 
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect({0, 0}, {size_x, size_y}));
     sprite.scale({scale, scale});
+    if(centerOrigin)
+    	sprite.setOrigin(sf::Vector2f((float)size_x/2.0, (float)size_y/2.0));
 }
 
 PropSprite::~PropSprite() {}
-
 
 sf::Sprite& PropSprite::getSprite() {
 	return sprite;
 }
 
-//detects whether the current object collides with another
+// Detects whether the current object collides with another
 bool PropSprite::isCollidingWith(PropSprite& object){
-		auto thisBounds = sprite.getGlobalBounds();
-		auto objectBounds = object.getSprite().getGlobalBounds();
+	auto thisBounds = sprite.getGlobalBounds();
+	auto objectBounds = object.getSprite().getGlobalBounds();
 
-		return thisBounds.findIntersection(objectBounds).has_value();
-		
-	}
+	return thisBounds.findIntersection(objectBounds).has_value();
+}
 
 void PropSprite::setFrame(int index){
-	
 	// Ensures that it rotates after the maximum index
 	index = index % getFrameAmount();
 	
@@ -48,10 +48,10 @@ void PropSprite::setFrame(int index){
 	}, sprite.getTextureRect().size));
 }
 
-int PropSprite::getFrame(){
-	return sprite.getTextureRect().position.x/sprite.getTextureRect().size.x;
-}
-
 int PropSprite::getFrameAmount(){
 	return sprite.getTexture().getSize().x/sprite.getTextureRect().size.x;
+}
+
+int PropSprite::getFrame(){
+	return sprite.getTextureRect().position.x/sprite.getTextureRect().size.x;
 }

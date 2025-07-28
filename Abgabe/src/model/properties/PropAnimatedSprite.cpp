@@ -7,22 +7,26 @@
 
 #include "PropAnimatedSprite.h"
 #include "PropSprite.h"
-#include <iostream>
-#include <ostream>
 
 PropAnimatedSprite::PropAnimatedSprite(
 	const std::filesystem::path& filename,
 	const int size_x, const int size_y,
 	const float runTimeInSec, const bool loop,
-	const float scale
-) : PropSprite(filename, size_x, size_y, scale),
+	const float scale,
+	const bool centerOrigin
+) : PropSprite(filename, size_x, size_y, scale, centerOrigin),
 	loop(loop),
 	fullRunTime(runTimeInSec),
 	runtime(0) {}
 
+bool PropAnimatedSprite::hasStopped() {
+	return runtime <= -1;
+}
+
 void PropAnimatedSprite::updateSprite(float time_passed){
 	// Ensures less calculations for sprites that have reached their end of life
 	if(runtime > fullRunTime && !loop) return;
+	if(runtime == -1) return;
 	
 	int frameAmt = getFrameAmount();
 	
@@ -34,10 +38,14 @@ void PropAnimatedSprite::updateSprite(float time_passed){
 	// Only updates the sprite, if the frames are different
 	if(oldFrame == newFrame) return;
 
-	// Resets the loop
-	if(newFrame >= frameAmt && loop) {
-		setFrame(0);
-		runtime = 0;
+	if(newFrame >= frameAmt){
+		// Resets the loop
+		if(loop){
+			setFrame(0);
+			runtime = 0;
+		}else
+			// Marks the prop as over
+			runtime = -1;
 	}else if(oldFrame < newFrame){
 		// Otherwise advances the frame
 		setFrame(getFrame()+1);

@@ -14,12 +14,11 @@
 #include "properties/PropSprite.h"
 
 Player::Player() :
-	PropMoveable(4),
-	PropSprite("assets/sprites/player_default.png", 48, 48)
+	PropMoveable(3.5),
+	PropSprite("assets/sprites/player_default.png", 32, 28, 2, true)
     {
 		
     // Positions the sprite
-	sprite.setOrigin({24,24});
     sprite.setPosition({0, constants::GAME_HEIGHT});
 }
 Player::~Player() {}

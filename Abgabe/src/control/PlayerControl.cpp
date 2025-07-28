@@ -13,7 +13,7 @@
 
 PlayerControl::PlayerControl(Layer &layer) :
 	PropDrawable(layer),
-	lifes(constants::START_LIFES)
+	lifes(constants::START_LIFES-4)
 	{}
 PlayerControl::~PlayerControl() {}
 
@@ -22,14 +22,25 @@ void PlayerControl::update(float time_passed){
 }
 
 void PlayerControl::draw(){
+	// Prevents the player from being drawn after he has died
+	if(lifes <= 0) return;
+	
 	this->layer.add_to_layer(this->player.getSprite());
 }
 
 void PlayerControl::damagePlayer(int amount){
 	lifes -= amount;
+	
+	// Spawn death animation if player has died
+	if(lifes == 0)
+		Game::getInstance().getParticleControl().spawnPlayerDeathParticle(player.getPosition().x, player.getPosition().y);
 }
 
 void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) {
+	// Prevents any inputs after the player has died
+	if(lifes <= 0) return;
+	
+	
 	bool is_vertical = key == sf::Keyboard::Key::W || key == sf::Keyboard::Key::S;
 	bool is_horizontal = key == sf::Keyboard::Key::A || key == sf::Keyboard::Key::D;
 	

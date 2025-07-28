@@ -15,15 +15,13 @@
 
 Alien::Alien(const int x, const int y, const int lifes) :
 	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
-	PropSprite("assets/sprites/alien_default.png", 64, 64, 0.5),
-	shieldSprite("assets/sprites/Alien_Shield.png", 64, 64, 1, true, 0.5)
+	PropSprite("assets/sprites/alien_default.png", 64, 64, 0.5, true),
+	shieldSprite("assets/sprites/Alien_Shield.png", 64, 64, 1, true, 0.5, true)
     {
-	shieldSprite.getSprite().setOrigin({32,32});
 	shieldSprite.getSprite().setPosition(sf::Vector2f(x, y));
 	shieldSprite.getSprite().setRotation(sf::degrees(180));
 
     // Positions the sprite
-	sprite.setOrigin({32,32});
     sprite.setPosition(sf::Vector2f(x, y));
 	sprite.setRotation(sf::degrees(180));
 
