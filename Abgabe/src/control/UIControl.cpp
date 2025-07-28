@@ -8,7 +8,6 @@
 #include "UIControl.h"
 #include "../assets/AssetLoader.h"
 #include <SFML/Graphics/Rect.hpp>
-#include <iostream>
 #include "../model/Constants.hpp"
 #include "Game.hpp"
 
@@ -45,6 +44,10 @@ UIControl::UIControl(sf::RenderWindow& window) :
 	setScore(0);
 }
 
+void UIControl::update(float time_passed) {
+	background.update(time_passed);
+}
+
 void UIControl::nextBackground(){
 	background.setFrame(background.getFrame()+1);
 }
@@ -59,7 +62,7 @@ void UIControl::setScore(int newScore){
 }
 
 void UIControl::draw() {
-	win.draw(background.getSprite());
+	background.draw(win);
 	
 	win.draw(scoreboardLabel);
 	win.draw(scoreLabel);

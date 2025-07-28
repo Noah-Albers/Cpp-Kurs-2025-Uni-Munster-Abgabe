@@ -82,6 +82,7 @@ void Game::update(float time_passed) {
     meteor_control.update(time_passed);
     particle_control.update(time_passed);
     alien_bullet_control.update(time_passed);
+    ui_control.update(time_passed);
 }
 
 void Game::draw() {

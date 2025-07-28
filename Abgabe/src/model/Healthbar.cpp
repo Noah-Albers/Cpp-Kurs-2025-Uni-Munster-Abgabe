@@ -2,7 +2,7 @@
  * Health.cpp
  *
  *  Created on: 28.07.2025
- *      Author: snow
+ *      Author: Noah
  */
 
 #include "Healthbar.h"

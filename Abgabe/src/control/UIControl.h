@@ -30,6 +30,9 @@ public:
 	// Sets a new score and updates the screen
 	void setScore(int score);
 	
+	// Updates the object
+	void update(float time_passed);
+	
 protected:
 	// Score the player achieved
 	// TODO: Maybe move this somewhere else

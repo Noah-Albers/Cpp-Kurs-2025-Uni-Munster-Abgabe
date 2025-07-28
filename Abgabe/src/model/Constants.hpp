@@ -17,4 +17,6 @@ namespace constants {
     constexpr float SCORE_MULTIPLIER_PER_LEVEL = 1.5;
     constexpr int MAX_ALIEN_PER_LINE = 7;
     constexpr int MAX_ALIEN_TOTAL = 50;
+    
+    constexpr float BACKGROUND_SCROLL_SPEED = 1.2; // Constant to change the background scroll speed
 }
