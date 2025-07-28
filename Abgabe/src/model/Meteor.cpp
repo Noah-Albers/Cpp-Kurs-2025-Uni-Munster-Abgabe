@@ -10,9 +10,11 @@
 #include "properties/PropSprite.h"
 #include <SFML/System/Vector2.hpp>
 
+#include "../assets/AssetMappings.h"
+
 Meteor::Meteor(const int x, const int y) :
 	PropMoveable(2, VerticalDirection::DOWN),
-	PropSprite("assets/sprites/Asteroid.png", 64, 64)
+	PropSprite(ASSETS_SPRITE_METEOR)
 {
 	sprite.setPosition(sf::Vector2f(x,y));
 }

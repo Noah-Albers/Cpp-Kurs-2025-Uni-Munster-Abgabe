@@ -10,11 +10,10 @@
 Particle::Particle(
 	const std::filesystem::path& filename,
 	const int size_x, const int size_y,
-	const int posX, const int posY,
 	const float scale,
+	const int posX, const int posY,
 	const float lifeTime
-) : PropAnimatedSprite(filename, size_x, size_y, lifeTime, false, scale, true)
+) : PropAnimatedSprite(filename, size_x, size_y, scale, lifeTime, false, true)
 	{
 	sprite.setPosition({(float)posX,(float)posY});
-	sprite.setScale({scale, scale});
 }

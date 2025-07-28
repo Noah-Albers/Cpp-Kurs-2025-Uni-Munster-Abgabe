@@ -11,8 +11,8 @@
 PropAnimatedSprite::PropAnimatedSprite(
 	const std::filesystem::path& filename,
 	const int size_x, const int size_y,
-	const float runTimeInSec, const bool loop,
 	const float scale,
+	const float runTimeInSec, const bool loop,
 	const bool centerOrigin
 ) : PropSprite(filename, size_x, size_y, scale, centerOrigin),
 	loop(loop),

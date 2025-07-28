@@ -8,6 +8,8 @@
 #include "ParticleControl.h"
 #include "properties/PropDrawable.h"
 
+#include "../assets/AssetMappings.h"
+
 ParticleControl::ParticleControl(Layer& layer) : PropDrawable(layer) {}
 
 void ParticleControl::draw(){
@@ -29,6 +31,6 @@ void ParticleControl::update(float time_passed){
 
 
 void ParticleControl::spawnPlayerDeathParticle(const int x, const int y) {
-	particles.emplace_back("assets/sprites/player_death.png", 64, 64, x, y, 2, 2);
+	particles.emplace_back(ASSETS_SPRITE_PLAYER_DEATH, x, y, 2);
 }
 

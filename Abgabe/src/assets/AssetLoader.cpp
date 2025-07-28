@@ -6,6 +6,7 @@
  */
 
 #include "AssetLoader.h"
+#include "AssetMappings.h"
 
 AssetLoader& AssetLoader::getInstance() {
 	static AssetLoader instance;
@@ -14,7 +15,7 @@ AssetLoader& AssetLoader::getInstance() {
 
 AssetLoader::AssetLoader() {
 	// Loads the font
-	if (!gameFont.openFromFile("assets/fonts/DejaVuSansMono.ttf"))
+	if (!gameFont.openFromFile(ASSETS_FONT_DEFAULT))
         throw std::runtime_error("Failed to load Font");
 }
 

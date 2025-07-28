@@ -13,9 +13,11 @@
 #include "properties/PropMoveable.h"
 #include "properties/PropSprite.h"
 
+#include "../assets/AssetMappings.h"
+
 Player::Player() :
 	PropMoveable(3.5),
-	PropSprite("assets/sprites/player_default.png", 32, 28, 2, true)
+	PropSprite(ASSETS_SPRITE_PLAYER, true)
     {
 		
     // Positions the sprite

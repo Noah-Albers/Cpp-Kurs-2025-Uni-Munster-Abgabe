@@ -15,8 +15,8 @@ public:
 	Particle(
 		const std::filesystem::path& filename,
 		const int size_x, const int size_y,
-		const int posX, const int posY,
 		const float scale,
+		const int posX, const int posY,
 		const float lifeTime
 	);
 };

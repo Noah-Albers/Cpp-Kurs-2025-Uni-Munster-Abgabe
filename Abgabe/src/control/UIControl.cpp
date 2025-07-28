@@ -16,18 +16,9 @@ UIControl::UIControl(sf::RenderWindow& window) :
 	win(window),
 	scoreboardLabel(AssetLoader::getInstance().getGameFont()),
 	scoreLabel(AssetLoader::getInstance().getGameFont()),
-	healthTexture(),
-	healthSprite(healthTexture),
 	background(window.getSize().x)
 	{
-	// load the health texture
-    if (!healthTexture.loadFromFile("assets/sprites/health.png"))
-        throw std::invalid_argument("Spritesheet not found");
-    // set up sprite
-    healthSprite.setTexture(healthTexture);
-    healthSprite.setTextureRect(sf::IntRect({0, 0}, {7, 7}));
-	healthSprite.setScale({6, 6});
-
+	
 	// Style options for the scoreboard
 	scoreboardLabel.setString("Score: ");
     scoreboardLabel.setFillColor(sf::Color::White);
@@ -45,7 +36,7 @@ UIControl::UIControl(sf::RenderWindow& window) :
 		scoreboardLabel.getPosition().y
 	});
 	
-	healthSprite.setPosition({
+	healthbar.getSprite().setPosition({
 		space,
 		scoreboardLabel.getPosition().y + scoreboardLabel.getLocalBounds().size.y + space * 2}
 	);
@@ -73,28 +64,9 @@ void UIControl::draw() {
 	win.draw(scoreboardLabel);
 	win.draw(scoreLabel);
 	
-	// Gets the player lifes
-	int currentLifes = Game::getInstance().getPlayerControl().getLifes();
-	
-	// Moves the sprite for each heart and draws it
-	// at the end resets its position to the start
-	float pos = healthSprite.getPosition().x;
-	for(int i=0;i<constants::START_LIFES;i++){
-		// If the current iteration is a life that the player still has (false) or has lost (true)
-		bool isLifeLost = i >= currentLifes;
-		
-		healthSprite.setTextureRect(sf::IntRect(
-			{isLifeLost ? 7 : 0, 0},
-			healthSprite.getTextureRect().size
-		));
-		
-		// Moves the sprite along the x axis to draw the lifes
-		healthSprite.setPosition({
-			(float)(pos + (healthSprite.getTextureRect().size.x * healthSprite.getScale().x + 10) * i), 
-			healthSprite.getPosition().y}
-		);
-		win.draw(healthSprite);
-	}
-	healthSprite.setPosition({pos, healthSprite.getPosition().y});
-	
+	// Renders the health bar
+	healthbar.drawBar(win,
+		Game::getInstance().getPlayerControl().getLifes(),
+		constants::START_LIFES
+	);	
 };

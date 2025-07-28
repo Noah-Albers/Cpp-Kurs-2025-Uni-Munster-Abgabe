@@ -13,10 +13,12 @@
 #include "properties/PropMoveable.h"
 #include "properties/PropSprite.h"
 
+#include "../assets/AssetMappings.h"
+
 Alien::Alien(const int x, const int y, const int lifes) :
 	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
-	PropSprite("assets/sprites/alien_default.png", 64, 64, 0.5, true),
-	shieldSprite("assets/sprites/Alien_Shield.png", 64, 64, 1, true, 0.5, true)
+	PropSprite(ASSETS_SPRITE_ALIEN, true),
+	shieldSprite(ASSETS_SPRITE_ALIEN_SHIELD, 1, true, true)
     {
 	shieldSprite.getSprite().setPosition(sf::Vector2f(x, y));
 	shieldSprite.getSprite().setRotation(sf::degrees(180));

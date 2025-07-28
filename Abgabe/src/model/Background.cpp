@@ -8,8 +8,10 @@
 #include "Background.h"
 #include "properties/PropSprite.h"
 
+#include "../assets/AssetMappings.h"
+
 Background::Background(int windowSizeX) :
-	PropSprite("assets/sprites/background.png", 720, 1080)
+	PropSprite(ASSETS_SPRITE_BACKGROUND)
 	{
 	float scale = (float)windowSizeX / (float)sprite.getTextureRect().size.x;
 	sprite.setScale({scale, scale});

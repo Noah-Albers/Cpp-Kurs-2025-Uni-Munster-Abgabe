@@ -15,6 +15,7 @@
 #include <SFML/Window/Window.hpp>
 
 #include "../model/Background.h"
+#include "../model/Healthbar.h"
 
 class UIControl {
 public:
@@ -40,9 +41,8 @@ protected:
 	// Text's for the score
 	sf::Text scoreboardLabel, scoreLabel;
 	
-	// Sprite and texture for the player's health
-	sf::Texture healthTexture;
-	sf::Sprite healthSprite;
+	// Healthbar object
+	Healthbar healthbar;
 	
 	// Background object
 	Background background;

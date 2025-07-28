@@ -10,9 +10,11 @@
 #include "properties/PropSprite.h"
 #include <SFML/System/Vector2.hpp>
 
+#include "../assets/AssetMappings.h"
+
 Bullet::Bullet(const int x, const int y) :
 	PropMoveable(10, VerticalDirection::UP),
-	PropSprite("assets/sprites/bullet_default.png", 5, 18)
+	PropSprite(ASSETS_SPRITE_PLAYER_BULLET)
 {
 	sprite.setPosition(sf::Vector2f(x,y));
 }
