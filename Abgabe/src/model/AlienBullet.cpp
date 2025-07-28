@@ -31,7 +31,7 @@ void AlienBullet::setPosition(sf::Vector2f pos){
 }
 
 void AlienBullet::nextSprite() {
-    if (animation_clock.getElapsedTime().asSeconds() > 0.1) {
+    if (animation_clock.getElapsedTime().asSeconds() > constants::ANIMATION_TIME) {
         frame_index++;
         this->setFrame(frame_index);
         animation_clock.restart();
