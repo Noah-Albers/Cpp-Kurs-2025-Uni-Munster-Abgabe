@@ -5,8 +5,9 @@
 
 #include "../view/Layer.hpp"
 #include "PlayerControl.h"
-#include "BulletControl.h"
 #include "UIControl.h"
+#include "BulletControl.h"
+#include "AlienControl.h"
 
 // Game class
 class Game {
@@ -43,6 +44,7 @@ private:
     // Controllers for the game
     PlayerControl player_control;
     BulletControl bullet_control;
+    AlienControl alien_control;
     UIControl ui_control;
 };
 

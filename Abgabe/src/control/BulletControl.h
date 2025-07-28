@@ -24,6 +24,9 @@ public:
 	
 	// Spawns a new bullet at the given position
 	void spawnBulletAt(const int x, const int y);
+
+	// Returns the Bulletlist
+	std::list<Bullet>& getBullets();
 	
 	virtual void draw() override;
 	

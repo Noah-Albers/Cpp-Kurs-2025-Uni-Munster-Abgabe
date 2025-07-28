@@ -43,8 +43,9 @@ $(BUILDDIR)/libgmock.a: $(BUILDDIR)/gtest-all.o
 
 
 # build game 
-game: $(GAME_OBJECTS) 
-	$(CXX) $^ -o $@ $(LDFLAGS) $(LDLIBS)
+game: $(GAME_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $^ -o $@ \
+	-L$(SFMLDIR)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 # build tests
 TEST_BINARY := Test

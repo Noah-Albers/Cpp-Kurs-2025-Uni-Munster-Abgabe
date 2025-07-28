@@ -3,9 +3,10 @@
 #include <SFML/Window/Keyboard.hpp>
 
 #include "../model/Constants.hpp"
+#include "UIControl.h"
 #include "BulletControl.h"
 #include "PlayerControl.h"
-#include "UIControl.h"
+#include "AlienControl.h"
 
 // Initialize the singleton
 
@@ -20,8 +21,12 @@ Game::Game() :
     gameLayer(window),
     player_control(gameLayer),
     bullet_control(gameLayer),
+    alien_control(gameLayer),
     ui_control(window)
     {
+	
+    alien_control.spawnAlien(100, 100);
+ 
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
 
@@ -68,6 +73,7 @@ bool Game::input() {
 void Game::update(float time_passed) {
 	player_control.update();
 	bullet_control.update();
+    alien_control.update();
 }
 
 void Game::draw() {
@@ -78,6 +84,7 @@ void Game::draw() {
     // Adds game objects to draw
     player_control.draw();
     bullet_control.draw();
+    alien_control.draw();
     
     ui_control.draw();
     
