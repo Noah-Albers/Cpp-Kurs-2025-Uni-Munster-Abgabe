@@ -15,11 +15,11 @@ MeteorControl::MeteorControl(Layer &layer) : layer(layer) {}
 MeteorControl::~MeteorControl() {}
 
 void MeteorControl::update(float time_passed){
-	// Moves Meteors forward and removes any that went out of screen
+	
 	for (auto meteors_it = meteors.begin(); meteors_it != meteors.end(); ) {
 		bool erased = false;
 
-        
+        //for every meteor, check whether it collides with the player and erase it
 		auto& player = Game::getInstance().getPlayerControl().getPlayer();
 
 		
@@ -31,6 +31,7 @@ void MeteorControl::update(float time_passed){
         		break;
     		}
 		
+            //  removes any that went out of screen
             if(meteors_it->getPosition().y > constants::GAME_HEIGHT+20){
 			    meteors_it = meteors.erase(meteors_it);
                 erased = true;
@@ -39,6 +40,7 @@ void MeteorControl::update(float time_passed){
 
             }
 
+            //Moves Meteors forward 
             if (!erased){
                 meteors_it->updatePosition();
                 ++ meteors_it;	

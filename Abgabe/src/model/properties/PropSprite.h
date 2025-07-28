@@ -17,6 +17,7 @@ public:
 	virtual ~PropSprite();
 	
 
+	//detects whether the current object collides with another
 	bool collision(PropSprite& object);
 
 	// Sets the texture to the given frame

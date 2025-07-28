@@ -11,7 +11,7 @@
 #include <SFML/System/Vector2.hpp>
 
 Meteor::Meteor(const int x, const int y) :
-	PropMoveable(5, VerticalDirection::DOWN),
+	PropMoveable(2, VerticalDirection::DOWN),
 	PropSprite("assets/sprites/Asteroid.png", 64, 64)
 {
 	sprite.setPosition(sf::Vector2f(x,y));
