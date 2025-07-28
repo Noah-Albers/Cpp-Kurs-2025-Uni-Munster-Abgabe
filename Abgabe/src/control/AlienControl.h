@@ -26,6 +26,8 @@ public:
 
 	void spawnAlien(const int x, const int y, const int lifes);
 	
+	// Getters/Setters
+	std::list<Alien>& getAliens();
 protected:
 	// Layer to render the player onto
 	Layer &layer;

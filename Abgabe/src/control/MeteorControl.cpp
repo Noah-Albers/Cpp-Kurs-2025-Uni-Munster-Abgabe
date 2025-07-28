@@ -4,46 +4,35 @@
  *  Created on: 27.07.2025
  *      Author: Alica
  */
-#include <cstdlib>
 #include "MeteorControl.h"
 #include "../model/Constants.hpp"
 #include "Game.hpp"
 #include <cstdlib>
+#include <list>
 
 MeteorControl::MeteorControl(Layer &layer) :
 	layer(layer) {}
 MeteorControl::~MeteorControl() {}
 
-void MeteorControl::update(float time_passed){
-	// Moves Meteors forward and removes any that got destroyed from the screen
-	for (auto meteors_it = meteors.begin(); meteors_it != meteors.end();) {
-		bool erased = false;
+void MeteorControl::update(float time_passed) {
+	auto &playerCtrl = Game::getInstance().getPlayerControl();
 
-		// for every meteor, check whether it collides with the player and erase
-		// it
-		auto &player = Game::getInstance().getPlayerControl().getPlayer();
+	// Updates meteors, checks collision and if they are out of scope
+	for (auto it = meteors.begin(); it != meteors.end();) {
+		it->updatePosition(time_passed);
 
-		if (meteors_it->isCollidingWith(player)) {
-			Game::getInstance().getPlayerControl().damagePlayer();
-			meteors_it = meteors.erase(meteors_it);
-			erased = true;
+		// Checks if the meteor is out of scope or has collided with the player
+		bool hasCollided = it->isCollidingWith(playerCtrl.getPlayer());
+		bool isOutOfScope = it->getPosition().y > constants::GAME_HEIGHT + 20;
 
-			break;
-		}
+		if (hasCollided)
+			playerCtrl.damagePlayer();
 
-		//  removes any that went out of screen
-		if (meteors_it->getPosition().y > constants::GAME_HEIGHT + 20) {
-			meteors_it = meteors.erase(meteors_it);
-			erased = true;
-
-			break;
-		}
-
-		// Moves Meteors forward
-		if (!erased) {
-			meteors_it->updatePosition(time_passed);
-			++meteors_it;
-		}
+		// Removes the bullet if out of scope or collided with playerd
+		if (hasCollided || isOutOfScope)
+			it = meteors.erase(it);
+		else
+			++it;
 	}
 
 	// count the time that passed since last Meteor spawn
@@ -65,3 +54,9 @@ void MeteorControl::draw() {
 void MeteorControl::spawnMeteorAt(const int x, const int y) {
 	meteors.emplace_back(x, y);
 }
+
+// #region Getters/Setters
+
+std::list<Meteor>& MeteorControl::getMeteors() { return meteors; }
+
+// #endregion

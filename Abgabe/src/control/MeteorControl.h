@@ -15,14 +15,6 @@
 
 class MeteorControl {
 public:
-
-    //timer counts how much time has passed since last meteor spawned
-    float timer = 0;
-
-    //time that passes, until next meteor spawns
-    // TODO?: make random?
-    float time_between_meteors = 10;
-
 	MeteorControl(Layer &layer);
 	virtual ~MeteorControl();
 	
@@ -35,12 +27,22 @@ public:
 	// Spawns a new Meteor at the given position
 	void spawnMeteorAt(const int x, const int y);
 
+	// Getters/Setters
+	std::list<Meteor>& getMeteors();
+
 protected:
 	// Layer to render the Meteors onto
 	Layer &layer;
 
 	// List of shot Meteors
 	std::list<Meteor> meteors;
+	
+    // timer counts how much time has passed since last meteor spawned
+    float timer = 0;
+
+    // time that passes, until next meteor spawns
+    // TODO?: make random?
+    float time_between_meteors = 10;
 };
 
 #endif /* SRC_CONTROL_MeteorCONTROL_H_ */

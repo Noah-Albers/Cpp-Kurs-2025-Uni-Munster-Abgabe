@@ -3,6 +3,7 @@
 #include <SFML/Window/Keyboard.hpp>
 
 #include "../model/Constants.hpp"
+#include "MeteorControl.h"
 #include "ParticleControl.h"
 #include "UIControl.h"
 #include "BulletControl.h"
@@ -109,6 +110,8 @@ void Game::draw() {
 BulletControl& Game::getBulletControl(){ return bullet_control; };
 PlayerControl& Game::getPlayerControl(){ return player_control; };
 ParticleControl& Game::getParticleControl(){ return particle_control; };
+AlienControl& Game::getAlientControl(){ return alien_control; };
+MeteorControl& Game::getMeteorControl(){ return meteor_control; };
 UIControl& Game::getUIControl(){ return ui_control; };
 AlienBulletControl& Game::getAlienBulletControl() {return alien_bullet_control; };
 

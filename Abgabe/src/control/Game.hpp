@@ -29,6 +29,8 @@ public:
 	BulletControl& getBulletControl();
 	PlayerControl& getPlayerControl();
     AlienBulletControl& getAlienBulletControl();
+    AlienControl& getAlientControl();
+    MeteorControl& getMeteorControl();
 
 	UIControl& getUIControl();
 	ParticleControl& getParticleControl();

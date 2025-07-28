@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include <list>
 #include "AlienControl.h"
 #include "../model/Constants.hpp"
 #include "Game.hpp"
@@ -15,28 +16,16 @@ AlienControl::AlienControl(Layer &layer) : layer(layer) {}
 AlienControl::~AlienControl() {}
 
 void AlienControl::update(float time_passed) {
-	auto& bullets = Game::getInstance().getBulletControl().getBullets();
-	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); ) {
-		bool erased = false;
-
-		for (auto bullet_it = bullets.begin(); bullet_it != bullets.end();) {
-			if(alien_it->isCollidingWith(*bullet_it)){	
-				alien_it->removeLife();
-				if (alien_it->getLifes() == 0) {
-					alien_it = aliens.erase(alien_it);
-					erased = true;
-				}
-				bullet_it = bullets.erase(bullet_it);
-        		break;
-    		}
-			++bullet_it;
-		}
-
-		if (!erased) {
-			alien_it->update(time_passed);
-			randomSpawnBullet(*alien_it);
-			++alien_it;
-		}
+	
+	// Updates aliens, checks for dead ones and randomly spawns bullets
+	for (auto it = aliens.begin(); it != aliens.end(); ) {
+		it->update(time_passed);
+		randomSpawnBullet(*it);		
+		
+		if(it->getLifes() <= 0)
+			it = aliens.erase(it);
+		else
+			++it;
 	}
 }
 
@@ -63,3 +52,9 @@ void AlienControl::randomSpawnBullet(Alien& alien) {
 		);
 	}
 }
+
+// # region Getters/Setters
+
+std::list<Alien>& AlienControl::getAliens(){ return aliens; };
+
+// # endregion

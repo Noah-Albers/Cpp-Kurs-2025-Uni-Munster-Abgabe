@@ -13,7 +13,7 @@
 
 PlayerControl::PlayerControl(Layer &layer) :
 	PropDrawable(layer),
-	lifes(constants::START_LIFES-4)
+	lifes(constants::START_LIFES)
 	{}
 PlayerControl::~PlayerControl() {}
 
