@@ -10,4 +10,11 @@ namespace constants {
     constexpr float ALIEN_BULLET_SPEED = 2.5;
 
     constexpr float ANIMATION_TIME = 0.4; //Time in sec.ms that defines how long an animated sprite runs
+
+    constexpr float ALIEN_BASE_SPEED = 5;
+    constexpr float ALIEN_SPEED_INCREASE_PER_LEVEL = 5;
+    constexpr int ALIEN_INCREASE_PER_LEVEL = 3;
+    constexpr float SCORE_MULTIPLIER_PER_LEVEL = 1.5;
+    constexpr int MAX_ALIEN_PER_LINE = 7;
+    constexpr int MAX_ALIEN_TOTAL = 50;
 }
