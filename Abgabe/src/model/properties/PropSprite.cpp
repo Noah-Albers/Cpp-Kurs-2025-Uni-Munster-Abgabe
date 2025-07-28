@@ -24,11 +24,7 @@ PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, 
 PropSprite::~PropSprite() {}
 
 
-sf::Sprite PropSprite::getSprite() {
-	return sprite;
-}
-
-sf::Sprite& PropSprite::getSpriteReference() { 
+sf::Sprite& PropSprite::getSprite() {
 	return sprite;
 }
 
@@ -42,9 +38,9 @@ bool PropSprite::isCollidingWith(PropSprite& object){
 	}
 
 void PropSprite::setFrame(int index){
+	
 	// Ensures that it rotates after the maximum index
-	int maxIndx = sprite.getTexture().getSize().x/sprite.getTextureRect().size.x;
-	index = index % maxIndx;
+	index = index % getFrameAmount();
 	
 	sprite.setTextureRect(sf::IntRect({
 		sprite.getTextureRect().size.x * index,
@@ -54,4 +50,8 @@ void PropSprite::setFrame(int index){
 
 int PropSprite::getFrame(){
 	return sprite.getTextureRect().position.x/sprite.getTextureRect().size.x;
+}
+
+int PropSprite::getFrameAmount(){
+	return sprite.getTexture().getSize().x/sprite.getTextureRect().size.x;
 }

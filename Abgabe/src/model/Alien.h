@@ -11,6 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "./properties/PropMoveable.h"
+#include "properties/PropAnimatedSprite.h"
 #include "properties/PropSprite.h"
 
 class Alien : public PropMoveable, public PropSprite {
@@ -29,17 +30,13 @@ public:
 
 	sf::Sprite getShieldSprite();
 
-	void nextSprite();
 	int getLifes();
 	void removeLife();
 protected: 
 
 private:
-	PropSprite shieldSprite;
+	PropAnimatedSprite shieldSprite;
 	int lifes;
-
-	sf::Clock animation_clock;
-	int frame_index;
 };
 
 #endif /* SRC_MODEL_ALIEN_H_ */

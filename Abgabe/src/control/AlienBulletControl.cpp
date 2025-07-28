@@ -12,15 +12,14 @@
 AlienBulletControl::AlienBulletControl(Layer &layer) : PropDrawable(layer) {}
 AlienBulletControl::~AlienBulletControl() {}
 
-void AlienBulletControl::update(){
+void AlienBulletControl::update(float time_passed){
 	// Moves bullets forward and removes any that went out of screen
 	for(auto it = alien_bullets.begin(); it != alien_bullets.end();){
-		it->updatePosition();
+		it->update(time_passed);
 		
 		if(it->getPosition().y > constants::GAME_HEIGHT + 20)
 			it = alien_bullets.erase(it);
 		else
-            it->nextSprite();
 			++it;
 	}	
 }

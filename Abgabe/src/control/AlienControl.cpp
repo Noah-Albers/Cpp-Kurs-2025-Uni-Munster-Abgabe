@@ -35,7 +35,6 @@ void AlienControl::update(float time_passed) {
 		if (!erased) {
 			alien_it->update(time_passed);
 			randomSpawnBullet(*alien_it);
-			alien_it->nextSprite();
 			++alien_it;
 		}
 	}
@@ -44,9 +43,9 @@ void AlienControl::update(float time_passed) {
 void AlienControl::draw(){
 	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++) {
 		layer.add_to_layer(alien_it->getSprite());
-		if (alien_it->getLifes() > 1) {
+		
+		if (alien_it->getLifes() > 1)
 			layer.add_to_layer(alien_it->getShieldSprite());
-		}
 	}
 }
 

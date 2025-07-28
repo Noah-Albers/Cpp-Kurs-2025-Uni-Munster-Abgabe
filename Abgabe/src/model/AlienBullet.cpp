@@ -6,18 +6,16 @@
  */
 
 #include "AlienBullet.h"
+#include "properties/PropAnimatedSprite.h"
 #include "properties/PropMoveable.h"
-#include "properties/PropSprite.h"
 #include <SFML/System/Vector2.hpp>
 #include "Constants.hpp"
 
 AlienBullet::AlienBullet(const int x, const int y) :
 	PropMoveable(constants::ALIEN_BULLET_SPEED, VerticalDirection::DOWN),
-	PropSprite("assets/sprites/Alien_Bullet.png", 18, 38, 0.5)
+	PropAnimatedSprite("assets/sprites/Alien_Bullet.png", 18, 38, constants::ANIMATION_TIME, true, 0.8)
 {
 	sprite.setPosition(sf::Vector2f(x,y));
-    animation_clock.restart();
-    frame_index = 0;
 }
 
 AlienBullet::~AlienBullet() {}
@@ -30,10 +28,7 @@ void AlienBullet::setPosition(sf::Vector2f pos){
 	sprite.setPosition(pos);
 }
 
-void AlienBullet::nextSprite() {
-    if (animation_clock.getElapsedTime().asSeconds() > constants::ANIMATION_TIME) {
-        frame_index++;
-        this->setFrame(frame_index);
-        animation_clock.restart();
-    }
+void AlienBullet::update(float time_passed) {
+	updateSprite(time_passed);
+	updatePosition(time_passed);
 }

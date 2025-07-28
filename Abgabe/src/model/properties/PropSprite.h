@@ -23,10 +23,9 @@ public:
 	void setFrame(int index);
 	
 	// Getters/Setters
-	sf::Sprite getSprite();
-	sf::Sprite& getSpriteReference();
+	sf::Sprite& getSprite();
 	int getFrame();
-
+	int getFrameAmount();
 protected:
     // Texture and sprite for the object
     sf::Texture texture;

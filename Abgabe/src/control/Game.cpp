@@ -77,7 +77,7 @@ void Game::update(float time_passed) {
 	bullet_control.update(time_passed);
     alien_control.update(time_passed);
     meteor_control.update(time_passed);
-    alien_bullet_control.update();
+    alien_bullet_control.update(time_passed);
 }
 
 void Game::draw() {
