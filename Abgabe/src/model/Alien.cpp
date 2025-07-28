@@ -15,7 +15,7 @@
 
 Alien::Alien(const int x, const int y) :
 	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
-	PropSprite("assets/sprites/alien_default.png", 64, 64)
+	PropSprite("assets/sprites/alien_default.png", 64, 64, 0.5)
     {
 		
     // Positions the sprite

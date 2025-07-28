@@ -20,6 +20,7 @@ void AlienBulletControl::update(){
 		if(it->getPosition().y > constants::GAME_HEIGHT + 20)
 			it = alien_bullets.erase(it);
 		else
+            it->nextSprite();
 			++it;
 	}	
 }

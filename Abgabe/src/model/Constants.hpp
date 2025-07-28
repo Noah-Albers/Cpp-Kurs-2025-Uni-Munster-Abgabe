@@ -7,4 +7,5 @@ namespace constants {
 	
 	constexpr int START_LIFES = 5;
     constexpr float ALIEN_SHOOT_CHANCE = 0.05; //Chance in percent per alien per frame
+    constexpr float ALIEN_BULLET_SPEED = 2.5;
 }
