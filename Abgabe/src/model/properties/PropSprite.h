@@ -13,7 +13,7 @@
 
 class PropSprite {
 public:
-	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale = 1);
+	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale = 1, const bool centerOrigin = false);
 	virtual ~PropSprite();
 	
 	// Detects whether the current object collides with another
@@ -21,6 +21,9 @@ public:
 
 	// Sets the texture to the given frame
 	void setFrame(int index);
+	
+	// Returns how many frames exist in the current texture
+	int getFrameAmount();
 	
 	// Getters/Setters
 	sf::Sprite getSprite();

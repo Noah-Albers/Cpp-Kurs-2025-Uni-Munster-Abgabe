@@ -3,6 +3,7 @@
 #include <SFML/Window/Keyboard.hpp>
 
 #include "../model/Constants.hpp"
+#include "ParticleControl.h"
 #include "UIControl.h"
 #include "BulletControl.h"
 #include "PlayerControl.h"
@@ -23,6 +24,7 @@ Game::Game() :
     bullet_control(gameLayer),
     alien_control(gameLayer),
     meteor_control(gameLayer),
+    particle_control(gameLayer),
     ui_control(window)
     {
 	
@@ -76,6 +78,7 @@ void Game::update(float time_passed) {
 	bullet_control.update(time_passed);
     alien_control.update(time_passed);
     meteor_control.update(time_passed);
+    particle_control.update(time_passed);
 }
 
 void Game::draw() {
@@ -88,6 +91,7 @@ void Game::draw() {
     bullet_control.draw();
     alien_control.draw();
     meteor_control.draw();
+    particle_control.draw();
     
     ui_control.draw();
     
@@ -101,6 +105,7 @@ void Game::draw() {
 
 BulletControl& Game::getBulletControl(){ return bullet_control; };
 PlayerControl& Game::getPlayerControl(){ return player_control; };
+ParticleControl& Game::getParticleControl(){ return particle_control; };
 UIControl& Game::getUIControl(){ return ui_control; };
 
 // #endregion
