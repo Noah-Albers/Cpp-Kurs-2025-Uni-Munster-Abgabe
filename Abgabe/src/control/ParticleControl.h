@@ -19,6 +19,9 @@ public:
 	// Event: When the game objects shall update
 	void update(float time_passed);
 	
+	// Methods to spawn particles at given positions
+	void spawnPlayerDeathParticle(const int x, const int y);
+	
 	virtual void draw() override;
 	
 protected:

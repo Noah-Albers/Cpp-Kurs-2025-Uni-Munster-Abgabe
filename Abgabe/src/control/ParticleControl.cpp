@@ -28,3 +28,8 @@ void ParticleControl::update(float time_passed){
 	}
 }
 
+
+void ParticleControl::spawnPlayerDeathParticle(const int x, const int y) {
+	particles.emplace_back("assets/sprites/player_death.png", 64, 64, x, y, 2, 2);
+}
+
