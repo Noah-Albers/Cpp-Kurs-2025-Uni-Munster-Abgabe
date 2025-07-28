@@ -15,12 +15,13 @@
 
 Alien::Alien(const int x, const int y) :
 	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
-	PropSprite("assets/sprites/alien_default.png", 48, 48)
+	PropSprite("assets/sprites/alien_default.png", 64, 64)
     {
 		
     // Positions the sprite
-	sprite.setOrigin({24,24});
+	sprite.setOrigin({32,32});
     sprite.setPosition(sf::Vector2f(x, y));
+	sprite.setRotation(sf::degrees(180));
 }
 Alien::~Alien() {}
 

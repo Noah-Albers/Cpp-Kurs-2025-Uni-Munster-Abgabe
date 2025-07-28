@@ -22,6 +22,7 @@ Game::Game() :
     player_control(gameLayer),
     bullet_control(gameLayer),
     alien_control(gameLayer),
+    alien_bullet_control(gameLayer),
     meteor_control(gameLayer),
     ui_control(window)
     {
@@ -76,6 +77,7 @@ void Game::update(float time_passed) {
 	bullet_control.update();
     alien_control.update();
     meteor_control.update(time_passed);
+    alien_bullet_control.update();
 }
 
 void Game::draw() {
@@ -87,6 +89,7 @@ void Game::draw() {
     player_control.draw();
     bullet_control.draw();
     alien_control.draw();
+    alien_bullet_control.draw();
     meteor_control.draw();
     
     ui_control.draw();
@@ -100,5 +103,6 @@ void Game::draw() {
 // #region Getters/Setters
 
 BulletControl& Game::getBulletControl(){ return bullet_control; };
+AlienBulletControl& Game::getAlienBulletControl() {return alien_bullet_control; };
 
 // #endregion

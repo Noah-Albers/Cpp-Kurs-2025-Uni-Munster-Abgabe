@@ -8,6 +8,7 @@
 #include "UIControl.h"
 #include "BulletControl.h"
 #include "AlienControl.h"
+#include "AlienBulletControl.h"
 #include "MeteorControl.h"
 
 // Game class
@@ -25,6 +26,7 @@ public:
 
 	// Getters/Setters
 	BulletControl& getBulletControl();
+    AlienBulletControl& getAlienBulletControl();
 
 private:
     // processes user input, returns true if window has been closed
@@ -46,6 +48,7 @@ private:
     PlayerControl player_control;
     BulletControl bullet_control;
     AlienControl alien_control;
+    AlienBulletControl alien_bullet_control;
     MeteorControl meteor_control;
 
     UIControl ui_control;

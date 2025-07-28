@@ -32,6 +32,9 @@ protected:
 	
 	// All Alien objects
 	std::list<Alien> aliens;
+
+private:
+	void randomSpawnBullet(Alien& alien);
 };
 
 #endif /* SRC_CONTROL_ALIENCONTROL_H_ */

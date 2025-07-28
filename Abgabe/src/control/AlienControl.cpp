@@ -8,6 +8,7 @@
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "AlienControl.h"
+#include "../model/Constants.hpp"
 #include "Game.hpp"
 
 
@@ -31,6 +32,7 @@ void AlienControl::update() {
 
 
 		if (!erased) {
+			randomSpawnBullet(*alien_it);
 			alien_it->update();
 			++alien_it;
 		}
@@ -45,4 +47,15 @@ void AlienControl::draw(){
 
 void AlienControl::spawnAlien(const int x, const int y) {
 	aliens.emplace_back(x, y);
+}
+
+void AlienControl::randomSpawnBullet(Alien& alien) {
+    const float random_value = (float)(rand()) / (float)(RAND_MAX);
+
+	if (random_value < constants::ALIEN_SHOOT_CHANCE) {
+		Game::getInstance().getAlienBulletControl().spawnBulletAt(
+			alien.getPosition().x,
+			alien.getPosition().y+6
+		);
+	}
 }
