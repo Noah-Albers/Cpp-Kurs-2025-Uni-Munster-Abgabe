@@ -8,7 +8,7 @@
 #include "PropSprite.h"
 #include <SFML/Graphics/Rect.hpp>
 
-PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y) : 
+PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale) : 
 	texture(),
     sprite(texture) {
 	
@@ -18,6 +18,7 @@ PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, 
     // set up sprite
     sprite.setTexture(texture);
     sprite.setTextureRect(sf::IntRect({0, 0}, {size_x, size_y}));
+    sprite.scale({scale, scale});
 }
 
 PropSprite::~PropSprite() {}
@@ -28,6 +29,10 @@ sf::Sprite PropSprite::getSprite() {
 }
 
 void PropSprite::setFrame(int index){
+	// Ensures that it rotates after the maximum index
+	int maxIndx = sprite.getTexture().getSize().x/sprite.getTextureRect().size.x;
+	index = index % maxIndx;
+	
 	sprite.setTextureRect(sf::IntRect({
 		sprite.getTextureRect().size.x * index,
 		0

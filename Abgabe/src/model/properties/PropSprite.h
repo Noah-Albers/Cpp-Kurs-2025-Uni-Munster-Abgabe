@@ -13,7 +13,7 @@
 
 class PropSprite {
 public:
-	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y);
+	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale = 1);
 	virtual ~PropSprite();
 	
 	// Sets the texture to the given frame

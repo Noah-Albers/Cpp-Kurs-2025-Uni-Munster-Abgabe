@@ -4,8 +4,6 @@
  *  Created on: 27.07.2025
  *      Author: Alica
  */
-#include <iostream>
-#include <ostream>
 #include <cstdlib>
 #include "MeteorControl.h"
 #include "../model/Constants.hpp"
@@ -22,7 +20,7 @@ void MeteorControl::update(float time_passed){
 			it = meteors.erase(it);
 		else
 			++it;
-	}	
+	}
 
     //count the time that passed since last Meteor spawn
     timer += time_passed;

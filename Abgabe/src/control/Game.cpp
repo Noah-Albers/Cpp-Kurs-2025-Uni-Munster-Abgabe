@@ -103,6 +103,8 @@ void Game::draw() {
 // #region Getters/Setters
 
 BulletControl& Game::getBulletControl(){ return bullet_control; };
+PlayerControl& Game::getPlayerControl(){ return player_control; };
+UIControl& Game::getUIControl(){ return ui_control; };
 AlienBulletControl& Game::getAlienBulletControl() {return alien_bullet_control; };
 
 // #endregion

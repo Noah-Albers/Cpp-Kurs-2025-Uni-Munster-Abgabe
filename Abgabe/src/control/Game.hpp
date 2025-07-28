@@ -26,6 +26,8 @@ public:
 
 	// Getters/Setters
 	BulletControl& getBulletControl();
+	PlayerControl& getPlayerControl();
+	UIControl& getUIControl();
     AlienBulletControl& getAlienBulletControl();
 
 private:
@@ -52,7 +54,6 @@ private:
     MeteorControl meteor_control;
 
     UIControl ui_control;
-
 };
 
 #endif

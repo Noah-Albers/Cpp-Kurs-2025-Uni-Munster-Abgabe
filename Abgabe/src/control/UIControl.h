@@ -9,8 +9,12 @@
 #define SRC_CONTROL_UICONTROL_H_
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/Window/Window.hpp>
+
+#include "../model/Background.h"
 
 class UIControl {
 public:
@@ -18,6 +22,9 @@ public:
 	
 	// Draws the ui on the screen
 	void draw();
+	
+	// Advances the background
+	void nextBackground();
 	
 	// Sets a new score and updates the screen
 	void setScore(int score);
@@ -32,6 +39,13 @@ protected:
 	
 	// Text's for the score
 	sf::Text scoreboardLabel, scoreLabel;
+	
+	// Sprite and texture for the player's health
+	sf::Texture healthTexture;
+	sf::Sprite healthSprite;
+	
+	// Background object
+	Background background;
 };
 
 #endif /* SRC_CONTROL_UICONTROL_H_ */
