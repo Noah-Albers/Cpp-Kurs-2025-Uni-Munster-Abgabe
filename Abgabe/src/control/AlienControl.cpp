@@ -33,6 +33,7 @@ void AlienControl::update() {
 
 		if (!erased) {
 			randomSpawnBullet(*alien_it);
+			alien_it->nextSprite();
 			alien_it->update();
 			++alien_it;
 		}
@@ -42,6 +43,7 @@ void AlienControl::update() {
 void AlienControl::draw(){
 	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++){
 		layer.add_to_layer(alien_it->getSprite());
+		layer.add_to_layer(alien_it->getShieldSprite());
 	}
 }
 

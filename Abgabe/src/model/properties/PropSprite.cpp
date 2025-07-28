@@ -28,6 +28,10 @@ sf::Sprite PropSprite::getSprite() {
 	return sprite;
 }
 
+sf::Sprite& PropSprite::getSpriteReference() { 
+	return sprite;
+}
+
 void PropSprite::setFrame(int index){
 	// Ensures that it rotates after the maximum index
 	int maxIndx = sprite.getTexture().getSize().x/sprite.getTextureRect().size.x;

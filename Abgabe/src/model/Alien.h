@@ -26,8 +26,20 @@ public:
 	virtual sf::Vector2f getPosition() override;
 
 	void changeDirection();
-	
-protected:    
+
+	sf::Sprite getShieldSprite();
+
+	void nextSprite();
+protected: 
+
+private:
+	PropSprite shieldSprite;
+	void removeLife();
+	int getLifes();
+	int lifes;
+
+	sf::Clock animation_clock;
+	int frame_index;
 };
 
 #endif /* SRC_MODEL_ALIEN_H_ */

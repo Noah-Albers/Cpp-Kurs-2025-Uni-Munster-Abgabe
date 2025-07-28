@@ -21,6 +21,7 @@ public:
 	
 	// Getters/Setters
 	sf::Sprite getSprite();
+	sf::Sprite& getSpriteReference();
 	int getFrame();
 protected:
 
