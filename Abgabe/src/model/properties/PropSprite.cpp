@@ -28,7 +28,7 @@ sf::Sprite PropSprite::getSprite() {
 }
 
 //detects whether the current object collides with another
-bool PropSprite::collision(PropSprite& object){
+bool PropSprite::isCollidingWith(PropSprite& object){
 		auto thisBounds = sprite.getGlobalBounds();
 		auto objectBounds = object.getSprite().getGlobalBounds();
 

@@ -10,7 +10,6 @@
 #include "AlienControl.h"
 #include "Game.hpp"
 
-
 AlienControl::AlienControl(Layer &layer) : layer(layer) {}
 AlienControl::~AlienControl() {}
 
@@ -19,16 +18,12 @@ void AlienControl::update() {
 		bool erased = false;
 
 		for (auto& bullet : Game::getInstance().getBulletControl().getBullets()) {
-			auto bulletBounds = bullet.getSprite().getGlobalBounds();
-			auto alientBounds = alien_it->getSprite().getGlobalBounds();
-
-			if(bulletBounds.findIntersection(alientBounds)){
+			if(alien_it->isCollidingWith(bullet)){	
         		alien_it = aliens.erase(alien_it);
         		erased = true;
         		break;
     		}
 		}
-
 
 		if (!erased) {
 			alien_it->update();
@@ -38,9 +33,8 @@ void AlienControl::update() {
 }
 
 void AlienControl::draw(){
-	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++){
+	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++)
 		layer.add_to_layer(alien_it->getSprite());
-	}
 }
 
 void AlienControl::spawnAlien(const int x, const int y) {
