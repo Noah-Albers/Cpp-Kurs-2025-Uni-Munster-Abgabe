@@ -26,6 +26,7 @@ public:
 	// Getters/Setters
 	BulletControl& getBulletControl();
 	PlayerControl& getPlayerControl();
+	UIControl& getUIControl();
 
 private:
     // processes user input, returns true if window has been closed
@@ -50,7 +51,6 @@ private:
     MeteorControl meteor_control;
 
     UIControl ui_control;
-
 };
 
 #endif

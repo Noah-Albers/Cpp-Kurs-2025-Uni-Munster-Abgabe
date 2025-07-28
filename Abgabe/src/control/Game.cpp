@@ -101,5 +101,6 @@ void Game::draw() {
 
 BulletControl& Game::getBulletControl(){ return bullet_control; };
 PlayerControl& Game::getPlayerControl(){ return player_control; };
+UIControl& Game::getUIControl(){ return ui_control; };
 
 // #endregion

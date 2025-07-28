@@ -57,6 +57,11 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 			this->player.getPosition().x-14,
 			this->player.getPosition().y-48
 		);
+		
+	// TODO: Remove debug key
+	if(key == sf::Keyboard::Key::Enter){
+		
+	}
 }
 
 // #region Getters/Setters

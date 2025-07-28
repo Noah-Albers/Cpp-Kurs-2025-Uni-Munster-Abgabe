@@ -17,7 +17,8 @@ UIControl::UIControl(sf::RenderWindow& window) :
 	scoreboardLabel(AssetLoader::getInstance().getGameFont()),
 	scoreLabel(AssetLoader::getInstance().getGameFont()),
 	healthTexture(),
-	healthSprite(healthTexture)
+	healthSprite(healthTexture),
+	background(window.getSize().x)
 	{
 	// load the health texture
     if (!healthTexture.loadFromFile("assets/sprites/health.png"))
@@ -53,6 +54,10 @@ UIControl::UIControl(sf::RenderWindow& window) :
 	setScore(0);
 }
 
+void UIControl::nextBackground(){
+	background.setFrame(background.getFrame()+1);
+}
+
 void UIControl::setScore(int newScore){
 	score = newScore;
 	
@@ -63,6 +68,8 @@ void UIControl::setScore(int newScore){
 }
 
 void UIControl::draw() {
+	win.draw(background.getSprite());
+	
 	win.draw(scoreboardLabel);
 	win.draw(scoreLabel);
 	
@@ -88,6 +95,6 @@ void UIControl::draw() {
 		);
 		win.draw(healthSprite);
 	}
-	healthSprite.setPosition({pos , healthSprite.getPosition().y});
+	healthSprite.setPosition({pos, healthSprite.getPosition().y});
 	
 };
