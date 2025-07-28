@@ -6,6 +6,7 @@
  */
 
 #include "PropSprite.h"
+#include <SFML/Graphics/Rect.hpp>
 
 PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y) : 
 	texture(),
@@ -26,4 +27,13 @@ sf::Sprite PropSprite::getSprite() {
 	return sprite;
 }
 
+void PropSprite::setFrame(int index){
+	sprite.setTextureRect(sf::IntRect({
+		sprite.getTextureRect().size.x * index,
+		0
+	}, sprite.getTextureRect().size));
+}
 
+int PropSprite::getFrame(){
+	return sprite.getTextureRect().position.x/sprite.getTextureRect().size.x;
+}

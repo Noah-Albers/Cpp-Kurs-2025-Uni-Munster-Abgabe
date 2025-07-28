@@ -16,8 +16,12 @@ public:
 	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y);
 	virtual ~PropSprite();
 	
+	// Sets the texture to the given frame
+	void setFrame(int index);
+	
 	// Getters/Setters
 	sf::Sprite getSprite();
+	int getFrame();
 protected:
 
     // Texture and sprite for the object
