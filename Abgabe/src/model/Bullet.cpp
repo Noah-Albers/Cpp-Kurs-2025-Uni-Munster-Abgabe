@@ -11,7 +11,7 @@
 #include <SFML/System/Vector2.hpp>
 
 Bullet::Bullet(const int x, const int y) :
-	PropMoveable(2, VerticalDirection::UP),
+	PropMoveable(10, VerticalDirection::UP),
 	PropSprite("assets/sprites/bullet_default.png", 5, 18)
 {
 	sprite.setPosition(sf::Vector2f(x,y));

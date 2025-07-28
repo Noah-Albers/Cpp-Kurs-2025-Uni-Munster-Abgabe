@@ -22,6 +22,7 @@ Game::Game() :
     player_control(gameLayer),
     bullet_control(gameLayer),
     alien_control(gameLayer),
+    meteor_control(gameLayer),
     ui_control(window)
     {
 	
@@ -74,6 +75,7 @@ void Game::update(float time_passed) {
 	player_control.update();
 	bullet_control.update();
     alien_control.update();
+    meteor_control.update(time_passed);
 }
 
 void Game::draw() {
@@ -85,6 +87,7 @@ void Game::draw() {
     player_control.draw();
     bullet_control.draw();
     alien_control.draw();
+    meteor_control.draw();
     
     ui_control.draw();
     

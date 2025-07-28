@@ -8,6 +8,7 @@
 #include "UIControl.h"
 #include "BulletControl.h"
 #include "AlienControl.h"
+#include "MeteorControl.h"
 
 // Game class
 class Game {
@@ -45,7 +46,10 @@ private:
     PlayerControl player_control;
     BulletControl bullet_control;
     AlienControl alien_control;
+    MeteorControl meteor_control;
+
     UIControl ui_control;
+
 };
 
 #endif
