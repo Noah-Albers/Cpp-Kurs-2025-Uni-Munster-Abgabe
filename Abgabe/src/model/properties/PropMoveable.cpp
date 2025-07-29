@@ -39,7 +39,8 @@ void PropMoveable::moveBy(int x, int y){
 void PropMoveable::setVerticalDirection(const VerticalDirection dir) { v_dir = dir; }
 void PropMoveable::setHorizontalDirection(const HorizontalDirection dir) { h_dir = dir; }
 void PropMoveable::setSpeed(const float _speed) { speed = _speed; }
-
+VerticalDirection PropMoveable::getVerticalDirection() { return v_dir; };
+HorizontalDirection PropMoveable::getHorizontalDirection() { return h_dir; };
 // #endregion
 
 
