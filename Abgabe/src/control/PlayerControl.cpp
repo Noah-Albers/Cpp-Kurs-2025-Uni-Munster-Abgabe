@@ -37,14 +37,17 @@ void PlayerControl::draw(){
 	if(blink_time_left >= 0){
 		int blink_int = (int)(blink_time_left *100);
 
-		if (blink_int % 100 < 50) return; 
-	
+		if (blink_int % 20 < 10) return; 
+
 	}
 	this->layer.add_to_layer(this->player.getSprite());
 	
 }
 
 void PlayerControl::damagePlayer(int amount){
+	// Lets the player only lose life if he isn't blinking
+	if(blink_time_left >= 0) return;
+	
 	lifes -= amount;
 	blink_time_left = 2;
 	

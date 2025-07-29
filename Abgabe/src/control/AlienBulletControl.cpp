@@ -18,7 +18,7 @@ void AlienBulletControl::populate(PlayerControl* playerControl) {
 }
 
 void AlienBulletControl::update(float time_passed){
-	// Updates bullets, removes any out of bounce and handles player collision
+	// Updates bullets, removes any out of bounds and handles player collision
 	for(auto it = alien_bullets.begin(); it != alien_bullets.end();){
 		it->update(time_passed);
 		
