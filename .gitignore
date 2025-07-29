@@ -7,4 +7,7 @@ game
 /Abgabe/.cproject
 /Abgabe/.project
 /Abgabe/.settings/
+/Abgabe/.vscode
+/Abgabe/tests
+/Abgabe/game
 .vscode
