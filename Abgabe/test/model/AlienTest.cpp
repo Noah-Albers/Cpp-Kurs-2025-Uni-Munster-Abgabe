@@ -53,6 +53,10 @@ TEST(AlienModelTest, removeLife){
 	ASSERT_EQ(alien.getLifes(), 2);
 	alien.removeLife();
 	ASSERT_EQ(alien.getLifes(), 1);
+	alien.removeLife();
+	ASSERT_EQ(alien.getLifes(), 0);
+	alien.removeLife();
+	ASSERT_EQ(alien.getLifes(), 0);
 }
 
 

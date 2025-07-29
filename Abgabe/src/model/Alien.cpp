@@ -64,7 +64,7 @@ void Alien::changeDirection() {
 }
 
 void Alien::removeLife() {
-	lifes--;
+	if(lifes > 0) lifes--;
 }
 
 
