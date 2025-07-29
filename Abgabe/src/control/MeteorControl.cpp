@@ -41,7 +41,7 @@ void MeteorControl::update(float time_passed) {
 	// when wanted time passed, spawn new meteor at random x coordinate and
 	// reset time
 	if (timer > time_between_meteors) {
-		spawnMeteorAt(rand() % constants::GAME_WIDTH, -20);
+		spawnMeteorAt(rand() % constants::GAME_WIDTH, -constants::SCOREBOARD_HEIGHT);
 		timer = 0;
 	}
 }

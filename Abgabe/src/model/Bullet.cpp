@@ -6,20 +6,23 @@
  */
 
 #include "Bullet.h"
-#include "properties/PropMoveable.h"
-#include "properties/PropSprite.h"
 #include <SFML/System/Vector2.hpp>
 
 #include "../assets/AssetMappings.h"
 
 Bullet::Bullet(const int x, const int y) :
-	PropMoveable(10, VerticalDirection::UP),
-	PropSprite(ASSETS_SPRITE_PLAYER_BULLET)
+	PropMoveable(6, VerticalDirection::UP),
+	PropAnimatedSprite(ASSETS_SPRITE_PLAYER_BULLET, 0.6, true, true)
 {
 	sprite.setPosition(sf::Vector2f(x,y));
 }
 
 Bullet::~Bullet() {}
+
+void Bullet::update(float time_passed) {
+	updatePosition(time_passed);
+	updateSprite(time_passed);
+}
 
 sf::Vector2f Bullet::getPosition() {
 	return sprite.getPosition();

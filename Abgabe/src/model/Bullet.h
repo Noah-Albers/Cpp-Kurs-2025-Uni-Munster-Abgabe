@@ -11,12 +11,15 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "properties/PropMoveable.h"
-#include "properties/PropSprite.h"
+#include "properties/PropAnimatedSprite.h"
 
-class Bullet : public PropMoveable, public PropSprite {
+class Bullet : public PropMoveable, public PropAnimatedSprite {
 public:
 	Bullet(const int x, const int y);
 	virtual ~Bullet();
+	
+	// Updates the object
+	void update(float time_passed);
 	
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;

@@ -65,8 +65,8 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 	if (key == sf::Keyboard::Key::Space)
 		// TODO: Maybe at some point replace with constants or a calculation
 		Game::getInstance().getBulletControl().spawnBulletAt(
-			this->player.getPosition().x-14,
-			this->player.getPosition().y-48
+			this->player.getPosition().x,
+			this->player.getPosition().y
 		);
 		
 	// TODO: Remove debug key

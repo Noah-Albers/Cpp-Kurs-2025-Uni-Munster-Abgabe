@@ -8,6 +8,7 @@
 #include "BulletControl.h"
 #include "Game.hpp"
 #include "properties/PropDrawable.h"
+#include "../model/Constants.hpp"
 
 BulletControl::BulletControl(Layer &layer) :
 	PropDrawable(layer) {}
@@ -20,10 +21,11 @@ void BulletControl::update(float time_passed) {
 
 	// Updates bullets, checks collisions and if they are out of scope
 	for (auto it = bullets.begin(); it != bullets.end();) {
-		it->updatePosition(time_passed);
+		it->update(time_passed);
 
 		// Flag to check if the bullet shall be deleted
-		bool deleteFlag = it->getPosition().y < -20;
+		// Checks if the lower end of the bullet is above the scoreboard-area
+		bool deleteFlag = it->getPosition().y < -it->getSprite().getLocalBounds().size.y - constants::SCOREBOARD_HEIGHT;
 
 		// Checks for alien collisions
 		for (auto alien_it = aliens.begin(); alien_it != aliens.end();alien_it++)

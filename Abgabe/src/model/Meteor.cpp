@@ -16,7 +16,8 @@ Meteor::Meteor(const int x, const int y) :
 	PropMoveable(2, VerticalDirection::DOWN),
 	PropSprite(ASSETS_SPRITE_METEOR)
 {
-	sprite.setPosition(sf::Vector2f(x,y));
+	// Adjusts the y position to let the user define the lower boundry
+	sprite.setPosition(sf::Vector2f(x,y - sprite.getLocalBounds().size.y));
 }
 
 Meteor::~Meteor() {}
