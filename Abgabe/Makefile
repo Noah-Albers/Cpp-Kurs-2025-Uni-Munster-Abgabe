@@ -7,12 +7,13 @@ BUILDDIR := ./build
 VPATH := src
 
 SFMLDIR := $(BUILDDIR)/SFML
+GTEST_DIR := $(BUILDDIR)/GoogleTest
 
 # Contain path for any includes (headers)
 # Depending on your platform: Include a path to boost, on linux should be 
 # /usr/local/include, on mac could be /opt/homebrew/include
-GTEST_INCLUDES := -IGoogleTest/googletest/include -IGoogleTest/googletest \
-			      -IGoogleTest/googlemock/include -IGoogleTest/googlemock
+GTEST_INCLUDES := -I$(GTEST_DIR)/googletest/include -I$(GTEST_DIR)/googletest \
+			      -I$(GTEST_DIR)/googlemock/include -I$(GTEST_DIR)/googlemock
 INCLUDES := -I./$(SFMLDIR)/include -I/opt/homebrew/include $(GTEST_INCLUDES)
 
 # Contains libraries we need to (-L is directory search path, -l is lib)
@@ -29,7 +30,6 @@ GAME_OBJECTS := $(SRCFILES:$(SRCDIR)/%.cpp=$(BUILDDIR)/src/%.o)
 DEPENDENCIES := $(SRCFILES:$(SRCDIR)/%.cpp=$(BUILDDIR)/src/%.d) 
 
 # build GTest
-GTEST_DIR := $(BUILDDIR)/GoogleTest
 $(BUILDDIR)/gtest-all.o: $(GTEST_DIR)/googletest/src/gtest-all.cc
 	$(CXX) $(CXXFLAGS) -I$(GTEST_DIR)/googletest/include -I$(GTEST_DIR)/googletest $< -c -o $@
 $(BUILDDIR)/gtest_main.o: $(GTEST_DIR)/googletest/src/gtest_main.cc
@@ -63,7 +63,7 @@ getGTest:
 	@echo "Removing download"
 	rm googletest-1.17.0.tar.gz
 	@echo "Renaming folder"
-	mv googletest-1.17.0 GoogleTest
+	mv googletest-1.17.0 $(GTEST_DIR)
 	@echo "Finished!"
 
 # On a Mac: "brew install sfml" will install the library.
