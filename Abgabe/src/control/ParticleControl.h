@@ -20,10 +20,18 @@ public:
 	void update(float time_passed);
 	
 	// Methods to spawn particles at given positions
+	
 	void spawnPlayerDeathParticle(const int x, const int y);
-
-	// Methods to spawn particles at given positions
 	void spawnMeteorExplosionParticle(const int x, const int y);
+	
+	// Debug-method to spawn any sprite as a particle at a given position
+	void spawnDebugParticle(
+		const std::filesystem::path& filename,
+		const int size_x, const int size_y,
+		const float scale,
+		const int posX, const int posY,
+		const float lifeTime
+	);
 	
 	virtual void draw() override;
 	

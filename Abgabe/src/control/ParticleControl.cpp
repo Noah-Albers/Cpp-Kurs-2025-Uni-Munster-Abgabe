@@ -29,6 +29,15 @@ void ParticleControl::update(float time_passed){
 	}
 }
 
+void ParticleControl::spawnDebugParticle(
+		const std::filesystem::path& filename,
+		const int size_x, const int size_y,
+		const float scale,
+		const int posX, const int posY,
+		const float lifeTime
+	) {
+	particles.emplace_back(filename, size_x, size_y, scale, posX, posY, lifeTime);
+}
 
 void ParticleControl::spawnPlayerDeathParticle(const int x, const int y) {
 	particles.emplace_back(ASSETS_SPRITE_PLAYER_DEATH, x, y, 2);
