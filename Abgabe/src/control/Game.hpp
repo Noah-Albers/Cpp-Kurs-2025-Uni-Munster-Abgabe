@@ -11,6 +11,7 @@
 #include "AlienControl.h"
 #include "AlienBulletControl.h"
 #include "MeteorControl.h"
+#include "LevelControl.h"
 
 // Game class
 class Game {
@@ -48,6 +49,8 @@ private:
 	
 	ParticleControl particle_control;
     UIControl ui_control;
+
+    LevelControl level_control;
 };
 
 #endif

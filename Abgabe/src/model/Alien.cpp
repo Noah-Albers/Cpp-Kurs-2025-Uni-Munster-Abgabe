@@ -49,8 +49,8 @@ void Alien::setPosition(sf::Vector2f pos){
 	if(pos.y > constants::GAME_HEIGHT) pos.y = constants::GAME_HEIGHT;
 	
 	// Changes alien direction when at the sides
-	if(pos.x == 0 || pos.x == constants::GAME_HEIGHT)
-		changeDirection();
+	//if(pos.x == 0 || pos.x == constants::GAME_HEIGHT)
+	//	changeDirection();
 	
 	sprite.setPosition(pos);
 	shieldSprite.getSprite().setPosition(pos);

@@ -24,17 +24,19 @@ Game::Game() :
     alien_bullet_control(gameLayer),
     meteor_control(gameLayer),
     particle_control(gameLayer),
-    ui_control(uiLayer, backgroundLayer)
+    ui_control(uiLayer, backgroundLayer),
+    level_control()
     {
 	// Populates all control's
 	alien_bullet_control.populate(&player_control);
-	alien_control.populate(&alien_bullet_control);
+	alien_control.populate(&alien_bullet_control, &level_control);
 	bullet_control.populate(&alien_control, &meteor_control);
 	meteor_control.populate(&player_control,&particle_control);
 	player_control.populate(&bullet_control, &particle_control);
 	ui_control.populate(&player_control);
+    level_control.populate(&alien_control);
 	
-    alien_control.spawnAlien(100, 100, 3);
+    
  
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
@@ -82,6 +84,7 @@ bool Game::input() {
 }
 
 void Game::update(float time_passed) {
+    level_control.update();
 	player_control.update(time_passed);
 	bullet_control.update(time_passed);
     alien_control.update(time_passed);

@@ -14,21 +14,42 @@
 
 AlienControl::AlienControl(Layer &layer) : layer(layer) {}
 
-void AlienControl::populate(AlienBulletControl* alientBulletControl){
+void AlienControl::populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl){
 	this->alientBulletControl = alientBulletControl;
+	this->levelControl = levelControl;
 }
 
 void AlienControl::update(float time_passed) {
-	
+	bool change_direction = false;
 	// Updates aliens, checks for dead ones and randomly spawns bullets
 	for (auto it = aliens.begin(); it != aliens.end(); ) {
 		it->update(time_passed);
 		randomSpawnBullet(*it);		
 		
-		if(it->getLifes() <= 0)
+		if(it->getLifes() <= 0) {
 			it = aliens.erase(it);
-		else
+			levelControl->alien_killed();
+		}
+		else {
+			if(it->getPosition().x == 0 || it->getPosition().x == constants::GAME_HEIGHT)
+				change_direction = true;
+			if (it->getPosition().y > constants::GAME_HEIGHT) {
+				// Game over logik here
+			}
 			++it;
+		}
+	}
+
+	// Alle Aliens umdrehen wenn eins den Rand berührt und Aliens nach unten schieben
+	if (change_direction) {
+		for (auto it = aliens.begin(); it != aliens.end(); it++)
+		{
+			it->changeDirection();
+			sf::Vector2f pos = it->getPosition();
+			pos.y = pos.y + constants::ALIEN_Y_ADVANCE;
+			it->setPosition(pos);
+		}
+		
 	}
 }
 
