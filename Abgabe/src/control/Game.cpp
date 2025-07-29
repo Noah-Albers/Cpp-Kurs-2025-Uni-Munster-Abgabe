@@ -27,7 +27,7 @@ Game::Game() :
 	alien_bullet_control.populate(&player_control);
 	alien_control.populate(&alien_bullet_control);
 	bullet_control.populate(&alien_control, &meteor_control);
-	meteor_control.populate(&player_control);
+	meteor_control.populate(&player_control,&particle_control);
 	player_control.populate(&bullet_control, &particle_control);
 	ui_control.populate(&player_control);
 	

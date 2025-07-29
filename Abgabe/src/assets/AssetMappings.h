@@ -21,7 +21,8 @@
 #define ASSETS_SPRITE_ALIEN_BULLET 		"assets/sprites/Alien_Bullet.png",		18,		38,		1
 #define ASSETS_SPRITE_ALIEN 			"assets/sprites/alien_default.png",		64,		64,		0.5
 #define ASSETS_SPRITE_ALIEN_SHIELD 		"assets/sprites/Alien_Shield.png",		64,		64,		0.5
-#define ASSETS_SPRITE_METEOR 			"assets/sprites/Asteroid.png",			64,		64,		1
+#define ASSETS_SPRITE_METEOR 			"assets/sprites/Asteroid.png",			38,		33,		1
+#define ASSETS_SPRITE_METEOR_EXPLOSION 	"assets/sprites/Asteroid_Explosion.png",90, 	96,		2
 #define ASSETS_SPRITE_BACKGROUND 		"assets/sprites/background.png",		720,	1080,	1
 #define ASSETS_SPRITE_PLAYER_BULLET 	"assets/sprites/bullet_default.png",	5, 		18, 	1
 #define ASSETS_SPRITE_HEALTH 			"assets/sprites/health.png",			7, 		7,		6
