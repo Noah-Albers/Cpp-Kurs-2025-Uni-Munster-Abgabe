@@ -13,7 +13,8 @@
 
 PlayerControl::PlayerControl(Layer &layer) :
 	PropDrawable(layer),
-	lifes(constants::START_LIFES)
+	lifes(constants::START_LIFES),
+	blink_time_left(-1)
 	{}
 	
 void PlayerControl::populate(BulletControl* bulletControl, ParticleControl* particleControl) {
@@ -23,17 +24,29 @@ void PlayerControl::populate(BulletControl* bulletControl, ParticleControl* part
 
 void PlayerControl::update(float time_passed){
 	this->player.update(time_passed);
+	// count down blink time if it is set on a positive value
+	if(blink_time_left >= 0)
+		blink_time_left -= time_passed;
 }
 
 void PlayerControl::draw(){
 	// Prevents the player from being drawn after he has died
 	if(lifes <= 0) return;
 	
+	//if player lost life and blink time is set on positive value, player should blink for blink time seconds
+	if(blink_time_left >= 0){
+		int blink_int = (int)(blink_time_left *100);
+
+		if (blink_int % 100 < 50) return; 
+	
+	}
 	this->layer.add_to_layer(this->player.getSprite());
+	
 }
 
 void PlayerControl::damagePlayer(int amount){
 	lifes -= amount;
+	blink_time_left = 2;
 	
 	// Spawn death animation if player has died
 	if(lifes == 0)

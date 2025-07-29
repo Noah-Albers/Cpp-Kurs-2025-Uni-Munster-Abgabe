@@ -54,6 +54,10 @@ protected:
 	// How many lifes the player has left
 	int lifes;
 
+	//says whether a life was just lost
+
+	float blink_time_left;
+
 	// Player object
 	Player player;
 };
