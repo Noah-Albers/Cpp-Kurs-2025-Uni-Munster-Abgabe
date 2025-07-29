@@ -11,12 +11,19 @@
 #include <SFML/Graphics.hpp>
 #include "../view/Layer.hpp"
 #include "../model/Alien.h"
+#include "AlienBulletControl.h"
 #include <list>
+
+// Declares classes to avoid circular dependencies
+class AlienBulletControl;
 
 class AlienControl {
 public:
 	AlienControl(Layer &layer);
-	virtual ~AlienControl();
+	
+	// Part of setup
+	// Its imperative to call this before anything else in this class
+	void populate(AlienBulletControl* alientBulletControl);
 	
 	// Event: When the alien is drawn
 	void draw();
@@ -36,7 +43,12 @@ protected:
 	std::list<Alien> aliens;
 
 private:
+	// Communication with other control's
+	AlienBulletControl* alientBulletControl;
+	
 	void randomSpawnBullet(Alien& alien);
+
+	
 };
 
 #endif /* SRC_CONTROL_ALIENCONTROL_H_ */

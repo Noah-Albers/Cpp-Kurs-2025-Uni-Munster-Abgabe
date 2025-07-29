@@ -10,10 +10,13 @@
 #include <list>
 #include "AlienControl.h"
 #include "../model/Constants.hpp"
-#include "Game.hpp"
+#include "AlienBulletControl.h"
 
 AlienControl::AlienControl(Layer &layer) : layer(layer) {}
-AlienControl::~AlienControl() {}
+
+void AlienControl::populate(AlienBulletControl* alientBulletControl){
+	this->alientBulletControl = alientBulletControl;
+}
 
 void AlienControl::update(float time_passed) {
 	
@@ -46,7 +49,7 @@ void AlienControl::randomSpawnBullet(Alien& alien) {
     const float random_value = (float)(rand()) / (float)(RAND_MAX);
 
 	if (random_value < constants::ALIEN_SHOOT_CHANCE) {
-		Game::getInstance().getAlienBulletControl().spawnBulletAt(
+		alientBulletControl->spawnBulletAt(
 			alien.getPosition().x,
 			alien.getPosition().y+6
 		);

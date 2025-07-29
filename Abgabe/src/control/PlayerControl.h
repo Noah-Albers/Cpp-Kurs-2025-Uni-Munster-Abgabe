@@ -11,13 +11,19 @@
 #include <SFML/Graphics.hpp>
 #include "../view/Layer.hpp"
 #include "../model/Player.h"
+#include "ParticleControl.h"
 #include "properties/PropDrawable.h"
+
+// Declares classes to avoid circular dependencys
+class BulletControl;
 
 class PlayerControl : public PropDrawable {
 public:
 	PlayerControl(Layer &layer);
-	virtual ~PlayerControl();
-
+	
+	// Part of setup
+	// Its imperative to call this before anything else in this class
+	void populate(BulletControl* bulletControl, ParticleControl* particleControl);
 	
 	
 	// Event: When the game objects shall update
@@ -41,6 +47,10 @@ public:
 	Player& getPlayer();
 
 protected:
+	// Communication with other control's
+	BulletControl* bulletControl;
+	ParticleControl* particleControl;
+
 	// How many lifes the player has left
 	int lifes;
 

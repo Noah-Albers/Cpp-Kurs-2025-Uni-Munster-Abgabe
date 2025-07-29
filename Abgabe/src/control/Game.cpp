@@ -11,12 +11,6 @@
 #include "AlienControl.h"
 
 // Initialize the singleton
-
- Game& Game::getInstance() {
-	static Game instance;
-    return instance;
-}
-
 Game::Game() :
 	window(sf::VideoMode({constants::GAME_WIDTH, constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}), "Space Invaders"),
     gameView(sf::FloatRect(sf::Vector2f({0, -constants::SCOREBOARD_HEIGHT}), sf::Vector2f({constants::GAME_WIDTH,constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}))),
@@ -29,6 +23,13 @@ Game::Game() :
     particle_control(gameLayer),
     ui_control(window)
     {
+	// Populates all control's
+	alien_bullet_control.populate(&player_control);
+	alien_control.populate(&alien_bullet_control);
+	bullet_control.populate(&alien_control, &meteor_control);
+	meteor_control.populate(&player_control);
+	player_control.populate(&bullet_control, &particle_control);
+	ui_control.populate(&player_control);
 	
     alien_control.spawnAlien(100, 100, 3);
  
@@ -105,15 +106,3 @@ void Game::draw() {
     
     window.display();
 }
-
-// #region Getters/Setters
-
-BulletControl& Game::getBulletControl(){ return bullet_control; };
-PlayerControl& Game::getPlayerControl(){ return player_control; };
-ParticleControl& Game::getParticleControl(){ return particle_control; };
-AlienControl& Game::getAlientControl(){ return alien_control; };
-MeteorControl& Game::getMeteorControl(){ return meteor_control; };
-UIControl& Game::getUIControl(){ return ui_control; };
-AlienBulletControl& Game::getAlienBulletControl() {return alien_bullet_control; };
-
-// #endregion

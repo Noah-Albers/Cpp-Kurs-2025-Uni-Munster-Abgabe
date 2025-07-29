@@ -13,7 +13,7 @@
 
 class Healthbar : public PropSprite {
 public:
-	Healthbar();
+	Healthbar(const int pos_x, const int pos_y);
 	
 	// Draws the health bar
 	void drawBar(sf::RenderWindow& win, int lifes, int maxlifes);

@@ -16,10 +16,16 @@
 
 #include "../model/Background.h"
 #include "../model/Healthbar.h"
+#include "../model/Scoreboard.h"
+#include "PlayerControl.h"
 
 class UIControl {
 public:
 	UIControl(sf::RenderWindow& win);
+	
+	// Part of setup
+	// Its imperative to call this before anything else in this class
+	void populate(PlayerControl* playerControl);
 	
 	// Draws the ui on the screen
 	void draw();
@@ -34,6 +40,9 @@ public:
 	void update(float time_passed);
 	
 protected:
+	// Communication with other control's
+	PlayerControl* playerControl;
+
 	// Score the player achieved
 	// TODO: Maybe move this somewhere else
 	int score;
@@ -42,7 +51,7 @@ protected:
 	sf::RenderWindow& win;
 	
 	// Text's for the score
-	sf::Text scoreboardLabel, scoreLabel;
+	Scoreboard scoreboard;
 	
 	// Healthbar object
 	Healthbar healthbar;

@@ -9,11 +9,14 @@
 
 #include "properties/PropSprite.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/System/Vector2.hpp>
 
 #include "../assets/AssetMappings.h"
 
-Healthbar::Healthbar() :
-	PropSprite(ASSETS_SPRITE_HEALTH) {}
+Healthbar::Healthbar(const int pos_x, const int pos_y) :
+	PropSprite(ASSETS_SPRITE_HEALTH) {
+		sprite.setPosition(sf::Vector2f({(float) pos_x, (float) pos_y}));
+	}
 
 	
 void Healthbar::drawBar(sf::RenderWindow& win, int lifes, int maxlifes) {

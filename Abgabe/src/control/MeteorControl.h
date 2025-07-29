@@ -13,10 +13,15 @@
 #include "../view/Layer.hpp"
 #include "../model/Meteor.h"
 
+class PlayerControl;
+
 class MeteorControl {
 public:
 	MeteorControl(Layer &layer);
-	virtual ~MeteorControl();
+	
+	// Part of setup
+	// Its imperative to call this before anything else in this class
+	void populate(PlayerControl* playerControl);
 	
 	// Event: When the game objects shall update
 	void update(float time_passed);
@@ -31,6 +36,9 @@ public:
 	std::list<Meteor>& getMeteors();
 
 protected:
+	// Communication with other control's
+	PlayerControl* playerControl;
+
 	// Layer to render the Meteors onto
 	Layer &layer;
 
@@ -38,11 +46,11 @@ protected:
 	std::list<Meteor> meteors;
 	
     // timer counts how much time has passed since last meteor spawned
-    float timer = 0;
+    float timer;
 
     // time that passes, until next meteor spawns
     // TODO?: make random?
-    float time_between_meteors = 10;
+    float time_between_meteors;
 };
 
 #endif /* SRC_CONTROL_MeteorCONTROL_H_ */

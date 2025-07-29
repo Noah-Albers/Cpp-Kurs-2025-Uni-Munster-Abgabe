@@ -7,15 +7,19 @@
 
 #include "PlayerControl.h"
 #include <SFML/Window/Keyboard.hpp>
-#include "Game.hpp"
 #include "properties/PropDrawable.h"
 #include "../model/Constants.hpp"
+#include "BulletControl.h"
 
 PlayerControl::PlayerControl(Layer &layer) :
 	PropDrawable(layer),
 	lifes(constants::START_LIFES)
 	{}
-PlayerControl::~PlayerControl() {}
+	
+void PlayerControl::populate(BulletControl* bulletControl, ParticleControl* particleControl) {
+	this->bulletControl = bulletControl;
+	this->particleControl = particleControl;
+}
 
 void PlayerControl::update(float time_passed){
 	this->player.update(time_passed);
@@ -33,7 +37,7 @@ void PlayerControl::damagePlayer(int amount){
 	
 	// Spawn death animation if player has died
 	if(lifes == 0)
-		Game::getInstance().getParticleControl().spawnPlayerDeathParticle(player.getPosition().x, player.getPosition().y);
+		particleControl->spawnPlayerDeathParticle(player.getPosition().x, player.getPosition().y);
 }
 
 void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) {
@@ -61,10 +65,9 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 	// All code below shall only execute on press
 	if(!is_now_pressed) return;
 	
-	// Spawns a bullet when space is pressed
+	// Spawns a bullet when space is pressed at the players position
 	if (key == sf::Keyboard::Key::Space)
-		// TODO: Maybe at some point replace with constants or a calculation
-		Game::getInstance().getBulletControl().spawnBulletAt(
+		bulletControl->spawnBulletAt(
 			this->player.getPosition().x,
 			this->player.getPosition().y
 		);

@@ -14,10 +14,16 @@
 #include "../model/AlienBullet.h"
 #include "./properties/PropDrawable.h"
 
+// Declares classes to avoid circular dependencies
+class PlayerControl;
+
 class AlienBulletControl : public PropDrawable {
 public:
 	AlienBulletControl(Layer &layer);
-	virtual ~AlienBulletControl();
+	
+	// Part of setup
+	// Its imperative to call this before anything else in this class
+	void populate(PlayerControl* playerControl);
 	
 	// Event: When the game objects shall update
 	void update(float time_passed);
@@ -31,8 +37,12 @@ public:
 	virtual void draw() override;
 	
 protected:
+	// Communication with other control's
+	PlayerControl* playerControl;
+	
 	// List of shot bullets
 	std::list<AlienBullet> alien_bullets;
+	
 };
 
 #endif /* SRC_CONTROL_ALIENBULLETCONTROL_H_ */

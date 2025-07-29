@@ -21,19 +21,6 @@ public:
 
     // start the game
     void start();
-    
-    // Singleton access method
-    static Game& getInstance();
-
-	// Getters/Setters
-	BulletControl& getBulletControl();
-	PlayerControl& getPlayerControl();
-    AlienBulletControl& getAlienBulletControl();
-    AlienControl& getAlientControl();
-    MeteorControl& getMeteorControl();
-
-	UIControl& getUIControl();
-	ParticleControl& getParticleControl();
 
 private:
     // processes user input, returns true if window has been closed

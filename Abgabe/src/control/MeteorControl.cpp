@@ -11,22 +11,26 @@
 #include <list>
 
 MeteorControl::MeteorControl(Layer &layer) :
-	layer(layer) {}
-MeteorControl::~MeteorControl() {}
+	layer(layer),
+	timer(0),
+	time_between_meteors(10)
+	{}
+
+void MeteorControl::populate(PlayerControl* playerControl) {
+	this->playerControl = playerControl;
+}
 
 void MeteorControl::update(float time_passed) {
-	auto &playerCtrl = Game::getInstance().getPlayerControl();
-
 	// Updates meteors, checks collision and if they are out of scope
 	for (auto it = meteors.begin(); it != meteors.end();) {
 		it->updatePosition(time_passed);
 
 		// Checks if the meteor is out of scope or has collided with the player
-		bool hasCollided = it->isCollidingWith(playerCtrl.getPlayer());
+		bool hasCollided = it->isCollidingWith(playerControl->getPlayer());
 		bool isOutOfScope = it->getPosition().y > constants::GAME_HEIGHT + 20;
 
 		if (hasCollided)
-			playerCtrl.damagePlayer();
+			playerControl->damagePlayer();
 
 		// Removes the bullet if out of scope or collided with playerd
 		if (hasCollided || isOutOfScope)

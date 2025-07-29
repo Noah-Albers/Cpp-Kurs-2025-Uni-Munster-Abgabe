@@ -6,18 +6,23 @@
  */
 
 #include "BulletControl.h"
-#include "Game.hpp"
 #include "properties/PropDrawable.h"
 #include "../model/Constants.hpp"
+#include "MeteorControl.h"
+#include "AlienControl.h"
 
 BulletControl::BulletControl(Layer &layer) :
 	PropDrawable(layer) {}
-BulletControl::~BulletControl() {}
+
+void BulletControl::populate(AlienControl* alienControl, MeteorControl* meteorControl) {
+	this->alienControl = alienControl;
+	this->meteorControl = meteorControl;
+}
 
 void BulletControl::update(float time_passed) {
 	// List of all aliens
-	auto &aliens = Game::getInstance().getAlientControl().getAliens();
-	auto &meteors = Game::getInstance().getMeteorControl().getMeteors();
+	auto &aliens = alienControl->getAliens();
+	auto &meteors = meteorControl->getMeteors();
 
 	// Updates bullets, checks collisions and if they are out of scope
 	for (auto it = bullets.begin(); it != bullets.end();) {
