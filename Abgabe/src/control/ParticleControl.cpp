@@ -34,3 +34,6 @@ void ParticleControl::spawnPlayerDeathParticle(const int x, const int y) {
 	particles.emplace_back(ASSETS_SPRITE_PLAYER_DEATH, x, y, 2);
 }
 
+void ParticleControl::spawnMeteorExplosionParticle(const int x, const int y) {
+	particles.emplace_back(ASSETS_SPRITE_METEOR_EXPLOSION, x, y, 0.5);
+}

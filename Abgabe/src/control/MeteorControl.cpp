@@ -5,6 +5,7 @@
  *      Author: Alica
  */
 #include "MeteorControl.h"
+#include "ParticleControl.h"
 #include "../model/Constants.hpp"
 #include "Game.hpp"
 #include <cstdlib>
@@ -13,11 +14,12 @@
 MeteorControl::MeteorControl(Layer &layer) :
 	layer(layer),
 	timer(0),
-	time_between_meteors(10)
+	time_between_meteors(3)
 	{}
 
-void MeteorControl::populate(PlayerControl* playerControl) {
+void MeteorControl::populate(PlayerControl* playerControl, ParticleControl* particleControl) {
 	this->playerControl = playerControl;
+	this->particleControl = particleControl;
 }
 
 void MeteorControl::update(float time_passed) {
@@ -29,8 +31,10 @@ void MeteorControl::update(float time_passed) {
 		bool hasCollided = it->isCollidingWith(playerControl->getPlayer());
 		bool isOutOfScope = it->getPosition().y > constants::GAME_HEIGHT + 20;
 
-		if (hasCollided)
+		if (hasCollided){
 			playerControl->damagePlayer();
+			particleControl->spawnMeteorExplosionParticle(it->getPosition().x,it->getPosition().y);
+		}
 
 		// Removes the bullet if out of scope or collided with playerd
 		if (hasCollided || isOutOfScope)

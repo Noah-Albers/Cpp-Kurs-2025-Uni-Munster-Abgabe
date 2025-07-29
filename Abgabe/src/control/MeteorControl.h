@@ -12,6 +12,7 @@
 #include <list>
 #include "../view/Layer.hpp"
 #include "../model/Meteor.h"
+#include "ParticleControl.h"
 
 class PlayerControl;
 
@@ -21,7 +22,7 @@ public:
 	
 	// Part of setup
 	// Its imperative to call this before anything else in this class
-	void populate(PlayerControl* playerControl);
+	void populate(PlayerControl* playerControl, ParticleControl* particleControl);
 	
 	// Event: When the game objects shall update
 	void update(float time_passed);
@@ -38,6 +39,7 @@ public:
 protected:
 	// Communication with other control's
 	PlayerControl* playerControl;
+	ParticleControl* particleControl;
 
 	// Layer to render the Meteors onto
 	Layer &layer;
