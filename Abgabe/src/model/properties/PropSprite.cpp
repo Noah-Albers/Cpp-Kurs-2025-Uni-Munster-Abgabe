@@ -24,8 +24,6 @@ PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, 
     	sprite.setOrigin(sf::Vector2f((float)size_x/2.0, (float)size_y/2.0));
 }
 
-PropSprite::~PropSprite() {}
-
 sf::Sprite& PropSprite::getSprite() {
 	return sprite;
 }

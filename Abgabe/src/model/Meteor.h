@@ -16,7 +16,6 @@
 class Meteor : public PropMoveable, public PropSprite {
 public:
 	Meteor(const int x, const int y);
-	virtual ~Meteor();
 	
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;

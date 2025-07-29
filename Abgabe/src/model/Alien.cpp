@@ -18,16 +18,13 @@
 Alien::Alien(const int x, const int y, const int lifes) :
 	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
 	PropSprite(ASSETS_SPRITE_ALIEN, true),
-	shieldSprite(ASSETS_SPRITE_ALIEN_SHIELD, 1, true, true)
+	shieldSprite(ASSETS_SPRITE_ALIEN_SHIELD, 1, true, true),
+	lifes(lifes)
     {
 	shieldSprite.getSprite().setPosition(sf::Vector2f(x, y));
-	shieldSprite.getSprite().setRotation(sf::degrees(180));
 
     // Positions the sprite
     sprite.setPosition(sf::Vector2f(x, y));
-	sprite.setRotation(sf::degrees(180));
-
-	this->lifes = lifes;
 }
 
 
@@ -66,8 +63,6 @@ void Alien::changeDirection() {
 void Alien::removeLife() {
 	if(lifes > 0) lifes--;
 }
-
-
 
 // #region Getters/Setters
 

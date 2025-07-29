@@ -17,8 +17,10 @@
 Background::Background() :
 	PropSprite(ASSETS_SPRITE_BACKGROUND)
 	{
+	// Calculates the scale-factor which is needed to get the background to cover the whole width of the screen
 	float scale = constants::GAME_WIDTH / (float)sprite.getTextureRect().size.x;
 	sprite.setScale({scale, scale});	
+	// Enables texture-repeating on the sprite the ensure it can be moved by just changing the viewport
 	texture.setRepeated(true);
 }
 

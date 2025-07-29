@@ -14,9 +14,9 @@
 
 AlienBullet::AlienBullet(const int x, const int y) :
 	PropMoveable(constants::ALIEN_BULLET_SPEED, VerticalDirection::DOWN),
-	PropAnimatedSprite(ASSETS_SPRITE_ALIEN_BULLET, constants::ANIMATION_TIME, true, 0.8)
+	PropAnimatedSprite(ASSETS_SPRITE_ALIEN_BULLET, constants::ANIMATION_TIME, true, true)
 {
-	sprite.setPosition(sf::Vector2f(x,y));
+	setPosition(sf::Vector2f(x,y));
 }
 
 AlienBullet::~AlienBullet() {}

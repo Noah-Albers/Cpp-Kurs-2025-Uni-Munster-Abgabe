@@ -14,7 +14,6 @@
 class PropSprite {
 public:
 	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale = 1, const bool centerOrigin = false);
-	virtual ~PropSprite();
 	
 	/**
 	 * Detects whether the current object collides with another
