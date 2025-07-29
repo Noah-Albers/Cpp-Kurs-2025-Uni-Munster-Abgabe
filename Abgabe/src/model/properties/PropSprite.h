@@ -16,8 +16,13 @@ public:
 	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale = 1, const bool centerOrigin = false);
 	virtual ~PropSprite();
 	
-	// Detects whether the current object collides with another
-	bool isCollidingWith(PropSprite& object);
+	/**
+	 * Detects whether the current object collides with another
+	 *
+	 * @param margin is the amount of margin that shall be subtracted from both sprite hitboxes.
+	 * If they collid only in this small margin, it is considered that they didn't collide at all
+	 */
+	bool isCollidingWith(PropSprite& object, float margin = 5);
 
 	// Sets the texture to the given frame
 	void setFrame(int index);

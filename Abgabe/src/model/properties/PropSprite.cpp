@@ -30,10 +30,20 @@ sf::Sprite& PropSprite::getSprite() {
 	return sprite;
 }
 
-// Detects whether the current object collides with another
-bool PropSprite::isCollidingWith(PropSprite& object){
+bool PropSprite::isCollidingWith(PropSprite& object, float margin){
 	auto thisBounds = sprite.getGlobalBounds();
 	auto objectBounds = object.getSprite().getGlobalBounds();
+	
+	if(margin > 0){		
+		thisBounds.position.x += margin;
+		thisBounds.position.y += margin;
+		thisBounds.size.x -= margin*2;
+		thisBounds.size.y -= margin*2;
+		objectBounds.position.x += margin;
+		objectBounds.position.y += margin;
+		objectBounds.size.x -= margin*2;
+		objectBounds.size.y -= margin*2;
+	}
 
 	return thisBounds.findIntersection(objectBounds).has_value();
 }
