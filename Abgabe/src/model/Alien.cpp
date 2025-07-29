@@ -29,7 +29,6 @@ Alien::Alien(const int x, const int y, const int lifes) :
 
 	this->lifes = lifes;
 }
-Alien::~Alien() {}
 
 
 void Alien::update(float time_passed){
@@ -43,15 +42,19 @@ sf::Vector2f Alien::getPosition() {
 }
 
 void Alien::setPosition(sf::Vector2f pos){
-	if(pos.x < 0) this->changeDirection();
-	if(pos.x > constants::GAME_WIDTH) this->changeDirection();
+	// Clamps position
+	if(pos.x < 0) pos.x = 0;
+	if(pos.x > constants::GAME_WIDTH) pos.x = constants::GAME_WIDTH;
 	if(pos.y < 0) pos.y = 0;
 	if(pos.y > constants::GAME_HEIGHT) pos.y = constants::GAME_HEIGHT;
+	
+	// Changes alien direction when at the sides
+	if(pos.x == 0 || pos.x == constants::GAME_HEIGHT)
+		changeDirection();
 	
 	sprite.setPosition(pos);
 	shieldSprite.getSprite().setPosition(pos);
 }
-
 
 void Alien::changeDirection() {
 	if (h_dir == HorizontalDirection::RIGHT)
@@ -60,14 +63,15 @@ void Alien::changeDirection() {
 		setHorizontalDirection(HorizontalDirection::RIGHT);
 }
 
-sf::Sprite Alien::getShieldSprite() {
-	return shieldSprite.getSprite();
-}
-
 void Alien::removeLife() {
 	lifes--;
 }
 
-int Alien::getLifes() {
-	return lifes;
-}
+
+
+// #region Getters/Setters
+
+int Alien::getLifes() { return lifes; };
+sf::Sprite Alien::getShieldSprite() { return shieldSprite.getSprite(); };
+
+// #endregion

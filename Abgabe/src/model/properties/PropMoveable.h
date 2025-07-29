@@ -37,7 +37,8 @@ public:
 	void setVerticalDirection(const VerticalDirection dir);
 	void setHorizontalDirection(const HorizontalDirection dir);
 	void setSpeed(const float speed);
-	
+	VerticalDirection getVerticalDirection();
+	HorizontalDirection getHorizontalDirection();
 protected:
 	
 	// Vertical and horizonal movement direction's

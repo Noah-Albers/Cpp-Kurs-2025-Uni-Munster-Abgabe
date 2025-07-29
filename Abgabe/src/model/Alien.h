@@ -17,24 +17,25 @@
 class Alien : public PropMoveable, public PropSprite {
 public:
 	Alien(const int x, const int y, const int lifes);
-	virtual ~Alien();
 	
 	// Event: When the object shall update
 	void update(float time_passed);
+
+	// Makes the alien change its direction
+	void changeDirection();
+
+	// Removes a life from the alien
+	void removeLife();
 	
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;
 	virtual sf::Vector2f getPosition() override;
-
-	void changeDirection();
-
+	
+	// Getters/Setters
 	sf::Sprite getShieldSprite();
-
 	int getLifes();
-	void removeLife();
-protected: 
-
-private:
+		
+protected:
 	PropAnimatedSprite shieldSprite;
 	int lifes;
 };
