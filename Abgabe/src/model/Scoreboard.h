@@ -11,6 +11,8 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "../view/Layer.hpp"
+
 class Scoreboard {
 public:
 	/**
@@ -19,7 +21,7 @@ public:
 	Scoreboard(float space);
 
 	// Renders the scoreboard onto the window
-	void draw(sf::RenderWindow& win);
+	void draw(Layer& win);
 
 	// Shows the given score as text on the scoreboard
 	void displayScore(int score);

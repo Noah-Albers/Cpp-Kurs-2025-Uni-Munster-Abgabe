@@ -11,23 +11,20 @@
 #include "../assets/AssetMappings.h"
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include <iostream>
 
 #include "../model/Constants.hpp"
 
-Background::Background(int windowSizeX) :
+Background::Background() :
 	PropSprite(ASSETS_SPRITE_BACKGROUND)
 	{
-	float scale = (float)windowSizeX / (float)sprite.getTextureRect().size.x;
-	sprite.setScale({scale, scale});
+	float scale = constants::GAME_WIDTH / (float)sprite.getTextureRect().size.x;
+	sprite.setScale({scale, scale});	
 	texture.setRepeated(true);
-	
-	//sprite.setTextureRect(sf::IntRect({0,0},{sprite.getTextureRect().size.x,sprite.getTextureRect().size.y*2}));
 }
 
-void Background::draw(sf::RenderWindow& win) {	
+void Background::draw(Layer& layer) {
 	// Draws to copys of the background
-	win.draw(sprite);
+	layer.add_to_layer(sprite);
 }
 
 void Background::update(float time_passed) {
@@ -42,7 +39,6 @@ void Background::update(float time_passed) {
 		{0,-offset},
 		sprite.getTextureRect().size)
 	);
-	
 }
 
 

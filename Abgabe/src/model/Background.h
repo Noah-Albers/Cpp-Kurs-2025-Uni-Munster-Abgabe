@@ -10,13 +10,14 @@
 
 #include "./properties/PropSprite.h"
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "../view/Layer.hpp"
 
 class Background : public PropSprite {
 public:
-	Background(int windowSizeX);
+	Background();
 	
 	// Draws the background
-	void draw(sf::RenderWindow& win);
+	void draw(Layer& layer);
 	
 	// Updates the object
 	void update(float time_passed);

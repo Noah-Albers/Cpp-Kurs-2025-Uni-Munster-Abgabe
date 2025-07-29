@@ -32,11 +32,12 @@ private:
     // draws the scene
     void draw();
 
+	// Window object
     sf::RenderWindow window;
 
     // view areas and layers
-    sf::View gameView;
-    Layer gameLayer;
+    sf::View gameView, uiView;
+    Layer gameLayer, uiLayer, backgroundLayer;
     
     // Controllers for the game
     PlayerControl player_control;
@@ -44,7 +45,6 @@ private:
     AlienControl alien_control;
     AlienBulletControl alien_bullet_control;
     MeteorControl meteor_control;
-	
 	
 	ParticleControl particle_control;
     UIControl ui_control;

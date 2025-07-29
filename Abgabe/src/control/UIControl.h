@@ -18,10 +18,11 @@
 #include "../model/Healthbar.h"
 #include "../model/Scoreboard.h"
 #include "PlayerControl.h"
+#include "../view/Layer.hpp"
 
 class UIControl {
 public:
-	UIControl(sf::RenderWindow& win);
+	UIControl(Layer& uiLayer, Layer& backgroundLayer);
 	
 	// Part of setup
 	// Its imperative to call this before anything else in this class
@@ -47,8 +48,9 @@ protected:
 	// TODO: Maybe move this somewhere else
 	int score;
 
-	// Window to render the ui onto
-	sf::RenderWindow& win;
+	// Layer to render the ui and background onto
+	Layer& uiLayer;
+	Layer& backgroundLayer;
 	
 	// Text's for the score
 	Scoreboard scoreboard;

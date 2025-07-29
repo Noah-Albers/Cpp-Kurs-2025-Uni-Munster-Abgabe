@@ -14,14 +14,17 @@
 Game::Game() :
 	window(sf::VideoMode({constants::GAME_WIDTH, constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}), "Space Invaders"),
     gameView(sf::FloatRect(sf::Vector2f({0, -constants::SCOREBOARD_HEIGHT}), sf::Vector2f({constants::GAME_WIDTH,constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}))),
+    uiView(sf::FloatRect(sf::Vector2f({0, 0}), sf::Vector2f({constants::GAME_WIDTH,constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}))),
     gameLayer(window),
+    uiLayer(window),
+    backgroundLayer(window),
     player_control(gameLayer),
     bullet_control(gameLayer),
     alien_control(gameLayer),
     alien_bullet_control(gameLayer),
     meteor_control(gameLayer),
     particle_control(gameLayer),
-    ui_control(window)
+    ui_control(uiLayer, backgroundLayer)
     {
 	// Populates all control's
 	alien_bullet_control.populate(&player_control);
@@ -38,6 +41,8 @@ Game::Game() :
 
     // set the view (visible area) for our game
     gameLayer.set_view(gameView);
+    uiLayer.set_view(uiView);
+    backgroundLayer.set_view(uiView);
 }
 
 void Game::start() {
@@ -89,6 +94,7 @@ void Game::update(float time_passed) {
 void Game::draw() {
 	// Cleans the screen
     window.clear();
+    uiLayer.clear();
     gameLayer.clear();
     
     // Adds game objects to draw
@@ -102,7 +108,9 @@ void Game::draw() {
     ui_control.draw();
     
     // Performs draw calls
+    backgroundLayer.draw();
     gameLayer.draw();
+    uiLayer.draw();
     
     window.display();
 }

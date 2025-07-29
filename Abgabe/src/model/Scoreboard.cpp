@@ -40,9 +40,9 @@ void Scoreboard::displayScore(int score){
 	scoreLabel.setString(ss.str());
 }
 
-void Scoreboard::draw(sf::RenderWindow& win){
-	win.draw(scoreboardLabel);
-	win.draw(scoreLabel);
+void Scoreboard::draw(Layer& layer){
+	layer.add_to_layer(scoreboardLabel);
+	layer.add_to_layer(scoreLabel);
 }
 
 // #region Getters/Setters

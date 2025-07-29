@@ -19,7 +19,7 @@ Healthbar::Healthbar(const int pos_x, const int pos_y) :
 	}
 
 	
-void Healthbar::drawBar(sf::RenderWindow& win, int lifes, int maxlifes) {
+void Healthbar::drawBar(Layer& layer, int lifes, int maxlifes) {
 	// Moves the sprite for each heart and draws it
 	// at the end resets its position to the start
 	float pos = sprite.getPosition().x;
@@ -37,7 +37,7 @@ void Healthbar::drawBar(sf::RenderWindow& win, int lifes, int maxlifes) {
 			(float)(pos + (sprite.getTextureRect().size.x * sprite.getScale().x + 10) * i), 
 			sprite.getPosition().y}
 		);
-		win.draw(sprite);
+		layer.add_to_layer(sprite);
 	}
 	sprite.setPosition({pos, sprite.getPosition().y});
 

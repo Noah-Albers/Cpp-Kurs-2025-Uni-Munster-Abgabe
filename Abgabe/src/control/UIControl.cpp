@@ -10,11 +10,11 @@
 #include "../model/Constants.hpp"
 #include "PlayerControl.h"
 
-UIControl::UIControl(sf::RenderWindow& window) :
-	win(window),
+UIControl::UIControl(Layer& uiLayer, Layer& backgroundLayer) :
+	uiLayer(uiLayer),
+	backgroundLayer(backgroundLayer),
 	scoreboard(10),
-	healthbar(10, 60),
-	background(window.getSize().x)
+	healthbar(10, 60)
 	{
 	// Sets the initial score
 	setScore(0);
@@ -24,7 +24,7 @@ void UIControl::populate(PlayerControl* playerControl){
 	this->playerControl = playerControl;
 }
 
-void UIControl::update(float time_passed) {
+void UIControl::update(float time_passed){
 	background.update(time_passed);
 }
 
@@ -38,12 +38,9 @@ void UIControl::setScore(int newScore){
 }
 
 void UIControl::draw() {
-	background.draw(win);
-	
-	scoreboard.draw(win);
-	
-	// Renders the health bar
-	healthbar.drawBar(win,
+	background.draw(backgroundLayer);
+	scoreboard.draw(uiLayer);
+	healthbar.drawBar(uiLayer,
 		playerControl->getLifes(),
 		constants::START_LIFES
 	);	
