@@ -23,6 +23,7 @@ public:
 	
 	void spawnPlayerDeathParticle(const int x, const int y);
 	void spawnMeteorExplosionParticle(const int x, const int y);
+	void spawnExplosionParticle(const int x, const int y);
 	
 	// Debug-method to spawn any sprite as a particle at a given position
 	void spawnDebugParticle(

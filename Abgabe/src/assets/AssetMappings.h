@@ -28,6 +28,7 @@
 #define ASSETS_SPRITE_HEALTH 			"assets/sprites/health.png",			7, 		7,		6
 #define ASSETS_SPRITE_PLAYER_DEATH 		"assets/sprites/player_death.png",		64, 	64,		2
 #define ASSETS_SPRITE_PLAYER 			"assets/sprites/player_default.png",	32, 	28,		2
+#define ASSETS_EXPLOSION	 			"assets/sprites/explosion.png",			80, 	48,		3
 
 
 #endif /* SRC_ASSETS_ASSETMAPPINGS_H_ */

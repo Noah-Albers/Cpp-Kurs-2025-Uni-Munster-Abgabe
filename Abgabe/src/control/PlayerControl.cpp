@@ -7,9 +7,11 @@
 
 #include "PlayerControl.h"
 #include <SFML/Window/Keyboard.hpp>
+#include "../CMakeLists.h"
 #include "properties/PropDrawable.h"
 #include "../model/Constants.hpp"
 #include "BulletControl.h"
+#include "../assets/AssetMappings.h"
 
 PlayerControl::PlayerControl(Layer &layer) :
 	PropDrawable(layer),
@@ -45,15 +47,25 @@ void PlayerControl::draw(){
 }
 
 void PlayerControl::damagePlayer(int amount){
+	bool isBig = amount > 5;
+	
 	// Lets the player only lose life if he isn't blinking
 	if(blink_time_left >= 0) return;
+	if(amount > lifes) amount = lifes;
 	
 	lifes -= amount;
 	blink_time_left = 2;
 	
 	// Spawn death animation if player has died
-	if(lifes == 0)
-		particleControl->spawnPlayerDeathParticle(player.getPosition().x, player.getPosition().y);
+	if(lifes == 0){
+		int x = player.getPosition().x;
+		int y = player.getPosition().y;
+		
+		if(isBig)
+			particleControl->spawnExplosionParticle(x, y);
+		else
+			particleControl->spawnPlayerDeathParticle(x, y);
+	}
 }
 
 void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) {
@@ -79,7 +91,7 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 	}
 	
 	// All code below shall only execute on press
-	if(!is_now_pressed) return;
+	if(!is_now_pressed) RETURN;
 	
 	// Spawns a bullet when space is pressed at the players position
 	if (key == sf::Keyboard::Key::Space)

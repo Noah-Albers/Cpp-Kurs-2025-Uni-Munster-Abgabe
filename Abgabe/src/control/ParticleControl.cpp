@@ -39,6 +39,10 @@ void ParticleControl::spawnDebugParticle(
 	particles.emplace_back(filename, size_x, size_y, scale, posX, posY, lifeTime);
 }
 
+void ParticleControl::spawnExplosionParticle(const int x, const int y){
+	particles.emplace_back(ASSETS_EXPLOSION, x, y, 2);
+}
+
 void ParticleControl::spawnPlayerDeathParticle(const int x, const int y) {
 	particles.emplace_back(ASSETS_SPRITE_PLAYER_DEATH, x, y, 2);
 }
