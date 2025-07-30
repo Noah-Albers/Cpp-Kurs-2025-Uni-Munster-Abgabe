@@ -42,20 +42,12 @@ public:
 	virtual void draw() override;
 	
 	// Getters/Setters
-	int getLifes();
-	Player& getPlayer();
-	bool isPlayerDead();
+	const Player& getPlayer() const;
 
 protected:
 	// Communication with other control's
 	BulletControl* bulletControl;
 	ParticleControl* particleControl;
-
-	// How many lifes the player has left
-	int lifes;
-
-	// Time that the player shall be invincible for and blinking
-	float blink_time_left;
 
 	// Player object
 	Player player;

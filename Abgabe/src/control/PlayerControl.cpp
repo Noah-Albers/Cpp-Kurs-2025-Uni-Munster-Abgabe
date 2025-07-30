@@ -11,12 +11,9 @@
 #include "properties/PropDrawable.h"
 #include "../model/Constants.hpp"
 #include "BulletControl.h"
-#include "../assets/AssetMappings.h"
 
 PlayerControl::PlayerControl(Layer &layer) :
-	PropDrawable(layer),
-	lifes(constants::START_LIFES),
-	blink_time_left(-1)
+	PropDrawable(layer)
 	{}
 	
 void PlayerControl::populate(BulletControl* bulletControl, ParticleControl* particleControl) {
@@ -26,61 +23,40 @@ void PlayerControl::populate(BulletControl* bulletControl, ParticleControl* part
 
 void PlayerControl::update(float time_passed){
 	this->player.update(time_passed);
-	// count down blink time if it is set on a positive value
-	if(blink_time_left >= 0)
-		blink_time_left -= time_passed;
 }
 
 void PlayerControl::draw(){
-	// Prevents the player from being drawn after he has died
-	if(lifes <= 0) return;
-	
-	//if player lost life and blink time is set on positive value, player should blink for blink time seconds
-	if(blink_time_left >= 0){
-		int blink_int = (int)(blink_time_left *100);
-
-		if (blink_int % 20 < 10) return; 
-
-	}
-	this->layer.add_to_layer(this->player.getSprite());
+	player.draw(layer);
 }
 
 void PlayerControl::damagePlayer(int amount){
-	if(lifes <= 0) return;
+	// If dead or invulnerable, he doesn't take damage
+	if(player.isDead() || player.isInvulnerable()) return;
 	
-	bool hadStrongDamage = amount > 5;
-	
-	// Lets the player only lose life if he isn't blinking
-	if(blink_time_left >= 0) return;
-	if(amount > lifes) amount = lifes;
-	
-	lifes -= amount;
-	blink_time_left = 2;
+	player.setLifes(player.getLifes() - amount);
+	player.setInvulnerable(2);
 	
 	// Handles death code
-	if(lifes == 0)
-		onPlayerDeath(hadStrongDamage);
+	if(player.isDead())
+		onPlayerDeath(amount > 5);
 }
 
 void PlayerControl::onPlayerDeath(bool hadStrongDamage) {
 	player.setHorizontalDirection(HorizontalDirection::NONE);
 	player.setVerticalDirection(VerticalDirection::NONE);
 	
-	// Spawn death animation if player has died
-	if(lifes == 0){
-		int x = player.getPosition().x;
-		int y = player.getPosition().y;
-		
-		if(hadStrongDamage)
-			particleControl->spawnExplosionParticle(x, y);
-		else
-			particleControl->spawnPlayerDeathParticle(x, y);
-	}
+	int x = player.getPosition().x;
+	int y = player.getPosition().y;
+	
+	if(hadStrongDamage)
+		particleControl->spawnExplosionParticle(x, y);
+	else
+		particleControl->spawnPlayerDeathParticle(x, y);
 }
 
 void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) {
 	// Prevents any inputs after the player has died
-	if(lifes <= 0) return;
+	if(player.isDead()) return;
 	
 	
 	bool is_vertical = key == sf::Keyboard::Key::W || key == sf::Keyboard::Key::S;
@@ -118,8 +94,6 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 
 // #region Getters/Setters
 
-int PlayerControl::getLifes(){ return lifes; };
-Player& PlayerControl::getPlayer(){ return player; };
-bool PlayerControl::isPlayerDead() { return lifes <= 0; };
+const Player& PlayerControl::getPlayer() const { return player; };
 
 // #endregion

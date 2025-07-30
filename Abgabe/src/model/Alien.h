@@ -11,7 +11,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "./properties/PropMoveable.h"
-#include "properties/PropAnimatedSprite.h"
+#include "AlienShield.h"
 #include "properties/PropSprite.h"
 
 class Alien : public PropMoveable, public PropSprite {
@@ -36,13 +36,13 @@ public:
 	void deleteShield();
 	
 	// Getters/Setters
-	sf::Sprite& getShieldSprite();
+	const sf::Sprite& getShieldSprite() const;
 	bool hasShield();
 	int getLifes();
 		
 protected:
-	// Optional shield sprite for the alien
-	PropAnimatedSprite* shieldSprite;
+	// Optional shield for the alien
+	AlienShield* shield;
 	int lifes;
 };
 

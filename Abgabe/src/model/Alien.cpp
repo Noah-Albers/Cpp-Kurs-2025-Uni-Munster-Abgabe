@@ -9,6 +9,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "AlienShield.h"
 #include "Constants.hpp"
 #include "properties/PropAnimatedSprite.h"
 #include "properties/PropMoveable.h"
@@ -19,14 +20,14 @@
 Alien::Alien(const int x, const int y, const int lifes) :
 	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
 	PropSprite(ASSETS_SPRITE_ALIEN, true),
-	shieldSprite(nullptr),
+	shield(nullptr),
 	lifes(lifes)
     {
 
     // Creates a shield if the alien has more than one life
     if(lifes > 1)
     	// Allocates a new shield sprite for the alien
-		shieldSprite = new PropAnimatedSprite(ASSETS_SPRITE_ALIEN_SHIELD, 1, true, true);
+		shield = new AlienShield();
 	
 	// Positions the alien
 	setPosition(sf::Vector2f(x, y));
@@ -40,10 +41,8 @@ Alien::~Alien(){
 void Alien::update(float time_passed){
 	this->updatePosition(time_passed);
 	
-	if(hasShield()){		
-		shieldSprite->getSprite().setPosition(sprite.getPosition());
-		shieldSprite->updateSprite(time_passed);
-	}
+	if(hasShield())
+		shield->updateSprite(time_passed);
 }
 
 sf::Vector2f Alien::getPosition() {
@@ -60,7 +59,7 @@ void Alien::setPosition(sf::Vector2f pos){
 	sprite.setPosition(pos);
 	
 	if(hasShield())
-		shieldSprite->getSprite().setPosition(pos);
+		shield->setPosition(pos);
 }
 
 void Alien::changeDirection() {
@@ -82,14 +81,14 @@ void Alien::removeLife() {
 
 void Alien::deleteShield(){
 	if(!hasShield()) return;
-	delete shieldSprite;
-	shieldSprite = nullptr;
+	delete shield;
+	shield = nullptr;
 }
 
 // #region Getters/Setters
 
 int Alien::getLifes() { return lifes; };
-sf::Sprite& Alien::getShieldSprite() { return shieldSprite->getSprite(); };
-bool Alien::hasShield() { return shieldSprite != nullptr; };
+const sf::Sprite& Alien::getShieldSprite() const { return shield->getSprite(); };
+bool Alien::hasShield() { return shield != nullptr; };
 
 // #endregion

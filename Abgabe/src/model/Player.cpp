@@ -17,7 +17,9 @@
 
 Player::Player() :
 	PropMoveable(3.5),
-	PropSprite(ASSETS_SPRITE_PLAYER, true)
+	PropSprite(ASSETS_SPRITE_PLAYER, true),
+	lifes(constants::START_LIFES),
+	invuln_time_sec(0)
     {
 		
     // Positions the sprite
@@ -25,9 +27,26 @@ Player::Player() :
 }
 Player::~Player() {}
 
-
 void Player::update(float time_passed){
 	this->updatePosition(time_passed);
+	
+	// Updates the invulnerability time of the player
+	if(invuln_time_sec >= 0)
+		invuln_time_sec -= time_passed;
+}
+
+void Player::draw(Layer& layer){
+	// Prevents the player from being drawn after he has died
+	if(isDead()) return;
+	
+	// if player is invulnerable, he should blink
+	if(isInvulnerable()){
+		int blink_int = (int)(invuln_time_sec *100);
+
+		if (blink_int % 20 < 10) return;
+	}
+	
+	layer.add_to_layer(getSprite());
 }
 
 sf::Vector2f Player::getPosition() {
@@ -43,4 +62,17 @@ void Player::setPosition(sf::Vector2f pos){
 	
 	sprite.setPosition(pos);
 }
+
+// #region Getters/Setters
+
+int Player::getLifes() const { return lifes; };
+bool Player::isDead() { return lifes <= 0; };
+bool Player::isInvulnerable() { return invuln_time_sec >= 0; };
+void Player::setLifes(int lifes) {
+	if(lifes < 0) lifes = 0;
+	this->lifes = lifes;
+};
+void Player::setInvulnerable(float timeSec) { invuln_time_sec = timeSec; };
+
+// #endregion
 

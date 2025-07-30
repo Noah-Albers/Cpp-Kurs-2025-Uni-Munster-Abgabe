@@ -24,11 +24,11 @@ PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, 
     	sprite.setOrigin(sf::Vector2f((float)size_x/2.0, (float)size_y/2.0));
 }
 
-sf::Sprite& PropSprite::getSprite() {
+const sf::Sprite& PropSprite::getSprite() const {
 	return sprite;
 }
 
-bool PropSprite::isCollidingWith(PropSprite& object, float margin){
+bool PropSprite::isCollidingWith(const PropSprite& object, float margin) const {
 	auto thisBounds = sprite.getGlobalBounds();
 	auto objectBounds = object.getSprite().getGlobalBounds();
 	

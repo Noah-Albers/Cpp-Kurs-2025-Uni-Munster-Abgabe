@@ -41,7 +41,7 @@ void UIControl::draw() {
 	background.draw(backgroundLayer);
 	scoreboard.draw(uiLayer);
 	healthbar.drawBar(uiLayer,
-		playerControl->getLifes(),
+		playerControl->getPlayer().getLifes(),
 		constants::START_LIFES
 	);	
 };
