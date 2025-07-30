@@ -3,12 +3,12 @@
 #include <SFML/Window/Keyboard.hpp>
 
 #include "../model/Constants.hpp"
-#include "MeteorControl.h"
-#include "ParticleControl.h"
-#include "UIControl.h"
-#include "BulletControl.h"
-#include "PlayerControl.h"
-#include "AlienControl.h"
+#include "controls/MeteorControl.h"
+#include "controls/ParticleControl.h"
+#include "controls/UIControl.h"
+#include "controls/BulletControl.h"
+#include "controls/PlayerControl.h"
+#include "controls/AlienControl.h"
 
 // Initialize the singleton
 Game::Game() :

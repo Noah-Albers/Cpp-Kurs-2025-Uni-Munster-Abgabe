@@ -4,14 +4,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "../view/Layer.hpp"
-#include "ParticleControl.h"
-#include "PlayerControl.h"
-#include "UIControl.h"
-#include "BulletControl.h"
-#include "AlienControl.h"
-#include "AlienBulletControl.h"
-#include "MeteorControl.h"
-#include "LevelControl.h"
+#include "controls/ParticleControl.h"
+#include "controls/PlayerControl.h"
+#include "controls/UIControl.h"
+#include "controls/BulletControl.h"
+#include "controls/AlienControl.h"
+#include "controls/AlienBulletControl.h"
+#include "controls/MeteorControl.h"
+#include "controls/LevelControl.h"
 
 // Game class
 class Game {
