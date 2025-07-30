@@ -14,8 +14,8 @@
 // For Fonts, it just holds the path to the font
 #define ASSETS_FONT_DEFAULT "assets/fonts/DejaVuSansMono.ttf"
 
-// For Sprites, it holds the path and the comma separated x/y size of a single from
-// followed by a muliplyer that will scale the final image when its loaded
+// For Sprites, it holds the path and the comma separated x/y size of a single frame,
+// followed by a multiplier that will scale the final image when its loaded.
 // For static Sprites it will be the full size of the picture
 // Format: 								<Path>									<x>		<y>		<scale>
 #define ASSETS_SPRITE_ALIEN_BULLET 		"assets/sprites/Alien_Bullet.png",		18,		38,		1
