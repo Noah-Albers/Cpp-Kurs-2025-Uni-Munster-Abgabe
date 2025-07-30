@@ -39,7 +39,6 @@ public:
 	// Adds damage to the player
 	void damagePlayer(int lifes = 1);
 	
-	
 	virtual void draw() override;
 	
 	// Getters/Setters
@@ -60,6 +59,9 @@ protected:
 
 	// Player object
 	Player player;
+	
+	// Handles the player death
+	void onPlayerDeath(bool hadStrongDamage);
 };
 
 #endif /* SRC_CONTROL_PLAYERCONTROL_H_ */

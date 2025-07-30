@@ -37,17 +37,17 @@ public:
 	// Getters/Setters
 	std::list<Alien>& getAliens();
 protected:
+	// Communication with other control's
+	AlienBulletControl* alientBulletControl;
+	LevelControl* levelControl;
+
 	// Layer to render the player onto
 	Layer &layer;
 	
 	// All Alien objects
 	std::list<Alien> aliens;
-
-private:
-	// Communication with other control's
-	AlienBulletControl* alientBulletControl;
-	LevelControl* levelControl;
 	
+	// Randomly spawns a bullet at the alien
 	void randomSpawnBullet(Alien& alien);
 
 	

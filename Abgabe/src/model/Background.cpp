@@ -38,7 +38,7 @@ void Background::update(float time_passed) {
 	
 	// Updates the visible texture area
 	sprite.setTextureRect(sf::IntRect(
-		{0,-offset},
+		{sprite.getTextureRect().position.x,-offset},
 		sprite.getTextureRect().size)
 	);
 }

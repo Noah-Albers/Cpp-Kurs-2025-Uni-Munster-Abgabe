@@ -47,7 +47,9 @@ void PlayerControl::draw(){
 }
 
 void PlayerControl::damagePlayer(int amount){
-	bool isBig = amount > 5;
+	if(lifes <= 0) return;
+	
+	bool hadStrongDamage = amount > 5;
 	
 	// Lets the player only lose life if he isn't blinking
 	if(blink_time_left >= 0) return;
@@ -56,12 +58,21 @@ void PlayerControl::damagePlayer(int amount){
 	lifes -= amount;
 	blink_time_left = 2;
 	
+	// Handles death code
+	if(lifes == 0)
+		onPlayerDeath(hadStrongDamage);
+}
+
+void PlayerControl::onPlayerDeath(bool hadStrongDamage) {
+	player.setHorizontalDirection(HorizontalDirection::NONE);
+	player.setVerticalDirection(VerticalDirection::NONE);
+	
 	// Spawn death animation if player has died
 	if(lifes == 0){
 		int x = player.getPosition().x;
 		int y = player.getPosition().y;
 		
-		if(isBig)
+		if(hadStrongDamage)
 			particleControl->spawnExplosionParticle(x, y);
 		else
 			particleControl->spawnPlayerDeathParticle(x, y);

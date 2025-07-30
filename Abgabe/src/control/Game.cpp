@@ -34,10 +34,8 @@ Game::Game() :
 	meteor_control.populate(&player_control,&particle_control);
 	player_control.populate(&bullet_control, &particle_control);
 	ui_control.populate(&player_control);
-    level_control.populate(&alien_control);
-	
-    
- 
+    level_control.populate(&alien_control, &ui_control);
+
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
 

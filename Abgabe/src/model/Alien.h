@@ -17,6 +17,7 @@
 class Alien : public PropMoveable, public PropSprite {
 public:
 	Alien(const int x, const int y, const int lifes);
+	virtual ~Alien();
 	
 	// Event: When the object shall update
 	void update(float time_passed);
@@ -31,12 +32,17 @@ public:
 	virtual void setPosition(const sf::Vector2f position) override;
 	virtual sf::Vector2f getPosition() override;
 	
+	// Unallocates the shield if it exists
+	void deleteShield();
+	
 	// Getters/Setters
-	sf::Sprite getShieldSprite();
+	sf::Sprite& getShieldSprite();
+	bool hasShield();
 	int getLifes();
 		
 protected:
-	PropAnimatedSprite shieldSprite;
+	// Optional shield sprite for the alien
+	PropAnimatedSprite* shieldSprite;
 	int lifes;
 };
 

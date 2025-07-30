@@ -8,58 +8,63 @@
 #include "../model/Constants.hpp"
 #include <cmath>
 #include "AlienControl.h"
+#include "UIControl.h"
 
-LevelControl::LevelControl() {
-    current_level = 0;
-    current_score_multiplier = 1;
-    count_alien_alive = 0;
+LevelControl::LevelControl() :
+	current_level(0),
+	count_alien_total(0),
+	current_alien_speed(0),
+	current_score_multiplier(1) {}
+
+void LevelControl::populate(AlienControl* alien_control, UIControl* ui_control) {
+    this->alien_control = alien_control;
+    this->ui_control = ui_control;
 }
-
-void LevelControl::populate(AlienControl* AlienControl) {
-    this->alien_control = AlienControl;
-}
-
-LevelControl::~LevelControl() { }
 
 void LevelControl::nextLevel() {
-    // Levelparameter erhöhen
-    current_level++;
-    current_score_multiplier += constants::SCORE_MULTIPLIER_PER_LEVEL;
-    current_alien_speed = ((current_level - 1) * constants::ALIEN_INCREASE_PER_LEVEL) + constants::ALIEN_BASE_SPEED;
-    count_alien_total = current_level * constants::ALIEN_INCREASE_PER_LEVEL;
+	// Ensures no alien still exists (Even tho they shouldn't)
+	alien_control->getAliens().clear();
+	
+	// Updates to the next level stats
+   	nextLevelStats();
+   	
+   	// Advances the background
+   	ui_control->nextBackground();
 
-    // Alienanzahl erhöhen
-    count_alien_lines = current_level * constants::ALIEN_LINE_INCREASE_PER_LEVEL;
-    count_alien_per_line = current_level * constants::ALIEN_INCREASE_PER_LEVEL;
-    if (count_alien_per_line > constants::MAX_ALIEN_PER_LINE) {
-        count_alien_per_line = constants::MAX_ALIEN_PER_LINE;
-    }
-
-
-    // Alien reihen spawnen
+    // Spawns alien rows
     int y = constants::ALIEN_SPACE_Y;
     for (int i = 0; i < count_alien_lines; i++) {
         int x = (constants::GAME_WIDTH  - (count_alien_per_line * constants::ALIEN_SPACE_X)) / 2;
 
         for (int j = 0; j < count_alien_per_line; j++) {
-            alien_control->spawnAlien(x,y, 1); //TODO: Add random chance for shields
-            x = x + constants::ALIEN_SPACE_X;
-        }
-        y = y + constants::ALIEN_SPACE_Y;
-    }
+			// Gives each alien randomly 1-3 lifes (more than one life is represented with a shield)
+			int lifes = rand() % 3 + 1;
 
-    count_alien_alive = count_alien_lines * count_alien_per_line;
+			alien_control->spawnAlien(x,y, lifes);
+			
+			x += constants::ALIEN_SPACE_X;
+        }
+        
+        y += constants::ALIEN_SPACE_Y;
+    }
+}
+
+void LevelControl::nextLevelStats() {
+	 // Advances level parameters
+    current_level++;
+    current_score_multiplier += constants::SCORE_MULTIPLIER_PER_LEVEL;
+    current_alien_speed = ((current_level - 1) * constants::ALIEN_INCREASE_PER_LEVEL) + constants::ALIEN_BASE_SPEED;
+    count_alien_total = current_level * constants::ALIEN_INCREASE_PER_LEVEL;
+
+    // Advances total alien amount
+    count_alien_lines = current_level * constants::ALIEN_LINE_INCREASE_PER_LEVEL;
+    count_alien_per_line = current_level * constants::ALIEN_INCREASE_PER_LEVEL;
+    if (count_alien_per_line > constants::MAX_ALIEN_PER_LINE)
+        count_alien_per_line = constants::MAX_ALIEN_PER_LINE;
 }
 
 void LevelControl::update() {
-    if (count_alien_alive == 0) {
+	// Reset the level if there are no more aliens
+	if(alien_control->getAliens().empty())
         this->nextLevel();
-    }
-}
-
-void LevelControl::alien_killed() {
-    count_alien_alive--;
-    if (count_alien_alive < 0) {
-        count_alien_alive = 0;
-    }
 }

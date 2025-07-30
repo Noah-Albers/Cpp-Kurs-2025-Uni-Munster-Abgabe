@@ -14,42 +14,58 @@
 
 AlienControl::AlienControl(Layer &layer) : layer(layer) {}
 
-void AlienControl::populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl){
+void AlienControl::populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl) {
 	this->alientBulletControl = alientBulletControl;
 	this->levelControl = levelControl;
 }
 
 void AlienControl::update(float time_passed) {
-	bool change_direction = false;
+	
+	// Flag to check if any alien has reached the border
+	bool anyReachedSideFlag = false;
+	
 	// Updates aliens, checks for dead ones and randomly spawns bullets
 	for (auto it = aliens.begin(); it != aliens.end(); ) {
+		// Remove alien if its dead
+		if(it->getLifes() <= 0) {
+			it = aliens.erase(it);
+			continue;
+		}
+	
+		// Update the alien and maybe spawn a bullet	
 		it->update(time_passed);
 		randomSpawnBullet(*it);		
 		
-		if(it->getLifes() <= 0) {
-			it = aliens.erase(it);
-			levelControl->alien_killed();
-		}
-		else {
-			if(it->getPosition().x == 0 || it->getPosition().x == constants::GAME_HEIGHT)
-				change_direction = true;
-			if (it->getPosition().y > constants::GAME_HEIGHT) {
-				// Game over logik here
-			}
-			++it;
-		}
+		// Sets a flag if the alien has reached the borders
+		if(it->getPosition().x == 0 || it->getPosition().x == constants::GAME_HEIGHT)
+			anyReachedSideFlag = true;
+		
+		++it;
+	
 	}
-
+	
+	// Flag to check if any alien has reached the bottom
+	bool reachedBottomFlag = false;
+	
+	// If any alien has reached the side, change the direction of all of them
 	// Alle Aliens umdrehen wenn eins den Rand berührt und Aliens nach unten schieben
-	if (change_direction) {
+	if (anyReachedSideFlag) {
 		for (auto it = aliens.begin(); it != aliens.end(); it++)
 		{
 			it->changeDirection();
-			sf::Vector2f pos = it->getPosition();
-			pos.y = pos.y + constants::ALIEN_Y_ADVANCE;
+			
+			// Moves the aliens a line lower
+			auto pos = it->getPosition();
+			pos.y += constants::ALIEN_Y_ADVANCE;
 			it->setPosition(pos);
+			
+			if (it->getPosition().y > constants::GAME_HEIGHT)
+				reachedBottomFlag = true;
 		}
-		
+	}
+	
+	if(reachedBottomFlag){
+		// TODO: Gameover logic
 	}
 }
 
@@ -57,7 +73,7 @@ void AlienControl::draw(){
 	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++) {
 		layer.add_to_layer(alien_it->getSprite());
 		
-		if (alien_it->getLifes() > 1)
+		if (alien_it->hasShield())
 			layer.add_to_layer(alien_it->getShieldSprite());
 	}
 }
