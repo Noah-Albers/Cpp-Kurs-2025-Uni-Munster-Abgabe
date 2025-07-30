@@ -54,7 +54,7 @@ void Background::draw(Layer& layer) {
 	}
 }
 
-void Background::update(float time_passed) {
+void Background::update(const float time_passed) {
 	
 	// Calculates the next offset for the background by adding the time multiplied by a constant.
 	// Because the background shall scroll into the negative direction, it inverts the current position to have the
@@ -71,7 +71,7 @@ void Background::update(float time_passed) {
 		updateTransition(time_passed);
 }
 
-void Background::updateTransition(float time_passed){
+void Background::updateTransition(const float time_passed){
 	transitionPercentage += time_passed * constants::BACKGROUND_TRANSITION_MODIFIER;
 	
 	// Finishes the transition by advancing the frame
@@ -82,9 +82,6 @@ void Background::updateTransition(float time_passed){
 	}
 }
 
-bool Background::isTransitioning(){
-	return transitionPercentage >= 0;
-}
 
 void Background::transitionToNextBackground() {
 	// If the background is still transitioning, this will finish the transition.
@@ -95,5 +92,8 @@ void Background::transitionToNextBackground() {
 	transitionPercentage = 0;
 }
 
+// #region Getters/Setters
 
+const bool Background::isTransitioning() const { return transitionPercentage >= 0; };
 
+// #endregion

@@ -27,22 +27,21 @@ public:
 	void populate(AlienControl* alienControl, MeteorControl* meteorControl);
 	
 	// Event: When the game objects shall update
-	void update(float time_passed);
+	void update(const float time_passed);
 	
 	// Spawns a new bullet at the given position
 	void spawnBulletAt(const int x, const int y);
 
-	// Returns the Bulletlist
-	std::list<Bullet>& getBullets();
-	
 	virtual void draw() override;
+
+	// Getters/Setters
+	const std::list<Bullet>& getBullets() const;
 	
 protected:
 	// Communication with other control's
 	AlienControl* alienControl;
 	MeteorControl* meteorControl;
 	
-
 	// List of shot bullets
 	std::list<Bullet> bullets;
 };

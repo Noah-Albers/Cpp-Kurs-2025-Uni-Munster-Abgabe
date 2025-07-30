@@ -13,7 +13,7 @@
 AlienShield::AlienShield() :
 	PropAnimatedSprite(ASSETS_SPRITE_ALIEN_SHIELD, 1, true, true) {}
 
-void AlienShield::setPosition(sf::Vector2f pos){
+void AlienShield::setPosition(const sf::Vector2f pos){
 	sprite.setPosition(pos);
 }
 

@@ -21,7 +21,7 @@ void PlayerControl::populate(BulletControl* bulletControl, ParticleControl* part
 	this->particleControl = particleControl;
 }
 
-void PlayerControl::update(float time_passed){
+void PlayerControl::update(const float time_passed){
 	this->player.update(time_passed);
 }
 

@@ -19,11 +19,11 @@ public:
 	virtual ~AlienBullet();
 	
 	// Updates the object
-	void update(float time_passed);
+	void update(const float time_passed);
 	
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;
-	virtual sf::Vector2f getPosition() override;
+	virtual const sf::Vector2f getPosition() const override;
 private:
 };
 

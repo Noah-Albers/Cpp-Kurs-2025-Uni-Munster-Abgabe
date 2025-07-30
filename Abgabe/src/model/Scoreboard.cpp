@@ -40,14 +40,14 @@ void Scoreboard::displayScore(int score){
 	scoreLabel.setString(ss.str());
 }
 
-void Scoreboard::draw(Layer& layer){
+void Scoreboard::draw(Layer& layer) const{
 	layer.add_to_layer(scoreboardLabel);
 	layer.add_to_layer(scoreLabel);
 }
 
 // #region Getters/Setters
 
-int Scoreboard::getBottomYCoordinate(){
+const int Scoreboard::getBottomYCoordinate() const{
 	return scoreboardLabel.getPosition().y + scoreboardLabel.getLocalBounds().size.y;
 }
 

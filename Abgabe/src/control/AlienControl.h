@@ -13,12 +13,13 @@
 #include "../model/Alien.h"
 #include "AlienBulletControl.h"
 #include "LevelControl.h"
+#include "properties/PropDrawable.h"
 #include <list>
 
 // Declares classes to avoid circular dependencies
 class AlienBulletControl;
 
-class AlienControl {
+class AlienControl : public PropDrawable {
 public:
 	AlienControl(Layer &layer);
 	
@@ -27,7 +28,7 @@ public:
 	void populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl);
 	
 	// Event: When the alien is drawn
-	void draw();
+	virtual void draw() override;
 	
 	// Event: When the game objects shall update
 	void update(float time_passed);
@@ -36,13 +37,11 @@ public:
 	
 	// Getters/Setters
 	std::list<Alien>& getAliens();
+	
 protected:
 	// Communication with other control's
 	AlienBulletControl* alientBulletControl;
 	LevelControl* levelControl;
-
-	// Layer to render the player onto
-	Layer &layer;
 	
 	// All Alien objects
 	std::list<Alien> aliens;
@@ -53,11 +52,11 @@ protected:
 	float downwardMotion;
 	
 	// Randomly spawns a bullet at the alien
-	void randomSpawnBullet(Alien& alien);
+	void randomSpawnBullet(const Alien& alien);
 
 	// Checks if all aliens are inside the actual game field or still
 	// outside (Used to slowly transition them)
-	bool areAliensInGamefield();
+	const bool areAliensInGamefield() const;
 	
 };
 

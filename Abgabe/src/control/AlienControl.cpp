@@ -11,9 +11,10 @@
 #include "AlienControl.h"
 #include "../model/Constants.hpp"
 #include "AlienBulletControl.h"
+#include "properties/PropDrawable.h"
 
 AlienControl::AlienControl(Layer &layer) :
-	layer(layer),
+	PropDrawable(layer),
 	downwardMotion(0) {}
 
 void AlienControl::populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl) {
@@ -96,7 +97,7 @@ void AlienControl::spawnAlien(const int x, const int y, const int lifes) {
 	aliens.emplace_back(x, y, lifes);
 }
 
-void AlienControl::randomSpawnBullet(Alien& alien) {
+void AlienControl::randomSpawnBullet(const Alien& alien) {
 	// Prevents more than a configureable amount of alien bullets to be spawned
 	if(alientBulletControl->getBullets().size() >= constants::MAX_ALIENT_BULLETS) return;
 	
@@ -110,7 +111,7 @@ void AlienControl::randomSpawnBullet(Alien& alien) {
 	}
 }
 
-bool AlienControl::areAliensInGamefield() {
+const bool AlienControl::areAliensInGamefield() const {
 	// Checks if each alien is inside the game field
 	for(auto it = aliens.begin(); it != aliens.end(); it++)
 		if(it->getPosition().y < 0)
@@ -120,6 +121,6 @@ bool AlienControl::areAliensInGamefield() {
 
 // # region Getters/Setters
 
-std::list<Alien>& AlienControl::getAliens(){ return aliens; };
+std::list<Alien>& AlienControl::getAliens() { return aliens; };
 
 // # endregion

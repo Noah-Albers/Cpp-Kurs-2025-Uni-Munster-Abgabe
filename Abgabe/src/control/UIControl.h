@@ -35,10 +35,10 @@ public:
 	void nextBackground();
 	
 	// Sets a new score and updates the screen
-	void setScore(int score);
+	void setScore(const int score);
 	
 	// Updates the object
-	void update(float time_passed);
+	void update(const float time_passed);
 	
 protected:
 	// Communication with other control's

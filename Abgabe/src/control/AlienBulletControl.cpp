@@ -17,7 +17,7 @@ void AlienBulletControl::populate(PlayerControl* playerControl) {
 	this->playerControl = playerControl;
 }
 
-void AlienBulletControl::update(float time_passed){
+void AlienBulletControl::update(const float time_passed){
 	// Updates bullets, removes any out of bounds and handles player collision
 	for(auto it = alien_bullets.begin(); it != alien_bullets.end();){
 		it->update(time_passed);
@@ -46,6 +46,8 @@ void AlienBulletControl::spawnBulletAt(const int x, const int y) {
 	alien_bullets.emplace_back(x,y);
 }
 
-std::list<AlienBullet>& AlienBulletControl::getBullets() {
-	return alien_bullets;
-}
+// #region Getters/Setters
+
+const std::list<AlienBullet>& AlienBulletControl::getBullets() const { return alien_bullets; };
+
+// #endregion

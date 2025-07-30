@@ -20,21 +20,21 @@ public:
 	virtual ~Player();
 	
 	// Event: When the object shall update
-	void update(float time_passed);
+	void update(const float time_passed);
 	
 	// Event: Draws the player
-	void draw(Layer& layer);
+	void draw(Layer& layer) const;
 	
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;
-	virtual sf::Vector2f getPosition() override;
+	virtual const sf::Vector2f getPosition() const override;
 	
 	// Getters/Setters
-	int getLifes() const;
+	const int getLifes() const;
 	void setLifes(int lifes);
-	bool isDead();
+	const bool isDead() const;
 	void setInvulnerable(float timeSec);
-	bool isInvulnerable();
+	const bool isInvulnerable() const;
 	
 protected:
 	// How many lifes the player has left

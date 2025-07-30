@@ -7,7 +7,6 @@
 #include "LevelControl.h"
 #include "../model/Constants.hpp"
 #include <cmath>
-#include <iostream>
 #include "AlienControl.h"
 #include "UIControl.h"
 

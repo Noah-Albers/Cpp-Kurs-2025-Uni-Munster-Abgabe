@@ -14,7 +14,7 @@ class AlienShield : public PropAnimatedSprite {
 public:
 	AlienShield();
 	
-	void setPosition(sf::Vector2f pos);
+	void setPosition(const sf::Vector2f pos);
 };
 
 #endif /* SRC_MODEL_ALIENSHIELD_H_ */

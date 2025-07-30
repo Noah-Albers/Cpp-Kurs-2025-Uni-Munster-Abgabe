@@ -20,10 +20,9 @@ Meteor::Meteor(const int x, const int y) :
 	sprite.setPosition(sf::Vector2f(x,y - sprite.getLocalBounds().size.y));
 }
 
-sf::Vector2f Meteor::getPosition() {
-	return sprite.getPosition();
-}
+// #region Getters/Setters
 
-void Meteor::setPosition(sf::Vector2f pos){
-	sprite.setPosition(pos);
-}
+const sf::Vector2f Meteor::getPosition() const { return sprite.getPosition(); };
+void Meteor::setPosition(const sf::Vector2f pos){ sprite.setPosition(pos); };
+
+// #endregion

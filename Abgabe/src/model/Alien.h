@@ -20,7 +20,7 @@ public:
 	virtual ~Alien();
 	
 	// Event: When the object shall update
-	void update(float time_passed);
+	void update(const float time_passed);
 
 	// Makes the alien change its direction
 	void changeDirection();
@@ -30,20 +30,20 @@ public:
 	
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;
-	virtual sf::Vector2f getPosition() override;
-	
-	// Unallocates the shield if it exists
-	void deleteShield();
+	virtual const sf::Vector2f getPosition() const override;
 	
 	// Getters/Setters
 	const sf::Sprite& getShieldSprite() const;
-	bool hasShield();
-	int getLifes();
+	const bool hasShield() const;
+	const int getLifes() const;
 		
 protected:
 	// Optional shield for the alien
 	AlienShield* shield;
 	int lifes;
+	
+	// Unallocates the shield if it exists
+	void deleteShield();
 };
 
 #endif /* SRC_MODEL_ALIEN_H_ */

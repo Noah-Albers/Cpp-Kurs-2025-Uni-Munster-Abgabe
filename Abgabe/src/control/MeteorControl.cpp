@@ -7,12 +7,13 @@
 #include "MeteorControl.h"
 #include "ParticleControl.h"
 #include "../model/Constants.hpp"
-#include "Game.hpp"
+#include "PlayerControl.h"
+#include "properties/PropDrawable.h"
 #include <cstdlib>
 #include <list>
 
 MeteorControl::MeteorControl(Layer &layer) :
-	layer(layer),
+	PropDrawable(layer),
 	timer(0),
 	time_between_meteors(3)
 	{}
@@ -22,7 +23,7 @@ void MeteorControl::populate(PlayerControl* playerControl, ParticleControl* part
 	this->particleControl = particleControl;
 }
 
-void MeteorControl::update(float time_passed) {
+void MeteorControl::update(const float time_passed) {
 	// Updates meteors, checks collision and if they are out of scope
 	for (auto it = meteors.begin(); it != meteors.end();) {
 		it->updatePosition(time_passed);
@@ -65,6 +66,6 @@ void MeteorControl::spawnMeteorAt(const int x, const int y) {
 
 // #region Getters/Setters
 
-std::list<Meteor>& MeteorControl::getMeteors() { return meteors; }
+const std::list<Meteor>& MeteorControl::getMeteors() const { return meteors; }
 
 // #endregion

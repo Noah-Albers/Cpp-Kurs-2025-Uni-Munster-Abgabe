@@ -27,7 +27,7 @@ Player::Player() :
 }
 Player::~Player() {}
 
-void Player::update(float time_passed){
+void Player::update(const float time_passed){
 	this->updatePosition(time_passed);
 	
 	// Updates the invulnerability time of the player
@@ -35,7 +35,7 @@ void Player::update(float time_passed){
 		invuln_time_sec -= time_passed;
 }
 
-void Player::draw(Layer& layer){
+void Player::draw(Layer& layer) const{
 	// Prevents the player from being drawn after he has died
 	if(isDead()) return;
 	
@@ -47,10 +47,6 @@ void Player::draw(Layer& layer){
 	}
 	
 	layer.add_to_layer(getSprite());
-}
-
-sf::Vector2f Player::getPosition() {
-	return sprite.getPosition();
 }
 
 void Player::setPosition(sf::Vector2f pos){
@@ -65,9 +61,10 @@ void Player::setPosition(sf::Vector2f pos){
 
 // #region Getters/Setters
 
-int Player::getLifes() const { return lifes; };
-bool Player::isDead() { return lifes <= 0; };
-bool Player::isInvulnerable() { return invuln_time_sec >= 0; };
+const int Player::getLifes() const { return lifes; };
+const bool Player::isDead() const { return lifes <= 0; };
+const bool Player::isInvulnerable() const { return invuln_time_sec >= 0; };
+const sf::Vector2f Player::getPosition() const { return sprite.getPosition(); };
 void Player::setLifes(int lifes) {
 	if(lifes < 0) lifes = 0;
 	this->lifes = lifes;

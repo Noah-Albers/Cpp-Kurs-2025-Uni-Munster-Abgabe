@@ -23,7 +23,7 @@ public:
 	virtual ~PropMoveable();
 	
 	// Event: When the object shall update its position
-	void updatePosition(float time_passed = 0.01);
+	void updatePosition(const float time_passed = 0.01);
 	
 	// Moves the object relative to its current position
 	void moveBy(const int x, const int y);
@@ -31,14 +31,14 @@ public:
 	// "abstract" Getter and setter to modify the actual position of the object
 	// Required to be overwritten
 	virtual void setPosition(const sf::Vector2f position) = 0;
-	virtual sf::Vector2f getPosition() = 0;
+	virtual const sf::Vector2f getPosition() const = 0;
 	
 	// Getters/Setters
 	void setVerticalDirection(const VerticalDirection dir);
 	void setHorizontalDirection(const HorizontalDirection dir);
 	void setSpeed(const float speed);
-	VerticalDirection getVerticalDirection();
-	HorizontalDirection getHorizontalDirection();
+	const VerticalDirection getVerticalDirection() const;
+	const HorizontalDirection getHorizontalDirection() const;
 protected:
 	
 	// Vertical and horizonal movement direction's

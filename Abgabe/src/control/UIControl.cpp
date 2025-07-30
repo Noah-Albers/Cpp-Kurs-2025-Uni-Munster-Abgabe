@@ -24,7 +24,7 @@ void UIControl::populate(PlayerControl* playerControl){
 	this->playerControl = playerControl;
 }
 
-void UIControl::update(float time_passed){
+void UIControl::update(const float time_passed){
 	background.update(time_passed);
 }
 
@@ -32,7 +32,7 @@ void UIControl::nextBackground(){
 	background.transitionToNextBackground();
 }
 
-void UIControl::setScore(int newScore){
+void UIControl::setScore(const int newScore){
 	score = newScore;
 	scoreboard.displayScore(score);
 }

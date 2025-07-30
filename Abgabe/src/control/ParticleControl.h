@@ -17,7 +17,7 @@ public:
 	ParticleControl(Layer& layer);
 	
 	// Event: When the game objects shall update
-	void update(float time_passed);
+	void update(const float time_passed);
 	
 	// Methods to spawn particles at given positions
 	

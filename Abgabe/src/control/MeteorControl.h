@@ -13,10 +13,11 @@
 #include "../view/Layer.hpp"
 #include "../model/Meteor.h"
 #include "ParticleControl.h"
+#include "properties/PropDrawable.h"
 
 class PlayerControl;
 
-class MeteorControl {
+class MeteorControl : public PropDrawable {
 public:
 	MeteorControl(Layer &layer);
 	
@@ -25,24 +26,20 @@ public:
 	void populate(PlayerControl* playerControl, ParticleControl* particleControl);
 	
 	// Event: When the game objects shall update
-	void update(float time_passed);
-	
-	// Event: When the objects are drawn to the screen
-	void draw();
-	
+	void update(const float time_passed);
+		
 	// Spawns a new Meteor at the given position
 	void spawnMeteorAt(const int x, const int y);
 
+	virtual void draw() override;
+
 	// Getters/Setters
-	std::list<Meteor>& getMeteors();
+	const std::list<Meteor>& getMeteors() const;
 
 protected:
 	// Communication with other control's
 	PlayerControl* playerControl;
 	ParticleControl* particleControl;
-
-	// Layer to render the Meteors onto
-	Layer &layer;
 
 	// List of shot Meteors
 	std::list<Meteor> meteors;

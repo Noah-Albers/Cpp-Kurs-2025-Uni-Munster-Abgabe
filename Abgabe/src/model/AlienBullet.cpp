@@ -21,15 +21,16 @@ AlienBullet::AlienBullet(const int x, const int y) :
 
 AlienBullet::~AlienBullet() {}
 
-sf::Vector2f AlienBullet::getPosition() {
-	return sprite.getPosition();
-}
 
-void AlienBullet::setPosition(sf::Vector2f pos){
-	sprite.setPosition(pos);
-}
 
 void AlienBullet::update(float time_passed) {
 	updateSprite(time_passed);
 	updatePosition(time_passed);
 }
+
+// # region Getters/Setters
+
+void AlienBullet::setPosition(const sf::Vector2f pos){ sprite.setPosition(pos); }
+const sf::Vector2f AlienBullet::getPosition() const { return sprite.getPosition(); };
+
+// #endregion

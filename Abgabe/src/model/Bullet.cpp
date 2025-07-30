@@ -19,15 +19,14 @@ Bullet::Bullet(const int x, const int y) :
 
 Bullet::~Bullet() {}
 
-void Bullet::update(float time_passed) {
+void Bullet::update(const float time_passed) {
 	updatePosition(time_passed);
 	updateSprite(time_passed);
 }
 
-sf::Vector2f Bullet::getPosition() {
-	return sprite.getPosition();
-}
+// #region Getters/Setters
 
-void Bullet::setPosition(sf::Vector2f pos){
-	sprite.setPosition(pos);
-}
+void Bullet::setPosition(const sf::Vector2f pos){ sprite.setPosition(pos); }
+const sf::Vector2f Bullet::getPosition() const { return sprite.getPosition(); };
+
+// #endregion

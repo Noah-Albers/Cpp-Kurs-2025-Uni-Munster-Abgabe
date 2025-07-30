@@ -17,7 +17,7 @@ public:
 	Healthbar(const int pos_x, const int pos_y);
 	
 	// Draws the health bar
-	void drawBar(Layer& layer, int lifes, int maxlifes);
+	void drawBar(Layer& layer, const int lifes, const int maxlifes);
 };
 
 #endif /* SRC_MODEL_HEALTHBAR_H_ */

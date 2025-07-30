@@ -19,7 +19,7 @@ Healthbar::Healthbar(const int pos_x, const int pos_y) :
 	}
 
 	
-void Healthbar::drawBar(Layer& layer, int lifes, int maxlifes) {
+void Healthbar::drawBar(Layer& layer, const int lifes, const int maxlifes) {
 	// Moves the sprite for each heart and draws it
 	// at the end resets its position to the start
 	float pos = sprite.getPosition().x;

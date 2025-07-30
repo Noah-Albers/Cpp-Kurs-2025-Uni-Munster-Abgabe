@@ -17,7 +17,7 @@ void ParticleControl::draw(){
 		layer.add_to_layer(it->getSprite());
 }
 
-void ParticleControl::update(float time_passed){
+void ParticleControl::update(const float time_passed){
 	// Updates the particles and removes any that have died
 	for(auto it = particles.begin(); it != particles.end();){
 		it->updateSprite(time_passed);

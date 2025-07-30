@@ -20,7 +20,7 @@ public:
 	void draw(Layer& layer);
 	
 	// Updates the object
-	void update(float time_passed);
+	void update(const float time_passed);
 	
 	// Starts a transition to the next background
 	void transitionToNextBackground();
@@ -33,13 +33,13 @@ protected:
 	float transitionPercentage;
 	
 	// Checks if the background is currently transitioning to a new frame 
-	bool isTransitioning();
+	const bool isTransitioning() const;
 	
 	/**
 	 * Updates the transition of the background to the next frame
 	 * @pre isTransitioning()
 	 */
-	void updateTransition(float time_passed);
+	void updateTransition(const float time_passed);
 };
 
 #endif /* SRC_MODEL_BACKGROUND_H_ */

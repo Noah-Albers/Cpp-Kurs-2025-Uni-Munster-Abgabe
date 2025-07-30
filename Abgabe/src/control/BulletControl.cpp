@@ -19,7 +19,7 @@ void BulletControl::populate(AlienControl* alienControl, MeteorControl* meteorCo
 	this->meteorControl = meteorControl;
 }
 
-void BulletControl::update(float time_passed) {
+void BulletControl::update(const float time_passed) {
 	// List of all aliens
 	auto &aliens = alienControl->getAliens();
 	auto &meteors = meteorControl->getMeteors();
@@ -60,4 +60,8 @@ void BulletControl::spawnBulletAt(const int x, const int y) {
 	bullets.emplace_back(x, y);
 }
 
-std::list<Bullet> &BulletControl::getBullets() { return bullets; }
+// #region Getters/Setters
+
+const std::list<Bullet> &BulletControl::getBullets() const { return bullets; }
+
+// #endregion

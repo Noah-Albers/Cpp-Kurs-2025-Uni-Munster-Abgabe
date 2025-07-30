@@ -18,17 +18,17 @@ public:
 	/**
 	 * @param space - how much space shall be left to the side and top
 	 */
-	Scoreboard(float space);
+	Scoreboard(const float space);
 
 	// Renders the scoreboard onto the window
-	void draw(Layer& win);
+	void draw(Layer& win) const;
 
 	// Shows the given score as text on the scoreboard
 	void displayScore(int score);
 	
 	// Getters/Setters
 	// Returns the y-coordinate of the scoreboard-text sprite at the bottom
-	int getBottomYCoordinate();
+	const int getBottomYCoordinate() const;
 
 protected:
 	sf::Font font;

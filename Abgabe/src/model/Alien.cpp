@@ -11,7 +11,6 @@
 
 #include "AlienShield.h"
 #include "Constants.hpp"
-#include "properties/PropAnimatedSprite.h"
 #include "properties/PropMoveable.h"
 #include "properties/PropSprite.h"
 
@@ -38,18 +37,17 @@ Alien::~Alien(){
 	deleteShield();
 }
 
-void Alien::update(float time_passed){
+void Alien::update(const float time_passed){
 	this->updatePosition(time_passed);
 	
 	if(hasShield())
 		shield->updateSprite(time_passed);
 }
 
-sf::Vector2f Alien::getPosition() {
-	return sprite.getPosition();
-}
 
-void Alien::setPosition(sf::Vector2f pos){
+void Alien::setPosition(const sf::Vector2f newPos){
+	auto pos = sf::Vector2f(newPos);
+	
 	// Clamps position
 	// Does not clamp upper position to allow for smooth transition
 	if(pos.x < 0) pos.x = 0;
@@ -87,8 +85,9 @@ void Alien::deleteShield(){
 
 // #region Getters/Setters
 
-int Alien::getLifes() { return lifes; };
+const int Alien::getLifes() const { return lifes; };
+const bool Alien::hasShield() const { return shield != nullptr; };
 const sf::Sprite& Alien::getShieldSprite() const { return shield->getSprite(); };
-bool Alien::hasShield() { return shield != nullptr; };
+const sf::Vector2f Alien::getPosition() const { return sprite.getPosition(); };
 
 // #endregion
