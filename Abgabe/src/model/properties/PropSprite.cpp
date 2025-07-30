@@ -52,7 +52,7 @@ void PropSprite::setFrame(int index){
 	
 	sprite.setTextureRect(sf::IntRect({
 		sprite.getTextureRect().size.x * index,
-		0
+		sprite.getTextureRect().position.y
 	}, sprite.getTextureRect().size));
 }
 

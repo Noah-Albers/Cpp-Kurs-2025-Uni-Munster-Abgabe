@@ -9,13 +9,16 @@
 #include "properties/PropSprite.h"
 
 #include "../assets/AssetMappings.h"
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <iostream>
 
 #include "../model/Constants.hpp"
 
 Background::Background() :
-	PropSprite(ASSETS_SPRITE_BACKGROUND)
+	PropSprite(ASSETS_SPRITE_BACKGROUND),
+	transitionPercentage(-1)
 	{
 	// Calculates the scale-factor which is needed to get the background to cover the whole width of the screen
 	float scale = constants::GAME_WIDTH / (float)sprite.getTextureRect().size.x;
@@ -25,8 +28,30 @@ Background::Background() :
 }
 
 void Background::draw(Layer& layer) {
-	// Draws to copys of the background
-	layer.add_to_layer(sprite);
+	
+	if(isTransitioning()){
+		// Caluclates the rgba-level (0-255) from the render-percantage
+		int rgbaLvl = 255 * transitionPercentage;
+	
+		// Renders the old frame at a reducing alpha-level
+		sprite.setColor(sf::Color(255,255,255, 255 - rgbaLvl));
+		layer.add_to_layer(sprite);
+			
+		// Advances the frame
+		auto frame = getFrame();
+		setFrame(frame+1);
+		
+		// Renders the new frame at a increasing alpha-level
+		sprite.setColor(sf::Color(255,255,255, rgbaLvl));
+		layer.add_to_layer(sprite);
+		
+		// Reset frame and alpha level
+		setFrame(frame);		
+		sprite.setColor(sf::Color(255,255,255, 255));
+	}else {
+		// Draws the normal background
+		layer.add_to_layer(sprite);
+	}
 }
 
 void Background::update(float time_passed) {
@@ -41,6 +66,33 @@ void Background::update(float time_passed) {
 		{sprite.getTextureRect().position.x,-offset},
 		sprite.getTextureRect().size)
 	);
+	
+	if(isTransitioning())
+		updateTransition(time_passed);
+}
+
+void Background::updateTransition(float time_passed){
+	transitionPercentage += time_passed * constants::BACKGROUND_TRANSITION_MODIFIER;
+	
+	// Finishes the transition by advancing the frame
+	if(transitionPercentage > 1){
+		transitionPercentage = -1;
+		setFrame(getFrame()+1);
+		return;		
+	}
+}
+
+bool Background::isTransitioning(){
+	return transitionPercentage >= 0;
+}
+
+void Background::transitionToNextBackground() {
+	// If the background is still transitioning, this will finish the transition.
+	// This will then skip the transition and start with the next one
+	if(isTransitioning())
+		setFrame(getFrame()+1);
+	
+	transitionPercentage = 0;
 }
 
 

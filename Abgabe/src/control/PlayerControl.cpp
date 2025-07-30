@@ -43,7 +43,6 @@ void PlayerControl::draw(){
 
 	}
 	this->layer.add_to_layer(this->player.getSprite());
-	
 }
 
 void PlayerControl::damagePlayer(int amount){
@@ -121,5 +120,6 @@ void PlayerControl::keyStateChanged(bool is_now_pressed, sf::Keyboard::Key key) 
 
 int PlayerControl::getLifes(){ return lifes; };
 Player& PlayerControl::getPlayer(){ return player; };
+bool PlayerControl::isPlayerDead() { return lifes <= 0; };
 
 // #endregion

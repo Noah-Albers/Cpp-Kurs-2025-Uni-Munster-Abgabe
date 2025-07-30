@@ -83,12 +83,15 @@ void AlienControl::spawnAlien(const int x, const int y, const int lifes) {
 }
 
 void AlienControl::randomSpawnBullet(Alien& alien) {
+	// Prevents more than a configureable amount of alien bullets to be spawned
+	if(alientBulletControl->getBullets().size() >= constants::MAX_ALIENT_BULLETS) return;
+	
     const float random_value = (float)(rand()) / (float)(RAND_MAX);
 
 	if (random_value < constants::ALIEN_SHOOT_CHANCE) {
 		alientBulletControl->spawnBulletAt(
 			alien.getPosition().x,
-			alien.getPosition().y+6
+			alien.getPosition().y + 6
 		);
 	}
 }

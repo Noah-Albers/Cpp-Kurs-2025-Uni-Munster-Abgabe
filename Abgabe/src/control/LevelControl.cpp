@@ -29,7 +29,8 @@ void LevelControl::nextLevel() {
    	nextLevelStats();
    	
    	// Advances the background
-   	ui_control->nextBackground();
+   	if(current_level > 1)
+	   	ui_control->nextBackground();
 
     // Spawns alien rows
     int y = constants::ALIEN_SPACE_Y;
@@ -37,8 +38,9 @@ void LevelControl::nextLevel() {
         int x = (constants::GAME_WIDTH  - (count_alien_per_line * constants::ALIEN_SPACE_X)) / 2;
 
         for (int j = 0; j < count_alien_per_line; j++) {
-			// Gives each alien randomly 1-3 lifes (more than one life is represented with a shield)
-			int lifes = rand() % 3 + 1;
+			// Gives each alien randomly 1 - 3 lifes (more than one life is represented with a shield)
+			int lifes = rand() % 5 - 2;
+			if(lifes <= 0) lifes = 1;
 
 			alien_control->spawnAlien(x,y, lifes);
 			

@@ -29,7 +29,7 @@ void UIControl::update(float time_passed){
 }
 
 void UIControl::nextBackground(){
-	background.setFrame(background.getFrame()+1);
+	background.transitionToNextBackground();
 }
 
 void UIControl::setScore(int newScore){

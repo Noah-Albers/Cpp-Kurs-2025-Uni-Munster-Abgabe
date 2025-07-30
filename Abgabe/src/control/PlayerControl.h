@@ -44,6 +44,7 @@ public:
 	// Getters/Setters
 	int getLifes();
 	Player& getPlayer();
+	bool isPlayerDead();
 
 protected:
 	// Communication with other control's
@@ -53,8 +54,7 @@ protected:
 	// How many lifes the player has left
 	int lifes;
 
-	//says whether a life was just lost
-
+	// Time that the player shall be invincible for and blinking
 	float blink_time_left;
 
 	// Player object
