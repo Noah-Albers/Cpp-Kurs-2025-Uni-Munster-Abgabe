@@ -22,6 +22,7 @@ class AlienBulletControl;
 class AlienControl : public PropDrawable {
 public:
 	AlienControl(Layer &layer);
+	virtual ~AlienControl();
 	
 	// Part of setup
 	// Its imperative to call this before anything else in this class

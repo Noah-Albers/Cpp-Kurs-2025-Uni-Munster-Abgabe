@@ -13,6 +13,7 @@
 
 BulletControl::BulletControl(Layer &layer) :
 	PropDrawable(layer) {}
+BulletControl::~BulletControl() {}
 
 void BulletControl::populate(AlienControl* alienControl, MeteorControl* meteorControl) {
 	this->alienControl = alienControl;

@@ -15,7 +15,8 @@
 PlayerControl::PlayerControl(Layer &layer) :
 	PropDrawable(layer)
 	{}
-	
+PlayerControl::~PlayerControl() {}
+
 void PlayerControl::populate(BulletControl* bulletControl, ParticleControl* particleControl) {
 	this->bulletControl = bulletControl;
 	this->particleControl = particleControl;

@@ -15,7 +15,9 @@
 
 AlienControl::AlienControl(Layer &layer) :
 	PropDrawable(layer),
-	downwardMotion(0) {}
+	downwardMotion(0) {};
+
+AlienControl::~AlienControl() {};
 
 void AlienControl::populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl) {
 	this->alientBulletControl = alientBulletControl;

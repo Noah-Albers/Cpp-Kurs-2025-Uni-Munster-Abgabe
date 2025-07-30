@@ -15,6 +15,7 @@
 class ParticleControl : public PropDrawable {
 public:
 	ParticleControl(Layer& layer);
+	virtual ~ParticleControl();
 	
 	// Event: When the game objects shall update
 	void update(const float time_passed);

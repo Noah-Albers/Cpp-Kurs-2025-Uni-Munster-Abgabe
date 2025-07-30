@@ -20,6 +20,7 @@ class PlayerControl;
 class MeteorControl : public PropDrawable {
 public:
 	MeteorControl(Layer &layer);
+	virtual ~MeteorControl() {};
 	
 	// Part of setup
 	// Its imperative to call this before anything else in this class

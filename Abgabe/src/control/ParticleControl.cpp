@@ -10,7 +10,10 @@
 
 #include "../assets/AssetMappings.h"
 
-ParticleControl::ParticleControl(Layer& layer) : PropDrawable(layer) {}
+ParticleControl::ParticleControl(Layer& layer) :
+	PropDrawable(layer) {}
+	
+ParticleControl::~ParticleControl() {}
 
 void ParticleControl::draw(){
 	for(auto it = particles.begin(); it != particles.end(); it++)

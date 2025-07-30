@@ -11,7 +11,10 @@
 #include "../model/Constants.hpp"
 #include "PlayerControl.h"
 
-AlienBulletControl::AlienBulletControl(Layer &layer) : PropDrawable(layer) {}
+AlienBulletControl::AlienBulletControl(Layer &layer) :
+	PropDrawable(layer) {}
+
+AlienBulletControl::~AlienBulletControl() {}
 
 void AlienBulletControl::populate(PlayerControl* playerControl) {
 	this->playerControl = playerControl;
@@ -29,7 +32,7 @@ void AlienBulletControl::update(const float time_passed){
 		if(hasCollided)
 			playerControl->damagePlayer();
 		
-		// Removes the bullet if out of scope or collided with playerd
+		// Removes the bullet if out of scope or collided with player
 		if(hasCollided || isOutOfScope)
 			it = alien_bullets.erase(it);
 		else
