@@ -12,6 +12,7 @@
 #include "../view/Layer.hpp"
 #include "../model/Alien.h"
 #include "AlienBulletControl.h"
+#include "LevelControl.h"
 #include <list>
 
 // Declares classes to avoid circular dependencies
@@ -23,7 +24,7 @@ public:
 	
 	// Part of setup
 	// Its imperative to call this before anything else in this class
-	void populate(AlienBulletControl* alientBulletControl);
+	void populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl);
 	
 	// Event: When the alien is drawn
 	void draw();
@@ -45,6 +46,7 @@ protected:
 private:
 	// Communication with other control's
 	AlienBulletControl* alientBulletControl;
+	LevelControl* levelControl;
 	
 	void randomSpawnBullet(Alien& alien);
 
