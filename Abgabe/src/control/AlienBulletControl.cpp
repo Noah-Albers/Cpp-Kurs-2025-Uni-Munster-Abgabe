@@ -26,7 +26,10 @@ void AlienBulletControl::update(const float time_passed){
 		it->update(time_passed);
 		
 		// Checks if the bullet is out of scope or has collided with the player
-		bool hasCollided = it->isCollidingWith(playerControl->getPlayer());
+		bool hasCollided = (
+			   !playerControl->getPlayer().isDead()
+			&& it->isCollidingWith(playerControl->getPlayer())
+		);
 		bool isOutOfScope = it->getPosition().y > constants::GAME_HEIGHT + 20;
 		
 		if(hasCollided)

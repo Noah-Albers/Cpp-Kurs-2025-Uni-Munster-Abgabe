@@ -8,6 +8,7 @@
 #ifndef SRC_CONTROL_UICONTROL_H_
 #define SRC_CONTROL_UICONTROL_H_
 
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
@@ -17,6 +18,7 @@
 #include "../model/Background.h"
 #include "../model/Healthbar.h"
 #include "../model/Scoreboard.h"
+#include "../model/Deathmessage.h"
 #include "PlayerControl.h"
 #include "../view/Layer.hpp"
 
@@ -44,6 +46,9 @@ protected:
 	// Communication with other control's
 	PlayerControl* playerControl;
 
+	// Font used for text
+	sf::Font font;
+
 	// Score the player achieved
 	// TODO: Maybe move this somewhere else
 	int score;
@@ -52,14 +57,17 @@ protected:
 	Layer& uiLayer;
 	Layer& backgroundLayer;
 	
-	// Text's for the score
+	// Displays the score which the user has achived
 	Scoreboard scoreboard;
 	
-	// Healthbar object
+	// Shows the healthbar
 	Healthbar healthbar;
 	
-	// Background object
+	// Renders the background
 	Background background;
+	
+	// Displays the death message
+	Deathmessage deathmessage;
 };
 
 #endif /* SRC_CONTROL_UICONTROL_H_ */

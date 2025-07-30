@@ -9,13 +9,24 @@
 #include <SFML/Graphics/Rect.hpp>
 #include "../model/Constants.hpp"
 #include "PlayerControl.h"
+#include "../assets/AssetMappings.h"
+
 
 UIControl::UIControl(Layer& uiLayer, Layer& backgroundLayer) :
 	uiLayer(uiLayer),
 	backgroundLayer(backgroundLayer),
-	scoreboard(10),
-	healthbar(10, 60)
+	scoreboard(font),
+	healthbar(10, 60),
+	deathmessage(font)
 	{
+		
+	// Loads the font
+	if (!font.openFromFile(ASSETS_FONT_DEFAULT))
+        throw std::runtime_error("Failed to load Font");
+
+	scoreboard.initialize(10);
+	deathmessage.initialize();
+		
 	// Sets the initial score
 	setScore(0);
 }
@@ -43,5 +54,8 @@ void UIControl::draw() {
 	healthbar.drawBar(uiLayer,
 		playerControl->getPlayer().getLifes(),
 		constants::START_LIFES
-	);	
+	);
+	
+	if(playerControl->getPlayer().isDead())
+		deathmessage.draw(uiLayer);
 };

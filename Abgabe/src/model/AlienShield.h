@@ -2,7 +2,7 @@
  * AlienShield.h
  *
  *  Created on: 30.07.2025
- *      Author: snow
+ *      Author: Noah
  */
 
 #ifndef SRC_MODEL_ALIENSHIELD_H_

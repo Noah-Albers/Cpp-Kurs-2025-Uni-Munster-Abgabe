@@ -11,6 +11,7 @@
 #include "AlienControl.h"
 #include "../model/Constants.hpp"
 #include "AlienBulletControl.h"
+#include "PlayerControl.h"
 #include "properties/PropDrawable.h"
 
 AlienControl::AlienControl(Layer &layer) :
@@ -19,9 +20,13 @@ AlienControl::AlienControl(Layer &layer) :
 
 AlienControl::~AlienControl() {};
 
-void AlienControl::populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl) {
+void AlienControl::populate(
+	AlienBulletControl* alientBulletControl, LevelControl* levelControl,
+	PlayerControl* playerControl
+	) {
 	this->alientBulletControl = alientBulletControl;
 	this->levelControl = levelControl;
+	this->playerControl = playerControl;
 }
 
 void AlienControl::update(float time_passed) {
@@ -62,7 +67,7 @@ void AlienControl::update(float time_passed) {
 		if(downwardMotion > 0)
 			it->moveBy(0, 1);
 		
-		if(it->getPosition().y > constants::GAME_HEIGHT)
+		if(it->getPosition().y >= constants::GAME_HEIGHT)
 			reachedBottomFlag = true;
 		
 		++it;
@@ -78,12 +83,16 @@ void AlienControl::update(float time_passed) {
 		for(auto it = aliens.begin(); it != aliens.end(); it++)
 			it->changeDirection();
 		
-		downwardMotion = constants::ALIEN_Y_ADVANCE;
+		// Only apply downward motion if the player is not dead.
+		// This prevents them from walking of-screen when the player has lost
+		if(!playerControl->getPlayer().isDead())
+			downwardMotion = constants::ALIEN_Y_ADVANCE;
 	}
 	
-	if(reachedBottomFlag){
-		// TODO: Gameover logic
-	}
+	// When the aliens reach the bottom, this kills the player
+	// to represent a game-over
+	if(reachedBottomFlag)
+		playerControl->killPlayer();
 }
 
 void AlienControl::draw(){
@@ -102,6 +111,8 @@ void AlienControl::spawnAlien(const int x, const int y, const int lifes) {
 void AlienControl::randomSpawnBullet(const Alien& alien) {
 	// Prevents more than a configureable amount of alien bullets to be spawned
 	if(alientBulletControl->getBullets().size() >= constants::MAX_ALIENT_BULLETS) return;
+	// Prevents aliens from shooting if the player is dead
+	if(playerControl->getPlayer().isDead()) return;
 	
     const float random_value = (float)(rand()) / (float)(RAND_MAX);
 

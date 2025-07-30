@@ -15,10 +15,13 @@
 
 class Scoreboard {
 public:
+	Scoreboard(const sf::Font& font);
+
 	/**
+	 * Must be called after the font has been loaded
 	 * @param space - how much space shall be left to the side and top
 	 */
-	Scoreboard(const float space);
+	void initialize(const float space);
 
 	// Renders the scoreboard onto the window
 	void draw(Layer& win) const;
@@ -31,8 +34,6 @@ public:
 	const int getBottomYCoordinate() const;
 
 protected:
-	sf::Font font;
-	
 	sf::Text scoreboardLabel;
 	sf::Text scoreLabel;
 };

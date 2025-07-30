@@ -12,7 +12,7 @@
 		) ++____idx; \
 		else {\
 			if(key == sf::Keyboard::Key::A && ____idx == 9) \
-				damagePlayer(420); \
+				killPlayer(true); \
 			____idx = 0; \
 		}\
     } while(0);

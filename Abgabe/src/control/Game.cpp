@@ -60,7 +60,7 @@ void Game::resetGame() {
 	
 	// Populates all control's
 	alien_bullet_control->populate(player_control);
-	alien_control->populate(alien_bullet_control, level_control);
+	alien_control->populate(alien_bullet_control, level_control, player_control);
 	bullet_control->populate(alien_control, meteor_control);
 	meteor_control->populate(player_control,particle_control);
 	player_control->populate(bullet_control, particle_control);

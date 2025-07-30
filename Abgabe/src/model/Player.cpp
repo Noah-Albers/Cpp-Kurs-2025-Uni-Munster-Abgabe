@@ -19,7 +19,7 @@ Player::Player() :
 	PropMoveable(3.5),
 	PropSprite(ASSETS_SPRITE_PLAYER, true),
 	lifes(constants::START_LIFES),
-	invuln_time_sec(0)
+	invuln_time_sec(-1)
     {
 		
     // Positions the sprite

@@ -38,7 +38,10 @@ public:
 	void keyStateChanged(bool is_now_pressed, sf::Keyboard::Key keyCode);
 	
 	// Adds damage to the player
-	void damagePlayer(int lifes = 1);
+	void damagePlayer(int lifes = 1, bool wasStrong = false);
+	
+	// Kills the player
+	void killPlayer(bool wasStrong = false);
 	
 	virtual void draw() override;
 	

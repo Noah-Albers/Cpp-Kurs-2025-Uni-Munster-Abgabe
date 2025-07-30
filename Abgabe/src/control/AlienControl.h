@@ -13,6 +13,7 @@
 #include "../model/Alien.h"
 #include "AlienBulletControl.h"
 #include "LevelControl.h"
+#include "PlayerControl.h"
 #include "properties/PropDrawable.h"
 #include <list>
 
@@ -26,7 +27,10 @@ public:
 	
 	// Part of setup
 	// Its imperative to call this before anything else in this class
-	void populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl);
+	void populate(
+		AlienBulletControl* alientBulletControl, LevelControl* levelControl,
+		PlayerControl* playerControl
+	);
 	
 	// Event: When the alien is drawn
 	virtual void draw() override;
@@ -43,6 +47,7 @@ protected:
 	// Communication with other control's
 	AlienBulletControl* alientBulletControl;
 	LevelControl* levelControl;
+	PlayerControl* playerControl;
 	
 	// All Alien objects
 	std::list<Alien> aliens;

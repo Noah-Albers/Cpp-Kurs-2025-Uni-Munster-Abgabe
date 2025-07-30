@@ -29,7 +29,10 @@ void MeteorControl::update(const float time_passed) {
 		it->updatePosition(time_passed);
 
 		// Checks if the meteor is out of scope or has collided with the player
-		bool hasCollided = it->isCollidingWith(playerControl->getPlayer());
+		bool hasCollided = (
+			   !playerControl->getPlayer().isDead()
+			&& it->isCollidingWith(playerControl->getPlayer())
+		);
 		bool isOutOfScope = it->getPosition().y > constants::GAME_HEIGHT + 20;
 
 		if (hasCollided){

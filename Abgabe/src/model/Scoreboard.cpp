@@ -7,16 +7,16 @@
 
 #include "Scoreboard.h"
 #include "../assets/AssetMappings.h"
+#include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
-Scoreboard::Scoreboard(float space) :
+Scoreboard::Scoreboard(const sf::Font& font) :
 	scoreboardLabel(font),
 	scoreLabel(font)
-	{
+	{ }
+	
 
-	// Loads the font
-	if (!font.openFromFile(ASSETS_FONT_DEFAULT))
-        throw std::runtime_error("Failed to load Font");
+void Scoreboard::initialize(float space) {
 
 	// Style options for the scoreboard
 	scoreboardLabel.setString("Score: ");

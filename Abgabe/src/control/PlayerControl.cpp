@@ -30,7 +30,12 @@ void PlayerControl::draw(){
 	player.draw(layer);
 }
 
-void PlayerControl::damagePlayer(int amount){
+void PlayerControl::killPlayer(bool wasStrong){
+	player.setInvulnerable(-1);
+	damagePlayer(player.getLifes(), wasStrong);
+}
+
+void PlayerControl::damagePlayer(int amount, bool wasStrong){
 	// If dead or invulnerable, he doesn't take damage
 	if(player.isDead() || player.isInvulnerable()) return;
 	
@@ -39,7 +44,7 @@ void PlayerControl::damagePlayer(int amount){
 	
 	// Handles death code
 	if(player.isDead())
-		onPlayerDeath(amount > 5);
+		onPlayerDeath(wasStrong);
 }
 
 void PlayerControl::onPlayerDeath(bool hadStrongDamage) {
