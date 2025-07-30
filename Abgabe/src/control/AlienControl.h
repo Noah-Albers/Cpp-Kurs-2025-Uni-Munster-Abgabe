@@ -47,9 +47,17 @@ protected:
 	// All Alien objects
 	std::list<Alien> aliens;
 	
+	// General motion that should be applied to all aliens
+	// and steadily decrease.
+	// Used for animations
+	float downwardMotion;
+	
 	// Randomly spawns a bullet at the alien
 	void randomSpawnBullet(Alien& alien);
 
+	// Checks if all aliens are inside the actual game field or still
+	// outside (Used to slowly transition them)
+	bool areAliensInGamefield();
 	
 };
 

@@ -22,7 +22,7 @@ namespace constants {
 
     constexpr int ALIEN_SPACE_X = 32;
     constexpr int ALIEN_SPACE_Y = 32;
-    constexpr int ALIEN_Y_ADVANCE = 10;
+    constexpr int ALIEN_Y_ADVANCE = 30;
     
     constexpr float BACKGROUND_SCROLL_SPEED = 1.2; // Constant to change the background scroll speed
     constexpr float BACKGROUND_TRANSITION_MODIFIER = .2; // Constant modifier to slow or speed up background transitions

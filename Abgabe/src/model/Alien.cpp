@@ -52,9 +52,9 @@ sf::Vector2f Alien::getPosition() {
 
 void Alien::setPosition(sf::Vector2f pos){
 	// Clamps position
+	// Does not clamp upper position to allow for smooth transition
 	if(pos.x < 0) pos.x = 0;
 	if(pos.x > constants::GAME_WIDTH) pos.x = constants::GAME_WIDTH;
-	if(pos.y < 0) pos.y = 0;
 	if(pos.y > constants::GAME_HEIGHT) pos.y = constants::GAME_HEIGHT;
 	
 	sprite.setPosition(pos);

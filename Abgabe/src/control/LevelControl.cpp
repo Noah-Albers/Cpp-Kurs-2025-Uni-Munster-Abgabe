@@ -7,6 +7,7 @@
 #include "LevelControl.h"
 #include "../model/Constants.hpp"
 #include <cmath>
+#include <iostream>
 #include "AlienControl.h"
 #include "UIControl.h"
 
@@ -32,8 +33,8 @@ void LevelControl::nextLevel() {
    	if(current_level > 1)
 	   	ui_control->nextBackground();
 
-    // Spawns alien rows
-    int y = constants::ALIEN_SPACE_Y;
+    // Spawns alien grid
+    int y = -constants::SCOREBOARD_HEIGHT - count_alien_per_line * constants::ALIEN_SPACE_Y;
     for (int i = 0; i < count_alien_lines; i++) {
         int x = (constants::GAME_WIDTH  - (count_alien_per_line * constants::ALIEN_SPACE_X)) / 2;
 

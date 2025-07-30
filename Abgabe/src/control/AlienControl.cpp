@@ -12,7 +12,9 @@
 #include "../model/Constants.hpp"
 #include "AlienBulletControl.h"
 
-AlienControl::AlienControl(Layer &layer) : layer(layer) {}
+AlienControl::AlienControl(Layer &layer) :
+	layer(layer),
+	downwardMotion(0) {}
 
 void AlienControl::populate(AlienBulletControl* alientBulletControl, LevelControl* levelControl) {
 	this->alientBulletControl = alientBulletControl;
@@ -21,8 +23,21 @@ void AlienControl::populate(AlienBulletControl* alientBulletControl, LevelContro
 
 void AlienControl::update(float time_passed) {
 	
-	// Flag to check if any alien has reached the border
+	// If not all aliens are inside the game field, transition them there
+	if(!areAliensInGamefield()){
+		for(auto it = aliens.begin(); it != aliens.end();) {
+			it->moveBy(0, 3);
+			
+			if(it->getLifes() <= 0)
+				it = aliens.erase(it);
+			else ++it;
+		}
+		return;
+	}
+	
+	// Flags to check if any alien has reached the border or the bottom
 	bool anyReachedSideFlag = false;
+	bool reachedBottomFlag = false;
 	
 	// Updates aliens, checks for dead ones and randomly spawns bullets
 	for (auto it = aliens.begin(); it != aliens.end(); ) {
@@ -40,28 +55,27 @@ void AlienControl::update(float time_passed) {
 		if(it->getPosition().x == 0 || it->getPosition().x == constants::GAME_HEIGHT)
 			anyReachedSideFlag = true;
 		
+		// If there is downwards motion, apply it
+		if(downwardMotion > 0)
+			it->moveBy(0, 1);
+		
+		if(it->getPosition().y > constants::GAME_HEIGHT)
+			reachedBottomFlag = true;
+		
 		++it;
-	
 	}
 	
-	// Flag to check if any alien has reached the bottom
-	bool reachedBottomFlag = false;
+	// Steadily decreases the downwards motion
+	if(downwardMotion > 0)
+		--downwardMotion;
 	
-	// If any alien has reached the side, change the direction of all of them
-	// Alle Aliens umdrehen wenn eins den Rand berührt und Aliens nach unten schieben
-	if (anyReachedSideFlag) {
-		for (auto it = aliens.begin(); it != aliens.end(); it++)
-		{
+	// If any alien has reached the side, start moving them down
+	// and change their direction
+	if(anyReachedSideFlag){
+		for(auto it = aliens.begin(); it != aliens.end(); it++)
 			it->changeDirection();
-			
-			// Moves the aliens a line lower
-			auto pos = it->getPosition();
-			pos.y += constants::ALIEN_Y_ADVANCE;
-			it->setPosition(pos);
-			
-			if (it->getPosition().y > constants::GAME_HEIGHT)
-				reachedBottomFlag = true;
-		}
+		
+		downwardMotion = constants::ALIEN_Y_ADVANCE;
 	}
 	
 	if(reachedBottomFlag){
@@ -94,6 +108,14 @@ void AlienControl::randomSpawnBullet(Alien& alien) {
 			alien.getPosition().y + 6
 		);
 	}
+}
+
+bool AlienControl::areAliensInGamefield() {
+	// Checks if each alien is inside the game field
+	for(auto it = aliens.begin(); it != aliens.end(); it++)
+		if(it->getPosition().y < 0)
+			return false;
+	return true;
 }
 
 // # region Getters/Setters
