@@ -11,7 +11,9 @@
 #include "UIControl.h"
 
 LevelControl::LevelControl() :
-	current_level(-1) {}
+	current_level(-1),
+    score(0)
+    {}
 
 void LevelControl::populate(AlienControl* alien_control, UIControl* ui_control) {
     this->alien_control = alien_control;
@@ -72,3 +74,7 @@ MAKE_CALCULATION_METHOD(float, calculateAlienSpeed, constants::ALIEN_START_SPEED
 MAKE_CALCULATION_METHOD(int, calculatePointsPerKill, 1, constants::SCORE_MULTIPLIER_INCREASE_PER_LEVEL, INFINITY);
 
 #undef MAKE_CALCULATION_METHOD
+
+void LevelControl::increaseScore(){
+    ui_control->displayScore(++score);
+}

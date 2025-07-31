@@ -25,10 +25,11 @@ UIControl::UIControl(Layer& uiLayer, Layer& backgroundLayer) :
         throw std::runtime_error("Failed to load Font");
 
 	scoreboard.initialize(10);
+	scoreboard.displayScore(0);
 	deathmessage.initialize();
+	
 		
-	// Sets the initial score
-	setScore(0);
+	
 }
 
 void UIControl::populate(PlayerControl* playerControl){
@@ -43,9 +44,8 @@ void UIControl::nextBackground(){
 	background.transitionToNextBackground();
 }
 
-void UIControl::setScore(const int newScore){
-	score = newScore;
-	scoreboard.displayScore(score);
+void UIControl::displayScore(const int newScore) {
+	scoreboard.displayScore(newScore);
 }
 
 void UIControl::draw() {
