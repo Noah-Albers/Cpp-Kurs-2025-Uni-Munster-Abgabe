@@ -19,7 +19,7 @@ PropAnimatedSprite::PropAnimatedSprite(
 	fullRunTime(runTimeInSec),
 	runtime(0) {}
 
-bool PropAnimatedSprite::hasStopped() {
+bool PropAnimatedSprite::hasStopped() const {
 	return runtime <= -1;
 }
 

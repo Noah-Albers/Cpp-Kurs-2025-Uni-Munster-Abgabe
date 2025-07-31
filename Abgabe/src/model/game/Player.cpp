@@ -24,7 +24,7 @@ Player::Player() :
 		
 		
     // Positions the sprite
-    sprite.setPosition({constants::GAME_WIDTH/2, constants::GAME_HEIGHT- sprite.getTextureRect().size.y});
+    sprite.setPosition({(float)(constants::GAME_WIDTH/2), (float)(constants::GAME_HEIGHT- sprite.getTextureRect().size.y)});
 }
 Player::~Player() {}
 
