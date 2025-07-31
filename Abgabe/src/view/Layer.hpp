@@ -9,9 +9,10 @@ class Layer {
 public:   
     // Initializes the layer in the given window
     Layer(sf::RenderWindow &window);
+    virtual ~Layer();
 
     // adds the drawable element to the layer
-    void add_to_layer(const sf::Drawable &drawable);
+    virtual void add_to_layer(const sf::Drawable &drawable); 
 
     // draws the scene to the window
     void draw();

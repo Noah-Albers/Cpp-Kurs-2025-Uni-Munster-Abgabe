@@ -1,5 +1,7 @@
 #include "Layer.hpp"
 
+Layer::~Layer() {   };
+
 Layer::Layer(sf::RenderWindow &window) :
     window(window),
     target(window.getSize()),
