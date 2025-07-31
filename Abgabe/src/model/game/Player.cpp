@@ -16,7 +16,7 @@
 #include "../../assets/AssetMappings.h"
 
 Player::Player() :
-	PropMoveable(3.5),
+	PropMoveable(constants::PLAYER_SPEED),
 	PropSprite(ASSETS_SPRITE_PLAYER, true),
 	lifes(constants::PLAYER_START_LIFES),
 	invuln_time_sec(-1)
@@ -43,7 +43,7 @@ void Player::draw(Layer& layer) const{
 	if(isInvulnerable()){
 		int blink_int = (int)(invuln_time_sec *100);
 
-		if (blink_int % 20 < 10) return;
+		if (blink_int % constants::PLAYER_BLINK_LENGTH*2 < constants::PLAYER_BLINK_LENGTH) return;
 	}
 	
 	layer.add_to_layer(getSprite());

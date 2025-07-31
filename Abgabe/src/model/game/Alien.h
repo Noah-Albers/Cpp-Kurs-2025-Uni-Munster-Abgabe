@@ -16,7 +16,7 @@
 
 class Alien : public PropMoveable, public PropSprite {
 public:
-	Alien(const int x, const int y, const int lifes);
+	Alien(const int x, const int y, const int lifes, const float speed);
 	virtual ~Alien();
 	
 	// Event: When the object shall update

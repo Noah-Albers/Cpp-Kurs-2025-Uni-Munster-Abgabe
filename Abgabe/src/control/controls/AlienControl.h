@@ -38,7 +38,7 @@ public:
 	// Event: When the game objects shall update
 	void update(float time_passed);
 
-	void spawnAlien(const int x, const int y, const int lifes);
+	void spawnAlien(const int x, const int y, const int lifes, const float speed);
 	
 	// Getters/Setters
 	std::list<Alien>& getAliens();

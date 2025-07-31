@@ -30,7 +30,7 @@ void AlienBulletControl::update(const float time_passed){
 			   !playerControl->getPlayer().isDead()
 			&& it->isCollidingWith(playerControl->getPlayer())
 		);
-		bool isOutOfScope = it->getPosition().y > constants::GAME_HEIGHT + 20;
+		bool isOutOfScope = it->getPosition().y > constants::GAME_HEIGHT + it->getSprite().getLocalBounds().size.y;
 		
 		if(hasCollided)
 			playerControl->damagePlayer();

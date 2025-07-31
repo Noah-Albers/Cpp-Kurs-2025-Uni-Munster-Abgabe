@@ -28,7 +28,7 @@ void Healthbar::drawBar(Layer& layer, const int lifes, const int maxlifes) {
 		bool isLifeLost = i >= lifes;
 		
 		sprite.setTextureRect(sf::IntRect(
-			{isLifeLost ? 7 : 0, 0},
+			{isLifeLost ? sprite.getTextureRect().size.x : 0, 0},
 			sprite.getTextureRect().size
 		));
 		

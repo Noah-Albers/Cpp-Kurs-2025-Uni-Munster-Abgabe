@@ -7,13 +7,14 @@
 
 #include "Meteor.h"
 #include "../properties/PropMoveable.h"
+#include "../Constants.hpp"
 #include "../properties/PropSprite.h"
 #include <SFML/System/Vector2.hpp>
 
 #include "../../assets/AssetMappings.h"
 
 Meteor::Meteor(const int x, const int y) :
-	PropMoveable(2, VerticalDirection::DOWN),
+	PropMoveable(constants::METEOR_SPEED, VerticalDirection::DOWN),
 	PropSprite(ASSETS_SPRITE_METEOR, true)
 {
 	// Adjusts the y position to let the user define the lower boundry

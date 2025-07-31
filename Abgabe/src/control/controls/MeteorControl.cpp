@@ -14,8 +14,7 @@
 
 MeteorControl::MeteorControl(Layer &layer) :
 	PropDrawable(layer),
-	timer(0),
-	time_between_meteors(3)
+	timer(0)
 	{}
 
 void MeteorControl::populate(PlayerControl* playerControl, ParticleControl* particleControl) {
@@ -52,7 +51,7 @@ void MeteorControl::update(const float time_passed) {
 
 	// when wanted time passed, spawn new meteor at random x coordinate and
 	// reset time
-	if (timer > time_between_meteors) {
+	if (timer > constants::METEOR_DELAY) {
 		spawnMeteorAt(rand() % constants::GAME_WIDTH, -constants::SCOREBOARD_HEIGHT);
 		timer = 0;
 	}

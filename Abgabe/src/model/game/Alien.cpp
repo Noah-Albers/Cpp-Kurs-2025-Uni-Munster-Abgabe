@@ -16,8 +16,8 @@
 
 #include "../../assets/AssetMappings.h"
 
-Alien::Alien(const int x, const int y, const int lifes) :
-	PropMoveable(2, VerticalDirection::NONE, HorizontalDirection::RIGHT),
+Alien::Alien(const int x, const int y, const int lifes, const float speed) :
+	PropMoveable(speed, VerticalDirection::NONE, HorizontalDirection::RIGHT),
 	PropSprite(ASSETS_SPRITE_ALIEN, true),
 	shield(nullptr),
 	lifes(lifes)

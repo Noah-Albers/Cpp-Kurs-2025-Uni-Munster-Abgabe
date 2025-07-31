@@ -47,10 +47,6 @@ protected:
 	
     // timer counts how much time has passed since last meteor spawned
     float timer;
-
-    // time that passes, until next meteor spawns
-    // TODO?: make random?
-    float time_between_meteors;
 };
 
 #endif /* SRC_CONTROL_MeteorCONTROL_H_ */

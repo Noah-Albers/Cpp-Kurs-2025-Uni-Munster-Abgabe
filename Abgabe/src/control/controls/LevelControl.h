@@ -24,26 +24,25 @@ public:
 	// Updates the level control
     void update();
 
+	// Getters/Setters
+	const int getCurrentLevel() const;
+	const int calculatePointsPerKill() const;
+
 private:
 	// Communication with other control's
     AlienControl* alien_control;
     UIControl* ui_control;
 	
-	// Stats of the current level
+	// Current level (starting from 0 with as the first level for calculation reasons)
     int current_level;
-    int count_alien_total;
-    int count_alien_per_line;
-    int count_alien_lines;
-
-    float current_alien_speed;
-    int current_score_multiplier;
 
 	// Advances to the next level
     void nextLevel();
     
-    // Calculates the stats for the next level
-    void nextLevelStats();
-
+    // Calculates various game settings from the current level
+    const int calculateLineAmount() const;
+	const int calculateAliensPerLine() const;
+	const float calculateAlienSpeed() const;
 };
 
 #endif /* SRC_CONTROL_LEVELCONTROL_H_*/

@@ -12,7 +12,7 @@
 #include "../Constants.hpp"
 
 Bullet::Bullet(const int x, const int y) :
-	PropMoveable(6, VerticalDirection::UP),
+	PropMoveable(constants::PLAYER_BULLET_SPEED, VerticalDirection::UP),
 	PropAnimatedSprite(
 		ASSETS_SPRITE_PLAYER_BULLET,
 		constants::ANIMATION_PLAYER_BULLET_LENGTH,

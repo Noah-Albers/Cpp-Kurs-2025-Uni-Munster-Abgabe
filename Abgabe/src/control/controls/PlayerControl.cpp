@@ -40,7 +40,7 @@ void PlayerControl::damagePlayer(int amount, bool wasStrong){
 	if(player.isDead() || player.isInvulnerable()) return;
 	
 	player.setLifes(player.getLifes() - amount);
-	player.setInvulnerable(2);
+	player.setInvulnerable(constants::INVULNERABILITY_TIME);
 	
 	// Handles death code
 	if(player.isDead())

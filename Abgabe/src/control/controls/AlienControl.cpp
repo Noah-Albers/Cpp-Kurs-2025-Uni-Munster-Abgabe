@@ -34,7 +34,7 @@ void AlienControl::update(float time_passed) {
 	// If not all aliens are inside the game field, transition them there
 	if(!areAliensInGamefield()){
 		for(auto it = aliens.begin(); it != aliens.end();) {
-			it->moveBy(0, 3);
+			it->moveBy(0, constants::ALIEN_SPAWN_SPEED);
 			
 			if(it->getLifes() <= 0)
 				it = aliens.erase(it);
@@ -86,7 +86,7 @@ void AlienControl::update(float time_passed) {
 		// Only apply downward motion if the player is not dead.
 		// This prevents them from walking of-screen when the player has lost
 		if(!playerControl->getPlayer().isDead())
-			downwardMotion = constants::ALIEN_Y_ADVANCE;
+			downwardMotion = constants::ALIEN_ADVANCE_SPEED;
 	}
 	
 	// When the aliens reach the bottom, this kills the player
@@ -104,13 +104,13 @@ void AlienControl::draw(){
 	}
 }
 
-void AlienControl::spawnAlien(const int x, const int y, const int lifes) {
-	aliens.emplace_back(x, y, lifes);
+void AlienControl::spawnAlien(const int x, const int y, const int lifes, const float speed) {
+	aliens.emplace_back(x, y, lifes, speed);
 }
 
 void AlienControl::randomSpawnBullet(const Alien& alien) {
 	// Prevents more than a configureable amount of alien bullets to be spawned
-	if(alientBulletControl->getBullets().size() >= constants::MAX_ALIENT_BULLETS) return;
+	if(alientBulletControl->getBullets().size() >= constants::MAX_ALIEN_BULLETS) return;
 	// Prevents aliens from shooting if the player is dead
 	if(playerControl->getPlayer().isDead()) return;
 	
@@ -119,7 +119,7 @@ void AlienControl::randomSpawnBullet(const Alien& alien) {
 	if (random_value < constants::ALIEN_SHOOT_CHANCE) {
 		alientBulletControl->spawnBulletAt(
 			alien.getPosition().x,
-			alien.getPosition().y + 6
+			alien.getPosition().y
 		);
 	}
 }
