@@ -18,7 +18,7 @@ public:
 	void updateSprite(float time_passed);
 	
 	// Returns if the animation is over. Note: Looping animations wont stop duh
-	bool hasStopped();
+	bool hasStopped() const;
 protected:
 	// If the sprite shall loop after its done
 	bool loop;

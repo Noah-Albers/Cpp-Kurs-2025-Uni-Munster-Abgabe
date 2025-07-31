@@ -27,6 +27,7 @@ void AlienControl::populate(
 	this->alientBulletControl = alientBulletControl;
 	this->levelControl = levelControl;
 	this->playerControl = playerControl;
+	
 }
 
 void AlienControl::update(float time_passed) {
@@ -36,8 +37,10 @@ void AlienControl::update(float time_passed) {
 		for(auto it = aliens.begin(); it != aliens.end();) {
 			it->moveBy(0, constants::ALIEN_SPAWN_SPEED);
 			
-			if(it->getLifes() <= 0)
+			if(it->getLifes() <= 0){
 				it = aliens.erase(it);
+				levelControl->increaseScore();
+			}
 			else ++it;
 		}
 		return;
@@ -52,6 +55,7 @@ void AlienControl::update(float time_passed) {
 		// Remove alien if its dead
 		if(it->getLifes() <= 0) {
 			it = aliens.erase(it);
+			levelControl->increaseScore();
 			continue;
 		}
 	

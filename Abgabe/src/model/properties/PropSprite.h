@@ -21,17 +21,17 @@ public:
 	 * @param margin is the amount of margin that shall be subtracted from both sprite hitboxes.
 	 * If they collid only in this small margin, it is considered that they didn't collide at all
 	 */
-	bool isCollidingWith(const PropSprite& object, float margin = 5) const;
+	const bool isCollidingWith(const PropSprite& object, float margin = 5) const;
 
 	// Sets the texture to the given frame
 	void setFrame(int index);
 	
 	// Returns how many frames exist in the current texture
-	int getFrameAmount();
+	const int getFrameAmount() const;
 	
 	// Getters/Setters
 	const sf::Sprite& getSprite() const;
-	int getFrame();
+	const int getFrame() const;
 protected:
     // Texture and sprite for the object
     sf::Texture texture;

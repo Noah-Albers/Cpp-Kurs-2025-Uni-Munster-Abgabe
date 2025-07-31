@@ -48,6 +48,7 @@ protected:
 	AlienBulletControl* alientBulletControl;
 	LevelControl* levelControl;
 	PlayerControl* playerControl;
+	UIControl* uiControl;
 	
 	// All Alien objects
 	std::list<Alien> aliens;

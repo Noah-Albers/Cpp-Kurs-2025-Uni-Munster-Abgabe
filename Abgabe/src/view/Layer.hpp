@@ -6,24 +6,24 @@
 
 // Layer class
 class Layer {
-public:   
+public:
     // Initializes the layer in the given window
     Layer(sf::RenderWindow &window);
     virtual ~Layer();
 
     // adds the drawable element to the layer
-    virtual void add_to_layer(const sf::Drawable &drawable); 
+    virtual void add_to_layer(const sf::Drawable &drawable);
 
     // draws the scene to the window
-    void draw();
+    virtual void draw();
 
     // clear the layer, remove all drawable elements
-    void clear();
+    virtual void clear();
 
     // adjust the layer's view
-    void set_view(const sf::View &view);
+    virtual void set_view(const sf::View &view);
 
-private:
+protected:
     // window in which the layer is shown
     sf::RenderWindow &window;
 

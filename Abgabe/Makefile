@@ -38,7 +38,7 @@ $(BUILDDIR)/gmock-all.o: $(GTEST_DIR)/googlemock/src/gmock-all.cc
 	$(CXX) $(CXXFLAGS) -I$(GTEST_DIR)/googletest/include -I$(GTEST_DIR)/googletest -I$(GTEST_DIR)/googlemock/include -I$(GTEST_DIR)/googlemock $< -c -o $@
 $(BUILDDIR)/libgtest.a: $(BUILDDIR)/gtest-all.o $(BUILDDIR)/gtest_main.o
 	ar rcs $@ $^
-$(BUILDDIR)/libgmock.a: $(BUILDDIR)/gtest-all.o
+$(BUILDDIR)/libgmock.a: $(BUILDDIR)/gmock-all.o
 	ar rcs $@ $^
 
 
