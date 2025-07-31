@@ -100,43 +100,55 @@ TEST_F(AlienControlTest, RemovesDeadAliens) {
     EXPECT_EQ(alienControl.getAliens().size(), 1);
 }
 
-    /*
+// Test Alien spawn animation
+TEST_F(AlienControlTest, AlienSpawnMovement) {
+    alienControl.spawnAlien(100, -5, 1, 1.0);
+    auto posA = alienControl.getAliens().front().getPosition();
 
+    alienControl.update(0.1);
+    auto posB = alienControl.getAliens().front().getPosition();
 
+    ASSERT_NEAR(posA.x, posB.x, 0.000001);
+    ASSERT_LE(posA.y, posB.y);
+} 
 
-// Test that bullets are not spawned when max bullets reached
-TEST_F(AlienControlTest, DoesNotSpawnBulletIfLimitReached) {
-    std::list<AlienBullet> maxedBullets(constants::MAX_ALIEN_BULLETS);
-    ON_CALL(mockBulletControl, getBullets())
-        .WillByDefault(ReturnRef(maxedBullets));
+// Test Alien movement
+TEST_F(AlienControlTest, AlienNormalMovement) {
+    alienControl.spawnAlien(constants::GAME_WIDTH - 1, 100, 1, 1.0);
+    auto posA = alienControl.getAliens().front().getPosition();
+    auto dirA = alienControl.getAliens().front().getHorizontalDirection();
 
-    ON_CALL(mockPlayer, isDead())
-        .WillByDefault(Return(false));
+    alienControl.update(0.5);
+    auto posB = alienControl.getAliens().front().getPosition();
+    auto dirB = alienControl.getAliens().front().getHorizontalDirection();
 
-    alienControl.spawnAlien(50, 10, 1, 1.0f); // One alien
+    alienControl.update(0.5);
+    auto posC = alienControl.getAliens().front().getPosition();
 
-    EXPECT_CALL(mockBulletControl, spawnBulletAt(_, _)).Times(0);
-    alienControl.update(0.016f);
+    EXPECT_NE(dirA, dirB);
+    //EXPECT_LT(posA.y, posB.y);
+    EXPECT_LT(posB.y, posC.y);
+    EXPECT_GT(posB.x, posC.x);
 }
 
-// Test that killPlayer is called when alien reaches bottom
-TEST_F(AlienControlTest, CallsKillPlayerAtBottom) {
-    alienControl.spawnAlien(50, constants::GAME_HEIGHT, 1, 1.0f);
+// No downward move when Player is dead
+TEST_F(AlienControlTest, AlienDeadPlayerMovement) {
+    playerControl.killPlayer();
+    alienControl.spawnAlien(constants::GAME_WIDTH - 1, 100, 1, 1.0);
+    auto posA = alienControl.getAliens().front().getPosition();
+    auto dirA = alienControl.getAliens().front().getHorizontalDirection();
 
-    ON_CALL(mockPlayer, isDead()).WillByDefault(Return(false));
-    EXPECT_CALL(mockPlayerControl, killPlayer()).Times(1);
+    alienControl.update(0.5);
+    auto posB = alienControl.getAliens().front().getPosition();
+    auto dirB = alienControl.getAliens().front().getHorizontalDirection();
 
-    alienControl.update(0.016f);
+    alienControl.update(0.5);
+    auto posC = alienControl.getAliens().front().getPosition();
+
+    EXPECT_NE(dirA, dirB);
+    EXPECT_NEAR(posA.y, posB.y, 0.000001);
+    EXPECT_NEAR(posB.y, posC.y, 0.000001);
+    EXPECT_GT(posB.x, posC.x);
 }
 
-// Test that direction changes when side is reached
-TEST_F(AlienControlTest, ChangesDirectionAtSide) {
-    // Spawn alien at right edge to trigger side flag
-    alienControl.spawnAlien(constants::GAME_HEIGHT, 50, 1, 1.0f);
-
-    ON_CALL(mockPlayer, isDead()).WillByDefault(Return(false));
-
-    EXPECT_NO_THROW(alienControl.update(0.016f)); // should not crash
-}
-
-*/
+// TODO: Mock Killplayer if y= 0
