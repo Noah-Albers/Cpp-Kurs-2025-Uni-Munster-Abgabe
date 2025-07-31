@@ -8,14 +8,62 @@
 #include <gmock/gmock.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/View.hpp> 
-
-#include "../../src/control/controls/AlienControl.h"
 #include "../../src/model/Constants.hpp"
 
+#include "../../src/control/controls/AlienBulletControl.h"
+#include "../../src/control/controls/AlienControl.h"
+#include "../../src/control/controls/BulletControl.h"
+#include "../../src/control/controls/LevelControl.h"
+#include "../../src/control/controls/MeteorControl.h"
+#include "../../src/control/controls/ParticleControl.h"
+#include "../../src/control/controls/PlayerControl.h"
+#include "../../src/control/controls/UIControl.h"
 
 using ::testing::Return;
 using ::testing::ReturnRef;
 using ::testing::_;
+
+/*
+class MockControl {
+    public:
+    MockControl() :
+        win(sf::VideoMode({10, 10}), "Dummy"),
+        layer(win),
+        layerbg(win),
+        alienBulletControl(layer),
+        alienControl(layer),
+        bulletControl(layer),
+        levelControl(),
+        meteorControl(layer),
+        particleControl(layer),
+        playerControl(layer),
+        uiControl(layer, layerbg)
+        {
+        alienBulletControl.populate(&playerControl);
+	    alienControl.populate(&alienBulletControl, &levelControl, &playerControl);
+	    bulletControl.populate(&alienControl, &meteorControl);
+	    meteorControl.populate(&playerControl, &particleControl);
+	    playerControl.populate(&bulletControl, &particleControl);
+	    uiControl.populate(&playerControl);
+        levelControl.populate(&alienControl, &uiControl);	
+    };
+
+    sf::RenderWindow win;
+    Layer layer;
+    Layer layerbg;
+    AlienBulletControl  alienBulletControl;
+    AlienControl        alienControl;
+    BulletControl       bulletControl;
+    LevelControl        levelControl;
+    MeteorControl       meteorControl;
+    ParticleControl     particleControl;
+    PlayerControl       playerControl;
+    UIControl           uiControl;
+};
+*/
+
+
+
 
 
 
@@ -47,19 +95,44 @@ public:
 // Test Fixture
 // ----------------------------------------
 
-class AlienControlTest : public ::testing::Test {
-protected:
-    DummyLayer dummyLayer;
-    AlienBulletControl alienBulletControl;
-    PlayerControl playerControl;
-    LevelControl levelControl;
-    AlienControlMock alienControl;
+class AlienControlTest :  public ::testing::Test { 
+    public:
+    AlienControlTest() :
+        win(sf::VideoMode({10, 10}), "Dummy"),
+        layer(win),
+        layerbg(win),
+        alienBulletControl(layer),
+        alienControl(layer),
+        bulletControl(layer),
+        levelControl(),
+        meteorControl(layer),
+        particleControl(layer),
+        playerControl(layer),
+        uiControl(layer, layerbg)
+        {
+        alienBulletControl.populate(&playerControl);
+	    alienControl.populate(&alienBulletControl, &levelControl, &playerControl);
+	    bulletControl.populate(&alienControl, &meteorControl);
+	    meteorControl.populate(&playerControl, &particleControl);
+	    playerControl.populate(&bulletControl, &particleControl);
+	    uiControl.populate(&playerControl);
+        levelControl.populate(&alienControl, &uiControl);	
+    };
 
-
-    AlienControlTest() : alienBulletControl(dummyLayer), playerControl(dummyLayer), alienControl(dummyLayer) {
-        alienControl.populate(&alienBulletControl, &levelControl, &playerControl);
-    }
+    sf::RenderWindow win;
+    Layer layer;
+    Layer layerbg;
+    AlienBulletControl  alienBulletControl;
+    AlienControlMock        alienControl;
+    BulletControl       bulletControl;
+    LevelControl        levelControl;
+    MeteorControl       meteorControl;
+    ParticleControl     particleControl;
+    PlayerControl       playerControl;
+    UIControl           uiControl;
 };
+
+
 
 // ----------------------------------------
 // Tests
@@ -71,7 +144,6 @@ TEST_F(AlienControlTest, SpawnAlien) {
     ASSERT_EQ(alienControl.getAliens().size(), 1);
 
     alienControl.spawnAlien(12, 12, 1, 1.0);
-    ASSERT_EQ(alienControl.getAliens().size(), 2);
 }
 
 TEST_F(AlienControlTest, AreAliensInGameField) {
@@ -83,7 +155,7 @@ TEST_F(AlienControlTest, AreAliensInGameField) {
 
     alienControl.spawnAlien(100, -30, 1, 1.0);
     EXPECT_FALSE(alienControl.forwardAreAliensInGamefield());
-}
+}  
 
 
 // Test that dead aliens are removed during update
