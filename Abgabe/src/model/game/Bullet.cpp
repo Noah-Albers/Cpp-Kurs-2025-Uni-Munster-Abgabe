@@ -9,11 +9,15 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "../../assets/AssetMappings.h"
+#include "../Constants.hpp"
 
 Bullet::Bullet(const int x, const int y) :
 	PropMoveable(6, VerticalDirection::UP),
-	PropAnimatedSprite(ASSETS_SPRITE_PLAYER_BULLET, 0.6, true, true)
-{
+	PropAnimatedSprite(
+		ASSETS_SPRITE_PLAYER_BULLET,
+		constants::ANIMATION_PLAYER_BULLET_LENGTH,
+		true, true
+	) {
 	sprite.setPosition(sf::Vector2f(x,y));
 }
 

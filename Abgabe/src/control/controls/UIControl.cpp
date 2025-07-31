@@ -53,7 +53,7 @@ void UIControl::draw() {
 	scoreboard.draw(uiLayer);
 	healthbar.drawBar(uiLayer,
 		playerControl->getPlayer().getLifes(),
-		constants::START_LIFES
+		constants::PLAYER_START_LIFES
 	);
 	
 	if(playerControl->getPlayer().isDead())

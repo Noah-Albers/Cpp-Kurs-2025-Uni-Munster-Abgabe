@@ -6,12 +6,16 @@
  */
 
 #include "AlienShield.h"
-#include "../properties/PropAnimatedSprite.h"
 #include "../../assets/AssetMappings.h"
 #include <SFML/System/Vector2.hpp>
+#include "../Constants.hpp"
 
 AlienShield::AlienShield() :
-	PropAnimatedSprite(ASSETS_SPRITE_ALIEN_SHIELD, 1, true, true) {}
+	PropAnimatedSprite(
+		ASSETS_SPRITE_ALIEN_SHIELD, 
+		constants::ANIMATION_ALIEN_SHIELD_LENGTH,
+		true, true
+	) {}
 
 void AlienShield::setPosition(const sf::Vector2f pos){
 	sprite.setPosition(pos);

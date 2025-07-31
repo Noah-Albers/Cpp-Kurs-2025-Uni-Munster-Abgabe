@@ -71,7 +71,7 @@ void Background::update(const float time_passed) {
 }
 
 void Background::updateTransition(const float time_passed){
-	transitionPercentage += time_passed * constants::BACKGROUND_TRANSITION_MODIFIER;
+	transitionPercentage += time_passed * constants::BACKGROUND_TRANSITION_SPEED;
 	
 	// Finishes the transition by advancing the frame
 	if(transitionPercentage > 1){

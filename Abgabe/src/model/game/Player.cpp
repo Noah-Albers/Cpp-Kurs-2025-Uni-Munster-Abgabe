@@ -18,7 +18,7 @@
 Player::Player() :
 	PropMoveable(3.5),
 	PropSprite(ASSETS_SPRITE_PLAYER, true),
-	lifes(constants::START_LIFES),
+	lifes(constants::PLAYER_START_LIFES),
 	invuln_time_sec(-1)
     {
 		

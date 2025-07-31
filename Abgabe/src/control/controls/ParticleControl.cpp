@@ -9,6 +9,7 @@
 #include "../properties/PropDrawable.h"
 
 #include "../../assets/AssetMappings.h"
+#include "../../model/Constants.hpp"
 
 ParticleControl::ParticleControl(Layer& layer) :
 	PropDrawable(layer) {}
@@ -43,13 +44,13 @@ void ParticleControl::spawnDebugParticle(
 }
 
 void ParticleControl::spawnExplosionParticle(const int x, const int y){
-	particles.emplace_back(ASSETS_EXPLOSION, x, y, 2);
+	particles.emplace_back(ASSETS_EXPLOSION, x, y, constants::PARTICLE_EXPLOSION_LENGTH);
 }
 
 void ParticleControl::spawnPlayerDeathParticle(const int x, const int y) {
-	particles.emplace_back(ASSETS_SPRITE_PLAYER_DEATH, x, y, 2);
+	particles.emplace_back(ASSETS_SPRITE_PLAYER_DEATH, x, y, constants::PARTICLE_PLAYER_DEATH_LENGTH);
 }
 
 void ParticleControl::spawnMeteorExplosionParticle(const int x, const int y) {
-	particles.emplace_back(ASSETS_SPRITE_METEOR_EXPLOSION, x, y, 0.5);
+	particles.emplace_back(ASSETS_SPRITE_METEOR_EXPLOSION, x, y, constants::PARTICLE_METEOR_EXPLOSION_LENGTH);
 }
