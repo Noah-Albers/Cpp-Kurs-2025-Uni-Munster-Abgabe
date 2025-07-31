@@ -18,43 +18,28 @@ using ::testing::ReturnRef;
 using ::testing::_;
 
 
-// Mock Classes for Dependencies
-
-class MockPlayer {
-public:
-    MOCK_METHOD(bool, isDead, (), (const));
-};
-
-class MockPlayerControl : public PlayerControl {
-public:
-    MockPlayerControl(Layer &layer) : PlayerControl(layer) {    };
-
-    //MOCK_METHOD(MockPlayer&, getPlayer, (), ());
-    MOCK_METHOD(void, killPlayer, (), ());
-};
-
-class MockAlienBulletControl : public AlienBulletControl {
-public:
-    MockAlienBulletControl(Layer &layer) : AlienBulletControl(layer) {  };
-
-    std::list<AlienBullet> bullets;
-
-    MOCK_METHOD(std::list<AlienBullet>&, getBullets, (), ());
-    MOCK_METHOD(void, spawnBulletAt, (int, int), ());
-};
 
 // Dummy Layer that does nothing
 class DummyLayer : public Layer {
 public:
     DummyLayer() : Layer(*createDummyWindow()) {}
 
-    MOCK_METHOD(void, add_to_layer, (const sf::Drawable&), (override));
+    //MOCK_METHOD(void, add_to_layer, (const sf::Drawable&), (override));
 
 private:
     static sf::RenderWindow* createDummyWindow() {
         // A shared dummy window so Layer’s constructor can be called safely
-        static sf::RenderWindow dummy(sf::VideoMode(), "Dummy");
+        static sf::RenderWindow dummy(sf::VideoMode({10, 10}), "Dummy");
         return &dummy;
+    }
+};
+
+class AlienControlMock : public AlienControl {
+public:
+    AlienControlMock(Layer &layer) : AlienControl(layer) {  };
+
+    bool forwardAreAliensInGamefield() {
+        return this->areAliensInGamefield();
     }
 };
 
@@ -65,34 +50,57 @@ private:
 class AlienControlTest : public ::testing::Test {
 protected:
     DummyLayer dummyLayer;
-    MockAlienBulletControl mockBulletControl;
-    MockPlayerControl mockPlayerControl;
+    AlienBulletControl alienBulletControl;
+    PlayerControl playerControl;
     LevelControl levelControl;
-    AlienControl alienControl;
+    AlienControlMock alienControl;
 
-    // Backing mock player to return from getPlayer()
-    MockPlayer mockPlayer;
 
-    AlienControlTest() : alienControl(dummyLayer), mockBulletControl(dummyLayer), mockPlayerControl(dummyLayer) {
-        alienControl.populate(&mockBulletControl, &levelControl, &mockPlayerControl);
-        //ON_CALL(mockPlayerControl, getPlayer())
-         //   .WillByDefault(ReturnRef(mockPlayer));
+    AlienControlTest() : alienBulletControl(dummyLayer), playerControl(dummyLayer), alienControl(dummyLayer) {
+        alienControl.populate(&alienBulletControl, &levelControl, &playerControl);
     }
 };
 
 // ----------------------------------------
 // Tests
 // ----------------------------------------
+TEST_F(AlienControlTest, SpawnAlien) {
+    ASSERT_EQ(alienControl.getAliens().size(), 0);
+    
+    alienControl.spawnAlien(10, 10, 2, 1.0);
+    ASSERT_EQ(alienControl.getAliens().size(), 1);
 
-/*
+    alienControl.spawnAlien(12, 12, 1, 1.0);
+    ASSERT_EQ(alienControl.getAliens().size(), 2);
+}
+
+TEST_F(AlienControlTest, AreAliensInGameField) {
+    alienControl.spawnAlien(100,100, 1, 1.0);
+    EXPECT_TRUE(alienControl.forwardAreAliensInGamefield());
+
+    alienControl.spawnAlien(100, 0, 1, 1.0);
+    EXPECT_TRUE(alienControl.forwardAreAliensInGamefield());
+
+    alienControl.spawnAlien(100, -30, 1, 1.0);
+    EXPECT_FALSE(alienControl.forwardAreAliensInGamefield());
+}
+
+
 // Test that dead aliens are removed during update
 TEST_F(AlienControlTest, RemovesDeadAliens) {
-    alienControl.spawnAlien(100, 0, 0, 1.0f); // Lifes = 0
-
+    alienControl.spawnAlien(100, 0, 0, 1.0);
     EXPECT_EQ(alienControl.getAliens().size(), 1);
-    alienControl.update(0.016f); // simulate frame update
+    alienControl.update(0.1); // simulate frame update
     EXPECT_EQ(alienControl.getAliens().size(), 0);
+
+    alienControl.spawnAlien(100, 100, 1, 1.0);
+    alienControl.spawnAlien(200,200, 0, 1.0);
+    EXPECT_EQ(alienControl.getAliens().size(), 2);
+    alienControl.update(0.1);
+    EXPECT_EQ(alienControl.getAliens().size(), 1);
 }
+
+    /*
 
 
 
