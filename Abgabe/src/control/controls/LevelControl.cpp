@@ -14,7 +14,9 @@ LevelControl::LevelControl() :
 	current_level(0),
 	count_alien_total(0),
 	current_alien_speed(0),
-	current_score_multiplier(1) {}
+	current_score_multiplier(1),
+    score(0)
+    {}
 
 void LevelControl::populate(AlienControl* alien_control, UIControl* ui_control) {
     this->alien_control = alien_control;
@@ -69,4 +71,12 @@ void LevelControl::update() {
 	// Reset the level if there are no more aliens
 	if(alien_control->getAliens().empty())
         this->nextLevel();
+}
+
+
+
+//TODO: score for each killed Alien as constant
+void LevelControl::increaseScore(){
+	score+= 1;
+    ui_control->setScore(score);
 }

@@ -25,14 +25,14 @@ TEST(AlienModelTest, update_moves_alien) {
 	ASSERT_NE(posA,posB);	
 }
 
-TEST(AlienModelTest, setPosition_out_of_bounce_negative){
+TEST(AlienModelTest, setPosition_out_of_bounds_negative){
 	Alien alien(100,100,2);
 	alien.setPosition(sf::Vector2f(-10, -10));	
 	
 	ASSERT_EQ(alien.getPosition(), sf::Vector2f(0,0));
 }
 
-TEST(AlienModelTest, setPosition_out_of_bounce_positive){
+TEST(AlienModelTest, setPosition_out_of_bounds_positive){
 	Alien alien(100,100,2);
 	alien.setPosition(sf::Vector2f(constants::GAME_WIDTH+10, constants::GAME_HEIGHT+10));	
 	

@@ -39,6 +39,7 @@ public:
 	// Sets a new score and updates the screen
 	void setScore(const int score);
 	
+	
 	// Updates the object
 	void update(const float time_passed);
 	
@@ -49,9 +50,7 @@ protected:
 	// Font used for text
 	sf::Font font;
 
-	// Score the player achieved
-	// TODO: Maybe move this somewhere else
-	int score;
+	
 
 	// Layer to render the ui and background onto
 	Layer& uiLayer;

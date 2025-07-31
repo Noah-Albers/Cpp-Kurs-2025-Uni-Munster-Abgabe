@@ -11,6 +11,7 @@ author olly
 // Declares classes to avoid circular dependencies
 class AlienControl;
 class UIControl;
+class Alien;
 
 class LevelControl
 {
@@ -24,6 +25,9 @@ public:
 	// Updates the level control
     void update();
 
+
+    void increaseScore();
+
 private:
 	// Communication with other control's
     AlienControl* alien_control;
@@ -34,6 +38,8 @@ private:
     int count_alien_total;
     int count_alien_per_line;
     int count_alien_lines;
+    
+	int score;
 
     float current_alien_speed;
     int current_score_multiplier;
