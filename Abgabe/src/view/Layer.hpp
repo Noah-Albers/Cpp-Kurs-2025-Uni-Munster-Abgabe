@@ -6,7 +6,7 @@
 
 // Layer class
 class Layer {
-public:   
+public:
     // Initializes the layer in the given window
     Layer(sf::RenderWindow &window);
     virtual ~Layer();
