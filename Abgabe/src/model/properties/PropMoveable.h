@@ -37,6 +37,7 @@ public:
 	void setVerticalDirection(const VerticalDirection dir);
 	void setHorizontalDirection(const HorizontalDirection dir);
 	void setSpeed(const float speed);
+	const float getSpeed() const;
 	const VerticalDirection getVerticalDirection() const;
 	const HorizontalDirection getHorizontalDirection() const;
 protected:
