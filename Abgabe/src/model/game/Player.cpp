@@ -22,8 +22,9 @@ Player::Player() :
 	invuln_time_sec(-1)
     {
 		
+		
     // Positions the sprite
-    sprite.setPosition({0, constants::GAME_HEIGHT});
+    sprite.setPosition({constants::GAME_WIDTH/2, constants::GAME_HEIGHT- sprite.getTextureRect().size.y});
 }
 Player::~Player() {}
 
@@ -66,6 +67,7 @@ const bool Player::isDead() const { return lifes <= 0; };
 const bool Player::isInvulnerable() const { return invuln_time_sec >= 0; };
 const sf::Vector2f Player::getPosition() const { return sprite.getPosition(); };
 void Player::setLifes(int lifes) {
+	if (lifes > constants::PLAYER_START_LIFES) lifes = constants::PLAYER_START_LIFES;
 	if(lifes < 0) lifes = 0;
 	this->lifes = lifes;
 };
