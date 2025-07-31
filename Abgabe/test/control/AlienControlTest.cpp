@@ -133,10 +133,10 @@ TEST_F(AlienControlTest, AlienNormalMovement) {
 
 // No downward move when Player is dead
 TEST_F(AlienControlTest, AlienDeadPlayerMovement) {
-    playerControl.killPlayer();
     alienControl.spawnAlien(constants::GAME_WIDTH - 1, 100, 1, 1.0);
     auto posA = alienControl.getAliens().front().getPosition();
     auto dirA = alienControl.getAliens().front().getHorizontalDirection();
+    playerControl.killPlayer();
 
     alienControl.update(0.5);
     auto posB = alienControl.getAliens().front().getPosition();
