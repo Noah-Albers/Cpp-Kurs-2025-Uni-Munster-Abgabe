@@ -1,5 +1,4 @@
 
-
 #include "../../../src/model/properties/PropSprite.h"
 #include <SFML/Graphics/Rect.hpp>
 #include <SFML/System/Vector2.hpp>
