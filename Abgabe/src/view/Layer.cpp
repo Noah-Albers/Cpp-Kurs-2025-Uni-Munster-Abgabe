@@ -8,6 +8,7 @@ Layer::Layer(sf::RenderWindow &window) :
     if (!target.resize(window.getSize()))
         throw std::runtime_error("undefined window size");
 }
+Layer::~Layer() {};
 
 void Layer::add_to_layer(const sf::Drawable &drawable) {
     target.draw(drawable);
