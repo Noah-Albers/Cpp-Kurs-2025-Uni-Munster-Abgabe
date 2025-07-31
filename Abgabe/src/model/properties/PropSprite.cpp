@@ -12,6 +12,7 @@
 PropSprite::PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale, const bool centerOrigin) : 
 	texture(),
     sprite(texture) {
+		
 	
 	// load texture
     if (!texture.loadFromFile(filename))
@@ -28,7 +29,7 @@ const sf::Sprite& PropSprite::getSprite() const {
 	return sprite;
 }
 
-bool PropSprite::isCollidingWith(const PropSprite& object, float margin) const {
+const bool PropSprite::isCollidingWith(const PropSprite& object, float margin) const {
 	auto thisBounds = sprite.getGlobalBounds();
 	auto objectBounds = object.getSprite().getGlobalBounds();
 	
@@ -56,10 +57,10 @@ void PropSprite::setFrame(int index){
 	}, sprite.getTextureRect().size));
 }
 
-int PropSprite::getFrameAmount(){
+const int PropSprite::getFrameAmount() const {
 	return sprite.getTexture().getSize().x/sprite.getTextureRect().size.x;
 }
 
-int PropSprite::getFrame(){
+const int PropSprite::getFrame() const {
 	return sprite.getTextureRect().position.x/sprite.getTextureRect().size.x;
 }

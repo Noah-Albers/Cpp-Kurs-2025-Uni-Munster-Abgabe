@@ -13,7 +13,9 @@ PropMoveable::PropMoveable(
 	const float speed,
 	const VerticalDirection v_dir,
 	const HorizontalDirection h_dir
-) : h_dir(h_dir), v_dir(v_dir), speed(speed) {}
+) : h_dir(h_dir), v_dir(v_dir){
+	setSpeed(speed);
+}
 PropMoveable::~PropMoveable() {}
 
 void PropMoveable::updatePosition(const float time_passed){
@@ -34,13 +36,18 @@ void PropMoveable::moveBy(int x, int y){
 	setPosition(getPosition() + sf::Vector2f(x,y));
 }
 
+void PropMoveable::setSpeed(const float _speed) {
+	speed = _speed < 0 ? 0 : _speed;
+}
+
 // #region Getters and setters
 	
 void PropMoveable::setVerticalDirection(const VerticalDirection dir) { v_dir = dir; }
 void PropMoveable::setHorizontalDirection(const HorizontalDirection dir) { h_dir = dir; }
-void PropMoveable::setSpeed(const float _speed) { speed = _speed; }
+const float PropMoveable::getSpeed() const { return speed; };
 const VerticalDirection PropMoveable::getVerticalDirection() const { return v_dir; };
 const HorizontalDirection PropMoveable::getHorizontalDirection() const { return h_dir; };
+
 // #endregion
 
 
