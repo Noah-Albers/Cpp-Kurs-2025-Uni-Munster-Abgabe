@@ -1,5 +1,5 @@
 /**
- * MockControler.cpp
+ * MockControl.cpp
  * created on 31.07
  * author Olly
  */
@@ -15,8 +15,31 @@
 
 class MockControl {
     public:
-    //DummyLayer dummyLayer;
+    MockControl() :
+        win(sf::VideoMode({10, 10}), "Dummy"),
+        layer(win),
+        layerbg(win),
+        alienBulletControl(layer),
+        alienControl(layer),
+        bulletControl(layer),
+        levelControl(),
+        meteorControl(layer),
+        particleControl(layer),
+        playerControl(layer),
+        uiControl(layer, layerbg)
+        {
+        alienBulletControl.populate(&playerControl);
+	    alienControl.populate(&alienBulletControl, &levelControl, &playerControl);
+	    bulletControl.populate(&alienControl, &meteorControl);
+	    meteorControl.populate(&playerControl, &particleControl);
+	    playerControl.populate(&bulletControl, &particleControl);
+	    uiControl.populate(&playerControl);
+        levelControl.populate(&alienControl, &uiControl);	
+    };
 
+    sf::RenderWindow win;
+    Layer layer;
+    Layer layerbg;
     AlienBulletControl  alienBulletControl;
     AlienControl        alienControl;
     BulletControl       bulletControl;
@@ -25,4 +48,4 @@ class MockControl {
     ParticleControl     particleControl;
     PlayerControl       playerControl;
     UIControl           uiControl;
-}
+};
