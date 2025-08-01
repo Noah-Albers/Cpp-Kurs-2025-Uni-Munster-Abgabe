@@ -16,7 +16,8 @@ UIControl::UIControl(Layer& uiLayer, Layer& backgroundLayer) :
 	uiLayer(uiLayer),
 	backgroundLayer(backgroundLayer),
 	scoreboard(font),
-	healthbar(10, 60),
+	healthbar(10, 90),
+	shieldbar(10, 55),
 	deathmessage(font)
 	{
 		
@@ -27,9 +28,7 @@ UIControl::UIControl(Layer& uiLayer, Layer& backgroundLayer) :
 	scoreboard.initialize(10);
 	scoreboard.displayScore(0);
 	deathmessage.initialize();
-	
-		
-	
+
 }
 
 void UIControl::populate(PlayerControl* playerControl){
@@ -55,6 +54,7 @@ void UIControl::draw() {
 		playerControl->getPlayer().getLifes(),
 		constants::PLAYER_START_LIFES
 	);
+	shieldbar.drawBar(uiLayer, playerControl->getPlayer().getShieldbar());
 	
 	if(playerControl->getPlayer().isDead())
 		deathmessage.draw(uiLayer);

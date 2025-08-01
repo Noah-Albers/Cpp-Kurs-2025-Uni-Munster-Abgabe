@@ -12,6 +12,7 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include "../properties/PropMoveable.h"
 #include "../properties/PropSprite.h"
+#include "Shield.h"
 #include "../../view/Layer.hpp"
 
 class Player : public PropMoveable, public PropSprite {
@@ -35,13 +36,24 @@ public:
 	const bool isDead() const;
 	void setInvulnerable(float timeSec);
 	const bool isInvulnerable() const;
+	const float getShieldbar() const;
+	const bool hasShield() const;
+	void setShieldbar(float percentage);
 	
 protected:
+	// Shield sprite
+	Shield shield;
+	
 	// How many lifes the player has left
 	int lifes;
 
+	// Percentage on how far the shield bar of is filled
+	// From 0.00 to 1.00
+	float shieldbar;
+
 	// How long the player still is invincible (in seconds)
 	float invuln_time_sec;
+	
 };
 
 #endif /* SRC_MODEL_PLAYER_H_ */

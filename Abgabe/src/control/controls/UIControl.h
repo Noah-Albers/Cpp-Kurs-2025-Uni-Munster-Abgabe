@@ -19,6 +19,7 @@
 #include "../../model/interface/Healthbar.h"
 #include "../../model/interface/Scoreboard.h"
 #include "../../model/interface/Deathmessage.h"
+#include "../../model/interface/Shieldbar.h"
 #include "PlayerControl.h"
 #include "../../view/Layer.hpp"
 
@@ -61,11 +62,15 @@ protected:
 	// Shows the healthbar
 	Healthbar healthbar;
 	
+	// Shield bar
+	Shieldbar shieldbar;
+	
 	// Renders the background
 	Background background;
 	
 	// Displays the death message
 	Deathmessage deathmessage;
+	
 };
 
 #endif /* SRC_CONTROL_UICONTROL_H_ */
