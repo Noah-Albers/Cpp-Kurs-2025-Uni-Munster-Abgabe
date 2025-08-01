@@ -26,6 +26,7 @@
 class UIControl {
 public:
 	UIControl(Layer& uiLayer, Layer& backgroundLayer);
+	virtual ~UIControl();
 	
 	// Part of setup
 	// Its imperative to call this before anything else in this class
@@ -38,7 +39,7 @@ public:
 	void nextBackground();
 	
 	// Sets a new score and updates the screen
-	void displayScore(const int score);
+	virtual void displayScore(const int score);
 	
 	// Updates the object
 	void update(const float time_passed);
