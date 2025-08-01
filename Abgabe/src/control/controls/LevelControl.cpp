@@ -15,6 +15,8 @@ LevelControl::LevelControl() :
     score(0)
     {}
 
+LevelControl::~LevelControl() {};
+
 void LevelControl::populate(AlienControl* alien_control, UIControl* ui_control) {
     this->alien_control = alien_control;
     this->ui_control = ui_control;

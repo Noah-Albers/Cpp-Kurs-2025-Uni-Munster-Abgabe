@@ -27,6 +27,13 @@ class UIControlMock : public UIControl {
     MOCK_METHOD(void, displayScore, (int score), (override));
 };
 
+class LevelControlMock : public LevelControl {
+    public:
+    LevelControlMock() : LevelControl() {};
+    
+    MOCK_METHOD(void, nextLevel, (), (override));
+};
+
 
 // ----------------------------------------
 // Test Fixture
@@ -78,4 +85,37 @@ TEST_F(LevelControlTest, UIControlDisplayScoreCall) {
 
     EXPECT_CALL(uiControlMock, displayScore(1));
     levelControl.increaseScore();
+}
+
+TEST_F(LevelControlTest, Update) {
+    LevelControlMock levelControlMock;
+    levelControlMock.populate(&alienControl, &uiControl);
+    alienControl.populate(&alienBulletControl, &levelControlMock, &playerControl);
+
+    //Expects only on call, if 0 or 2 test fails
+    EXPECT_CALL(levelControlMock, nextLevel()).Times(1);
+    levelControlMock.update();
+
+    alienControl.spawnAlien(10, 10, 2, 1.0);
+    levelControlMock.update();
+}
+
+TEST_F(LevelControlTest, NextLevelSpawnAlien) {
+    ASSERT_EQ(alienControl.getAliens().size(), 0);
+
+    levelControl.update();
+    ASSERT_EQ(alienControl.getAliens().size(), constants::ALIEN_START_LIENS_PER_LINE * constants::ALIEN_START_LINE_COUNT);
+    alienControl.getAliens().clear();
+
+    levelControl.update();
+    ASSERT_EQ(alienControl.getAliens().size(), (constants::ALIEN_LINE_INCREASE_PER_LEVEL + constants::ALIEN_START_LIENS_PER_LINE) * (constants::ALIEN_LINE_AMOUNT_INCREASE_PER_LEVEL + constants::ALIEN_START_LINE_COUNT));
+    alienControl.getAliens().clear();
+
+    for (int i = 0; i < 99; i++)
+    {
+        levelControl.update();
+        alienControl.getAliens().clear();
+    }
+    levelControl.update();
+    ASSERT_EQ(alienControl.getAliens().size(), constants::MAX_ALIEN_LINE_COUNT * constants::MAX_ALIENS_PER_LINE);
 }
