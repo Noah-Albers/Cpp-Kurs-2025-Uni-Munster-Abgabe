@@ -4,7 +4,6 @@
  * author Olly
  */
 
- /*
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <SFML/Graphics.hpp>
@@ -24,7 +23,7 @@ using ::testing::Return;
 using ::testing::ReturnRef;
 using ::testing::_;
 
-
+/*
 class MockControl {
     public:
     MockControl() :
@@ -67,7 +66,7 @@ class MockControl {
 
 
 
-/*
+
 // Dummy Layer that does nothing
 class DummyLayer : public Layer {
 public:
@@ -223,5 +222,5 @@ TEST_F(AlienControlTest, AlienDeadPlayerMovement) {
     EXPECT_NEAR(posB.y, posC.y, 0.000001);
     EXPECT_GT(posB.x, posC.x);
 }
-*/
+
 // TODO: Mock Killplayer if y= 0
