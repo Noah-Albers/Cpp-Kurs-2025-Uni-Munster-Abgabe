@@ -18,13 +18,13 @@
 // followed by a multiplier that will scale the final image when its loaded.
 // For static Sprites it will be the full size of the picture
 // Format: 								<Path>									<x>		<y>		<scale>
-#define ASSETS_SPRITE_ALIEN_BULLET 		"assets/sprites/Alien_Bullet.png",		18,		38,		1
+#define ASSETS_SPRITE_ALIEN_BULLET 		"assets/sprites/alien_bullet.png",		18,		38,		1
 #define ASSETS_SPRITE_ALIEN				"assets/sprites/alien_default.png",		24,		22,		1.5
-#define ASSETS_SPRITE_ALIEN_SHIELD 		"assets/sprites/Alien_Shield.png",		26,		24,		1.5
-#define ASSETS_SPRITE_METEOR 			"assets/sprites/Asteroid.png",			38,		33,		1
-#define ASSETS_SPRITE_METEOR_EXPLOSION 	"assets/sprites/Asteroid_Explosion.png",90, 	96,		1
+#define ASSETS_SPRITE_ALIEN_SHIELD 		"assets/sprites/alien_shield.png",		26,		24,		1.5
+#define ASSETS_SPRITE_METEOR 			"assets/sprites/meteor.png",			38,		33,		1
+#define ASSETS_SPRITE_METEOR_EXPLOSION 	"assets/sprites/meteor_explosion.png",	90, 	96,		1
 #define ASSETS_SPRITE_BACKGROUND 		"assets/sprites/background.png",		720,	1080,	1
-#define ASSETS_SPRITE_PLAYER_BULLET 	"assets/sprites/bullet_default.png",	5, 		18, 	1
+#define ASSETS_SPRITE_PLAYER_BULLET 	"assets/sprites/player_bullet.png",		5, 		18, 	1
 #define ASSETS_SPRITE_HEALTH 			"assets/sprites/health.png",			7, 		7,		6
 #define ASSETS_SPRITE_PLAYER_DEATH 		"assets/sprites/player_death.png",		64, 	64,		2
 #define ASSETS_SPRITE_PLAYER 			"assets/sprites/player_default.png",	32, 	28,		2
