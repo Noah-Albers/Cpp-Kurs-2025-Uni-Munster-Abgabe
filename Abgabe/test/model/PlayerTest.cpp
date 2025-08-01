@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
-#include "../../src/control/controls/MeteorControl.h"
+#include "../../src/model/game/Player.h"
 #include "../../src/model/Constants.hpp"
-#include "../MockClasses.cpp"
+#include "../CommonMockClasses.cpp"
 #include <gmock/gmock.h>
 
 
@@ -40,7 +40,7 @@ TEST(PlayerTest, update){
 TEST(PlayerTest, setPosition){
     Player player;
     // player must not leave the game field/screen
-    
+
     // Player is in the middle of the field
     player.setPosition(sf::Vector2f(constants::GAME_WIDTH/2,constants::GAME_HEIGHT/2));
 

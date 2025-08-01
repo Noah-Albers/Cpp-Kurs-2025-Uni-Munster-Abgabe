@@ -1,14 +1,68 @@
-#include <gtest/gtest.h>
-#include "../../src/control/controls/MeteorControl.h"
-#include "../../src/model/Constants.hpp"
-#include "../MockClasses.cpp"
+#include "../../src/control/controls/PlayerControl.h"
+#include "../../src/control/controls/BulletControl.h"
+#include "../../src/control/controls/ParticleControl.h"
+#include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/VideoMode.hpp>
 #include <gmock/gmock.h>
+#include <gtest/gtest.h>
+#include <iostream>
+#include "../../src/control/controls/AlienBulletControl.h"
+#include "../../src/control/controls/AlienControl.h"
+#include "../../src/control/controls/BulletControl.h"
+#include "../../src/control/controls/LevelControl.h"
+#include "../../src/control/controls/MeteorControl.h"
+#include "../../src/control/controls/ParticleControl.h"
+#include "../../src/control/controls/PlayerControl.h"
+#include "../../src/control/controls/UIControl.h"
+#include "../../src/model/Constants.hpp"
+#include "../CommonMockClasses.cpp"
 
 
-TEST(MeteorControlTest, spawnMeteor){
-    sf::RenderWindow window(sf::VideoMode({10, 10}), "");
-	  MockLayer layer(window);
-    MeteorControl meteorControl(layer);
+class MeteorControlTest :  public ::testing::Test { 
+    public:
+    MeteorControlTest() :
+        win(sf::VideoMode({10, 10}), "Dummy"),
+        layer(win),
+        layerbg(win),
+        alienBulletControl(layer),
+        alienControl(layer),
+        bulletControl(layer),
+        levelControl(),
+        meteorControl(layer),
+        particleControl(layer),
+        playerControl(layer),
+        uiControl(layer, layerbg)
+        {
+        alienBulletControl.populate(&playerControl);
+	    alienControl.populate(&alienBulletControl, &levelControl, &playerControl);
+	    bulletControl.populate(&alienControl, &meteorControl);
+	    meteorControl.populate(&playerControl, &particleControl);
+	    playerControl.populate(&bulletControl, &particleControl);
+	    uiControl.populate(&playerControl);
+        levelControl.populate(&alienControl, &uiControl);	
+    };
+
+    sf::RenderWindow win;
+    MockLayer layer;
+    MockLayer layerbg;
+    AlienBulletControl  alienBulletControl;
+    AlienControl        alienControl;
+    BulletControl       bulletControl;
+    LevelControl        levelControl;
+    MeteorControl       meteorControl;
+    ParticleControl     particleControl;
+    PlayerControl       playerControl;
+    UIControl           uiControl;
+};
+
+
+
+TEST_F(MeteorControlTest, spawnMeteor){
+    
+
 
     meteorControl.spawnMeteorAt(constants::GAME_WIDTH/2,constants::GAME_HEIGHT/2);
 
@@ -16,10 +70,8 @@ TEST(MeteorControlTest, spawnMeteor){
     ASSERT_NEAR(meteorControl.getMeteors().front().getPosition().y,constants::GAME_HEIGHT/2- meteorControl.getMeteors().front().getSprite().getLocalBounds().size.y,0.0001);
 }
 
-TEST(MeteorControlTest, draw){
-    sf::RenderWindow window(sf::VideoMode({10, 10}), "");
-	  MockLayer layer(window);
-    MeteorControl meteorControl(layer);
+TEST_F(MeteorControlTest, draw){
+    
 
     meteorControl.spawnMeteorAt(constants::GAME_WIDTH/2,constants::GAME_HEIGHT/2);
     meteorControl.spawnMeteorAt(constants::GAME_WIDTH,constants::GAME_HEIGHT);
@@ -32,11 +84,8 @@ TEST(MeteorControlTest, draw){
 
 }
 
-TEST(MeteorControlTest, updateNormally){
-    sf::RenderWindow window(sf::VideoMode({10, 10}), "");
-	  MockLayer layer(window);
-    MeteorControl meteorControl(layer);
-
+TEST_F(MeteorControlTest, updateNormally){
+    
     //in the beginning there are no meteors
     meteorControl.update(0);
 
@@ -50,27 +99,37 @@ TEST(MeteorControlTest, updateNormally){
 
 
 }
-/*
-TEST(MeteorControlTest, collisionWithPlayer){
-  sf::RenderWindow window(sf::VideoMode({10, 10}), "");
-	  MockLayer layer(window);
-    MeteorControl meteorControl(layer);
-    PlayerControl playerControl(layer);
-    meteorControl.populate(&playerControl);
 
-    meteorControl.spawnMeteor(constants::GAME_WIDTH/2,constants::GAME_HEIGHT/2);
-    playerControl.getPlayer().setPosition(constants::GAME_WIDTH/2,constants::GAME_HEIGHT/2);
+
+
+
+
+TEST_F(MeteorControlTest, collisionWithPlayer){
+    
+    meteorControl.spawnMeteorAt(playerControl.getPlayer().getPosition().x,playerControl.getPlayer().getPosition().y);
+    
 
 
     ASSERT_EQ((int)meteorControl.getMeteors().size(),1);
 
 
-    EXPECT_CALL(playerControl,damagePlayer(testing::_))
-        .Times(1);
 
     meteorControl.update(0);
+
+    ASSERT_EQ(playerControl.getPlayer().getLifes(),constants::PLAYER_START_LIFES-1);
 
     ASSERT_TRUE(meteorControl.getMeteors().empty());
     
 
-}*/
+}
+
+TEST_F(MeteorControlTest, outOfScope){
+
+    meteorControl.spawnMeteorAt(constants::GAME_WIDTH/2,constants::GAME_HEIGHT+19);
+
+    ASSERT_EQ((int)meteorControl.getMeteors().size(),1);
+
+    meteorControl.update(constants::METEOR_DELAY/2);
+
+    ASSERT_TRUE(meteorControl.getMeteors().empty());
+}
