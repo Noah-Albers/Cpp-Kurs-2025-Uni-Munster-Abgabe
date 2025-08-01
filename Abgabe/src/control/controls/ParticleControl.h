@@ -36,6 +36,8 @@ public:
 	);
 	
 	virtual void draw() override;
+
+	const std::list<Particle>& getParticles() const;
 	
 protected:
 	// List of particles

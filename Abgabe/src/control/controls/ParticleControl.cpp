@@ -54,3 +54,5 @@ void ParticleControl::spawnPlayerDeathParticle(const int x, const int y) {
 void ParticleControl::spawnMeteorExplosionParticle(const int x, const int y) {
 	particles.emplace_back(ASSETS_SPRITE_METEOR_EXPLOSION, x, y, constants::PARTICLE_METEOR_EXPLOSION_LENGTH);
 }
+
+const std::list<Particle>& ParticleControl::getParticles() const {return particles;}
