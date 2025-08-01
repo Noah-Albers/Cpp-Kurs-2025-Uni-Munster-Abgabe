@@ -46,6 +46,7 @@ void MeteorControl::update(const float time_passed) {
 			++it;
 	}
 
+
 	// count the time that passed since last Meteor spawn
 	timer += time_passed;
 

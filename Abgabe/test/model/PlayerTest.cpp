@@ -16,8 +16,10 @@ TEST(PlayerTest, constructor){
     //invulnerability set correctly
     ASSERT_FALSE(player.isInvulnerable());
 
+    //initial number of lives correct
     ASSERT_EQ(player.getLifes(),constants::PLAYER_START_LIFES);
 
+    //is not dead
     ASSERT_FALSE(player.isDead());
 }
 
@@ -25,36 +27,45 @@ TEST(PlayerTest, update){
     Player player;
     player.update(1.0);
 
+    // when updated and nothing happens, everything should stay the same
     ASSERT_FALSE(player.isInvulnerable());
 
     ASSERT_EQ(player.getLifes(),constants::PLAYER_START_LIFES);
 
     ASSERT_FALSE(player.isDead());
 
+
 }
 
 TEST(PlayerTest, setPosition){
     Player player;
+    // player must not leave the game field/screen
+    
+    // Player is in the middle of the field
     player.setPosition(sf::Vector2f(constants::GAME_WIDTH/2,constants::GAME_HEIGHT/2));
 
     ASSERT_NEAR(player.getPosition().x,(float)constants::GAME_WIDTH/2,0.00001);
     ASSERT_NEAR(player.getPosition().y,(float)constants::GAME_HEIGHT/2,0.00001);
 
+    // player is out of the field to the top left
     player.setPosition(sf::Vector2f(-100,-100));
 
     ASSERT_NEAR(player.getPosition().x,0,0.00001);
     ASSERT_NEAR(player.getPosition().y,0,0.00001);
 
+    // player is out of the field to the bottom right
     player.setPosition(sf::Vector2f(constants::GAME_WIDTH+100,constants::GAME_HEIGHT+100));
 
     ASSERT_NEAR(player.getPosition().x,(float)constants::GAME_WIDTH,0.00001);
     ASSERT_NEAR(player.getPosition().y,(float)constants::GAME_HEIGHT,0.00001);
 
+    // player is out of the field to the bottom
     player.setPosition(sf::Vector2f(constants::GAME_WIDTH/2,constants::GAME_HEIGHT+100));
 
     ASSERT_NEAR(player.getPosition().x,(float)constants::GAME_WIDTH/2,0.00001);
     ASSERT_NEAR(player.getPosition().y,(float)constants::GAME_HEIGHT,0.00001);
 
+    // player is out of the field to the top right
     player.setPosition(sf::Vector2f(constants::GAME_WIDTH+100,-100));
 
     ASSERT_NEAR(player.getPosition().x,(float)constants::GAME_WIDTH,0.00001);

@@ -32,3 +32,45 @@ TEST(MeteorControlTest, draw){
 
 }
 
+TEST(MeteorControlTest, updateNormally){
+    sf::RenderWindow window(sf::VideoMode({10, 10}), "");
+	  MockLayer layer(window);
+    MeteorControl meteorControl(layer);
+
+    //in the beginning there are no meteors
+    meteorControl.update(0);
+
+    ASSERT_TRUE(meteorControl.getMeteors().empty());
+
+    // after the delay time passed, a meteor should be spawned
+    meteorControl.update(constants::METEOR_DELAY+1);
+
+    ASSERT_EQ((int)meteorControl.getMeteors().size(),1);
+
+
+
+}
+/*
+TEST(MeteorControlTest, collisionWithPlayer){
+  sf::RenderWindow window(sf::VideoMode({10, 10}), "");
+	  MockLayer layer(window);
+    MeteorControl meteorControl(layer);
+    PlayerControl playerControl(layer);
+    meteorControl.populate(&playerControl);
+
+    meteorControl.spawnMeteor(constants::GAME_WIDTH/2,constants::GAME_HEIGHT/2);
+    playerControl.getPlayer().setPosition(constants::GAME_WIDTH/2,constants::GAME_HEIGHT/2);
+
+
+    ASSERT_EQ((int)meteorControl.getMeteors().size(),1);
+
+
+    EXPECT_CALL(playerControl,damagePlayer(testing::_))
+        .Times(1);
+
+    meteorControl.update(0);
+
+    ASSERT_TRUE(meteorControl.getMeteors().empty());
+    
+
+}*/
