@@ -64,7 +64,12 @@ class MockControl {
 
 
 
+class PlayerControlMock : public PlayerControl {
+public:
+    PlayerControlMock(Layer &layer) : PlayerControl(layer) {}
 
+    MOCK_METHOD(void, killPlayer, (bool wasStrong), (override));
+};
 
 
 // Dummy Layer that does nothing
@@ -224,3 +229,12 @@ TEST_F(AlienControlTest, AlienDeadPlayerMovement) {
 }
 
 // TODO: Mock Killplayer if y= 0
+TEST_F(AlienControlTest, KillPlayerTest) {
+    PlayerControlMock playerControlMock(layer);
+    playerControlMock.populate(&bulletControl, &particleControl);
+    alienControl.populate(&alienBulletControl, &levelControl, &playerControlMock);
+    EXPECT_CALL(playerControlMock, killPlayer(false));
+    alienControl.spawnAlien(100, constants::GAME_HEIGHT, 2, 1.0);
+    alienControl.update(0.5);
+}
+
