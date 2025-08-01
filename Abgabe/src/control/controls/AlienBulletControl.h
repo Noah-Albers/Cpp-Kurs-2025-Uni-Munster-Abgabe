@@ -30,12 +30,12 @@ public:
 	void update(const float time_passed);
 	
 	// Spawns a new bullet at the given position
-	void spawnBulletAt(const int x, const int y);
+	virtual void spawnBulletAt(const int x, const int y);
 	
 	virtual void draw() override;
 
 	// Getters/Setters
-	const std::list<AlienBullet>& getBullets() const;
+	virtual const std::list<AlienBullet>& getBullets() const;
 
 protected:
 	// Communication with other control's

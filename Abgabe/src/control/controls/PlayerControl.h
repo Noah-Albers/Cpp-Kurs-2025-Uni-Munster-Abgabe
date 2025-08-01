@@ -41,7 +41,7 @@ public:
 	void damagePlayer(int lifes = 1, bool wasStrong = false);
 	
 	// Kills the player
-	void killPlayer(bool wasStrong = false);
+	virtual void killPlayer(bool wasStrong = false);
 	
 	virtual void draw() override;
 	
