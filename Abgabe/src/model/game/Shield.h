@@ -1,5 +1,5 @@
 /*
- * AlienShield.h
+ * Shield.h
  *
  *  Created on: 30.07.2025
  *      Author: Noah
@@ -10,9 +10,14 @@
 
 #include "../properties/PropAnimatedSprite.h"
 #include <SFML/System/Vector2.hpp>
-class AlienShield : public PropAnimatedSprite {
+class Shield : public PropAnimatedSprite {
 public:
-	AlienShield();
+	Shield(
+		const std::filesystem::path& filename,
+		const int size_x, const int size_y,
+		const float scale,
+		const float runtime
+	);
 	
 	void setPosition(const sf::Vector2f pos);
 };

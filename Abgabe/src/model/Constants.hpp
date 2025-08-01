@@ -54,6 +54,9 @@ namespace constants {
 	// How fast the player bullets travel per frame
 	constexpr float PLAYER_BULLET_SPEED = 6; // px
 	
+	// The frequency on how fast the shieldbar fills
+	constexpr float PLAYER_SHIELD_FILL_FREQUENCY = 0.05; // Hz
+	
 	//
 	// Alien settings
 	//
@@ -106,6 +109,9 @@ namespace constants {
 	//
 	// How long each animation plays
 	//
+	
+	constexpr float ANIMATION_PLAYER_SHIELD_LENGTH = 1; // sec
+	
 	constexpr float ANIMATION_ALIEN_BULLET_LENGTH = .4; // sec
 	constexpr float ANIMATION_ALIEN_SHIELD_LENGTH = 1; // sec
 	constexpr float ANIMATION_PLAYER_BULLET_LENGTH = 0.6; // sec

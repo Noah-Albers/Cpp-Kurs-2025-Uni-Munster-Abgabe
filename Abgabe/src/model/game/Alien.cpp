@@ -9,12 +9,12 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Vector2.hpp>
 
-#include "AlienShield.h"
 #include "../Constants.hpp"
 #include "../properties/PropMoveable.h"
 #include "../properties/PropSprite.h"
 
 #include "../../assets/AssetMappings.h"
+#include "Shield.h"
 
 Alien::Alien(const int x, const int y, const int lifes, const float speed) :
 	PropMoveable(speed, VerticalDirection::NONE, HorizontalDirection::RIGHT),
@@ -26,7 +26,7 @@ Alien::Alien(const int x, const int y, const int lifes, const float speed) :
     // Creates a shield if the alien has more than one life
     if(lifes > 1)
     	// Allocates a new shield sprite for the alien
-		shield = new AlienShield();
+		shield = new Shield(ASSETS_SPRITE_ALIEN_SHIELD, constants::ANIMATION_ALIEN_SHIELD_LENGTH);
 	
 	// Positions the alien
 	setPosition(sf::Vector2f(x, y));

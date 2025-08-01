@@ -24,14 +24,19 @@ void PlayerControl::populate(BulletControl* bulletControl, ParticleControl* part
 
 void PlayerControl::update(const float time_passed){
 	this->player.update(time_passed);
+	
+	// Slowly fills the shieldbar
+	if(player.getShieldbar() < 1)
+		player.setShieldbar(player.getShieldbar() + time_passed * constants::PLAYER_SHIELD_FILL_FREQUENCY);
 }
 
 void PlayerControl::draw(){
 	player.draw(layer);
 }
 
-void PlayerControl::killPlayer(bool wasStrong){
+void PlayerControl::killPlayer(bool wasStrong) {
 	player.setInvulnerable(-1);
+	player.setShieldbar(0);
 	damagePlayer(player.getLifes(), wasStrong);
 }
 
@@ -39,7 +44,11 @@ void PlayerControl::damagePlayer(int amount, bool wasStrong){
 	// If dead or invulnerable, he doesn't take damage
 	if(player.isDead() || player.isInvulnerable()) return;
 	
-	player.setLifes(player.getLifes() - amount);
+	if(player.hasShield())
+		player.setShieldbar(0);
+	else
+		player.setLifes(player.getLifes() - amount);
+	
 	player.setInvulnerable(constants::INVULNERABILITY_TIME);
 	
 	// Handles death code

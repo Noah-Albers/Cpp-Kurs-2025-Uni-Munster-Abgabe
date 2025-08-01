@@ -11,8 +11,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include "../properties/PropMoveable.h"
-#include "AlienShield.h"
 #include "../properties/PropSprite.h"
+#include "Shield.h"
 
 class Alien : public PropMoveable, public PropSprite {
 public:
@@ -39,7 +39,7 @@ public:
 		
 protected:
 	// Optional shield for the alien
-	AlienShield* shield;
+	Shield* shield;
 	int lifes;
 	
 	// Unallocates the shield if it exists

@@ -18,7 +18,9 @@
 Player::Player() :
 	PropMoveable(constants::PLAYER_SPEED),
 	PropSprite(ASSETS_SPRITE_PLAYER, true),
+	shield(ASSETS_SPRITE_PLAYER_SHIELD, constants::ANIMATION_PLAYER_SHIELD_LENGTH),
 	lifes(constants::PLAYER_START_LIFES),
+	shieldbar(0),
 	invuln_time_sec(-1)
     {
 		
@@ -34,6 +36,9 @@ void Player::update(const float time_passed){
 	// Updates the invulnerability time of the player
 	if(invuln_time_sec >= 0)
 		invuln_time_sec -= time_passed;
+	
+	if(hasShield())
+		shield.updateSprite(time_passed);
 }
 
 void Player::draw(Layer& layer) const{
@@ -48,6 +53,9 @@ void Player::draw(Layer& layer) const{
 	}
 	
 	layer.add_to_layer(getSprite());
+	
+	if(hasShield())
+		layer.add_to_layer(shield.getSprite());
 }
 
 void Player::setPosition(sf::Vector2f pos){
@@ -58,6 +66,7 @@ void Player::setPosition(sf::Vector2f pos){
 	if(pos.y > constants::GAME_HEIGHT) pos.y = constants::GAME_HEIGHT;
 	
 	sprite.setPosition(pos);
+	shield.setPosition(pos);
 }
 
 // #region Getters/Setters
@@ -72,6 +81,14 @@ void Player::setLifes(int lifes) {
 	this->lifes = lifes;
 };
 void Player::setInvulnerable(float timeSec) { invuln_time_sec = timeSec; };
+
+const float Player::getShieldbar() const { return shieldbar; };
+const bool Player::hasShield() const { return shieldbar >= 1; };
+void Player::setShieldbar(float percentage) {
+	if(percentage < 0) percentage = 0;
+	if(percentage > 1) percentage = 1;
+	shieldbar = percentage;
+}
 
 // #endregion
 
