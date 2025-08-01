@@ -20,10 +20,10 @@ public:
 	virtual ~Player();
 	
 	// Event: When the object shall update
-	void update(const float time_passed);
+	virtual void update(const float time_passed);
 	
 	// Event: Draws the player
-	void draw(Layer& layer) const;
+	virtual void draw(Layer& layer) const;
 	
 	// Position manipulation methods overwritten for PropMoveable
 	virtual void setPosition(const sf::Vector2f position) override;
