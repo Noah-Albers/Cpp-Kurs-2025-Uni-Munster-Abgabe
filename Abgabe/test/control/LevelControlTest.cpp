@@ -21,26 +21,21 @@
 #include "../../src/control/controls/UIControl.h"
 
 // Mock classes
-class UIControlMock : public UIControl {
+class MockUIControl : public UIControl {
 public:
-    UIControlMock(Layer &layer, Layer &layerbg) : UIControl(layer, layerbg) {};
+    MockUIControl(Layer &layer, Layer &layerbg) : UIControl(layer, layerbg) {};
 
 	MOCK_METHOD(void, nextBackground, (), (override));
     MOCK_METHOD(void, displayScore, (int score), (override));
 };
 
-class LevelControlMock : public LevelControl {
+class MockLevelControl : public LevelControl {
 public:
-    LevelControlMock() : LevelControl() {};
+    MockLevelControl() : LevelControl() {};
 	
 	void forwardNextLevel() { nextLevel(); };
 	int forwardGetScore() { return score; };
 };
-
-
-// ----------------------------------------
-// Test Fixture
-// ----------------------------------------
 
 class LevelControlTest :  public ::testing::Test { 
     public:
@@ -72,11 +67,11 @@ class LevelControlTest :  public ::testing::Test {
     AlienBulletControl  alienBulletControl;
     AlienControl        alienControl;
     BulletControl       bulletControl;
-    LevelControlMock	levelControl;
+    MockLevelControl	levelControl;
     MeteorControl       meteorControl;
     ParticleControl     particleControl;
     PlayerControl       playerControl;
-    UIControlMock           uiControl;
+    MockUIControl           uiControl;
 };
 
 // Ensures that old aliens are removed when a new level is started

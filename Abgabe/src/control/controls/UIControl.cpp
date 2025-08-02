@@ -11,7 +11,6 @@
 #include "PlayerControl.h"
 #include "../../assets/AssetMappings.h"
 
-
 UIControl::UIControl(Layer& uiLayer, Layer& backgroundLayer) :
 	uiLayer(uiLayer),
 	backgroundLayer(backgroundLayer),

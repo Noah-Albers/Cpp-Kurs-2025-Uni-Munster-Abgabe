@@ -20,6 +20,8 @@ class MockPropSprite : public PropSprite {
 		}
 };
 
+
+// Ensures the constructor correctly calculates and sets the values
 TEST(PropSprite, constructor_1) {
 	PropSprite prop("assets/test/Test.png", 8, 5, 2.5, true);
 	
@@ -37,6 +39,7 @@ TEST(PropSprite, constructor_1) {
 	ASSERT_EQ(texture, sf::IntRect({0,0}, {8,5}));
 }
 
+// Ensures the constructor correctly calculates and sets the values
 TEST(PropSprite, constructor_2) {
 	PropSprite prop("assets/test/Test.png", 8, 5, 6.1, false);
 	
@@ -54,6 +57,7 @@ TEST(PropSprite, constructor_2) {
 	ASSERT_EQ(texture, sf::IntRect({0,0}, {8,5}));
 }
 
+// Ensures that collision with 0 margin works
 TEST(PropSprite, isCollidingWith_1) {
 	MockPropSprite a("assets/test/Test.png", 8, 5, 1, false);
 	MockPropSprite b("assets/test/Test.png", 8, 5, 1, false);
@@ -61,6 +65,7 @@ TEST(PropSprite, isCollidingWith_1) {
 	ASSERT_TRUE(a.isCollidingWith(b, 0));
 }
 
+// Ensures that collision with 0 margin works
 TEST(PropSprite, isCollidingWith_2) {
 	MockPropSprite a("assets/test/Test.png", 8, 5, 1, false);
 	MockPropSprite b("assets/test/Test.png", 8, 5, 1, false);
@@ -70,7 +75,7 @@ TEST(PropSprite, isCollidingWith_2) {
 	ASSERT_FALSE(a.isCollidingWith(b, 0));
 }
 
-
+// Ensures that collision with 0 margin works
 TEST(PropSprite, isCollidingWith_3) {
 	MockPropSprite a("assets/test/Test.png", 8, 5, 1, false);
 	MockPropSprite b("assets/test/Test.png", 8, 5, 1, false);
@@ -80,6 +85,7 @@ TEST(PropSprite, isCollidingWith_3) {
 	ASSERT_TRUE(a.isCollidingWith(b, 0));
 }
 
+// Ensures that collision with margin works
 TEST(PropSprite, isCollidingWith_4) {
 	MockPropSprite a("assets/test/Test.png", 8, 5, 1, false);
 	MockPropSprite b("assets/test/Test.png", 8, 5, 1, false);
@@ -89,6 +95,7 @@ TEST(PropSprite, isCollidingWith_4) {
 	ASSERT_FALSE(a.isCollidingWith(b, 1));
 }
 
+// Ensures set/getFrame work and are capped at the max frame amount
 TEST(PropSprite, setFrame_getFrame) {
 	PropSprite prop("assets/test/Test.png", 8, 5, 1, false);
 	
@@ -101,20 +108,26 @@ TEST(PropSprite, setFrame_getFrame) {
 	ASSERT_EQ(prop.getFrame(), 0);
 }
 
-
+// Ensures getFrameAmount returns the correct amount of frames
 TEST(PropSprite, getFrameAmount_1) {
+	
+	// Test.png has 3 frames
 	PropSprite prop("assets/test/Test.png", 8, 5, 1, false);
 	
 	ASSERT_EQ(prop.getFrameAmount(), 3);
 }
 
+// Ensures getFrameAmount returns the correct amount of frames
 TEST(PropSprite, getFrameAmount_2) {
+	// Test_1x1.png has 1 frame
 	PropSprite prop("assets/test/Test_1x1.png", 1, 1, 1, false);
 	
 	ASSERT_EQ(prop.getFrameAmount(), 1);
 }
 
+// Ensures getFrameAmount returns the correct amount of frames
 TEST(PropSprite, getFrameAmount_3) {
+	// Test_2x1.png has 2 frames
 	PropSprite prop("assets/test/Test_2x1.png", 1, 1, 1, false);
 	
 	ASSERT_EQ(prop.getFrameAmount(), 2);

@@ -21,11 +21,6 @@
 #include "../../src/control/controls/PlayerControl.h"
 #include "../../src/control/controls/UIControl.h"
 
-
-// ----------------------------------------
-// Test Fixture
-// ----------------------------------------
-
 class AlienBulletControlTest :  public ::testing::Test { 
     public:
     AlienBulletControlTest() :

@@ -5,10 +5,8 @@
  *      Author: Alice
  */
  
-#include "../../src/control/controls/ParticleControl.h"
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <iostream>
 #include "../../src/model/Constants.hpp"
 #include "../CommonMockClasses.cpp"
 

@@ -9,7 +9,7 @@
 
 #include <gtest/gtest.h>
 
-
+// Ensures the constructor sets the position correctly
 TEST(AlienBulletModelTest, constructorTest1) {
     AlienBullet ab = AlienBullet(10, 10);
     auto pos = ab.getPosition();
@@ -17,6 +17,7 @@ TEST(AlienBulletModelTest, constructorTest1) {
     ASSERT_EQ(pos, sf::Vector2f(10,10));
 }
 
+// Ensures the constructor sets the position correctly
 TEST(AlienBulletModelTest, constructorTest2) {
     AlienBullet ab = AlienBullet(constants::GAME_WIDTH, constants::GAME_HEIGHT);
     auto pos = ab.getPosition();
@@ -24,6 +25,7 @@ TEST(AlienBulletModelTest, constructorTest2) {
     ASSERT_EQ(pos, sf::Vector2f(constants::GAME_WIDTH, constants::GAME_HEIGHT));
 }
 
+// Ensures the constructor sets the position correctly
 TEST(AlienBulletModelTest, constructorTest3) {
     AlienBullet ab = AlienBullet(0, 0);
     auto pos = ab.getPosition();
@@ -31,6 +33,7 @@ TEST(AlienBulletModelTest, constructorTest3) {
     ASSERT_EQ(pos, sf::Vector2f(0,0));
 }
 
+// Ensures the update lets the bullets move
 TEST(AlienBulletModelTest, updateTest1) {
     AlienBullet ab = AlienBullet(0, 0);
     auto posA = ab.getPosition();
@@ -42,6 +45,7 @@ TEST(AlienBulletModelTest, updateTest1) {
     ASSERT_NEAR(posA.x, posB.x, 0.00000000001);
 }
 
+// Ensures the update lets the bullets move
 TEST(AlienBulletModelTest, updateTest2) {
     AlienBullet ab = AlienBullet(constants::GAME_WIDTH, constants::GAME_HEIGHT);
     auto posA = ab.getPosition();
@@ -53,6 +57,7 @@ TEST(AlienBulletModelTest, updateTest2) {
     ASSERT_NEAR(posA.x, posB.x, 0.00000000001);
 }
 
+// Ensures the update lets the bullets move
 TEST(AlienBulletModelTest, updateTest3) {
     AlienBullet ab = AlienBullet(0, 0);
     auto posA = ab.getPosition();
@@ -63,4 +68,3 @@ TEST(AlienBulletModelTest, updateTest3) {
     ASSERT_LE(posA.y, posB.y);
     ASSERT_NEAR(posA.x, posB.x, 0.00000000001);
 }
-

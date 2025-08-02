@@ -4,6 +4,10 @@
  *
  *  Created on: 02.08.2025
  *      Author: Noah
+ *
+ * This call holds common tests for the interface elements.
+ * Mostly ensures that the draw calls are actually performed
+ *
  */
 
 #include <SFML/Graphics/RenderWindow.hpp>

@@ -11,37 +11,36 @@
 #include "../CommonMockClasses.cpp"
 #include <gmock/gmock.h>
 
+// Ensures the constructor sets the correct parameters like
+// Position, invulnerability and lives
 TEST(PlayerTest, constructor){
     Player player;
 
-    //position set correctly
+    // Position set correctly
     ASSERT_NEAR(player.getPosition().x,constants::GAME_WIDTH/2,0.00001);
     ASSERT_NEAR(player.getPosition().y,constants::GAME_HEIGHT - player.getSprite().getTextureRect().size.y,0.00001);
 
-    //invulnerability set correctly
+    // Invulnerability set correctly
     ASSERT_FALSE(player.isInvulnerable());
 
-    //initial number of lives correct
+    // Initial number of lives correct
     ASSERT_EQ(player.getLifes(),constants::PLAYER_START_LIFES);
 
-    //is not dead
+    // Is not dead
     ASSERT_FALSE(player.isDead());
 }
 
-TEST(PlayerTest, update){
+// Ensures that updates doesn't change the "health" state
+TEST(PlayerTest, update) {
     Player player;
     player.update(1.0);
 
-    // when updated and nothing happens, everything should stay the same
     ASSERT_FALSE(player.isInvulnerable());
-
     ASSERT_EQ(player.getLifes(),constants::PLAYER_START_LIFES);
-
     ASSERT_FALSE(player.isDead());
-
-
 }
 
+// Ensures setposition works
 TEST(PlayerTest, setPosition){
     Player player;
     // player must not leave the game field/screen
@@ -75,11 +74,9 @@ TEST(PlayerTest, setPosition){
 
     ASSERT_NEAR(player.getPosition().x,(float)constants::GAME_WIDTH,0.00001);
     ASSERT_NEAR(player.getPosition().y,0,0.00001);
-
-
 }
 
-
+// Ensures invulnerability works
 TEST(PlayerTest, invulnarability){
     Player player;
     //player is invulberable for 3 sec
@@ -102,7 +99,7 @@ TEST(PlayerTest, invulnarability){
     ASSERT_FALSE(player.isInvulnerable());
 
 }
-
+// Ensures setLifes and isDead work
 TEST(PlayerTest, lifes){
     Player player;
 
@@ -121,18 +118,16 @@ TEST(PlayerTest, lifes){
     player.setLifes(constants::PLAYER_START_LIFES+3);
 
     ASSERT_EQ(player.getLifes(),constants::PLAYER_START_LIFES);
-
-
 }
 
-
+// Ensures Player-Draw calls work
 TEST(PlayerTest, draw){
 
     Player player;
     sf::RenderWindow window(sf::VideoMode({10, 10}), "");
 	MockLayer layer(window);
 
-    //player is being drawn when alive and vulnerable
+    // Ensure the player is being drawn when alive and vulnerable
     EXPECT_CALL(layer, add_to_layer(testing::_))
         .Times(testing::AtLeast(1));
 
@@ -140,7 +135,7 @@ TEST(PlayerTest, draw){
 
      ::testing::Mock::VerifyAndClearExpectations(&layer);
 
-    // player is not drawn when dead
+    // Ensures the player is not drawn when dead
 
     player.setLifes(0);
 
@@ -148,18 +143,15 @@ TEST(PlayerTest, draw){
         .Times(0);
 
     player.draw(layer);
-    
-
-    
-
 }
 
+// Ensures blinking works
 TEST(PlayerTest, blinking){
     Player player;
     sf::RenderWindow window(sf::VideoMode({10, 10}), "");
 	MockLayer layer(window);
 
-    //when not drawn
+    // Ensure the player is not drawn when at the first frame of ticking
     float time = (float) constants::PLAYER_BLINK_LENGTH*2/100;
     player.setInvulnerable(time);
 
@@ -168,7 +160,7 @@ TEST(PlayerTest, blinking){
 
     player.draw(layer);
 
-    // when drawn
+    // Ensures the player is drawn when at the second frame of ticking
     float time2 = ((float) (constants::PLAYER_BLINK_LENGTH*1.5))/100.0f ;
     player.setInvulnerable(time2);
 
@@ -176,14 +168,16 @@ TEST(PlayerTest, blinking){
         .Times(testing::AtLeast(1));
 
     player.draw(layer);
-
 }
 
+// Ensures the shieldbar state works
 TEST(PlayerTest, shieldbar){
 	Player p;
 	
+	// Should startout with his shild full
 	ASSERT_TRUE(p.hasShield());
 	
+	// Ensures the clamping of the shieldbar works
 	p.setShieldbar(0.99);
 	ASSERT_NEAR(p.getShieldbar(), 0.99, 0.001);
 	ASSERT_FALSE(p.hasShield());

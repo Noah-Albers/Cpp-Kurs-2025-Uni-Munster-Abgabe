@@ -21,16 +21,12 @@
 #include "../../src/control/controls/UIControl.h"
 
 
-class AlienControlMock : public AlienControl {
+class MockAlienControl : public AlienControl {
 public:
-    AlienControlMock(Layer &layer) : AlienControl(layer) {  };
+    MockAlienControl(Layer &layer) : AlienControl(layer) {  };
 
     bool forwardAreAliensInGamefield() { return areAliensInGamefield(); };
 };
-
-// ----------------------------------------
-// Test Fixture
-// ----------------------------------------
 
 class AlienControlTest :  public ::testing::Test { 
     public:
@@ -60,7 +56,7 @@ class AlienControlTest :  public ::testing::Test {
     MockLayer layer;
     MockLayer layerbg;
     AlienBulletControl  alienBulletControl;
-    AlienControlMock    alienControl;
+    MockAlienControl    alienControl;
     BulletControl       bulletControl;
     LevelControl        levelControl;
     MeteorControl       meteorControl;
@@ -68,12 +64,6 @@ class AlienControlTest :  public ::testing::Test {
     PlayerControl       playerControl;
     UIControl           uiControl;
 };
-
-
-// ----------------------------------------
-// Tests
-// ----------------------------------------
-
 
 // Ensures that for each alien the sprite is drawn and if it has a shield, that is also drawn
 TEST_F(AlienControlTest, draw) {

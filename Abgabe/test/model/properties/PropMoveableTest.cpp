@@ -10,6 +10,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <gtest/gtest.h>
 
+// Mock-Class to hold an instance of the position
 class MockPropMoveable : public PropMoveable {
 public:
 	sf::Vector2f pos;
@@ -21,6 +22,7 @@ public:
 	virtual const sf::Vector2f getPosition() const override { return pos; };
 };
 
+// Ensures the constructor sets the correct values
 TEST(PropMoveable, constructor_1) {
 	MockPropMoveable prop(4.5, VerticalDirection::NONE, HorizontalDirection::NONE);
 	
@@ -29,6 +31,7 @@ TEST(PropMoveable, constructor_1) {
 	ASSERT_EQ(prop.getVerticalDirection(), VerticalDirection::NONE);
 }
 
+// Ensures the constructor sets the correct values
 TEST(PropMoveable, constructor_2) {
 	MockPropMoveable prop(-1.3, VerticalDirection::UP, HorizontalDirection::LEFT);
 	
@@ -37,6 +40,7 @@ TEST(PropMoveable, constructor_2) {
 	ASSERT_EQ(prop.getVerticalDirection(), VerticalDirection::UP);
 }
 
+// Ensures setSpeed works and is always positive
 TEST(PropMoveable, setSpeed) {
 	MockPropMoveable prop(0, VerticalDirection::NONE, HorizontalDirection::NONE);
 	
@@ -50,6 +54,8 @@ TEST(PropMoveable, setSpeed) {
 	ASSERT_NEAR(prop.getSpeed(), 0, 0.0001);
 }
 
+
+// Ensures that moveBy actually moves the object relative
 TEST(PropMoveable, moveBy) {
 	MockPropMoveable prop(10, VerticalDirection::NONE, HorizontalDirection::NONE);
 	prop.setPosition(sf::Vector2f(0,0));
@@ -63,6 +69,7 @@ TEST(PropMoveable, moveBy) {
 	ASSERT_EQ(prop.getPosition(), sf::Vector2f(10+20-100,15-5+0));
 }
 
+// Ensures that updatePosition correctly changes the position
 TEST(PropMoveable, updatePosition_1) {
 	MockPropMoveable prop(10, VerticalDirection::NONE, HorizontalDirection::NONE);
 	prop.updatePosition(1);
@@ -71,6 +78,7 @@ TEST(PropMoveable, updatePosition_1) {
 	ASSERT_NEAR(prop.getPosition().y, 0,0.001);
 }
 
+// Ensures that updatePosition correctly changes the position
 TEST(PropMoveable, updatePosition_2) {
 	MockPropMoveable prop(100, VerticalDirection::DOWN, HorizontalDirection::NONE);
 	prop.updatePosition(1);
@@ -79,6 +87,7 @@ TEST(PropMoveable, updatePosition_2) {
 	ASSERT_GT(prop.getPosition().y, 1);
 }
 
+// Ensures that updatePosition correctly changes the position
 TEST(PropMoveable, updatePosition_3) {
 	MockPropMoveable prop(100, VerticalDirection::UP, HorizontalDirection::NONE);
 	prop.updatePosition(1);
@@ -87,6 +96,7 @@ TEST(PropMoveable, updatePosition_3) {
 	ASSERT_LT(prop.getPosition().y, 1);
 }
 
+// Ensures that updatePosition correctly changes the position
 TEST(PropMoveable, updatePosition_4) {
 	MockPropMoveable prop(100, VerticalDirection::NONE, HorizontalDirection::LEFT);
 	prop.updatePosition(1);
@@ -94,6 +104,7 @@ TEST(PropMoveable, updatePosition_4) {
 	ASSERT_NEAR(prop.getPosition().y, 0, 0.001);
 	ASSERT_LT(prop.getPosition().x, 1);
 }
+// Ensures that updatePosition correctly changes the position
 TEST(PropMoveable, updatePosition_5) {
 	MockPropMoveable prop(100, VerticalDirection::NONE, HorizontalDirection::RIGHT);
 	prop.updatePosition(1);
@@ -101,7 +112,3 @@ TEST(PropMoveable, updatePosition_5) {
 	ASSERT_NEAR(prop.getPosition().y, 0, 0.001);
 	ASSERT_GT(prop.getPosition().x, 1);
 }
-
-
-
-

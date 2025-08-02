@@ -1,6 +1,12 @@
-#include "../../src/control/controls/PlayerControl.h"
-#include "../../src/control/controls/BulletControl.h"
-#include "../../src/control/controls/ParticleControl.h"
+/**
+ *
+ * MeteorControlTest.cpp
+ *
+ *  Created on 01.08.2025
+ * 		Author: Alice
+ *
+ */
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/System/Vector2.hpp>
@@ -8,7 +14,6 @@
 #include <SFML/Window/VideoMode.hpp>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <iostream>
 #include "../../src/control/controls/AlienBulletControl.h"
 #include "../../src/control/controls/AlienControl.h"
 #include "../../src/control/controls/BulletControl.h"

@@ -11,6 +11,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <gtest/gtest.h>
 
+// Below trys to work three different configuration of particles to ensure that they all work
+
 TEST(Particle, constructor_1) {
 	Particle part("assets/test/Test_1x1.png", 1, 1, 1, 9, 18, 10);
 	

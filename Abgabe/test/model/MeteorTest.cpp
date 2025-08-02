@@ -10,6 +10,7 @@
 #include "../../src/model/game/Meteor.h"
 #include "../../src/model/Constants.hpp"
 
+// Ensures the meteor constructor sets the correct position
 TEST(MeteorTest, constructor) {
 	Meteor meteor(10, 20);
 	
