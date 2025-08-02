@@ -36,17 +36,20 @@ Spiel-Ablauf:
         Sobald man von etwas getroffen wird, blinkt das Raumschiff für kurze Zeit. In dieser Zeit ist man unverwundbar, kann also keine Leben verlieren.
 
     Leben, Score und Schild: 
-
+![alt text](example_pics_for_instructions/initialScreen.png)
         Zu Beginn hat man 5 Leben und der Score ist auf 0 gesetzt(angezeigt durch "Score" und die Herzen oben links).
 
-        Zudem befindet sich zwischen Score und Leben eine sich blau auffüllende Leiste. Diese zeigt den Ladeprozess eines Schildes an, welches das Raumschiff erhält, sobald die Leiste voll geladen ist. 
-        Dann ist ein blaues Schild über dem Raumschiff zu erkennen.
+        Zudem befindet sich zwischen Score und Leben eine blaue Leiste. Diese zeigt den Ladeprozess eines Schildes an, welches das Raumschiff erhält, sobald die Leiste voll geladen ist. 
+        Das Spiel startet mit einer vollen Leiste, also hat das Raumschiff bereits zu Beginn ein Schild (wie im Bild als blau schimmernde Schicht zu erkennen).
+
         Dieses Schild schützt einmalig davor, ein Leben zu verlieren. 
-        Sobald man mit etwas getroffen wird, ist das Schild zerstört und die Leiste wird zurückgesetzt und lädt sich von Neuem auf.
+        Sobald man mit etwas getroffen wird, ist das Schild zerstört und die Leiste wird zurückgesetzt und lädt sich von Neuem auf (wie im zweiten Bild zu sehen).
+
+![alt text](example_pics_for_instructions/noShield.png)        
 
     Meteoren:
 
-        Die Meteorenfliegen fliegen in bestimmten Zeitabständen von oben runter.
+        Die Meteorenfliegen fliegen in bestimmten Zeitabständen von oben runter (als Steine im Bild zu erkennen).
         Diesen muss das Raumschiff ausweichen, da es sonst ein Leben verliert.
         Meteoren können nicht zerstört werden und die Schüsse des Raumschiffs werden von ihnen absorbiert.
 
@@ -56,18 +59,20 @@ Spiel-Ablauf:
         Danach bewegen sie sich in dieser Einheit von einer Seite zur anderen, wobei sie sich immer ein Stück runter bewegen, sobald sie den Rand des Spielfeldes erreichen.
 
         Aliens können ebenfalls schießen. Diesen Schüssen muss man, wie auch den Meteoren, ausweichen.
-        Einzelne Aliens besitzen auch ein Schild, was man daran erkennt, dass sie rot schimmern.
+        Einzelne Aliens besitzen auch ein Schild, was man daran erkennt, dass sie rot schimmern (siehe Bilder).
         Diese Aliens muss man zweimal treffen, um sie auszulöschen: das erste mal, um das Schild zu zerstören, das zweite mal, um das Alien auszulöschen, wie ein normales Alien auch.
 
         Jedes ausgelöschte Alien verschwindet und erhöht den Score um eins. 
         Sobald eine Einheit von Aliens besiegt worden ist, ist ein Level geschafft und man wechselt automatisch zum nächsten. 
-        Dies erkennt man daran, dass der Hintergrund seine Farbe wechselt. 
-        Mit höherem Level wächst auch die Anzahl an Aliens in einer Einheit.
+        Dies erkennt man daran, dass der Hintergrund seine Farbe wechselt (siehe das nächste Bild). 
+        Mit höherem Level steigt auch die Anzahl an Aliens in der Einheit.
+
+![alt text](example_pics_for_instructions/livesLost.png)
 
     Spiel-Ende:
 
         Das Spiel ist zu Ende (Game Over), wenn man keine Leben mehr hat oder die Aliens den unteren Rand des Spielfeldes erreicht haben.
-        Wenn das passiert, steht auf dem Bildschirm "Game Over" und um das Spiel neu zu starten, muss man 'R' drücken.
+        Wenn das passiert, steht auf dem Bildschirm "Game Over" und um das Spiel neu zu starten, muss man 'R' drücken (siehe das nachfolgende Bild).
     
-
+![alt text](example_pics_for_instructions/gameOver.png)
     
