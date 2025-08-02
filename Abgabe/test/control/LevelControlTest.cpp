@@ -101,14 +101,14 @@ TEST_F(LevelControlTest, Update) {
 }
 
 TEST_F(LevelControlTest, NextLevelSpawnAlien) {
-    ASSERT_EQ(alienControl.getAliens().size(), 0);
+    ASSERT_EQ(alienControl.getAliens().size(), (const long unsigned int)0);
 
     levelControl.update();
-    ASSERT_EQ(alienControl.getAliens().size(), constants::ALIEN_START_LIENS_PER_LINE * constants::ALIEN_START_LINE_COUNT);
+    ASSERT_EQ(alienControl.getAliens().size(), (const long unsigned int)(constants::ALIEN_START_LIENS_PER_LINE * constants::ALIEN_START_LINE_COUNT));
     alienControl.getAliens().clear();
 
     levelControl.update();
-    ASSERT_EQ(alienControl.getAliens().size(), (constants::ALIEN_LINE_INCREASE_PER_LEVEL + constants::ALIEN_START_LIENS_PER_LINE) * (constants::ALIEN_LINE_AMOUNT_INCREASE_PER_LEVEL + constants::ALIEN_START_LINE_COUNT));
+    ASSERT_EQ(alienControl.getAliens().size(), (const long unsigned int)((constants::ALIEN_LINE_INCREASE_PER_LEVEL + constants::ALIEN_START_LIENS_PER_LINE) * (constants::ALIEN_LINE_AMOUNT_INCREASE_PER_LEVEL + constants::ALIEN_START_LINE_COUNT)));
     alienControl.getAliens().clear();
 
     for (int i = 0; i < 99; i++)
@@ -117,5 +117,5 @@ TEST_F(LevelControlTest, NextLevelSpawnAlien) {
         alienControl.getAliens().clear();
     }
     levelControl.update();
-    ASSERT_EQ(alienControl.getAliens().size(), constants::MAX_ALIEN_LINE_COUNT * constants::MAX_ALIENS_PER_LINE);
+    ASSERT_EQ(alienControl.getAliens().size(), (const long unsigned int)(constants::MAX_ALIEN_LINE_COUNT * constants::MAX_ALIENS_PER_LINE));
 }
