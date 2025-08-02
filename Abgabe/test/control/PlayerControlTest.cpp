@@ -137,9 +137,7 @@ TEST_F(PlayerControlTest, player_damage_high) {
 	ASSERT_EQ(player.getVerticalDirection(), VerticalDirection::NONE);
 	ASSERT_EQ(player.getHorizontalDirection(), HorizontalDirection::NONE);
 	
-	// Ensures the player can't shot while dead
-	const long unsigned int zero = 0;
-	ASSERT_EQ(bulletControl.getBullets().size(), zero);
+	ASSERT_EQ(bulletControl.getBullets().size(), (size_t)0);
 }
 
 TEST_F(PlayerControlTest, shieldbar) {

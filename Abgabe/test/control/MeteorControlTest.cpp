@@ -94,7 +94,7 @@ TEST_F(MeteorControlTest, updateNormally){
     // after the delay time passed, a meteor should be spawned
     meteorControl.update(constants::METEOR_DELAY+1);
 
-    ASSERT_EQ((int)meteorControl.getMeteors().size(),1);
+    ASSERT_EQ(meteorControl.getMeteors().size(),(size_t)1);
 
 
 
@@ -110,7 +110,7 @@ TEST_F(MeteorControlTest, collisionWithPlayer){
     
 
 
-    ASSERT_EQ((int)meteorControl.getMeteors().size(),1);
+    ASSERT_EQ(meteorControl.getMeteors().size(),(size_t)1);
 
 
 	ASSERT_TRUE(playerControl.getPlayer().hasShield());
@@ -126,7 +126,7 @@ TEST_F(MeteorControlTest, outOfScope){
 
     meteorControl.spawnMeteorAt(constants::GAME_WIDTH/2,constants::GAME_HEIGHT+19);
 
-    ASSERT_EQ((int)meteorControl.getMeteors().size(),1);
+    ASSERT_EQ(meteorControl.getMeteors().size(),(size_t)1);
 
     meteorControl.update(constants::METEOR_DELAY/2);
 

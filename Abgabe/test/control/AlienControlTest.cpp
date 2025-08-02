@@ -27,20 +27,6 @@ public:
     MOCK_METHOD(void, killPlayer, (bool wasStrong), (override));
 };
 
-
-// Dummy Layer that does nothing
-class DummyLayer : public Layer {
-public:
-    DummyLayer() : Layer(*createDummyWindow()) {}
-
-private:
-    static sf::RenderWindow* createDummyWindow() {
-        // A shared dummy window so Layer’s constructor can be called safely
-        static sf::RenderWindow dummy(sf::VideoMode({10, 10}), "Dummy");
-        return &dummy;
-    }
-};
-
 class AlienControlMock : public AlienControl {
 public:
     AlienControlMock(Layer &layer) : AlienControl(layer) {  };
@@ -97,10 +83,10 @@ class AlienControlTest :  public ::testing::Test {
 // Tests
 // ----------------------------------------
 TEST_F(AlienControlTest, SpawnAlien) {
-    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(0));
+    ASSERT_EQ(alienControl.getAliens().size(), (size_t)0);
     
     alienControl.spawnAlien(10, 10, 2, 1.0);
-    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(1));
+    ASSERT_EQ(alienControl.getAliens().size(), (size_t)1);
 
     alienControl.spawnAlien(12, 12, 1, 1.0);
 }
@@ -120,15 +106,15 @@ TEST_F(AlienControlTest, AreAliensInGameField) {
 // Test that dead aliens are removed during update
 TEST_F(AlienControlTest, RemovesDeadAliens) {
     alienControl.spawnAlien(100, 0, 0, 1.0);
-    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(1));
+    ASSERT_EQ(alienControl.getAliens().size(), (size_t)1);
     alienControl.update(0.1); // simulate frame update
-    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(0));
+    ASSERT_EQ(alienControl.getAliens().size(), (size_t)0);
 
     alienControl.spawnAlien(100, 100, 1, 1.0);
     alienControl.spawnAlien(200,200, 0, 1.0);
-    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(2));
+    ASSERT_EQ(alienControl.getAliens().size(), (size_t)2);
     alienControl.update(0.1);
-    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(1));
+    ASSERT_EQ(alienControl.getAliens().size(), (size_t)1);
 }
 
 // Test Alien spawn animation
