@@ -14,15 +14,15 @@ TEST(ParticleControlTest, spawnParticlesAndDraw){
 
     particleControl.spawnExplosionParticle(10,10);
 
-    ASSERT_EQ(particleControl.getParticles().size(),1);
+    ASSERT_EQ(particleControl.getParticles().size(),(const long unsigned int)1);
 
     particleControl.spawnPlayerDeathParticle(10,10);
 
-    ASSERT_EQ(particleControl.getParticles().size(),2);
+    ASSERT_EQ(particleControl.getParticles().size(),(const long unsigned int)2);
 
     particleControl.spawnMeteorExplosionParticle(10,10);
 
-    ASSERT_EQ(particleControl.getParticles().size(),3);
+    ASSERT_EQ(particleControl.getParticles().size(),(const long unsigned int)3);
 
     EXPECT_CALL(layer, add_to_layer(testing::_))
         .Times(3);
@@ -41,7 +41,7 @@ TEST(ParticleControlTest, update){
 
     particleControl.update(constants::PARTICLE_EXPLOSION_LENGTH/2);
 
-    ASSERT_EQ(particleControl.getParticles().size(),1);
+    ASSERT_EQ(particleControl.getParticles().size(),(const long unsigned int)1);
 
     particleControl.update(constants::PARTICLE_EXPLOSION_LENGTH+1);
 
