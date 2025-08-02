@@ -10,7 +10,6 @@
 #include "controls/PlayerControl.h"
 #include "controls/AlienControl.h"
 
-// Initialize the singleton
 Game::Game() :
 	window(sf::VideoMode({constants::GAME_WIDTH, constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}), "Space Invaders"),
     gameView(sf::FloatRect(sf::Vector2f({0, -constants::SCOREBOARD_HEIGHT}), sf::Vector2f({constants::GAME_WIDTH,constants::GAME_HEIGHT + constants::SCOREBOARD_HEIGHT}))),
