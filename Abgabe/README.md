@@ -1,17 +1,18 @@
-Bauen und ausführen im JupyterHub: 
+# Bauen und ausführen im JupyterHub: 
 
-1. Ins Terminal navigieren, z. B. in der Konsole mit `cd cpp-sommersemester-2025/Abgabe_Vorlage`
-2. Nur beim ersten Mal: Die Befehle `make getSFML` und `make getGTest` ausführen, um Ressourcen herunterzuladen.
-3. Das Projekt und die Tests bauen: `make game` bzw. `make tests`
-4. Den Pfad im Terminal anpassen: `export LD_LIBRARY_PATH=./build/SFML/lib:$LD_LIBRARY_PATH`
+1. Im Terminal diesen Ordner öffnen.
+2. Beim ersten mal die Befehle `make getSFML` und `make getGTest` ausführen, um benötigte Bibliotheken herunterzuladen.
+3. Das Projekt und die Tests werden mit `make game` und `make tests` gebaut.
+4. Um beides erfolgreich ausführen zu können, den SFML-Library-Path mit `export LD_LIBRARY_PATH=./build/SFML/lib:$LD_LIBRARY_PATH` hinterlegen.
 5. Das Spiel oder die Test ausführen (in der Konsolen-Anwendung, nicht VSCode!): `./game` oder `./tests`
 
 
-Ziel des Spiels: 
+# Erklärung
+## Ziel des Spiels: 
 
     Ziel des Spiels ist es, alle Aliens abzuschießen um sie davon abzuhalten, an den unteren Rand des Feldes anzukommen. Dabei werden Punkte gesammelt und Level abgeschlossen.
 
-Steuerung:
+## Steuerung:
 
     Anders als beim klassischen Space Invaders kann sich das Raumschiff in dieser Version in alle Richtungen bewegen, anstatt nur nach links und rechts.
 
@@ -25,7 +26,7 @@ Steuerung:
     Geschossen wird mit der Leerzeichen-Taste
 
 
-Spiel-Ablauf:
+## Spiel-Ablauf:
 
     Allgemein:
 
@@ -62,7 +63,7 @@ Spiel-Ablauf:
         Einzelne Aliens besitzen auch ein Schild, was man daran erkennt, dass sie rot schimmern (siehe Bilder).
         Diese Aliens muss man zweimal treffen, um sie auszulöschen: das erste mal, um das Schild zu zerstören, das zweite mal, um das Alien auszulöschen, wie ein normales Alien auch.
 
-        Jedes ausgelöschte Alien verschwindet und erhöht den Score um eins. 
+        Jedes ausgelöschte Alien erhöht den Score. 
         Sobald eine Einheit von Aliens besiegt worden ist, ist ein Level geschafft und man wechselt automatisch zum nächsten. 
         Dies erkennt man daran, dass der Hintergrund seine Farbe wechselt (siehe das nächste Bild). 
         Mit höherem Level steigt auch die Anzahl an Aliens in der Einheit.

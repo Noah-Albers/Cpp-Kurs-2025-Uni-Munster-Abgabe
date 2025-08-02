@@ -56,6 +56,7 @@ tests: $(TEST_OBJECTS) $(BUILDDIR)/libgtest.a $(BUILDDIR)/libgmock.a
 -include $(DEPENDENCIES)
 
 getGTest:
+	mkdir -p build
 	@echo "Downloading GoogleTest"
 	curl -L https://github.com/google/googletest/releases/download/v1.17.0/googletest-1.17.0.tar.gz --output googletest-1.17.0.tar.gz
 	@echo "Unpacking the lib"
@@ -68,6 +69,7 @@ getGTest:
 
 # On a Mac: "brew install sfml" will install the library.
 getSFML:
+	mkdir -p build
 	@echo "Downloading SFML"
 	curl https://www.sfml-dev.org/files/SFML-3.0.0-linux-gcc-64-bit.tar.gz --output SFML.tar.gz
 	@echo "Unpacking the lib"
