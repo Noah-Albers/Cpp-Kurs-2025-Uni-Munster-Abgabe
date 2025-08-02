@@ -1,5 +1,5 @@
 /**
- * AlienBulletModelTest.cpp
+ * AlienBulletTest.cpp
  * created on 31.07
  * author olly
  */

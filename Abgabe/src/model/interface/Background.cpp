@@ -77,10 +77,9 @@ void Background::updateTransition(const float time_passed){
 	if(transitionPercentage > 1){
 		transitionPercentage = -1;
 		setFrame(getFrame()+1);
-		return;		
+		return;
 	}
 }
-
 
 void Background::transitionToNextBackground() {
 	// If the background is still transitioning, this will finish the transition.

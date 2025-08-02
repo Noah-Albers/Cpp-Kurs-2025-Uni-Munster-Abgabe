@@ -83,7 +83,8 @@ TEST_F(LevelControlTest, UIControlDisplayScoreCall) {
     uiControlMock.populate(&playerControl);
     levelControl.populate(&alienControl, &uiControlMock);
 
-    EXPECT_CALL(uiControlMock, displayScore(1));
+    EXPECT_CALL(uiControlMock, displayScore(1))
+    	.Times(1);
     levelControl.increaseScore();
 }
 
@@ -93,7 +94,8 @@ TEST_F(LevelControlTest, Update) {
     alienControl.populate(&alienBulletControl, &levelControlMock, &playerControl);
 
     //Expects only on call, if 0 or 2 test fails
-    EXPECT_CALL(levelControlMock, nextLevel()).Times(1);
+    EXPECT_CALL(levelControlMock, nextLevel())
+    	.Times(1);
     levelControlMock.update();
 
     alienControl.spawnAlien(10, 10, 2, 1.0);

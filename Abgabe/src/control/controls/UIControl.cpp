@@ -20,7 +20,6 @@ UIControl::UIControl(Layer& uiLayer, Layer& backgroundLayer) :
 	shieldbar(10, 55),
 	deathmessage(font)
 	{
-		
 	// Loads the font
 	if (!font.openFromFile(ASSETS_FONT_DEFAULT))
         throw std::runtime_error("Failed to load Font");
