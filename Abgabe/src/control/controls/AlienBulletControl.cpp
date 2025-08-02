@@ -20,6 +20,11 @@ void AlienBulletControl::populate(PlayerControl* playerControl) {
 	this->playerControl = playerControl;
 }
 
+// TODO:
+// 1. Bullets are updated
+// 2. Can collide with player
+// 3. Collide with player damages player and removes bullet
+
 void AlienBulletControl::update(const float time_passed){
 	// Updates bullets, removes any out of bounds and handles player collision
 	for(auto it = alien_bullets.begin(); it != alien_bullets.end();){
@@ -43,10 +48,14 @@ void AlienBulletControl::update(const float time_passed){
 	}	
 }
 
+// Bullets are drawn
+
 void AlienBulletControl::draw(){
 	for(auto it = alien_bullets.begin(); it != alien_bullets.end(); it++)
 		layer.add_to_layer(it->getSprite());
 }
+
+// Bullets can spawn
 
 void AlienBulletControl::spawnBulletAt(const int x, const int y) {
 	alien_bullets.emplace_back(x,y);
