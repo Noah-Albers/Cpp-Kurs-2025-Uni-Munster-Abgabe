@@ -17,6 +17,7 @@ class LevelControl
 {
 public:
     LevelControl();
+	virtual ~LevelControl();
 
 	// Part of setup
 	// Its imperative to call this before anything else in this class
@@ -43,7 +44,7 @@ private:
 	int score;
 
 	// Advances to the next level
-    void nextLevel();
+    virtual void nextLevel();
     
     // Calculates various game settings from the current level
     const int calculateLineAmount() const;

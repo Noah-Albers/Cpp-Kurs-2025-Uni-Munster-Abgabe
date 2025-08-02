@@ -19,60 +19,19 @@
 #include "../../src/control/controls/PlayerControl.h"
 #include "../../src/control/controls/UIControl.h"
 
-using ::testing::Return;
-using ::testing::ReturnRef;
-using ::testing::_;
 
-/*
-class MockControl {
-    public:
-    MockControl() :
-        win(sf::VideoMode({10, 10}), "Dummy"),
-        layer(win),
-        layerbg(win),
-        alienBulletControl(layer),
-        alienControl(layer),
-        bulletControl(layer),
-        levelControl(),
-        meteorControl(layer),
-        particleControl(layer),
-        playerControl(layer),
-        uiControl(layer, layerbg)
-        {
-        alienBulletControl.populate(&playerControl);
-	    alienControl.populate(&alienBulletControl, &levelControl, &playerControl);
-	    bulletControl.populate(&alienControl, &meteorControl);
-	    meteorControl.populate(&playerControl, &particleControl);
-	    playerControl.populate(&bulletControl, &particleControl);
-	    uiControl.populate(&playerControl);
-        levelControl.populate(&alienControl, &uiControl);	
-    };
+class PlayerControlMock : public PlayerControl {
+public:
+    PlayerControlMock(Layer &layer) : PlayerControl(layer) {}
 
-    sf::RenderWindow win;
-    Layer layer;
-    Layer layerbg;
-    AlienBulletControl  alienBulletControl;
-    AlienControl        alienControl;
-    BulletControl       bulletControl;
-    LevelControl        levelControl;
-    MeteorControl       meteorControl;
-    ParticleControl     particleControl;
-    PlayerControl       playerControl;
-    UIControl           uiControl;
+    MOCK_METHOD(void, killPlayer, (bool wasStrong), (override));
 };
-*/
-
-
-
-
 
 
 // Dummy Layer that does nothing
 class DummyLayer : public Layer {
 public:
     DummyLayer() : Layer(*createDummyWindow()) {}
-
-    //MOCK_METHOD(void, add_to_layer, (const sf::Drawable&), (override));
 
 private:
     static sf::RenderWindow* createDummyWindow() {
@@ -123,7 +82,7 @@ class AlienControlTest :  public ::testing::Test {
     Layer layer;
     Layer layerbg;
     AlienBulletControl  alienBulletControl;
-    AlienControlMock        alienControl;
+    AlienControlMock    alienControl;
     BulletControl       bulletControl;
     LevelControl        levelControl;
     MeteorControl       meteorControl;
@@ -138,10 +97,10 @@ class AlienControlTest :  public ::testing::Test {
 // Tests
 // ----------------------------------------
 TEST_F(AlienControlTest, SpawnAlien) {
-    ASSERT_EQ(alienControl.getAliens().size(), 0);
+    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(0));
     
     alienControl.spawnAlien(10, 10, 2, 1.0);
-    ASSERT_EQ(alienControl.getAliens().size(), 1);
+    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(1));
 
     alienControl.spawnAlien(12, 12, 1, 1.0);
 }
@@ -161,15 +120,15 @@ TEST_F(AlienControlTest, AreAliensInGameField) {
 // Test that dead aliens are removed during update
 TEST_F(AlienControlTest, RemovesDeadAliens) {
     alienControl.spawnAlien(100, 0, 0, 1.0);
-    EXPECT_EQ(alienControl.getAliens().size(), 1);
+    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(1));
     alienControl.update(0.1); // simulate frame update
-    EXPECT_EQ(alienControl.getAliens().size(), 0);
+    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(0));
 
     alienControl.spawnAlien(100, 100, 1, 1.0);
     alienControl.spawnAlien(200,200, 0, 1.0);
-    EXPECT_EQ(alienControl.getAliens().size(), 2);
+    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(2));
     alienControl.update(0.1);
-    EXPECT_EQ(alienControl.getAliens().size(), 1);
+    ASSERT_EQ(alienControl.getAliens().size(), static_cast<size_t>(1));
 }
 
 // Test Alien spawn animation
@@ -187,7 +146,6 @@ TEST_F(AlienControlTest, AlienSpawnMovement) {
 // Test Alien movement
 TEST_F(AlienControlTest, AlienNormalMovement) {
     alienControl.spawnAlien(constants::GAME_WIDTH - 1, 100, 1, 1.0);
-    auto posA = alienControl.getAliens().front().getPosition();
     auto dirA = alienControl.getAliens().front().getHorizontalDirection();
 
     alienControl.update(0.5);
@@ -198,7 +156,6 @@ TEST_F(AlienControlTest, AlienNormalMovement) {
     auto posC = alienControl.getAliens().front().getPosition();
 
     EXPECT_NE(dirA, dirB);
-    //EXPECT_LT(posA.y, posB.y);
     EXPECT_LT(posB.y, posC.y);
     EXPECT_GT(posB.x, posC.x);
 }
@@ -223,4 +180,12 @@ TEST_F(AlienControlTest, AlienDeadPlayerMovement) {
     EXPECT_GT(posB.x, posC.x);
 }
 
-// TODO: Mock Killplayer if y= 0
+// Test if KillPlayer is called when an Alien reaches the bottom
+TEST_F(AlienControlTest, KillPlayerTest) {
+    PlayerControlMock playerControlMock(layer);
+    playerControlMock.populate(&bulletControl, &particleControl);
+    alienControl.populate(&alienBulletControl, &levelControl, &playerControlMock);
+    EXPECT_CALL(playerControlMock, killPlayer(false));
+    alienControl.spawnAlien(100, constants::GAME_HEIGHT, 2, 1.0);
+    alienControl.update(0.5);
+}

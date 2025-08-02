@@ -31,6 +31,8 @@ UIControl::UIControl(Layer& uiLayer, Layer& backgroundLayer) :
 
 }
 
+UIControl::~UIControl() {};
+
 void UIControl::populate(PlayerControl* playerControl){
 	this->playerControl = playerControl;
 }
