@@ -39,6 +39,8 @@ public:
 	const float getShieldbar() const;
 	const bool hasShield() const;
 	void setShieldbar(float percentage);
+	const float getShotDelay() const;
+	void setShotDelay(float delay);
 	
 protected:
 	// Shield sprite
@@ -50,6 +52,9 @@ protected:
 	// Percentage on how far the shield bar of is filled
 	// From 0.00 to 1.00
 	float shieldbar;
+	
+	// How many seconds the player has to wait until it can shot again
+	float shotDelay;
 
 	// How long the player still is invincible (in seconds)
 	float invulnTimeSec;

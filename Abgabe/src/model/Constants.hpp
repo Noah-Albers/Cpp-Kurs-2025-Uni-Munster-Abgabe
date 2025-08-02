@@ -2,18 +2,16 @@
 #include <cmath>
 namespace constants {
 	
-	// TODO: Maybe make alien shoot chance constant and increment with levels
-	
 	///////////////////////
 	/// Window settings ///
 	///////////////////////
 	
 	// Size of the play-field
-    constexpr int GAME_WIDTH = 600; // px
-    constexpr int GAME_HEIGHT = 600; // px
+    constexpr int GAME_WIDTH = 800; // px
+    constexpr int GAME_HEIGHT = 800; // px
     
 	// Scoreboard and upper UI height
-    constexpr int SCOREBOARD_HEIGHT = 150; // px
+    constexpr int SCOREBOARD_HEIGHT = 200; // px
     
     // Max amount of frames per second
     constexpr unsigned int FRAME_RATE = 60; // fps
@@ -22,12 +20,12 @@ namespace constants {
 	// Position Settings //
 	///////////////////////
 	// Alien Grid spacing settings
-    constexpr int ALIEN_SPACE_X = 32; // px
-    constexpr int ALIEN_SPACE_Y = 32; // px
+    constexpr int ALIEN_SPACE_X = 50; // px
+    constexpr int ALIEN_SPACE_Y = 50; // px
     
     // How fast the aliens move per Frame when they spawn and
     // move into the game field
-    constexpr float ALIEN_SPAWN_SPEED = 3; // px
+    constexpr float ALIEN_SPAWN_SPEED = 6; // px
     
     ////////////////////
     // Score settings //
@@ -46,46 +44,49 @@ namespace constants {
 	constexpr int PLAYER_START_LIFES = 5; // lifes
 	
 	// How fast the player moves per Frame when the keys are pressed
-	constexpr float PLAYER_SPEED = 3.5; // px
+	constexpr float PLAYER_SPEED = 4.5; // px
 	
 	// How long the player is invulnerable after being hit
 	constexpr float INVULNERABILITY_TIME = 2; // sec
 	
 	// How fast the player bullets travel per frame
-	constexpr float PLAYER_BULLET_SPEED = 6; // px
+	constexpr float PLAYER_BULLET_SPEED = 8; // px
 	
 	// The frequency on how fast the shieldbar fills
-	constexpr float PLAYER_SHIELD_FILL_FREQUENCY = 0.05; // Hz
+	constexpr float PLAYER_SHIELD_FILL_FREQUENCY = 0.1; // Hz
+	
+	// Delay between shots. In seconds
+	constexpr float PLAYER_SHOT_DELAY = 0.2; // sec
 	
 	//
 	// Alien settings
 	//
 	// Speed development per level
 	constexpr float ALIEN_START_SPEED = 2; // px
-	constexpr float ALIEN_SPEED_INCREASE_PER_LEVEL = .2; // px
+	constexpr float ALIEN_SPEED_INCREASE_PER_LEVEL = .1; // px
 	constexpr float MAX_ALIEN_SPEED = INFINITY; // px
 	
 	// Population development per level
-	constexpr int ALIEN_START_LIENS_PER_LINE = 1; // aliens
+	constexpr int ALIEN_START_ALIENS_PER_LINE = 1; // aliens
 	constexpr int ALIEN_LINE_INCREASE_PER_LEVEL = 2; // aliens
 	constexpr int MAX_ALIENS_PER_LINE = 9; // aliens
 
 	constexpr int ALIEN_START_LINE_COUNT = 1; // lines
 	constexpr int ALIEN_LINE_AMOUNT_INCREASE_PER_LEVEL = 1; // lines
-	constexpr int MAX_ALIEN_LINE_COUNT = 5; // lines
+	constexpr int MAX_ALIEN_LINE_COUNT = 4; // lines
 		
 	// How fast the alien-bullets fly
-	constexpr float ALIEN_BULLET_SPEED = 2.5; // px	
+	constexpr float ALIEN_BULLET_SPEED = 6; // px	
 	
 	// How far down the aliens move when they get to the end of a line
-	constexpr int ALIEN_ADVANCE_SPEED = 30; // px
+	constexpr int ALIEN_ADVANCE_SPEED = 20; // px
 	
 	//
 	// Alien Bullet settings
 	//
 	// How likely it is for an alien to shot per frame
-	constexpr float ALIEN_SHOOT_CHANCE = 0.005; // %
-	constexpr int MAX_ALIEN_BULLETS = 15; // bullets
+	constexpr float ALIEN_SHOOT_CHANCE = 0.001; // %
+	constexpr int MAX_ALIEN_BULLETS = 10; // bullets
 	
 	//
 	// Meteor settings
@@ -94,14 +95,14 @@ namespace constants {
 	constexpr float METEOR_DELAY = 3; // sec
 	
 	// How fast the meteor moves per Frame
-	constexpr float METEOR_SPEED = 2; // px
+	constexpr float METEOR_SPEED = 3; // px
 	
 	////////////////////////
 	// Animation Settings //
 	////////////////////////
 	
 	// How many pixel the background shall scroll per Frame
-	constexpr float BACKGROUND_SCROLL_SPEED = 1.2; // px
+	constexpr float BACKGROUND_SCROLL_SPEED = 1.4; // px
 	
 	// Frequency of the background transition. Eg. 1 <=> 1 second, 0.5 <=> 2 seconds
 	constexpr float BACKGROUND_TRANSITION_SPEED = .2; // Hz

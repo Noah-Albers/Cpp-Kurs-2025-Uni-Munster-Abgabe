@@ -198,3 +198,31 @@ TEST(PlayerTest, shieldbar){
 	ASSERT_NEAR(p.getShieldbar(), 1, 0.001);
 	ASSERT_TRUE(p.hasShield());
 }
+
+// Ensures the players shot delay is correct
+TEST(PlayerTest, shotdelay) {
+	Player p;
+	
+	// Zero by default
+	ASSERT_NEAR(p.getShotDelay(), 0, 0.001);
+	
+	// No negatives
+	p.setShotDelay(-1);
+	ASSERT_NEAR(p.getShotDelay(), 0, 0.001);
+	
+	// Any other value works
+	p.setShotDelay(10);
+	ASSERT_NEAR(p.getShotDelay(), 10, 0.001);
+	
+	// Ensures it counts down correctly
+	p.update(1);
+	ASSERT_NEAR(p.getShotDelay(), 9, 0.001);
+	p.update(2);
+	ASSERT_NEAR(p.getShotDelay(), 7, 0.001);
+	p.update(5);
+	ASSERT_NEAR(p.getShotDelay(), 2, 0.001);
+	p.update(2);
+	ASSERT_NEAR(p.getShotDelay(), 0, 0.001);
+	p.update(1);
+	ASSERT_NEAR(p.getShotDelay(), 0, 0.001);
+}

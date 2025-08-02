@@ -12,7 +12,7 @@
 #include <gtest/gtest.h>
 
 // Ensures that the aliens move when updated
-TEST(AlienModelTest, updateNormalSpeed) {
+TEST(AlienTest, updateNormalSpeed) {
 	
 	Alien alien(0,0,2, 1.0);
 	
@@ -26,7 +26,7 @@ TEST(AlienModelTest, updateNormalSpeed) {
 }
 
 // Ensures the aliens dont move with no speed
-TEST(AlienModelTest, updateNoSpeed) {
+TEST(AlienTest, updateNoSpeed) {
 	Alien alien (10, 10, 1, 0);
 	auto posA = alien.getPosition();
 
@@ -37,7 +37,7 @@ TEST(AlienModelTest, updateNoSpeed) {
 }
 
 // Ensures the aliens move when speed is applied
-TEST(AlienModelTest, updateSuperFastSpeed) {
+TEST(AlienTest, updateSuperFastSpeed) {
 	Alien alien (10, 10, 1, 9876123456789.0);
 	auto posA = alien.getPosition();
 
@@ -48,7 +48,7 @@ TEST(AlienModelTest, updateSuperFastSpeed) {
 }
 
 // Ensures the aliens can't go out of bounds (except above to let them fly in)
-TEST(AlienModelTest, setPosition_out_of_bounds_negative){
+TEST(AlienTest, setPosition_out_of_bounds_negative){
 	Alien alien(100,100,2, 1.0);
 	alien.setPosition(sf::Vector2f(-10, -10));	
 	
@@ -56,7 +56,7 @@ TEST(AlienModelTest, setPosition_out_of_bounds_negative){
 }
 
 // Ensures the aliens can't go out of bounds (except above to let them fly in)
-TEST(AlienModelTest, setPosition_out_of_bounds_positive){
+TEST(AlienTest, setPosition_out_of_bounds_positive){
 	Alien alien(100,100,2, 1.0);
 	alien.setPosition(sf::Vector2f(constants::GAME_WIDTH+10, constants::GAME_HEIGHT+10));	
 	
@@ -64,7 +64,7 @@ TEST(AlienModelTest, setPosition_out_of_bounds_positive){
 }
 
 // Ensures the position can be set normally
-TEST(AlienModelTest, setPositionNormal){
+TEST(AlienTest, setPositionNormal){
 	Alien alien(100,100,2, 1.0);
 	alien.setPosition(sf::Vector2f(constants::GAME_WIDTH / 2, constants::GAME_HEIGHT / 2));	
 	
@@ -72,7 +72,7 @@ TEST(AlienModelTest, setPositionNormal){
 }
 
 // Ensures that changeDirection actually alternates between the directions
-TEST(AlienModelTest, changeDirection){
+TEST(AlienTest, changeDirection){
 	Alien alien(100, 100, 2, 1.0);
 	auto dir = alien.getHorizontalDirection();
 	alien.changeDirection();
@@ -82,7 +82,7 @@ TEST(AlienModelTest, changeDirection){
 }
 
 // Ensures that remove life and hasShield work
-TEST(AlienModelTest, removeLifeShield1) {
+TEST(AlienTest, removeLifeShield1) {
 	Alien alien(100, 100, 0, 1.0);
 	ASSERT_FALSE(alien.hasShield());
 	ASSERT_EQ(alien.getLifes(), 0);
@@ -93,7 +93,7 @@ TEST(AlienModelTest, removeLifeShield1) {
 }
 
 // Ensures that remove life and hasShield work
-TEST(AlienModelTest, removeLifeShield2) {
+TEST(AlienTest, removeLifeShield2) {
 	Alien alien(100, 100, 1, 1.0);
 	ASSERT_FALSE(alien.hasShield());
 	ASSERT_EQ(alien.getLifes(), 1);
@@ -108,7 +108,7 @@ TEST(AlienModelTest, removeLifeShield2) {
 }
 
 // Ensures that remove life and hasShield work
-TEST(AlienModelTest, removeLifeShield3) {
+TEST(AlienTest, removeLifeShield3) {
 	Alien alien(100, 100, 3, 1.0);
 	ASSERT_TRUE(alien.hasShield());
 	ASSERT_EQ(alien.getLifes(), 3);

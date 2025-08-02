@@ -70,7 +70,7 @@ void LevelControl::update() {
 	}
 	
 MAKE_CALCULATION_METHOD(int, calculateLineAmount, constants::ALIEN_START_LINE_COUNT, constants::ALIEN_LINE_AMOUNT_INCREASE_PER_LEVEL, constants::MAX_ALIEN_LINE_COUNT);
-MAKE_CALCULATION_METHOD(int, calculateAliensPerLine, constants::ALIEN_START_LIENS_PER_LINE, constants::ALIEN_LINE_INCREASE_PER_LEVEL, constants::MAX_ALIENS_PER_LINE);
+MAKE_CALCULATION_METHOD(int, calculateAliensPerLine, constants::ALIEN_START_ALIENS_PER_LINE, constants::ALIEN_LINE_INCREASE_PER_LEVEL, constants::MAX_ALIENS_PER_LINE);
 MAKE_CALCULATION_METHOD(float, calculateAlienSpeed, constants::ALIEN_START_SPEED, constants::ALIEN_SPEED_INCREASE_PER_LEVEL, constants::MAX_ALIEN_SPEED);
 MAKE_CALCULATION_METHOD(int, calculatePointsPerKill, 1, constants::SCORE_MULTIPLIER_INCREASE_PER_LEVEL, INFINITY);
 

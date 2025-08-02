@@ -41,7 +41,7 @@ void PlayerControl::killPlayer(bool wasStrong) {
 }
 
 void PlayerControl::damagePlayer(int amount, bool wasStrong){
-	// If dead or invulnerable, he doesn't take damage
+	// If dead or invulnerable, it doesn't take damage
 	if(player.isDead() || player.isInvulnerable()) return;
 	
 	if(player.hasShield())
@@ -96,10 +96,20 @@ void PlayerControl::keyStateChanged(bool isNowPressed, sf::Keyboard::Key key) {
 	
 	// Spawns a bullet when space is pressed at the players position
 	if (key == sf::Keyboard::Key::Space)
-		bulletControl->spawnBulletAt(
-			this->player.getPosition().x,
-			this->player.getPosition().y
-		);
+		shotBullet();
+}
+
+
+void PlayerControl::shotBullet() {
+	// Ensures the player can only shot if not on delay
+	if(player.getShotDelay() > 0) return;
+	
+	// Sets the player on delay and shots a bullet	
+	player.setShotDelay(constants::PLAYER_SHOT_DELAY);
+	bulletControl->spawnBulletAt(
+		this->player.getPosition().x,
+		this->player.getPosition().y
+	);
 }
 
 // #region Getters/Setters

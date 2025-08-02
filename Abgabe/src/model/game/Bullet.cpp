@@ -18,7 +18,7 @@ Bullet::Bullet(const int x, const int y) :
 		constants::ANIMATION_PLAYER_BULLET_LENGTH,
 		true, true
 	) {
-	sprite.setPosition(sf::Vector2f(x,y));
+	setPosition(sf::Vector2f(x,y));
 }
 
 Bullet::~Bullet() {}

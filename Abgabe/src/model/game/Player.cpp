@@ -21,6 +21,7 @@ Player::Player() :
 	shield(ASSETS_SPRITE_PLAYER_SHIELD, constants::ANIMATION_PLAYER_SHIELD_LENGTH),
 	lifes(constants::PLAYER_START_LIFES),
 	shieldbar(1),
+	shotDelay(0),
 	invulnTimeSec(-1)
     {
     // Positions the sprite
@@ -35,15 +36,19 @@ void Player::update(const float timePassed){
 	if(invulnTimeSec >= 0)
 		invulnTimeSec -= timePassed;
 	
+	// Updates the shotdelay
+	if(shotDelay > 0)
+		setShotDelay(shotDelay - timePassed);
+	
 	if(hasShield())
 		shield.updateSprite(timePassed);
 }
 
 void Player::draw(Layer& layer) const{
-	// Prevents the player from being drawn after he has died
+	// Prevents the player from being drawn after it has died
 	if(isDead()) return;
 	
-	// if player is invulnerable, he should blink
+	// if player is invulnerable, it should blink
 	if(isInvulnerable()){
 		int blink_int = (int)(invulnTimeSec *100);
 
@@ -86,6 +91,13 @@ void Player::setShieldbar(float percentage) {
 	if(percentage < 0) percentage = 0;
 	if(percentage > 1) percentage = 1;
 	shieldbar = percentage;
+}
+
+const float Player::getShotDelay() const { return shotDelay; };
+void Player::setShotDelay(float delay) {
+	if(delay <= 0)
+		delay = 0;
+	shotDelay = delay;
 }
 
 // #endregion
