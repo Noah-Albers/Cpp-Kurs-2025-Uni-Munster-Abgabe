@@ -21,7 +21,7 @@
 #define ASSETS_SPRITE_PLAYER 			"assets/sprites/player_default.png",	32, 	28,		2.6
 #define ASSETS_SPRITE_PLAYER_SHIELD		"assets/sprites/player_shield.png",		34,		30,		2.6
 #define ASSETS_SPRITE_PLAYER_DEATH 		"assets/sprites/player_death.png",		64, 	64,		2.6
-#define ASSETS_SPRITE_PLAYER_BULLET 	"assets/sprites/player_bullet.png",		5, 		18, 	1.4
+#define ASSETS_SPRITE_PLAYER_BULLET 	"assets/sprites/player_bullet.png",		5, 		10, 	2.4
 
 #define ASSETS_SPRITE_ALIEN				"assets/sprites/alien_default.png",		24,		22,		2.3
 #define ASSETS_SPRITE_ALIEN_SHIELD 		"assets/sprites/alien_shield.png",		26,		24,		2.3

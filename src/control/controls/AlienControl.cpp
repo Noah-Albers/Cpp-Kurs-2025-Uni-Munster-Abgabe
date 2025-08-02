@@ -120,7 +120,7 @@ void AlienControl::randomSpawnBullet(const Alien& alien) {
 	
     const float rdmValue = (float)(rand()) / (float)(RAND_MAX);
 
-	if (rdmValue < constants::ALIEN_SHOOT_CHANCE) {
+	if (rdmValue < constants::ALIEN_SHOOT_CHANCE/100) {
 		alientBulletControl->spawnBulletAt(
 			alien.getPosition().x,
 			alien.getPosition().y

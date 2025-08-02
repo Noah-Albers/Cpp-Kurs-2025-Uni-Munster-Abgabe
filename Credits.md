@@ -5,7 +5,7 @@
 
 [Player (Shieldbar)](assets/sprites/player_shieldbar.png) is from [Itch.io (bdragon1727)](https://bdragon1727.itch.io/basic-pixel-health-bar-and-scroll-bar)
 
-[Player (Bullet)](assets/sprites/player_bullet.png) is from [Itch.io (foozlecc)](https://foozlecc.itch.io/void-main-ship)]
+[Player (Bullet)](assets/sprites/player_bullet.png) is a modified version of [Itch.io (foozlecc)](https://foozlecc.itch.io/void-fleet-pack-3)]
 
 [Player (Death)](assets/sprites/player_death.png) is from [Itch.io (foozlecc)](https://foozlecc.itch.io/void-fleet-pack-3)]
 

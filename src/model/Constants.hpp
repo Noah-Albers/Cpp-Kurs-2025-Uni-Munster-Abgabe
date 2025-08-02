@@ -50,20 +50,20 @@ namespace constants {
 	constexpr float INVULNERABILITY_TIME = 2; // sec
 	
 	// How fast the player bullets travel per frame
-	constexpr float PLAYER_BULLET_SPEED = 8; // px
+	constexpr float PLAYER_BULLET_SPEED = 10; // px
 	
 	// The frequency on how fast the shieldbar fills
-	constexpr float PLAYER_SHIELD_FILL_FREQUENCY = 0.1; // Hz
+	constexpr float PLAYER_SHIELD_FILL_FREQUENCY = 0.05; // Hz
 	
 	// Delay between shots. In seconds
-	constexpr float PLAYER_SHOT_DELAY = 0.2; // sec
+	constexpr float PLAYER_SHOT_DELAY = 0.15; // sec
 	
 	//
 	// Alien settings
 	//
 	// Speed development per level
 	constexpr float ALIEN_START_SPEED = 2; // px
-	constexpr float ALIEN_SPEED_INCREASE_PER_LEVEL = .1; // px
+	constexpr float ALIEN_SPEED_INCREASE_PER_LEVEL = .25; // px
 	constexpr float MAX_ALIEN_SPEED = INFINITY; // px
 	
 	// Population development per level
@@ -85,7 +85,7 @@ namespace constants {
 	// Alien Bullet settings
 	//
 	// How likely it is for an alien to shot per frame
-	constexpr float ALIEN_SHOOT_CHANCE = 0.001; // %
+	constexpr float ALIEN_SHOOT_CHANCE = 0.23; // %
 	constexpr int MAX_ALIEN_BULLETS = 10; // bullets
 	
 	//
