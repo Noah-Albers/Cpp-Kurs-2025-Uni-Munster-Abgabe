@@ -1,16 +1,16 @@
 # Bauen und ausführen im JupyterHub: 
 
 1. Im Terminal diesen Ordner öffnen.
-2. Beim ersten mal die Befehle `make getSFML` und `make getGTest` ausführen, um benötigte Bibliotheken herunterzuladen.
+2. Beim ersten Mal die Befehle `make getSFML` und `make getGTest` ausführen, um benötigte Bibliotheken herunterzuladen.
 3. Das Projekt und die Tests werden mit `make game` und `make tests` gebaut.
 4. Um beides erfolgreich ausführen zu können, den SFML-Library-Path mit `export LD_LIBRARY_PATH=./build/SFML/lib:$LD_LIBRARY_PATH` hinterlegen.
-5. Das Spiel oder die Test ausführen (in der Konsolen-Anwendung, nicht VSCode!): `./game` oder `./tests`
+5. Das Spiel oder die Tests ausführen (in der Konsolen-Anwendung, nicht in VSCode!): `./game` oder `./tests`
 
 
 # Erklärung
 ## Ziel des Spiels: 
 
-    Ziel des Spiels ist es, alle Aliens abzuschießen um sie davon abzuhalten, an den unteren Rand des Feldes anzukommen. Dabei werden Punkte gesammelt und Level abgeschlossen.
+    Ziel des Spiels ist es, alle Aliens abzuschießen um sie davon abzuhalten, den unteren Rand des Spielfeldes zu erreichen. Dabei werden Punkte gesammelt und Level abgeschlossen.
 
 ## Steuerung:
 
@@ -23,22 +23,24 @@
     S = rückwärts
     D = rechts
 
-    Geschossen wird mit der Leerzeichen-Taste
+    Geschossen wird mit der Leertaste
 
 
 ## Spiel-Ablauf:
 
     Allgemein:
 
-        Das Raumschiff der spielenden Person startet mittig am unteren Rand des Spielfeldes. 
+        Das Raumschiff der spielenden Person startet mittig am unteren Rand des Spielfelds. 
         
         Man verliert Leben, wenn man von Alien-Schüssen oder Meteoren getroffen wird.
 
-        Sobald man von etwas getroffen wird, blinkt das Raumschiff für kurze Zeit. In dieser Zeit ist man unverwundbar, kann also keine Leben verlieren.
+        Sobald man von etwas getroffen wird, blinkt das Raumschiff für kurze Zeit. In dieser Zeit ist man unverwundbar, kann also keine weiteren Leben verlieren.
 
     Leben, Score und Schild: 
+
 ![alt text](example_pics_for_instructions/initialScreen.png)
-        Zu Beginn hat man 5 Leben und der Score ist auf 0 gesetzt(angezeigt durch "Score" und die Herzen oben links).
+
+        Zu Beginn hat man 5 Leben und der Score ist auf 0 gesetzt (angezeigt durch "Score" und die Herzen oben links).
 
         Zudem befindet sich zwischen Score und Leben eine blaue Leiste. Diese zeigt den Ladeprozess eines Schildes an, welches das Raumschiff erhält, sobald die Leiste voll geladen ist. 
         Das Spiel startet mit einer vollen Leiste, also hat das Raumschiff bereits zu Beginn ein Schild (wie im Bild als blau schimmernde Schicht zu erkennen).
@@ -50,7 +52,7 @@
 
     Meteoren:
 
-        Die Meteorenfliegen fliegen in bestimmten Zeitabständen von oben runter (als Steine im Bild zu erkennen).
+        Die Meteore fliegen in bestimmten Zeitabständen von oben runter (im Bild als Steine zu erkennen).
         Diesen muss das Raumschiff ausweichen, da es sonst ein Leben verliert.
         Meteoren können nicht zerstört werden und die Schüsse des Raumschiffs werden von ihnen absorbiert.
 
@@ -61,10 +63,11 @@
 
         Aliens können ebenfalls schießen. Diesen Schüssen muss man, wie auch den Meteoren, ausweichen.
         Einzelne Aliens besitzen auch ein Schild, was man daran erkennt, dass sie rot schimmern (siehe Bilder).
-        Diese Aliens muss man zweimal treffen, um sie auszulöschen: das erste mal, um das Schild zu zerstören, das zweite mal, um das Alien auszulöschen, wie ein normales Alien auch.
+        Diese Aliens müssen zweimal getroffen werden, um sie auszulöschen: 
+        das erste Mal, um das Schild zu zerstören; das zweite Mal, um das Alien auszulöschen, wie ein normales Alien auch.
 
         Jedes ausgelöschte Alien erhöht den Score. 
-        Sobald eine Einheit von Aliens besiegt worden ist, ist ein Level geschafft und man wechselt automatisch zum nächsten. 
+        Sobald eine gesamte Alien-Einheit besiegt worden ist, ist ein Level geschafft und man wechselt automatisch zum nächsten. 
         Dies erkennt man daran, dass der Hintergrund seine Farbe wechselt (siehe das nächste Bild). 
         Mit höherem Level steigt auch die Anzahl an Aliens in der Einheit.
 
@@ -72,8 +75,8 @@
 
     Spiel-Ende:
 
-        Das Spiel ist zu Ende (Game Over), wenn man keine Leben mehr hat oder die Aliens den unteren Rand des Spielfeldes erreicht haben.
-        Wenn das passiert, steht auf dem Bildschirm "Game Over" und um das Spiel neu zu starten, muss man 'R' drücken (siehe das nachfolgende Bild).
+        Das Spiel ist vorbei (Game Over), wenn man keine Leben mehr hat oder die Aliens den unteren Rand des Spielfeldes erreicht haben.
+        Wenn das passiert, steht auf dem Bildschirm "Game Over" und um neu zu starten, muss man 'R' drücken (siehe das nachfolgende Bild).
     
 ![alt text](example_pics_for_instructions/gameOver.png)
     
