@@ -14,7 +14,7 @@
 
 class Healthbar : public PropSprite {
 public:
-	Healthbar(const int pos_x, const int pos_y);
+	Healthbar(const int posX, const int posY);
 	
 	// Draws the health bar
 	void drawBar(Layer& layer, const int lifes, const int maxlifes);

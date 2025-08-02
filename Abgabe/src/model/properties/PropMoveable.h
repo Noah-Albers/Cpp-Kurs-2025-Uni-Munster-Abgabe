@@ -17,13 +17,13 @@ class PropMoveable {
 public:
 	PropMoveable(
 		const float speed = 1,
-		const VerticalDirection v_dir = VerticalDirection::NONE,
-		const HorizontalDirection h_dir = HorizontalDirection::NONE
+		const VerticalDirection vDir = VerticalDirection::NONE,
+		const HorizontalDirection hDir = HorizontalDirection::NONE
 	);
 	virtual ~PropMoveable();
 	
 	// Event: When the object shall update its position
-	void updatePosition(const float time_passed = 0.01);
+	void updatePosition(const float timePassed = 0.01);
 	
 	// Moves the object relative to its current position
 	void moveBy(const int x, const int y);
@@ -43,8 +43,8 @@ public:
 protected:
 	
 	// Vertical and horizonal movement direction's
-	HorizontalDirection h_dir;
-	VerticalDirection v_dir;
+	HorizontalDirection hDir;
+	VerticalDirection vDir;
 	
 	// Multiplier to set the movement speed
 	float speed;

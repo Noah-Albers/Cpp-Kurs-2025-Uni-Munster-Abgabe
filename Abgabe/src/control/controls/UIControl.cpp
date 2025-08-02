@@ -35,8 +35,8 @@ void UIControl::populate(PlayerControl* playerControl){
 	this->playerControl = playerControl;
 }
 
-void UIControl::update(const float time_passed){
-	background.update(time_passed);
+void UIControl::update(const float timePassed){
+	background.update(timePassed);
 }
 
 void UIControl::nextBackground(){

@@ -13,22 +13,22 @@ PropMoveable::PropMoveable(
 	const float speed,
 	const VerticalDirection v_dir,
 	const HorizontalDirection h_dir
-) : h_dir(h_dir), v_dir(v_dir){
+) : hDir(h_dir), vDir(v_dir){
 	setSpeed(speed);
 }
 PropMoveable::~PropMoveable() {}
 
-void PropMoveable::updatePosition(const float time_passed){
+void PropMoveable::updatePosition(const float timePassed){
 	int by_x=0, by_y=0;
-	if(v_dir != VerticalDirection::NONE)
-		by_y = v_dir == VerticalDirection::DOWN ? 1 : -1;
-	if(h_dir != HorizontalDirection::NONE)
-		by_x = h_dir == HorizontalDirection::RIGHT ? 1 : -1;
+	if(vDir != VerticalDirection::NONE)
+		by_y = vDir == VerticalDirection::DOWN ? 1 : -1;
+	if(hDir != HorizontalDirection::NONE)
+		by_x = hDir == HorizontalDirection::RIGHT ? 1 : -1;
 	
 	if(by_x != 0 || by_y != 0)
 		moveBy(
-			(float)by_x * this->speed * time_passed * 100.0,
-			(float)by_y * this->speed * time_passed * 100.0
+			(float)by_x * this->speed * timePassed * 100.0,
+			(float)by_y * this->speed * timePassed * 100.0
 		);
 }
 
@@ -42,11 +42,11 @@ void PropMoveable::setSpeed(const float _speed) {
 
 // #region Getters and setters
 	
-void PropMoveable::setVerticalDirection(const VerticalDirection dir) { v_dir = dir; }
-void PropMoveable::setHorizontalDirection(const HorizontalDirection dir) { h_dir = dir; }
+void PropMoveable::setVerticalDirection(const VerticalDirection dir) { vDir = dir; }
+void PropMoveable::setHorizontalDirection(const HorizontalDirection dir) { hDir = dir; }
 const float PropMoveable::getSpeed() const { return speed; };
-const VerticalDirection PropMoveable::getVerticalDirection() const { return v_dir; };
-const HorizontalDirection PropMoveable::getHorizontalDirection() const { return h_dir; };
+const VerticalDirection PropMoveable::getVerticalDirection() const { return vDir; };
+const HorizontalDirection PropMoveable::getHorizontalDirection() const { return hDir; };
 
 // #endregion
 

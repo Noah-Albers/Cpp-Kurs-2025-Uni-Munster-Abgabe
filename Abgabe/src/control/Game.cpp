@@ -18,14 +18,14 @@ Game::Game() :
     gameLayer(window),
     uiLayer(window),
     backgroundLayer(window),
-    player_control(nullptr),
-    bullet_control(nullptr),
-    alien_control(nullptr),
-    alien_bullet_control(nullptr),
-    meteor_control(nullptr),
-    particle_control(nullptr),
-    ui_control(nullptr),
-    level_control(nullptr)
+    playerControl(nullptr),
+    bulletControl(nullptr),
+    alienControl(nullptr),
+    alienBulletControl(nullptr),
+    meteorControl(nullptr),
+    particleControl(nullptr),
+    uiControl(nullptr),
+    levelControl(nullptr)
     {
     // limit frame rate
     window.setFramerateLimit(constants::FRAME_RATE);
@@ -41,31 +41,31 @@ Game::Game() :
 void Game::resetGame() {
 	
 	// Defines a macro to delete any old controllers that might exist and create the new ones
-	#define RESET_CONTROL(controller_ptr, ControllerClass, ...) \
-	    if (controller_ptr != nullptr) \
-	        delete controller_ptr; \
-	    controller_ptr = new ControllerClass(__VA_ARGS__);
+	#define RESET_CONTROL(controllerPtr, ControllerClass, ...) \
+	    if (controllerPtr != nullptr) \
+	        delete controllerPtr; \
+	    controllerPtr = new ControllerClass(__VA_ARGS__);
 	
 	// Resets the controllers
-	RESET_CONTROL(player_control, PlayerControl, gameLayer);
-	RESET_CONTROL(bullet_control, BulletControl, gameLayer);
-	RESET_CONTROL(alien_control, AlienControl, gameLayer);
-	RESET_CONTROL(alien_bullet_control, AlienBulletControl, gameLayer);
-	RESET_CONTROL(meteor_control, MeteorControl, gameLayer);
-	RESET_CONTROL(particle_control, ParticleControl, gameLayer);
-	RESET_CONTROL(ui_control, UIControl, uiLayer, backgroundLayer);
-	RESET_CONTROL(level_control, LevelControl);
+	RESET_CONTROL(playerControl, PlayerControl, gameLayer);
+	RESET_CONTROL(bulletControl, BulletControl, gameLayer);
+	RESET_CONTROL(alienControl, AlienControl, gameLayer);
+	RESET_CONTROL(alienBulletControl, AlienBulletControl, gameLayer);
+	RESET_CONTROL(meteorControl, MeteorControl, gameLayer);
+	RESET_CONTROL(particleControl, ParticleControl, gameLayer);
+	RESET_CONTROL(uiControl, UIControl, uiLayer, backgroundLayer);
+	RESET_CONTROL(levelControl, LevelControl);
 	
 	#undef RESET_CONTROL
 	
 	// Populates all control's
-	alien_bullet_control->populate(player_control);
-	alien_control->populate(alien_bullet_control, level_control, player_control);
-	bullet_control->populate(alien_control, meteor_control);
-	meteor_control->populate(player_control,particle_control);
-	player_control->populate(bullet_control, particle_control);
-	ui_control->populate(player_control);
-    level_control->populate(alien_control, ui_control);	
+	alienBulletControl->populate(playerControl);
+	alienControl->populate(alienBulletControl, levelControl, playerControl);
+	bulletControl->populate(alienControl, meteorControl);
+	meteorControl->populate(playerControl,particleControl);
+	playerControl->populate(bulletControl, particleControl);
+	uiControl->populate(playerControl);
+    levelControl->populate(alienControl, uiControl);	
 }
 
 void Game::start() {
@@ -73,13 +73,13 @@ void Game::start() {
     sf::Clock clock;
 
     while (window.isOpen()) {
-        // Restart the clock and save the elapsed time into elapsed_time
-        sf::Time elapsed_time = clock.restart();
+        // Restart the clock and save the elapsed time into elapsedTime
+        sf::Time elapsedTime = clock.restart();
  
         // handle input, check if window is still open
         if (!input()) {
             // update the scene according to the passed time
-            update(elapsed_time.asSeconds());
+            update(elapsedTime.asSeconds());
             // draw the scene
             draw();
         }
@@ -106,22 +106,22 @@ bool Game::input() {
         
         // Handles key press and release events
         if(const auto* kp = event->getIf<sf::Event::KeyPressed>())
-			player_control->keyStateChanged(true, kp->code);			
+			playerControl->keyStateChanged(true, kp->code);			
         if(const auto* kp = event->getIf<sf::Event::KeyReleased>())
-			player_control->keyStateChanged(false, kp->code);
+			playerControl->keyStateChanged(false, kp->code);
     }
     return false;
 }
 
-void Game::update(const float time_passed) {
-    level_control->update();
-	player_control->update(time_passed);
-	bullet_control->update(time_passed);
-    alien_control->update(time_passed);
-    meteor_control->update(time_passed);
-    particle_control->update(time_passed);
-    alien_bullet_control->update(time_passed);
-    ui_control->update(time_passed);
+void Game::update(const float timePassed) {
+    levelControl->update();
+	playerControl->update(timePassed);
+	bulletControl->update(timePassed);
+    alienControl->update(timePassed);
+    meteorControl->update(timePassed);
+    particleControl->update(timePassed);
+    alienBulletControl->update(timePassed);
+    uiControl->update(timePassed);
 }
 
 void Game::draw() {
@@ -131,14 +131,14 @@ void Game::draw() {
     gameLayer.clear();
     
     // Adds game objects to draw
-    player_control->draw();
-    bullet_control->draw();
-    alien_control->draw();
-    alien_bullet_control->draw();
-    meteor_control->draw();
-    particle_control->draw();
+    playerControl->draw();
+    bulletControl->draw();
+    alienControl->draw();
+    alienBulletControl->draw();
+    meteorControl->draw();
+    particleControl->draw();
     
-    ui_control->draw();
+    uiControl->draw();
     
     // Performs draw calls
     backgroundLayer.draw();
@@ -148,4 +148,4 @@ void Game::draw() {
     window.display();
 }
 
-const bool Game::isGameOver() const { return player_control->getPlayer().isDead(); };
+const bool Game::isGameOver() const { return playerControl->getPlayer().isDead(); };

@@ -26,9 +26,9 @@ AlienBullet::~AlienBullet() {}
 
 
 
-void AlienBullet::update(float time_passed) {
-	updateSprite(time_passed);
-	updatePosition(time_passed);
+void AlienBullet::update(float timePassed) {
+	updateSprite(timePassed);
+	updatePosition(timePassed);
 }
 
 // # region Getters/Setters

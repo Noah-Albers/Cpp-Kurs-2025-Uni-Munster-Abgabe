@@ -13,7 +13,7 @@
 
 class PropSprite {
 public:
-	PropSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale = 1, const bool centerOrigin = false);
+	PropSprite(const std::filesystem::path& filename, const int sizeX, const int sizeY, const float scale = 1, const bool centerOrigin = false);
 	
 	/**
 	 * Detects whether the current object collides with another

@@ -20,15 +20,10 @@ void AlienBulletControl::populate(PlayerControl* playerControl) {
 	this->playerControl = playerControl;
 }
 
-// TODO:
-// 1. Bullets are updated
-// 2. Can collide with player
-// 3. Collide with player damages player and removes bullet
-
-void AlienBulletControl::update(const float time_passed){
+void AlienBulletControl::update(const float timePassed){
 	// Updates bullets, removes any out of bounds and handles player collision
-	for(auto it = alien_bullets.begin(); it != alien_bullets.end();){
-		it->update(time_passed);
+	for(auto it = alienBullets.begin(); it != alienBullets.end();){
+		it->update(timePassed);
 		
 		// Checks if the bullet is out of scope or has collided with the player
 		bool hasCollided = (
@@ -42,27 +37,23 @@ void AlienBulletControl::update(const float time_passed){
 		
 		// Removes the bullet if out of scope or collided with player
 		if(hasCollided || isOutOfScope)
-			it = alien_bullets.erase(it);
+			it = alienBullets.erase(it);
 		else
 			++ it;
 	}	
 }
 
-// Bullets are drawn
-
 void AlienBulletControl::draw(){
-	for(auto it = alien_bullets.begin(); it != alien_bullets.end(); it++)
+	for(auto it = alienBullets.begin(); it != alienBullets.end(); it++)
 		layer.add_to_layer(it->getSprite());
 }
 
-// Bullets can spawn
-
 void AlienBulletControl::spawnBulletAt(const int x, const int y) {
-	alien_bullets.emplace_back(x,y);
+	alienBullets.emplace_back(x,y);
 }
 
 // #region Getters/Setters
 
-const std::list<AlienBullet>& AlienBulletControl::getBullets() const { return alien_bullets; };
+const std::list<AlienBullet>& AlienBulletControl::getBullets() const { return alienBullets; };
 
 // #endregion

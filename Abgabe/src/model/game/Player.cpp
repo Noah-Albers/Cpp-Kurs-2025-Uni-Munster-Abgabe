@@ -21,24 +21,22 @@ Player::Player() :
 	shield(ASSETS_SPRITE_PLAYER_SHIELD, constants::ANIMATION_PLAYER_SHIELD_LENGTH),
 	lifes(constants::PLAYER_START_LIFES),
 	shieldbar(1),
-	invuln_time_sec(-1)
+	invulnTimeSec(-1)
     {
-		
-		
     // Positions the sprite
-    sprite.setPosition({(float)(constants::GAME_WIDTH/2), (float)(constants::GAME_HEIGHT- sprite.getTextureRect().size.y)});
+	setPosition({(float)(constants::GAME_WIDTH/2), (float)(constants::GAME_HEIGHT- sprite.getTextureRect().size.y)});
 }
 Player::~Player() {}
 
-void Player::update(const float time_passed){
-	this->updatePosition(time_passed);
+void Player::update(const float timePassed){
+	this->updatePosition(timePassed);
 	
 	// Updates the invulnerability time of the player
-	if(invuln_time_sec >= 0)
-		invuln_time_sec -= time_passed;
+	if(invulnTimeSec >= 0)
+		invulnTimeSec -= timePassed;
 	
 	if(hasShield())
-		shield.updateSprite(time_passed);
+		shield.updateSprite(timePassed);
 }
 
 void Player::draw(Layer& layer) const{
@@ -47,7 +45,7 @@ void Player::draw(Layer& layer) const{
 	
 	// if player is invulnerable, he should blink
 	if(isInvulnerable()){
-		int blink_int = (int)(invuln_time_sec *100);
+		int blink_int = (int)(invulnTimeSec *100);
 
 		if (blink_int % constants::PLAYER_BLINK_LENGTH*2 < constants::PLAYER_BLINK_LENGTH) return;
 	}
@@ -73,14 +71,14 @@ void Player::setPosition(sf::Vector2f pos){
 
 const int Player::getLifes() const { return lifes; };
 const bool Player::isDead() const { return lifes <= 0; };
-const bool Player::isInvulnerable() const { return invuln_time_sec >= 0; };
+const bool Player::isInvulnerable() const { return invulnTimeSec >= 0; };
 const sf::Vector2f Player::getPosition() const { return sprite.getPosition(); };
 void Player::setLifes(int lifes) {
 	if (lifes > constants::PLAYER_START_LIFES) lifes = constants::PLAYER_START_LIFES;
 	if(lifes < 0) lifes = 0;
 	this->lifes = lifes;
 };
-void Player::setInvulnerable(float timeSec) { invuln_time_sec = timeSec; };
+void Player::setInvulnerable(float timeSec) { invulnTimeSec = timeSec; };
 
 const float Player::getShieldbar() const { return shieldbar; };
 const bool Player::hasShield() const { return shieldbar >= 1; };

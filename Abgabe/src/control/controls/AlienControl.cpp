@@ -30,7 +30,7 @@ void AlienControl::populate(
 	
 }
 
-void AlienControl::update(float time_passed) {
+void AlienControl::update(float timePassed) {
 	
 	// If not all aliens are inside the game field, transition them there
 	if(!areAliensInGamefield()){
@@ -60,7 +60,7 @@ void AlienControl::update(float time_passed) {
 		}
 	
 		// Update the alien and maybe spawn a bullet	
-		it->update(time_passed);
+		it->update(timePassed);
 		randomSpawnBullet(*it);		
 		
 		// Sets a flag if the alien has reached the borders
@@ -100,15 +100,15 @@ void AlienControl::update(float time_passed) {
 }
 
 void AlienControl::draw(){
-	for (auto alien_it = aliens.begin(); alien_it != aliens.end(); alien_it++) {
-		layer.add_to_layer(alien_it->getSprite());
+	for (auto it = aliens.begin(); it != aliens.end(); it++) {
+		layer.add_to_layer(it->getSprite());
 		
-		if (alien_it->hasShield())
-			layer.add_to_layer(alien_it->getShieldSprite());
+		if (it->hasShield())
+			layer.add_to_layer(it->getShieldSprite());
 	}
 }
 
-void AlienControl::spawnAlien(const int x, const int y, const int lifes, const float speed) {
+void AlienControl::spawnAlienAt(const int x, const int y, const int lifes, const float speed) {
 	aliens.emplace_back(x, y, lifes, speed);
 }
 
@@ -118,9 +118,9 @@ void AlienControl::randomSpawnBullet(const Alien& alien) {
 	// Prevents aliens from shooting if the player is dead
 	if(playerControl->getPlayer().isDead()) return;
 	
-    const float random_value = (float)(rand()) / (float)(RAND_MAX);
+    const float rdmValue = (float)(rand()) / (float)(RAND_MAX);
 
-	if (random_value < constants::ALIEN_SHOOT_CHANCE) {
+	if (rdmValue < constants::ALIEN_SHOOT_CHANCE) {
 		alientBulletControl->spawnBulletAt(
 			alien.getPosition().x,
 			alien.getPosition().y

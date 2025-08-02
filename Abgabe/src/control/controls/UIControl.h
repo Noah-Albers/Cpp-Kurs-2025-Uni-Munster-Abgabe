@@ -42,7 +42,7 @@ public:
 	virtual void displayScore(const int score);
 	
 	// Updates the object
-	void update(const float time_passed);
+	void update(const float timePassed);
 	
 protected:
 	// Communication with other control's

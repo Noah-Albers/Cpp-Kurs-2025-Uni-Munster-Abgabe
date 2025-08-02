@@ -20,29 +20,29 @@ void BulletControl::populate(AlienControl* alienControl, MeteorControl* meteorCo
 	this->meteorControl = meteorControl;
 }
 
-void BulletControl::update(const float time_passed) {
+void BulletControl::update(const float timePassed) {
 	// List of all aliens
 	auto &aliens = alienControl->getAliens();
 	auto &meteors = meteorControl->getMeteors();
 
 	// Updates bullets, checks collisions and if they are out of scope
 	for (auto it = bullets.begin(); it != bullets.end();) {
-		it->update(time_passed);
+		it->update(timePassed);
 
 		// Flag to check if the bullet shall be deleted
 		// Checks if the lower end of the bullet is above the scoreboard-area
 		bool deleteFlag = it->getPosition().y < -it->getSprite().getLocalBounds().size.y - constants::SCOREBOARD_HEIGHT;
 
 		// Checks for alien collisions
-		for (auto alien_it = aliens.begin(); alien_it != aliens.end();alien_it++)
-			if (it->isCollidingWith(*alien_it)) {
+		for (auto alienIt = aliens.begin(); alienIt != aliens.end();alienIt++)
+			if (it->isCollidingWith(*alienIt)) {
 				deleteFlag = true;
-				alien_it->removeLife();
+				alienIt->removeLife();
 			}
 
 		// Checks for meteor collisions
-		for (auto meteor_it = meteors.begin(); meteor_it != meteors.end();meteor_it++)
-			if (it->isCollidingWith(*meteor_it))
+		for (auto meteorIt = meteors.begin(); meteorIt != meteors.end();meteorIt++)
+			if (it->isCollidingWith(*meteorIt))
 				deleteFlag = true;
 
 		if (deleteFlag)

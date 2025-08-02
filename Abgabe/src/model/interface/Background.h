@@ -20,7 +20,7 @@ public:
 	void draw(Layer& layer);
 	
 	// Updates the object
-	void update(const float time_passed);
+	void update(const float timePassed);
 	
 	// Starts a transition to the next background
 	void transitionToNextBackground();
@@ -39,7 +39,7 @@ protected:
 	 * Updates the transition of the background to the next frame
 	 * @pre isTransitioning()
 	 */
-	void updateTransition(const float time_passed);
+	void updateTransition(const float timePassed);
 };
 
 #endif /* SRC_MODEL_BACKGROUND_H_ */

@@ -18,7 +18,7 @@ public:
 	virtual ~ParticleControl();
 	
 	// Event: When the game objects shall update
-	virtual void update(const float time_passed);
+	virtual void update(const float timePassed);
 	
 	// Methods to spawn particles at given positions
 	
@@ -29,7 +29,7 @@ public:
 	// Debug-method to spawn any sprite as a particle at a given position
 	void spawnDebugParticle(
 		const std::filesystem::path& filename,
-		const int size_x, const int size_y,
+		const int sizeX, const int sizeY,
 		const float scale,
 		const int posX, const int posY,
 		const float lifeTime

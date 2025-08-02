@@ -53,12 +53,12 @@ void Background::draw(Layer& layer) {
 	}
 }
 
-void Background::update(const float time_passed) {
+void Background::update(const float timePassed) {
 	
 	// Calculates the next offset for the background by adding the time multiplied by a constant.
 	// Because the background shall scroll into the negative direction, it inverts the current position to have the
 	// calculation be positive and afterwards inverts it again
-	int offset = (int)(-sprite.getTextureRect().position.y + time_passed * 100 * constants::BACKGROUND_SCROLL_SPEED) % sprite.getTextureRect().size.y;
+	int offset = (int)(-sprite.getTextureRect().position.y + timePassed * 100 * constants::BACKGROUND_SCROLL_SPEED) % sprite.getTextureRect().size.y;
 	
 	// Updates the visible texture area
 	sprite.setTextureRect(sf::IntRect(
@@ -67,11 +67,11 @@ void Background::update(const float time_passed) {
 	);
 	
 	if(isTransitioning())
-		updateTransition(time_passed);
+		updateTransition(timePassed);
 }
 
-void Background::updateTransition(const float time_passed){
-	transitionPercentage += time_passed * constants::BACKGROUND_TRANSITION_SPEED;
+void Background::updateTransition(const float timePassed){
+	transitionPercentage += timePassed * constants::BACKGROUND_TRANSITION_SPEED;
 	
 	// Finishes the transition by advancing the frame
 	if(transitionPercentage > 1){

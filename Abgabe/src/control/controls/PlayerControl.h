@@ -28,14 +28,14 @@ public:
 	
 	
 	// Event: When the game objects shall update
-	void update(const float time_passed);
+	void update(const float timePassed);
 	
 	/**
 	 * Event: When a key is pressed or released.
-	 * @param is_now_pressed - stores if the given key got pressed (true) or released (false)
+	 * @param isNowPressed - stores if the given key got pressed (true) or released (false)
 	 * @param keyCode - stores the given keycode. use sf::Keyboard::Key::<CODE> to check which key was pressed
 	 */
-	void keyStateChanged(bool is_now_pressed, sf::Keyboard::Key keyCode);
+	void keyStateChanged(bool isNowPressed, sf::Keyboard::Key keyCode);
 	
 	// Adds damage to the player
 	void damagePlayer(int lifes = 1, bool wasStrong = false);

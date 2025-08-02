@@ -20,7 +20,7 @@ public:
 	virtual ~Alien();
 	
 	// Event: When the object shall update
-	void update(const float time_passed);
+	void update(const float timePassed);
 
 	// Makes the alien change its direction
 	void changeDirection();

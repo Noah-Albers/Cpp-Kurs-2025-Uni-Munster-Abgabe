@@ -23,9 +23,9 @@ Bullet::Bullet(const int x, const int y) :
 
 Bullet::~Bullet() {}
 
-void Bullet::update(const float time_passed) {
-	updatePosition(time_passed);
-	updateSprite(time_passed);
+void Bullet::update(const float timePassed) {
+	updatePosition(timePassed);
+	updateSprite(timePassed);
 }
 
 // #region Getters/Setters

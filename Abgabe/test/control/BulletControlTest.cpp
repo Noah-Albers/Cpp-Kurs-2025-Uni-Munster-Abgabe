@@ -104,7 +104,7 @@ TEST_F(BulletControlTest, update_bullets_can_fall) {
 // Ensures bullets can damage aliens, despawns them and removes the bullet
 TEST_F(BulletControlTest, update_damage_aliens) {
 	// Spawns an alien and a bullet in the same place
-	alienControl.spawnAlien(0, 0, 1, 0);
+	alienControl.spawnAlienAt(0, 0, 1, 0);
 	bulletControl.spawnBulletAt(0,0);
 	
     ASSERT_EQ(alienControl.getAliens().size(),(size_t)1);

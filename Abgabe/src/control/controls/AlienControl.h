@@ -36,9 +36,9 @@ public:
 	virtual void draw() override;
 	
 	// Event: When the game objects shall update
-	void update(float time_passed);
+	void update(float timePassed);
 
-	void spawnAlien(const int x, const int y, const int lifes, const float speed);
+	void spawnAlienAt(const int x, const int y, const int lifes, const float speed);
 	
 	// Getters/Setters
 	std::list<Alien>& getAliens();

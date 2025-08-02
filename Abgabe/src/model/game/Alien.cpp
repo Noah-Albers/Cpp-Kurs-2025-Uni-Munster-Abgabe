@@ -37,11 +37,11 @@ Alien::~Alien(){
 	deleteShield();
 }
 
-void Alien::update(const float time_passed){
-	this->updatePosition(time_passed);
+void Alien::update(const float timePassed){
+	this->updatePosition(timePassed);
 	
 	if(hasShield())
-		shield->updateSprite(time_passed);
+		shield->updateSprite(timePassed);
 }
 
 
@@ -61,7 +61,7 @@ void Alien::setPosition(const sf::Vector2f newPos){
 }
 
 void Alien::changeDirection() {
-	if (h_dir == HorizontalDirection::RIGHT)
+	if (hDir == HorizontalDirection::RIGHT)
 		setHorizontalDirection(HorizontalDirection::LEFT);
 	else
 		setHorizontalDirection(HorizontalDirection::RIGHT);

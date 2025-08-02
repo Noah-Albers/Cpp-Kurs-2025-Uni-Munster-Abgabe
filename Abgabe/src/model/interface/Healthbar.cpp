@@ -13,9 +13,9 @@
 
 #include "../../assets/AssetMappings.h"
 
-Healthbar::Healthbar(const int pos_x, const int pos_y) :
+Healthbar::Healthbar(const int posX, const int posY) :
 	PropSprite(ASSETS_SPRITE_HEALTH) {
-		sprite.setPosition(sf::Vector2f({(float) pos_x, (float) pos_y}));
+		sprite.setPosition(sf::Vector2f({(float) posX, (float) posY}));
 	}
 
 	

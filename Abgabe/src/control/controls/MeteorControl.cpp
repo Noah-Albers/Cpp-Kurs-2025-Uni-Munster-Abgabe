@@ -22,10 +22,10 @@ void MeteorControl::populate(PlayerControl* playerControl, ParticleControl* part
 	this->particleControl = particleControl;
 }
 
-void MeteorControl::update(const float time_passed) {
+void MeteorControl::update(const float timePassed) {
 	// Updates meteors, checks collision and if they are out of scope
 	for (auto it = meteors.begin(); it != meteors.end();) {
-		it->updatePosition(time_passed);
+		it->updatePosition(timePassed);
 
 		// Checks if the meteor is out of scope or has collided with the player
 		bool hasCollided = (
@@ -48,7 +48,7 @@ void MeteorControl::update(const float time_passed) {
 
 
 	// count the time that passed since last Meteor spawn
-	timer += time_passed;
+	timer += timePassed;
 
 	// when wanted time passed, spawn new meteor at random x coordinate and
 	// reset time

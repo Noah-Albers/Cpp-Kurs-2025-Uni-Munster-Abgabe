@@ -21,7 +21,7 @@ public:
 	virtual ~Player();
 	
 	// Event: When the object shall update
-	virtual void update(const float time_passed);
+	virtual void update(const float timePassed);
 	
 	// Event: Draws the player
 	virtual void draw(Layer& layer) const;
@@ -52,7 +52,7 @@ protected:
 	float shieldbar;
 
 	// How long the player still is invincible (in seconds)
-	float invuln_time_sec;
+	float invulnTimeSec;
 	
 };
 

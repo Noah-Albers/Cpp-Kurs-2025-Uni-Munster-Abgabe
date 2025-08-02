@@ -21,7 +21,7 @@ public:
 
 	// Part of setup
 	// Its imperative to call this before anything else in this class
-    void populate(AlienControl* alien_control, UIControl* ui_control);
+    void populate(AlienControl* alienControl, UIControl* uiControl);
 
 	// Updates the level control
     void update();
@@ -34,11 +34,11 @@ public:
 	const int calculatePointsPerKill() const;
 protected:
 	// Communication with other control's
-    AlienControl* alien_control;
-    UIControl* ui_control;
+    AlienControl* alienControl;
+    UIControl* uiControl;
 	
 	// Current level (starting from 0 with as the first level for calculation reasons)
-    int current_level;
+    int currentLevel;
 	
 	// Current score that the player has reached    
 	int score;

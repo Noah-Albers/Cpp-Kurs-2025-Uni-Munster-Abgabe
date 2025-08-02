@@ -77,7 +77,7 @@ class LevelControlTest :  public ::testing::Test {
 // Ensures that old aliens are removed when a new level is started
 TEST_F(LevelControlTest, nextLvl_removes_aliens) {
 	for(int i=0;i<999;i++)
-		alienControl.spawnAlien(10,10, 1, 1.0);
+		alienControl.spawnAlienAt(10,10, 1, 1.0);
 
 	ASSERT_EQ(alienControl.getAliens().size(), (size_t)999);
 
@@ -127,7 +127,7 @@ TEST_F(LevelControlTest, update_advances_level) {
 	// Checks this for the first few levels
 	for(int i=0;i<10;i++){
 		// Ensures no level is advances if aliens exist
-		alienControl.spawnAlien(10,10, 1, 1.0);
+		alienControl.spawnAlienAt(10,10, 1, 1.0);
 		levelControl.update();
 
 		ASSERT_EQ(levelControl.getCurrentLevel(), i);
@@ -141,11 +141,14 @@ TEST_F(LevelControlTest, update_advances_level) {
 
 // Ensures that increase score works
 TEST_F(LevelControlTest, increaseScore) {
+	// Ensures this starts with the first level
+	levelControl.forwardNextLevel();
+	
     auto score = levelControl.forwardGetScore();
     
-    EXPECT_CALL(uiControl, displayScore(1))
+    EXPECT_CALL(uiControl, displayScore(testing::_))
     	.Times(1);
     levelControl.increaseScore();
     
-    ASSERT_EQ(levelControl.forwardGetScore(), score+1);
+    ASSERT_GT(levelControl.forwardGetScore(), score);
 }

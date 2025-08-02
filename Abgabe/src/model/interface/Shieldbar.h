@@ -13,7 +13,7 @@
 
 class Shieldbar : public PropSprite {
 public:
-	Shieldbar(const int pos_x, const int pos_y);
+	Shieldbar(const int posX, const int posY);
 	virtual ~Shieldbar();
 	
 	// Draws the shield bar

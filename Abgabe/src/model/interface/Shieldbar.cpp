@@ -10,9 +10,9 @@
 #include "../../assets/AssetMappings.h"
 #include <SFML/System/Vector2.hpp>
 
-Shieldbar::Shieldbar(const int pos_x, const int pos_y) :
+Shieldbar::Shieldbar(const int posX, const int posY) :
 	PropSprite(ASSETS_SPRITE_SHIELD_BAR) {
-	sprite.setPosition(sf::Vector2f(pos_x, pos_y));
+	sprite.setPosition(sf::Vector2f(posX, posY));
 }
 
 Shieldbar::~Shieldbar() {}

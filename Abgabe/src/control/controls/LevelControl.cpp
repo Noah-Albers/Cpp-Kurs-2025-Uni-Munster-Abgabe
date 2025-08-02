@@ -11,31 +11,31 @@
 #include "UIControl.h"
 
 LevelControl::LevelControl() :
-	current_level(-1),
+	currentLevel(-1),
     score(0)
     {}
 
 LevelControl::~LevelControl() {};
 
-void LevelControl::populate(AlienControl* alien_control, UIControl* ui_control) {
-    this->alien_control = alien_control;
-    this->ui_control = ui_control;
+void LevelControl::populate(AlienControl* alienControl, UIControl* uiControl) {
+    this->alienControl = alienControl;
+    this->uiControl = uiControl;
 }
 
 void LevelControl::nextLevel() {
 	// Ensures no alien still exists (Even tho they shouldn't)
-	alien_control->getAliens().clear();
+	alienControl->getAliens().clear();
 	
 	// Increments to the next level
-	++current_level;
+	++currentLevel;
 	
 	int alienLines = calculateLineAmount();
 	int aliensPerLine = calculateAliensPerLine();
 	float alienSpeed = calculateAlienSpeed();
    	
    	// Advances the background
-   	if(current_level > 0)
-	   	ui_control->nextBackground();
+   	if(currentLevel > 0)
+	   	uiControl->nextBackground();
 
     // Spawns alien grid
     int y = -constants::SCOREBOARD_HEIGHT - alienLines * constants::ALIEN_SPACE_Y;
@@ -47,7 +47,7 @@ void LevelControl::nextLevel() {
 			int lifes = rand() % 5 - 2;
 			if(lifes <= 0) lifes = 1;
 
-			alien_control->spawnAlien(x,y, lifes, alienSpeed);
+			alienControl->spawnAlienAt(x,y, lifes, alienSpeed);
 			
 			x += constants::ALIEN_SPACE_X;
         }
@@ -58,15 +58,15 @@ void LevelControl::nextLevel() {
 
 void LevelControl::update() {
 	// Reset the level if there are no more aliens
-	if(alien_control->getAliens().empty())
+	if(alienControl->getAliens().empty())
         this->nextLevel();
 }
 
 // Creates the calculation methods that all have the same linear-formular
-#define MAKE_CALCULATION_METHOD(datatype, methodname, start_count, increase_count, max_count)\
+#define MAKE_CALCULATION_METHOD(datatype, methodname, startCount, increaseCount, maxCount)\
 	const datatype LevelControl::methodname() const {\
-		datatype value = start_count + increase_count * current_level;\
-		return value > max_count ? max_count : value;\
+		datatype value = startCount + increaseCount * currentLevel;\
+		return value > maxCount ? maxCount : value;\
 	}
 	
 MAKE_CALCULATION_METHOD(int, calculateLineAmount, constants::ALIEN_START_LINE_COUNT, constants::ALIEN_LINE_AMOUNT_INCREASE_PER_LEVEL, constants::MAX_ALIEN_LINE_COUNT);
@@ -77,12 +77,13 @@ MAKE_CALCULATION_METHOD(int, calculatePointsPerKill, 1, constants::SCORE_MULTIPL
 #undef MAKE_CALCULATION_METHOD
 
 void LevelControl::increaseScore(){
-    ui_control->displayScore(++score);
+	score += calculatePointsPerKill();
+    uiControl->displayScore(score);
 }
 
 
 // #region Getters/Setters
 
-const int LevelControl::getCurrentLevel() const { return current_level; };
+const int LevelControl::getCurrentLevel() const { return currentLevel; };
 
 // #endregion

@@ -32,14 +32,14 @@ private:
     Layer gameLayer, uiLayer, backgroundLayer;
     
     // Controllers for the game
-    PlayerControl* player_control;
-    BulletControl* bullet_control;
-    AlienControl* alien_control;
-    AlienBulletControl* alien_bullet_control;
-    MeteorControl* meteor_control;
-	ParticleControl* particle_control;
-    UIControl* ui_control;
-    LevelControl* level_control;
+    PlayerControl* playerControl;
+    BulletControl* bulletControl;
+    AlienControl* alienControl;
+    AlienBulletControl* alienBulletControl;
+    MeteorControl* meteorControl;
+	ParticleControl* particleControl;
+    UIControl* uiControl;
+    LevelControl* levelControl;
 
 	// Resets the game into the starting state
 	void resetGame();
@@ -48,7 +48,7 @@ private:
     bool input();
 
     // updates all game elements
-    void update(const float time_passed);
+    void update(const float timePassed);
 
     // draws the scene
     void draw();

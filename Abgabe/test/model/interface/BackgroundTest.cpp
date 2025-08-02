@@ -18,7 +18,7 @@ class MockBackground : public Background {
 public:
 	float getPerc(){ return transitionPercentage; };
 	const bool forwardIsTransitioning() const { return isTransitioning(); };
-	void forwardUpdateTransition(const float time_passed) { updateTransition(time_passed); };
+	void forwardUpdateTransition(const float timePassed) { updateTransition(timePassed); };
 };
 
 // Ensures that normally scrolling the background works

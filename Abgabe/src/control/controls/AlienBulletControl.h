@@ -27,7 +27,7 @@ public:
 	void populate(PlayerControl* playerControl);
 	
 	// Event: When the game objects shall update
-	void update(const float time_passed);
+	void update(const float timePassed);
 	
 	// Spawns a new bullet at the given position
 	virtual void spawnBulletAt(const int x, const int y);
@@ -42,7 +42,7 @@ protected:
 	PlayerControl* playerControl;
 	
 	// List of shot bullets
-	std::list<AlienBullet> alien_bullets;
+	std::list<AlienBullet> alienBullets;
 };
 
 #endif /* SRC_CONTROL_ALIENBULLETCONTROL_H_ */

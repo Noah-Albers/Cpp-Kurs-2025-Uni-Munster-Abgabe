@@ -68,9 +68,9 @@ class AlienControlTest :  public ::testing::Test {
 // Ensures that for each alien the sprite is drawn and if it has a shield, that is also drawn
 TEST_F(AlienControlTest, draw) {
 	// Spawns a few aliens
-	alienControl.spawnAlien(10,10, 1, 0); // 1 life => no shield
-	alienControl.spawnAlien(10,10, 2, 0); // 2 lifes => shield
-	alienControl.spawnAlien(10,10, 3, 0); // 3 lifes => shield
+	alienControl.spawnAlienAt(10,10, 1, 0); // 1 life => no shield
+	alienControl.spawnAlienAt(10,10, 2, 0); // 2 lifes => shield
+	alienControl.spawnAlienAt(10,10, 3, 0); // 3 lifes => shield
 	
 	EXPECT_CALL(layer, add_to_layer(testing::_))
 		.Times(5);
@@ -82,23 +82,23 @@ TEST_F(AlienControlTest, draw) {
 TEST_F(AlienControlTest, spawnAlien) {
     ASSERT_EQ(alienControl.getAliens().size(), (size_t)0);
     
-    alienControl.spawnAlien(10, 10, 2, 1.0);
+    alienControl.spawnAlienAt(10, 10, 2, 1.0);
     ASSERT_EQ(alienControl.getAliens().size(), (size_t)1);
 
-    alienControl.spawnAlien(12, 12, 1, 1.0);
+    alienControl.spawnAlienAt(12, 12, 1, 1.0);
     ASSERT_EQ(alienControl.getAliens().size(), (size_t)2);
 }
 
 
 // Ensures that the test to check that aliens are in the game field works
 TEST_F(AlienControlTest, AreAliensInGameField) {
-    alienControl.spawnAlien(100,100, 1, 1.0);
+    alienControl.spawnAlienAt(100,100, 1, 1.0);
     EXPECT_TRUE(alienControl.forwardAreAliensInGamefield());
 
-    alienControl.spawnAlien(100, 0, 1, 1.0);
+    alienControl.spawnAlienAt(100, 0, 1, 1.0);
     EXPECT_TRUE(alienControl.forwardAreAliensInGamefield());
 
-    alienControl.spawnAlien(100, -30, 1, 1.0);
+    alienControl.spawnAlienAt(100, -30, 1, 1.0);
     EXPECT_FALSE(alienControl.forwardAreAliensInGamefield());
 }
 
@@ -108,7 +108,7 @@ TEST_F(AlienControlTest, update_spawn_moveIntoField) {
     ASSERT_EQ(alienControl.getAliens().size(), (size_t)0);
     
     // Spawn alien
-	alienControl.spawnAlien(10,-30,1, 1.0);
+	alienControl.spawnAlienAt(10,-30,1, 1.0);
 	
 	const Alien& alien = alienControl.getAliens().front();
 	
@@ -129,7 +129,7 @@ TEST_F(AlienControlTest, update_remove_aliens_afterSpawning) {
     ASSERT_EQ(alienControl.getAliens().size(), (size_t)0);
 	
     // Spawn alien (Outside of the game field)
-	alienControl.spawnAlien(10,-30,1, 1.0);
+	alienControl.spawnAlienAt(10,-30,1, 1.0);
 	Alien& alien = alienControl.getAliens().front();
 	
     ASSERT_EQ(alienControl.getAliens().size(), (size_t)1);
@@ -150,7 +150,7 @@ TEST_F(AlienControlTest, update_remove_aliens_whenSpawning) {
     ASSERT_EQ(alienControl.getAliens().size(), (size_t)0);
 	
     // Spawn alien (Inside the game field)
-	alienControl.spawnAlien(10,10,1, 1.0);
+	alienControl.spawnAlienAt(10,10,1, 1.0);
 	Alien& alien = alienControl.getAliens().front();
 	
     ASSERT_EQ(alienControl.getAliens().size(), (size_t)1);
@@ -169,7 +169,7 @@ TEST_F(AlienControlTest, update_remove_aliens_whenSpawning) {
 // Ensures aliens can randomly shoot bullets
 TEST_F(AlienControlTest, update_alien_can_randomly_shot) {
 	// Spawns an alien (With no speed to only check shoot ability)
-	alienControl.spawnAlien(10,10,1, 0);
+	alienControl.spawnAlienAt(10,10,1, 0);
 	
 	// Simulates frame to ensure its not dead
 	alienControl.update(0.5);
@@ -202,7 +202,7 @@ TEST_F(AlienControlTest, update_aliens_can_turn) {
 
 	// Spawns a few aliens
 	for(int i=0;i<3;i++)
-		alienControl.spawnAlien(10 + i*5,10,1,1.0);
+		alienControl.spawnAlienAt(10 + i*5,10,1,1.0);
 	
 	// Ensures there are 3 aliens and they all are inside the game field
     ASSERT_EQ(ls.size(), (size_t)3);
@@ -252,7 +252,7 @@ TEST_F(AlienControlTest, update_kills_player_when_aliens_reach_bottom) {
 	ASSERT_FALSE(playerControl.getPlayer().isDead());
 	ASSERT_TRUE(playerControl.getPlayer().hasShield());
 	
-	alienControl.spawnAlien(100, constants::GAME_HEIGHT, 2, 1.0);
+	alienControl.spawnAlienAt(100, constants::GAME_HEIGHT, 2, 1.0);
     alienControl.update(0.5);
     
     ASSERT_TRUE(playerControl.getPlayer().isDead());
@@ -261,7 +261,7 @@ TEST_F(AlienControlTest, update_kills_player_when_aliens_reach_bottom) {
 // Ensures no downward movement when the player is dead
 TEST_F(AlienControlTest, update_no_downmovement_when_player_is_dead) {
 	// Spawns an alien and kills the player
-    alienControl.spawnAlien(constants::GAME_WIDTH/2, 100, 1, 1.0);
+    alienControl.spawnAlienAt(constants::GAME_WIDTH/2, 100, 1, 1.0);
     auto posA = alienControl.getAliens().front().getPosition();
         
     playerControl.killPlayer();

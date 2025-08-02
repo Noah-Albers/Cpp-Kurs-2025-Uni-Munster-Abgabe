@@ -21,10 +21,10 @@ void ParticleControl::draw(){
 		layer.add_to_layer(it->getSprite());
 }
 
-void ParticleControl::update(const float time_passed){
+void ParticleControl::update(const float timePassed){
 	// Updates the particles and removes any that have died
 	for(auto it = particles.begin(); it != particles.end();){
-		it->updateSprite(time_passed);
+		it->updateSprite(timePassed);
 		
 		if(it->hasStopped())
 			it = particles.erase(it);
@@ -35,12 +35,12 @@ void ParticleControl::update(const float time_passed){
 
 void ParticleControl::spawnDebugParticle(
 		const std::filesystem::path& filename,
-		const int size_x, const int size_y,
+		const int sizeX, const int sizeY,
 		const float scale,
 		const int posX, const int posY,
 		const float lifeTime
 	) {
-	particles.emplace_back(filename, size_x, size_y, scale, posX, posY, lifeTime);
+	particles.emplace_back(filename, sizeX, sizeY, scale, posX, posY, lifeTime);
 }
 
 void ParticleControl::spawnExplosionParticle(const int x, const int y){

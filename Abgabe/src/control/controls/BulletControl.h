@@ -28,7 +28,7 @@ public:
 	void populate(AlienControl* alienControl, MeteorControl* meteorControl);
 	
 	// Event: When the game objects shall update
-	void update(const float time_passed);
+	void update(const float timePassed);
 	
 	// Spawns a new bullet at the given position
 	void spawnBulletAt(const int x, const int y);

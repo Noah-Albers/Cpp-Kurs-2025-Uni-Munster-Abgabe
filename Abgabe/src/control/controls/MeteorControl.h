@@ -27,7 +27,7 @@ public:
 	void populate(PlayerControl* playerControl, ParticleControl* particleControl);
 	
 	// Event: When the game objects shall update
-	void update(const float time_passed);
+	void update(const float timePassed);
 		
 	// Spawns a new Meteor at the given position
 	void spawnMeteorAt(const int x, const int y);

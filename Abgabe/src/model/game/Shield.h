@@ -14,7 +14,7 @@ class Shield : public PropAnimatedSprite {
 public:
 	Shield(
 		const std::filesystem::path& filename,
-		const int size_x, const int size_y,
+		const int sizeX, const int sizeY,
 		const float scale,
 		const float runtime
 	);

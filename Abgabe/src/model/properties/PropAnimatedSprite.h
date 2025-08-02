@@ -12,10 +12,10 @@
 
 class PropAnimatedSprite : public PropSprite {
 public:
-	PropAnimatedSprite(const std::filesystem::path& filename, const int size_x, const int size_y, const float scale, const float runTimeInSec, const bool loop, const bool centerOrigin = false);
+	PropAnimatedSprite(const std::filesystem::path& filename, const int sizeX, const int sizeY, const float scale, const float runTimeInSec, const bool loop, const bool centerOrigin = false);
 	
 	// When the frame shall update
-	void updateSprite(float time_passed);
+	void updateSprite(float timePassed);
 	
 	// Returns if the animation is over. Note: Looping animations wont stop duh
 	bool hasStopped() const;
