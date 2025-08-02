@@ -20,7 +20,7 @@ Player::Player() :
 	PropSprite(ASSETS_SPRITE_PLAYER, true),
 	shield(ASSETS_SPRITE_PLAYER_SHIELD, constants::ANIMATION_PLAYER_SHIELD_LENGTH),
 	lifes(constants::PLAYER_START_LIFES),
-	shieldbar(0),
+	shieldbar(1),
 	invuln_time_sec(-1)
     {
 		

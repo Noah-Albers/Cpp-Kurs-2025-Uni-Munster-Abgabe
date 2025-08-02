@@ -113,14 +113,13 @@ TEST_F(MeteorControlTest, collisionWithPlayer){
     ASSERT_EQ((int)meteorControl.getMeteors().size(),1);
 
 
+	ASSERT_TRUE(playerControl.getPlayer().hasShield());
 
     meteorControl.update(0);
 
-    ASSERT_EQ(playerControl.getPlayer().getLifes(),constants::PLAYER_START_LIFES-1);
+	ASSERT_FALSE(playerControl.getPlayer().hasShield());
 
     ASSERT_TRUE(meteorControl.getMeteors().empty());
-    
-
 }
 
 TEST_F(MeteorControlTest, outOfScope){

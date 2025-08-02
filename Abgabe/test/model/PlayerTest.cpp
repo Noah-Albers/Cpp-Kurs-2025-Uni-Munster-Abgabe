@@ -4,8 +4,6 @@
 #include "../CommonMockClasses.cpp"
 #include <gmock/gmock.h>
 
-
-
 TEST(PlayerTest, constructor){
     Player player;
 
@@ -129,7 +127,7 @@ TEST(PlayerTest, draw){
 
     //player is being drawn when alive and vulnerable
     EXPECT_CALL(layer, add_to_layer(testing::_))
-        .Times(1);
+        .Times(testing::AtLeast(1));
 
     player.draw(layer);
 
@@ -149,12 +147,7 @@ TEST(PlayerTest, draw){
 
 }
 
-
 TEST(PlayerTest, blinking){
-
-   
-
-
     Player player;
     sf::RenderWindow window(sf::VideoMode({10, 10}), "");
 	MockLayer layer(window);
@@ -173,8 +166,34 @@ TEST(PlayerTest, blinking){
     player.setInvulnerable(time2);
 
     EXPECT_CALL(layer, add_to_layer(testing::_))
-        .Times(1);
+        .Times(testing::AtLeast(1));
 
     player.draw(layer);
 
+}
+
+TEST(PlayerTest, shieldbar){
+	Player p;
+	
+	ASSERT_TRUE(p.hasShield());
+	
+	p.setShieldbar(0.99);
+	ASSERT_NEAR(p.getShieldbar(), 0.99, 0.001);
+	ASSERT_FALSE(p.hasShield());
+	
+	p.setShieldbar(1);
+	ASSERT_NEAR(p.getShieldbar(), 1, 0.001);
+	ASSERT_TRUE(p.hasShield());
+	
+	p.setShieldbar(0);
+	ASSERT_NEAR(p.getShieldbar(), 0, 0.001);
+	ASSERT_FALSE(p.hasShield());
+	
+	p.setShieldbar(-0.5);
+	ASSERT_NEAR(p.getShieldbar(), 0, 0.001);
+	ASSERT_FALSE(p.hasShield());
+	
+	p.setShieldbar(1.2);
+	ASSERT_NEAR(p.getShieldbar(), 1, 0.001);
+	ASSERT_TRUE(p.hasShield());
 }

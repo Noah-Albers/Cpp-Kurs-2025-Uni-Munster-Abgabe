@@ -25,6 +25,14 @@
 
 #include "../CommonMockClasses.cpp"
 
+class MockPlayerControl : public PlayerControl {
+public:
+	MockPlayerControl(Layer& layer) : PlayerControl(layer) {}
+	
+	Player& getModifiablePlayer(){ return player; };
+	
+};
+
 class PlayerControlTest : public ::testing::Test {
 public:
 	PlayerControlTest() :
@@ -51,14 +59,14 @@ public:
 	LevelControl levelControl;
 	MeteorControl meteorControl;
 	ParticleControl particleControl;
-	PlayerControl playerControl;
+	MockPlayerControl playerControl;
 	UIControl uiControl;
 };
 
 TEST_F(PlayerControlTest, draw) {
 
 	EXPECT_CALL(layer, add_to_layer(testing::_))
-		.Times(1);
+		.Times(testing::AtLeast(1));
 
 	playerControl.draw();
 }
@@ -80,9 +88,22 @@ TEST_F(PlayerControlTest, player_can_move) {
 }
 
 TEST_F(PlayerControlTest, player_damage_low) {
-	auto& player = playerControl.getPlayer();
+	auto& player = playerControl.getModifiablePlayer();
 	
+	ASSERT_TRUE(player.hasShield());
 	auto lifes = player.getLifes();
+	playerControl.damagePlayer(1);
+	
+	ASSERT_FALSE(player.hasShield());
+	ASSERT_EQ(lifes, player.getLifes());
+	ASSERT_TRUE(player.isInvulnerable());
+	
+	player.setInvulnerable(-1);
+	
+	ASSERT_FALSE(player.isInvulnerable());
+	ASSERT_FALSE(player.isDead());
+	
+	
 	
 	playerControl.keyStateChanged(true, sf::Keyboard::Key::W);
 	playerControl.keyStateChanged(true, sf::Keyboard::Key::D);
@@ -119,6 +140,22 @@ TEST_F(PlayerControlTest, player_damage_high) {
 	// Ensures the player can't shot while dead
 	const long unsigned int zero = 0;
 	ASSERT_EQ(bulletControl.getBullets().size(), zero);
+}
+
+TEST_F(PlayerControlTest, shieldbar) {
+	auto& player = playerControl.getModifiablePlayer();
+
+	ASSERT_TRUE(player.hasShield());
+	
+	auto lifes = player.getLifes();	
+	playerControl.damagePlayer();
+	
+	ASSERT_EQ(player.getLifes(), lifes);
+	ASSERT_FALSE(player.hasShield());
+	
+	playerControl.update(99999);
+	
+	ASSERT_TRUE(player.hasShield());
 }
 
 
