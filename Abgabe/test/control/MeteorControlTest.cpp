@@ -125,7 +125,7 @@ TEST_F(MeteorControlTest, update_damage_player_when_not_dead) {
     ASSERT_EQ(particleControl.getParticles().size(), prevSize+1);
 }
 
-// Ensures meteors can't interact with the player when he is dead
+// Ensures meteors can't interact with the player when it is dead
 TEST_F(MeteorControlTest, update_damage_player_when_dead) {
 	// Spawn a meteor at the players potion
 	meteorControl.spawnMeteorAt(playerControl.getPlayer().getPosition().x,playerControl.getPlayer().getPosition().y);

@@ -10,6 +10,8 @@
 #include "../../model/Constants.hpp"
 #include "MeteorControl.h"
 #include "AlienControl.h"
+#include <cmath>
+#include <iostream>
 
 BulletControl::BulletControl(Layer &layer) :
 	PropDrawable(layer) {}
@@ -27,8 +29,8 @@ void BulletControl::update(const float timePassed) {
 
 	// Updates bullets, checks collisions and if they are out of scope
 	for (auto it = bullets.begin(); it != bullets.end();) {
-		it->update(timePassed);
-
+  		it->update(timePassed);
+  		
 		// Flag to check if the bullet shall be deleted
 		// Checks if the lower end of the bullet is above the scoreboard-area
 		bool deleteFlag = it->getPosition().y < -it->getSprite().getLocalBounds().size.y - constants::SCOREBOARD_HEIGHT;
@@ -38,12 +40,16 @@ void BulletControl::update(const float timePassed) {
 			if (it->isCollidingWith(*alienIt)) {
 				deleteFlag = true;
 				alienIt->removeLife();
+				// Ensure one bullet can at max kill one alien
+				break;
 			}
+		
 
 		// Checks for meteor collisions
-		for (auto meteorIt = meteors.begin(); meteorIt != meteors.end();meteorIt++)
-			if (it->isCollidingWith(*meteorIt))
-				deleteFlag = true;
+		if(!deleteFlag)
+			for (auto meteorIt = meteors.begin(); meteorIt != meteors.end();meteorIt++)
+				if (it->isCollidingWith(*meteorIt))
+					deleteFlag = true;
 
 		if (deleteFlag)
 			it = bullets.erase(it);

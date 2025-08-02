@@ -33,7 +33,7 @@ const bool PropSprite::isCollidingWith(const PropSprite& object, float margin) c
 	auto thisBounds = sprite.getGlobalBounds();
 	auto objectBounds = object.getSprite().getGlobalBounds();
 	
-	if(margin > 0){		
+	if(margin > 0){
 		thisBounds.position.x += margin;
 		thisBounds.position.y += margin;
 		thisBounds.size.x -= margin*2;

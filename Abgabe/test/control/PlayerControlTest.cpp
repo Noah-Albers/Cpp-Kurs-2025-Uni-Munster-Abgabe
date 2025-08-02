@@ -184,4 +184,3 @@ TEST_F(PlayerControlTest, draw) {
 		
 	playerControl.draw();
 }
-

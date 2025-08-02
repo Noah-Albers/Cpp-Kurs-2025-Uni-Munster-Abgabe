@@ -56,6 +56,9 @@ protected:
 	// Player object
 	Player player;
 	
+	// Lets the player shot a bullet
+	void shotBullet();
+	
 	// Handles the player death
 	void onPlayerDeath(bool hadStrongDamage);
 };

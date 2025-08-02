@@ -108,14 +108,14 @@ TEST_F(AlienBulletControlTest, update_damage_player_when_not_dead) {
 	ASSERT_TRUE(playerControl.getPlayer().hasShield());
 
 	// Update the bullet
-    alienBulletControl.update(0.1);
+    alienBulletControl.update(0);
 	
 	// Ensures the player has lost the shield, bullet has despawned
-	ASSERT_FALSE(playerControl.getPlayer().hasShield());
     ASSERT_TRUE(alienBulletControl.getBullets().empty());
+	ASSERT_FALSE(playerControl.getPlayer().hasShield());
 }
 
-// Ensures bullets can't interact with the player when he is dead
+// Ensures bullets can't interact with the player when it is dead
 TEST_F(AlienBulletControlTest, update_damage_player_when_dead) {
 	// Spawn a bullet at the players position
 	alienBulletControl.spawnBulletAt(playerControl.getPlayer().getPosition().x,playerControl.getPlayer().getPosition().y);
