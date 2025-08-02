@@ -62,7 +62,6 @@ void LevelControl::update() {
         this->nextLevel();
 }
 
-
 // Creates the calculation methods that all have the same linear-formular
 #define MAKE_CALCULATION_METHOD(datatype, methodname, start_count, increase_count, max_count)\
 	const datatype LevelControl::methodname() const {\
@@ -80,3 +79,10 @@ MAKE_CALCULATION_METHOD(int, calculatePointsPerKill, 1, constants::SCORE_MULTIPL
 void LevelControl::increaseScore(){
     ui_control->displayScore(++score);
 }
+
+
+// #region Getters/Setters
+
+const int LevelControl::getCurrentLevel() const { return current_level; };
+
+// #endregion

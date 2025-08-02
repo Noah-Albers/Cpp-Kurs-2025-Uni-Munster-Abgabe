@@ -36,7 +36,7 @@ public:
 	void draw();
 	
 	// Advances the background
-	void nextBackground();
+	virtual void nextBackground();
 	
 	// Sets a new score and updates the screen
 	virtual void displayScore(const int score);

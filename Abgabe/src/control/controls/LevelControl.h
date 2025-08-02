@@ -32,7 +32,7 @@ public:
 	// Getters/Setters
 	const int getCurrentLevel() const;
 	const int calculatePointsPerKill() const;
-private:
+protected:
 	// Communication with other control's
     AlienControl* alien_control;
     UIControl* ui_control;
