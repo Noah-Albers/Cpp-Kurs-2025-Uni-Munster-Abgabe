@@ -22,9 +22,6 @@ public:
 	// Event: When the object shall update
 	void update(const float timePassed);
 
-	// Makes the alien change its direction
-	void changeDirection();
-
 	// Removes a life from the alien
 	void removeLife();
 	

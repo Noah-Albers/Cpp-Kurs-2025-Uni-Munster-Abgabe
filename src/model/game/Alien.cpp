@@ -48,23 +48,16 @@ void Alien::update(const float timePassed){
 void Alien::setPosition(const sf::Vector2f newPos){
 	auto pos = sf::Vector2f(newPos);
 	
-	// Clamps position
 	// Does not clamp upper position to allow for smooth transition
-	if(pos.x < 0) pos.x = 0;
-	if(pos.x > constants::GAME_WIDTH) pos.x = constants::GAME_WIDTH;
+	// Does not clamp side positions to prevent frame-drops from
+	// affecting the positioning in a wrong way
+	// Clamps position
 	if(pos.y > constants::GAME_HEIGHT) pos.y = constants::GAME_HEIGHT;
 	
 	sprite.setPosition(pos);
 	
 	if(hasShield())
 		shield->setPosition(pos);
-}
-
-void Alien::changeDirection() {
-	if (hDir == HorizontalDirection::RIGHT)
-		setHorizontalDirection(HorizontalDirection::LEFT);
-	else
-		setHorizontalDirection(HorizontalDirection::RIGHT);
 }
 
 void Alien::removeLife() {

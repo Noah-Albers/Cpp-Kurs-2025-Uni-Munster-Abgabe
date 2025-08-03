@@ -47,20 +47,32 @@ TEST(AlienTest, updateSuperFastSpeed) {
 	ASSERT_NE(posA, posB);
 }
 
-// Ensures the aliens can't go out of bounds (except above to let them fly in)
+// Ensures the aliens can't go out of bounds to the bottom
+// Ensures the alien can go out of bounds above to fly in
 TEST(AlienTest, setPosition_out_of_bounds_negative){
 	Alien alien(100,100,2, 1.0);
-	alien.setPosition(sf::Vector2f(-10, -10));	
 	
+	// Above (Flyin)
+	alien.setPosition(sf::Vector2f(0, -10));	
 	ASSERT_EQ(alien.getPosition(), sf::Vector2f(0,-10));
+	
+	// Below
+	alien.setPosition(sf::Vector2f(0, constants::GAME_HEIGHT+10));	
+	ASSERT_EQ(alien.getPosition(), sf::Vector2f(0,constants::GAME_HEIGHT));
 }
 
-// Ensures the aliens can't go out of bounds (except above to let them fly in)
+// Ensures the aliens can go out of bounds to the sides
+// to prevent frame-drops from catching multiple ones at the border
 TEST(AlienTest, setPosition_out_of_bounds_positive){
 	Alien alien(100,100,2, 1.0);
-	alien.setPosition(sf::Vector2f(constants::GAME_WIDTH+10, constants::GAME_HEIGHT+10));	
 	
-	ASSERT_EQ(alien.getPosition(), sf::Vector2f(constants::GAME_WIDTH,constants::GAME_HEIGHT));
+	// Right
+	alien.setPosition(sf::Vector2f(constants::GAME_WIDTH+10, 0));	
+	ASSERT_EQ(alien.getPosition(), sf::Vector2f(constants::GAME_WIDTH+10, 0));
+
+	// Left
+	alien.setPosition(sf::Vector2f(-10, 0));	
+	ASSERT_EQ(alien.getPosition(), sf::Vector2f(-10, 0));
 }
 
 // Ensures the position can be set normally
@@ -69,16 +81,6 @@ TEST(AlienTest, setPositionNormal){
 	alien.setPosition(sf::Vector2f(constants::GAME_WIDTH / 2, constants::GAME_HEIGHT / 2));	
 	
 	ASSERT_EQ(alien.getPosition(), sf::Vector2f(constants::GAME_WIDTH / 2,constants::GAME_HEIGHT / 2));
-}
-
-// Ensures that changeDirection actually alternates between the directions
-TEST(AlienTest, changeDirection){
-	Alien alien(100, 100, 2, 1.0);
-	auto dir = alien.getHorizontalDirection();
-	alien.changeDirection();
-	ASSERT_NE(dir, alien.getHorizontalDirection());
-	alien.changeDirection();
-	ASSERT_EQ(dir, alien.getHorizontalDirection());
 }
 
 // Ensures that remove life and hasShield work

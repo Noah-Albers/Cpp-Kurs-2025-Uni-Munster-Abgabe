@@ -46,8 +46,10 @@ void AlienControl::update(float timePassed) {
 		return;
 	}
 	
-	// Flags to check if any alien has reached the border or the bottom
-	bool anyReachedSideFlag = false;
+	// Stores None if all aliens are still within the game field
+	// Otherwise stores the position that all aliens shall be set to
+	HorizontalDirection nextDirection = HorizontalDirection::NONE;
+	// Flags to check if any alien has reached the bottom
 	bool reachedBottomFlag = false;
 	
 	// Updates aliens, checks for dead ones and randomly spawns bullets
@@ -64,8 +66,10 @@ void AlienControl::update(float timePassed) {
 		randomSpawnBullet(*it);		
 		
 		// Sets a flag if the alien has reached the borders
-		if(it->getPosition().x == 0 || it->getPosition().x == constants::GAME_HEIGHT)
-			anyReachedSideFlag = true;
+		if(it->getPosition().x <= 0)
+			nextDirection = HorizontalDirection::RIGHT;
+		if(it->getPosition().x >= constants::GAME_WIDTH)
+			nextDirection = HorizontalDirection::LEFT;
 		
 		// If there is downwards motion, apply it
 		if(downwardMotion > 0)
@@ -83,9 +87,9 @@ void AlienControl::update(float timePassed) {
 	
 	// If any alien has reached the side, start moving them down
 	// and change their direction
-	if(anyReachedSideFlag){
+	if(nextDirection != HorizontalDirection::NONE){
 		for(auto it = aliens.begin(); it != aliens.end(); it++)
-			it->changeDirection();
+			it->setHorizontalDirection(nextDirection);
 		
 		// Only apply downward motion if the player is not dead.
 		// This prevents them from walking of-screen when the player has lost
